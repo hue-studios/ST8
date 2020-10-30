@@ -1,0 +1,228 @@
+nav#nav-bar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  transform: translateX(-105%);
+  overflow-y: auto;
+  transition: all 0.36s $curve;
+  z-index: 100;
+  padding-top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: $darkBlue;
+  text-align: center;
+  .logo-name {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: all 0.36s ease-out 0.17s;
+    margin-bottom: 20px;
+    @media (min-width: $breakpoint-small) {
+      margin-bottom: 20px;
+    }
+    svg {
+      display: inline-block;
+      .blue-fill,
+      .green-fill {
+        fill: rgba($white, 0.25);
+      }
+    }
+  }
+  p {
+    margin-top: 5px;
+    margin-bottom: 0;
+    width: 80%;
+    margin-left: 10%;
+    transform: translateX(-20px);
+    transition: all 0.36s ease-out;
+    opacity: 0;
+    text-transform: uppercase;
+    @media (min-width: $breakpoint-small) {
+      margin-top: 10px;
+    }
+    @media (min-width: $breakpoint-medium) {
+      margin-top: 15px;
+    }
+  }
+
+  p:nth-of-type(1) {
+    transition-delay: 0.19s;
+  }
+
+  p:nth-of-type(2) {
+    transition-delay: 0.21s;
+  }
+
+  p:nth-of-type(3) {
+    transition-delay: 0.23s;
+  }
+
+  p:nth-of-type(4) {
+    transition-delay: 0.25s;
+  }
+
+  p:nth-of-type(5) {
+    transition-delay: 0.27s;
+  }
+
+  p:nth-of-type(6) {
+    transition-delay: 0.29s;
+  }
+
+  p:nth-of-type(7) {
+    transition-delay: 0.31s;
+  }
+
+  p:nth-of-type(8) {
+    transition-delay: 0.33s;
+  }
+
+  p:nth-of-type(9) {
+    transition-delay: 0.35s;
+  }
+
+  p:nth-of-type(10) {
+    transition-delay: 0.37s;
+  }
+
+  p:nth-of-type(11) {
+    transition-delay: 0.39s;
+  }
+  p:nth-of-type(12) {
+    transition-delay: 0.41s;
+  }
+  p:nth-of-type(13) {
+    transition-delay: 0.43s;
+  }
+  p:nth-of-type(14) {
+    transition-delay: 0.45s;
+  }
+  p:nth-of-type(15) {
+    transition-delay: 0.47s;
+  }
+
+  a:link,
+  a:visited {
+    color: $white;
+    font-size: 13px;
+    letter-spacing: 0.25em;
+    font-weight: 400;
+    position: relative;
+    transition: all 0.3s ease-out;
+    @media (min-width: $breakpoint-medium) {
+    }
+  }
+  a:hover {
+    @media (min-width: $breakpoint-medium) {
+      opacity: 0.5;
+      letter-spacing: 0.2em;
+    }
+  }
+  p.mobile-nav-title {
+    font-size: 13px;
+    letter-spacing: 0.25em;
+    font-weight: 400;
+    color: $green;
+  }
+  p.mobile-nav-title:not(:first-of-type) {
+    margin-top: 25px;
+  }
+  a.mobile-nav-link {
+  }
+
+  a.nuxt-link-exact-active {
+    // font-family:$bold-font;
+    color: $black;
+  }
+
+  a::before {
+    content: '';
+    position: absolute;
+    bottom: 1px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: $white;
+    transition: all 0.3s $curve;
+  }
+
+  a:hover::before {
+    width: 100%;
+    background: $white;
+    animation: borderBottomAnimate 0.3s forwards;
+  }
+
+  #social-links {
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    display: none;
+
+    a {
+      margin: 5px;
+      border-radius: 50%;
+      border: thin solid $black;
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      vertical-align: middle;
+      font-size: 18px;
+      transition: all 0.25s $bounce;
+    }
+
+    a:hover::before {
+      content: none;
+    }
+
+    a:hover {
+      background: $black;
+      color: $white;
+      transform: scale(1.3);
+    }
+  }
+
+  #contact-info {
+    display: none;
+    color: $white;
+    margin-top: 20px;
+    text-align: center;
+    width: 100%;
+    text-transform: lowercase;
+
+    h4 {
+      font-size: 14px;
+    }
+
+    h5 {
+      font-size: 12px;
+    }
+  }
+}
+nav#nav-bar.in-left {
+  transform: translateX(0px) rotateY(0deg) translateZ(0px);
+
+  p,
+  .logo-name {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
+
+// .container {
+//   overflow-x: hidden;
+// }
+//
+// .page-container {
+//   transform: translateX(0px);
+//   transition: all 0.36s $curve;
+// }
+//
+// .page-container.open {
+//   transform: translateX(300px);
+// }

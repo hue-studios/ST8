@@ -1,0 +1,66 @@
+#page-header {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 100;
+
+  transform: translate3d(0, 0, 0);
+  transition: all 0.3s $curve;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  background: $white;
+  width: 100%;
+  overflow: hidden;
+  height: 70px;
+  box-shadow: 0px 2px 10px rgba($black, 0.1);
+  @media (min-width: $breakpoint-small) {
+  }
+  @media (min-width: $breakpoint-large) {
+    height: 100px;
+    background: none;
+    box-shadow: none;
+    position: relative;
+  }
+  .logo-name {
+    @media (min-width: $breakpoint-large) {
+      display: none;
+    }
+  }
+  .logo {
+    widht: 175px;
+    display: none;
+    @media (min-width: $breakpoint-large) {
+      display: inline-block;
+    }
+    svg {
+      height: 100px;
+      width: auto;
+    }
+  }
+  .new-york-state {
+    width: 135px;
+    overflow: hidden;
+    display: none;
+    @media (min-width: $breakpoint-large) {
+      display: inline-block;
+    }
+    svg {
+      margin-top: -20px;
+      margin-right: -20px;
+      height: 120px;
+      width: auto;
+    }
+  }
+  #page-nav {
+    width: calc(100% - 310px);
+  }
+}
+
+#page-header.hide {
+  transform: translate3d(0, -80px, 0);
+  @media (min-width: $breakpoint-large) {
+    transform: translate3d(0, 0, 0);
+  }
+}
