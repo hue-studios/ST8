@@ -13,10 +13,6 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      // {
-      //   'http-equiv': 'Content-Security-Policy',
-      //   content: 'upgrade-insecure-requests'
-      // },
       {
         hid: 'description',
         name: 'description',
@@ -73,12 +69,12 @@ export default {
    */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-    baseURL: 'http://admin.steny.org/southern-tier-8'
+    baseURL: 'https://admin.steny.org/southern-tier-8'
   },
   env: {
-    apiUrl: 'http://admin.steny.org/southern-tier-8',
+    apiUrl: 'https://admin.steny.org/southern-tier-8',
 
-    imageUrl: 'http://admin.steny.org/southern-tier-8/assets/'
+    imageUrl: 'https://admin.steny.org/southern-tier-8/assets/'
   },
   /*
    ** Build configuration
