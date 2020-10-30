@@ -13,6 +13,10 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      // {
+      //   'http-equiv': 'Content-Security-Policy',
+      //   content: 'upgrade-insecure-requests'
+      // },
       {
         hid: 'description',
         name: 'description',
@@ -69,14 +73,12 @@ export default {
    */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-    baseURL: 'http://174.138.42.17/southern-tier-8'
+    baseURL: 'http://admin.steny.org/southern-tier-8'
   },
   env: {
-    // apiUrl: 'https://camila.life/content/api/1.1',
-    apiUrl: 'http://174.138.42.17/southern-tier-8',
-    // imageUrl: 'https://camila.life/content/thumbnail',
-    // digitalocean ip 167.172.134.66
-    imageUrl: 'http://174.138.42.17/southern-tier-8/assets/'
+    apiUrl: 'http://admin.steny.org/southern-tier-8',
+
+    imageUrl: 'http://admin.steny.org/southern-tier-8/assets/'
   },
   /*
    ** Build configuration

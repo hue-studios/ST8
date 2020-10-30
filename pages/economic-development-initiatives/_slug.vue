@@ -76,7 +76,7 @@
       <h5 id="regional-title" class="absolute uppercase initiative__bg-title">
         Regional
       </h5>
-      <h2 class="uppercase green-two relative initiative__vertical-story-title">
+      <h2 class="uppercase green-two relative story-title">
         How we accomplish this.
       </h2>
       <p>
@@ -94,6 +94,9 @@
       id="initiative__news"
       class="flex relative justify-center items-center flex-row flex-wrap relative"
     >
+      <h2 class="uppercase green-two relative story-title">
+        Get Involved
+      </h2>
       <div v-for="item in news" :key="item.key" class="">
         {{ item.title }}
       </div>
