@@ -25,6 +25,11 @@ export default {
         rel: 'preconnect',
         href: 'https://use.typekit.net/xnk2eiu.css',
         crossorigin: 'true'
+      },
+      {
+        rel: 'preconnect',
+        href: 'https://admin.steny.org',
+        crossorigin: 'true'
       }
     ]
   },
