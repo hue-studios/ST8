@@ -52,9 +52,9 @@
         <div
           class="flex items-center justify-center flex-row page-nav__drop-links"
         >
-          <nuxt-link to="/regional-news" class="uppercase">News</nuxt-link>
-          <nuxt-link to="/regional-events" class="uppercase">Events</nuxt-link>
-          <nuxt-link to="/regional-resources" class="uppercase"
+          <nuxt-link to="/regional/news" class="uppercase">News</nuxt-link>
+          <nuxt-link to="/regional/events" class="uppercase">Events</nuxt-link>
+          <nuxt-link to="/regional/resources" class="uppercase"
             >Resources</nuxt-link
           >
         </div>

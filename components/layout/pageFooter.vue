@@ -19,9 +19,17 @@
       class="flex flex-col items-start justify-start w-full md:w-1/3 pr-8 pl-8 footer-col"
     >
       <h4 class="uppercase w-full">Site Links</h4>
-      <nuxt-link to="" class="uppercase footer-link">Programs</nuxt-link>
-      <nuxt-link to="" class="uppercase footer-link">Services</nuxt-link>
-      <nuxt-link to="" class="uppercase footer-link"
+      <nuxt-link
+        to="/economic-development-programs/"
+        class="uppercase footer-link"
+        >Programs</nuxt-link
+      >
+      <nuxt-link
+        to="/economic-development-services/"
+        class="uppercase footer-link"
+        >Services</nuxt-link
+      >
+      <nuxt-link to="/regional-profile/" class="uppercase footer-link"
         >Regional Profile</nuxt-link
       >
       <nuxt-link to="" class="uppercase footer-link">ST8 Counties</nuxt-link>

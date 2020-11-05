@@ -20,9 +20,7 @@
       >
     </p>
     <p>
-      <nuxt-link
-        to="/creative-services/social-media-marketing-automation/"
-        class="mobile-nav-link"
+      <nuxt-link to="/economic-development-services/" class="mobile-nav-link"
         >Services</nuxt-link
       >
     </p>

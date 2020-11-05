@@ -172,11 +172,9 @@ export default {
     }
   },
   async asyncData({ params, $axios }) {
-    const initiativesReq = await $axios.get(
-      process.env.apiUrl + '/items/initiatives?fields=*.*.*'
-    )
+    const initiativesReq = await $axios.$get('/items/initiatives?fields=*.*.*')
     return {
-      initiatives: initiativesReq.data.data
+      initiatives: initiativesReq.data
     }
   },
   mounted() {

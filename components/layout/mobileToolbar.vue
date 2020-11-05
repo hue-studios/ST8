@@ -1,7 +1,7 @@
 <template>
   <div id="mobile-toolbar">
     <nuxt-link to="/creative-design-portfolio/">work</nuxt-link>
-    <nuxt-link to="/creative-services/">services</nuxt-link>
+    <nuxt-link to="/economic-development-services/">services</nuxt-link>
     <div id="nav-btn" @click.prevent="sideMenuToggle()">
       <div id="nav-icon"><span></span> <span></span> <span></span></div>
     </div>
