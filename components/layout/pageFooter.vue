@@ -73,6 +73,7 @@
             :href="item.social_links_id.link"
             target="_blank"
             class="rounded-full w-12 h-12 flex justify-center items-center mr-4"
+            rel="noopener"
             ><linkedin-icon
               v-if="item.social_links_id.platform == 'Linkedin'"
               size="1x"

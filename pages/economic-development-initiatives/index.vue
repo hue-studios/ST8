@@ -23,7 +23,7 @@
         <nuxt-link
           :to="'/economic-development-initiatives/' + initiative.url"
           class="uppercase tracking-wider navy text-xs initiatives__intro-card-link"
-          >Learn More
+          >Learn More<span class="hidden"> about {{ initiative.title }}.</span>
           <arrow-right-icon
             size="1.5x"
             stroke-width="1"
@@ -56,7 +56,7 @@
         <nuxt-link
           :to="'/economic-development-initiatives/' + initiative.url"
           class="uppercase tracking-wider navy text-xs initiatives__intro-card-link"
-          >Learn More
+          >Learn More<span class="hidden"> about {{ initiative.title }}.</span>
           <arrow-right-icon
             size="1.5x"
             stroke-width="1"

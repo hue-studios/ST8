@@ -1,7 +1,10 @@
 <template>
   <div id="page-header" :class="{ hide: !showHeader }" class="">
-    <logo-name />
-    <logo />
+    <nuxt-link to="/">
+      <logo-name />
+
+      <logo />
+    </nuxt-link>
     <div id="page-nav" class="flex flex-row">
       <div
         id="activeNavContainer"

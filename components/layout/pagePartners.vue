@@ -61,6 +61,8 @@
         <img
           :src="imageLocation + partner.logo.private_hash + '?key=thumbnail'"
           :alt="partner.title"
+          :width="partner.logo.width"
+          :height="partner.logo.height"
         />
       </div>
     </div>

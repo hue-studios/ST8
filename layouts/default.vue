@@ -101,17 +101,6 @@
           >Contact</nuxt-link
         >
       </p>
-      <div id="social-links">
-        <a href="https://twitter.com/hue_studios" target="_blank"
-          ><i class="fa fa-twitter" aria-hidden="true"></i
-        ></a>
-        <a href="https://facebook.com/huestudios" target="_blank"
-          ><i class="fa fa-facebook" aria-hidden="true"></i
-        ></a>
-        <a href="https://instagram.com/huestudios" target="_blank"
-          ><i class="fa fa-instagram" aria-hidden="true"></i
-        ></a>
-      </div>
     </nav>
     <div id="nav-btn" @click.prevent="sideMenuToggle()">
       <div id="nav-icon"><span></span> <span></span> <span></span></div>

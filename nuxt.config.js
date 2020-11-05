@@ -9,7 +9,7 @@ export default {
    ** Headers of the page
    */
   head: {
-    title: process.env.npm_package_name || '',
+    title: 'Southern Tier 8 | Regional Economic Development Organization',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -76,10 +76,26 @@ export default {
     // See https://github.com/nuxt-community/axios-module#options
     baseURL: 'https://admin.steny.org/southern-tier-8'
   },
+  pwa: {
+    meta: {
+      mobileAppIOS: true,
+      appleStatusBarStyle: 'black-translucent',
+      theme_color: '#193658',
+      nativeUI: true,
+      short_name: 'ST8',
+      background_color: '#ffffff'
+    }
+  },
   env: {
     apiUrl: 'https://admin.steny.org/southern-tier-8',
 
     imageUrl: 'https://admin.steny.org/southern-tier-8/assets/'
+  },
+
+  render: {
+    dist: {
+      maxAge: '1d'
+    }
   },
   /*
    ** Build configuration

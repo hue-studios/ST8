@@ -385,18 +385,20 @@
 @import './assets/scss/vars';
 .new-york-state {
   .nys-bg {
-    fill: #001a38;
+    // fill: #001a38;
+    fill: none;
+    stroke: $navy;
   }
   .st8-bg {
-    fill: #99e00d;
+    fill: $navy;
   }
   .st8-outlines {
     fill: none;
-    stroke: #001a38;
+    stroke: $green;
     stroke-linecap: round;
     stroke-linejoin: round;
     stroke-width: 2px;
-    opacity: 0.5;
+    opacity: 1;
   }
 }
 </style>
