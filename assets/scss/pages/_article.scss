@@ -1,0 +1,34 @@
+#article {
+  height: auto !important;
+  overflow: hidden;
+  width: 100%;
+
+  #article__bg-title {
+    color: $grey;
+    left: 0px;
+    top: 0px;
+
+    height: 450px;
+    width: 300px;
+    font-size: 42px;
+    white-space: pre-line;
+    font-weight: 300;
+    z-index: -1;
+    opacity: 0.25;
+    letter-spacing: 0.15em;
+    @media (min-width: $breakpoint-small) {
+      font-size: 68px;
+    }
+    @media (min-width: $breakpoint-medium) {
+      font-size: 212px;
+      line-height: 150px;
+      margin-top: -125px;
+    }
+  }
+  .article__content {
+    a:link {
+      color: $green;
+      text-decoration: underline;
+    }
+  }
+}

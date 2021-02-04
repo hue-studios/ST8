@@ -2,15 +2,14 @@
   <div id="page-header" :class="{ hide: !showHeader }" class="">
     <nuxt-link to="/">
       <logo-name />
-
       <logo />
     </nuxt-link>
     <div id="page-nav" class="flex flex-row">
       <div
         id="activeNavContainer"
+        class="relative page-nav__drop-container"
         @mouseover="toggleDropNav('active', true)"
         @mouseleave="toggleDropNav('active', false)"
-        class="relative page-nav__drop-container"
       >
         <h3 class="uppercase">Active</h3>
         <div
@@ -27,58 +26,37 @@
           >
         </div>
       </div>
-      <div
-        id="regionalNavContainer"
-        @mouseover="toggleDropNav('regional', true)"
-        @mouseleave="toggleDropNav('regional', false)"
-        class="relative page-nav__drop-container"
-      >
-        <h3 class="uppercase">Regional</h3>
-        <div
-          class="flex items-center justify-center flex-row page-nav__drop-links"
+      <div id="regionalNavContainer" class="relative page-nav__drop-container">
+        <nuxt-link to="/regional-profile"
+          ><h3 class="uppercase">Regional</h3></nuxt-link
         >
-          <nuxt-link to="/regional-data-profile" class="uppercase"
-            >Data</nuxt-link
-          >
-          <nuxt-link to="/counties-data-profile" class="uppercase"
-            >Counties</nuxt-link
-          >
-        </div>
       </div>
       <div
         id="nowNavContainer"
+        class="relative page-nav__drop-container"
         @mouseover="toggleDropNav('now', true)"
         @mouseleave="toggleDropNav('now', false)"
-        class="relative page-nav__drop-container"
       >
         <h3 class="uppercase">Now</h3>
         <div
           class="flex items-center justify-center flex-row page-nav__drop-links"
         >
-          <nuxt-link to="/regional/news" class="uppercase">News</nuxt-link>
-          <nuxt-link to="/regional/events" class="uppercase">Events</nuxt-link>
-          <nuxt-link to="/regional/resources" class="uppercase"
+          <nuxt-link to="/regional-news" class="uppercase">News</nuxt-link>
+          <nuxt-link to="/regional-news/resources" class="uppercase"
             >Resources</nuxt-link
+          >
+          <nuxt-link to="/regional-news/events" class="uppercase"
+            >Events</nuxt-link
           >
         </div>
       </div>
       <div
         id="organizationNavContainer"
-        @mouseover="toggleDropNav('organization', true)"
-        @mouseleave="toggleDropNav('organization', false)"
         class="relative page-nav__drop-container"
       >
-        <h3 class="uppercase">Organization</h3>
-        <div
-          class="flex items-center justify-center flex-row page-nav__drop-links"
+        <nuxt-link to="/regional-organization/"
+          ><h3 class="uppercase">Organization</h3></nuxt-link
         >
-          <nuxt-link to="/organization-mission" class="uppercase w-1/2"
-            >Mission</nuxt-link
-          >
-          <nuxt-link to="/organization-leadership" class="uppercase w-1/2"
-            >Leadership</nuxt-link
-          >
-        </div>
       </div>
     </div>
     <new-york-state />

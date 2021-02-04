@@ -77,30 +77,9 @@
           >Resources</nuxt-link
         >
       </p>
-      <p class="mobile-nav-title">
+      <nuxt-link to="/regional-organization/" class="mobile-nav-link">
         Organization
-      </p>
-      <p>
-        <nuxt-link
-          to="/creative-services/branding-agency/"
-          class="mobile-nav-link"
-          >Mission</nuxt-link
-        >
-      </p>
-      <p>
-        <nuxt-link
-          to="/creative-services/branding-agency/"
-          class="mobile-nav-link"
-          >Leadership</nuxt-link
-        >
-      </p>
-      <p>
-        <nuxt-link
-          to="/creative-services/branding-agency/"
-          class="mobile-nav-link"
-          >Contact</nuxt-link
-        >
-      </p>
+      </nuxt-link>
     </nav>
     <div id="nav-btn" @click.prevent="sideMenuToggle()">
       <div id="nav-icon"><span></span> <span></span> <span></span></div>

@@ -1,15 +1,13 @@
-#programs {
+#news {
   height: auto !important;
   overflow: hidden;
   width: 100%;
-  #programs__intro {
-    height: 400px;
+  #news__intro {
+    height: 300px;
 
     @media (min-width: $breakpoint-small) {
-      height: 450px;
     }
     @media (min-width: $breakpoint-medium) {
-      height: 600px;
     }
     h1 {
       font-size: 42px;
@@ -64,6 +62,11 @@
       }
     }
   }
-  #programs__program-cards {
+  #news__news-cards {
+    .news__filters {
+      input {
+        max-width: 400px;
+      }
+    }
   }
 }

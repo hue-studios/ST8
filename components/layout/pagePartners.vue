@@ -43,12 +43,10 @@
       Col<span class="white">lab</span>orate
     </h2>
     <p class="white w-5/6 md:w-3/5">
-      We are always looking to partner with organizations and businesses to
-      achieve the greater goal of growing our region. We believe that
-      partnership is everything and without it, we can’t possibility accomplish
-      all the programs that can lead to true success. We invite you to reach
-      out, share your ideas, and let’s see what we can put together to
-      accomplish our regional initiatives.
+      We believe that partnership is everything and without it, we can’t
+      possibility accomplish all the programs that can lead to true success. We
+      invite you to reach out, share your ideas, and let’s see what we can put
+      together to accomplish our regional initiatives.
     </p>
     <div
       class="w-full flex flex-row justify-center items-center flex-wrap mt-8"
@@ -59,6 +57,7 @@
         class="rounded-full flex items-center justify-center partners-badge"
       >
         <img
+          v-if="partner.logo"
           :src="imageLocation + partner.logo.private_hash + '?key=thumbnail'"
           :alt="partner.title"
           :width="partner.logo.width"
@@ -89,21 +88,21 @@ export default {
     gsap.to('#chevron-one', {
       scrollTrigger: {
         trigger: '#page-partners', // this is the element that will trigger the animation
-        start: 'top center', // this string defines the trigger and scroller start
-        end: 'bottom center', // this string defines the trigger and scroller end
+        start: 'top bottom-=100px', // this string defines the trigger and scroller start
+        end: '+=100%', // this string defines the trigger and scroller end
         scrub: true // this tells GSAP to link animation progress to scroll progress
       },
-      x: '-50px',
+      x: '-70px',
       y: '20px'
     })
     gsap.to('#chevron-three', {
       scrollTrigger: {
         trigger: '#page-partners', // this is the element that will trigger the animation
-        start: 'top center', // this string defines the trigger and scroller start
-        end: 'bottom center', // this string defines the trigger and scroller end
+        start: 'top bottom-=100px', // this string defines the trigger and scroller start
+        end: '+=100%', // this string defines the trigger and scroller end
         scrub: true // this tells GSAP to link animation progress to scroll progress
       },
-      x: '40px'
+      x: '50px'
     })
   },
   created() {

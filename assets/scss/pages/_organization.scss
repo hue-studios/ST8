@@ -1,0 +1,39 @@
+#organization {
+  #programs__page-title {
+    @media (min-width: $breakpoint-small) {
+    }
+    @media (min-width: $breakpoint-medium) {
+    }
+  }
+  #organization-intro {
+    height: 600px;
+    background-image: url('https://admin.steny.org/southern-tier-8/assets/7lck4gu6lq804wcc?key=large');
+    background-size: 350px auto;
+    background-repeat: no-repeat;
+    background-position: center top;
+    @media (min-width: $breakpoint-small) {
+      background-size: 600px auto;
+    }
+    @media (min-width: $breakpoint-medium) {
+      background-size: 800px auto;
+    }
+    .logo-name {
+      margin-top: 400px;
+      width: 90% !important;
+      max-width: 800px;
+      svg {
+        width: 100%;
+        height: auto;
+        display: inline-block;
+      }
+    }
+  }
+  #organization-industry {
+    #industry-chart {
+      svg {
+        height: 600px;
+        width: auto;
+      }
+    }
+  }
+}

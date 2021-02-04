@@ -32,11 +32,14 @@
       <nuxt-link to="/regional-profile/" class="uppercase footer-link"
         >Regional Profile</nuxt-link
       >
-      <nuxt-link to="" class="uppercase footer-link">ST8 Counties</nuxt-link>
-      <nuxt-link to="" class="uppercase footer-link">News</nuxt-link>
+      <nuxt-link to="/regional-news/" class="uppercase footer-link"
+        >News</nuxt-link
+      >
       <nuxt-link to="" class="uppercase footer-link">Events</nuxt-link>
       <nuxt-link to="" class="uppercase footer-link">Resources</nuxt-link>
-      <nuxt-link to="" class="uppercase footer-link">Board / Team</nuxt-link>
+      <nuxt-link to="/regional-organization/" class="uppercase footer-link"
+        >Organization</nuxt-link
+      >
     </div>
     <div
       class="flex flex-col items-start justify-start w-full md:w-1/3 pr-8 pl-8 footer-col"
@@ -60,6 +63,7 @@
       </div>
       <div
         v-for="item in locations"
+        :key="item.id"
         class="flex flex-col items-start justify-start footer-col__contact-section location"
       >
         <h5 class="uppercase">{{ item.locations_id.title }}</h5>
@@ -121,11 +125,11 @@ export default {
   methods: {
     getOrganizationInfo() {
       this.$axios
-        .$get('/items/organization?fields=*.*.*')
+        .$get('/items/organization?fields=*.*.*&single=1')
         .then((response) => {
-          this.organization = response.data[0]
-          this.social_links = response.data[0].social_links
-          this.locations = response.data[0].locations
+          this.organization = response.data
+          this.social_links = response.data.social_links
+          this.locations = response.data.locations
         })
         .catch(function(error) {
           console.log(error)

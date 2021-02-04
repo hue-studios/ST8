@@ -1,19 +1,24 @@
 #page-partners {
-  background: rgb(0, 26, 56);
-  background: linear-gradient(
-    302deg,
-    rgba(0, 26, 56, 1) 0%,
-    rgba(2, 36, 75, 1) 100%
-  );
+  // background: rgb(0, 26, 56);
+  // background: linear-gradient(
+  //   302deg,
+  //   rgba(0, 26, 56, 1) 0%,
+  //   rgba(2, 36, 75, 1) 100%
+  // );
+  background: $navy;
   overflow: hidden;
-  height: 500px;
+  // height: 500px;
   box-shadow: inset 0px -2px 50px rgba($black, 1);
+  padding-top: 40px;
+  padding-bottom: 40px;
   @media (min-width: $breakpoint-small) {
+    padding-top: 60px;
+    padding-bottom: 60px;
   }
   @media (min-width: $breakpoint-large) {
   }
   svg {
-    height: 600px;
+    height: 120%;
     width: auto;
     right: 0px;
     top: -50px;
@@ -28,8 +33,8 @@
   }
   svg#chevron-one {
     right: 15px;
-    height: 800px;
-    top: -200px;
+    height: 160%;
+    top: -35%;
     z-index: 1;
     path {
       opacity: 0.3;
@@ -40,24 +45,269 @@
     right: 15px;
   }
   svg#chevron-three {
-    right: 0px;
+    right: 30px;
   }
   h2 {
     font-size: 48px;
+  }
+  p {
+    font-size: 14px;
   }
   .partners-badge {
     z-index: 5;
     box-shadow: 0px 1px 35px rgba($black, 1);
     background-color: $white;
-    width: 100px;
-    height: 100px;
+    width: 60px;
+    height: 60px;
     padding: 10px;
     overflow: hidden;
     margin: 10px;
+    transition: all 0.25s $bounce;
     img {
       width: 70px;
       height: auto;
       filter: grayscale(1);
+      animation: pulseGrey 4.5s infinite $curve;
     }
+  }
+  .partners-badge:hover {
+    transform: scale(1.3);
+  }
+  .partners-badge:nth-of-type(2) {
+    img {
+      animation-delay: 0.1s;
+    }
+  }
+  .partners-badge:nth-of-type(3) {
+    img {
+      animation-delay: 0.2s;
+    }
+  }
+  .partners-badge:nth-of-type(4) {
+    img {
+      animation-delay: 0.3s;
+    }
+  }
+  .partners-badge:nth-of-type(5) {
+    img {
+      animation-delay: 0.4s;
+    }
+  }
+  .partners-badge:nth-of-type(6) {
+    img {
+      animation-delay: 0.5s;
+    }
+  }
+  .partners-badge:nth-of-type(6) {
+    img {
+      animation-delay: 0.6s;
+    }
+  }
+  .partners-badge:nth-of-type(7) {
+    img {
+      animation-delay: 0.7s;
+    }
+  }
+  .partners-badge:nth-of-type(8) {
+    img {
+      animation-delay: 0.8s;
+    }
+  }
+  .partners-badge:nth-of-type(9) {
+    img {
+      animation-delay: 0.9s;
+    }
+  }
+  .partners-badge:nth-of-type(10) {
+    img {
+      animation-delay: 1s;
+    }
+  }
+  .partners-badge:nth-of-type(11) {
+    img {
+      animation-delay: 1.1s;
+    }
+  }
+  .partners-badge:nth-of-type(12) {
+    img {
+      animation-delay: 1.2s;
+    }
+  }
+  .partners-badge:nth-of-type(13) {
+    img {
+      animation-delay: 1.3s;
+    }
+  }
+  .partners-badge:nth-of-type(14) {
+    img {
+      animation-delay: 1.4s;
+    }
+  }
+  .partners-badge:nth-of-type(15) {
+    img {
+      animation-delay: 1.5s;
+    }
+  }
+  .partners-badge:nth-of-type(16) {
+    img {
+      animation-delay: 1.6s;
+    }
+  }
+  .partners-badge:nth-of-type(17) {
+    img {
+      animation-delay: 1.7s;
+    }
+  }
+  .partners-badge:nth-of-type(18) {
+    img {
+      animation-delay: 1.8s;
+    }
+  }
+  .partners-badge:nth-of-type(19) {
+    img {
+      animation-delay: 1.9s;
+    }
+  }
+  .partners-badge:nth-of-type(20) {
+    img {
+      animation-delay: 2s;
+    }
+  }
+  .partners-badge:nth-of-type(21) {
+    img {
+      animation-delay: 2.1s;
+    }
+  }
+  .partners-badge:nth-of-type(22) {
+    img {
+      animation-delay: 2.2s;
+    }
+  }
+  .partners-badge:nth-of-type(23) {
+    img {
+      animation-delay: 2.3s;
+    }
+  }
+  .partners-badge:nth-of-type(24) {
+    img {
+      animation-delay: 2.4s;
+    }
+  }
+  .partners-badge:nth-of-type(25) {
+    img {
+      animation-delay: 2.5s;
+    }
+  }
+  .partners-badge:nth-of-type(26) {
+    img {
+      animation-delay: 2.6s;
+    }
+  }
+  .partners-badge:nth-of-type(27) {
+    img {
+      animation-delay: 2.7s;
+    }
+  }
+  .partners-badge:nth-of-type(28) {
+    img {
+      animation-delay: 2.8s;
+    }
+  }
+  .partners-badge:nth-of-type(29) {
+    img {
+      animation-delay: 2.9s;
+    }
+  }
+  .partners-badge:nth-of-type(30) {
+    img {
+      animation-delay: 3s;
+    }
+  }
+  .partners-badge:nth-of-type(31) {
+    img {
+      animation-delay: 3.1s;
+    }
+  }
+  .partners-badge:nth-of-type(32) {
+    img {
+      animation-delay: 3.2s;
+    }
+  }
+  .partners-badge:nth-of-type(33) {
+    img {
+      animation-delay: 3.3s;
+    }
+  }
+  .partners-badge:nth-of-type(34) {
+    img {
+      animation-delay: 3.4s;
+    }
+  }
+  .partners-badge:nth-of-type(35) {
+    img {
+      animation-delay: 3.5s;
+    }
+  }
+  .partners-badge:nth-of-type(36) {
+    img {
+      animation-delay: 3.6s;
+    }
+  }
+  .partners-badge:nth-of-type(37) {
+    img {
+      animation-delay: 3.7s;
+    }
+  }
+  .partners-badge:nth-of-type(38) {
+    img {
+      animation-delay: 3.8s;
+    }
+  }
+  .partners-badge:nth-of-type(39) {
+    img {
+      animation-delay: 3.9s;
+    }
+  }
+  .partners-badge:nth-of-type(40) {
+    img {
+      animation-delay: 4s;
+    }
+  }
+  .partners-badge:nth-of-type(41) {
+    img {
+      animation-delay: 4.1s;
+    }
+  }
+  .partners-badge:nth-of-type(42) {
+    img {
+      animation-delay: 4.2s;
+    }
+  }
+  .partners-badge:nth-of-type(43) {
+    img {
+      animation-delay: 4.3s;
+    }
+  }
+  .partners-badge:nth-of-type(44) {
+    img {
+      animation-delay: 4.4s;
+    }
+  }
+  .partners-badge:nth-of-type(45) {
+    img {
+      animation-delay: 4.5s;
+    }
+  }
+}
+
+@keyframes pulseGrey {
+  0% {
+    filter: grayscale(1);
+  }
+  50% {
+    filter: grayscale(0);
+  }
+  100% {
+    filter: grayscale(1);
   }
 }

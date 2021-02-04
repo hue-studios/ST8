@@ -2,200 +2,120 @@
   <div id="programs">
     <div
       id="programs__intro"
-      class="flex flex-row flex-wrap justify-center lg:justify-between items-center relative"
+      class="flex flex-col flex-wrap justify-center items-center relative"
     >
-      <div
-        class="w-full sm:w-5/6 lg:w-1/3 lg:pr-8 mt-8 mb-8 relative flex flex-col justify-start order-2 lg:order-1 programs__intro-card"
-      >
-        <h3 class="green-two absolute programs__intro-card-sort">
-          {{ initiativeProgramsCount(6) }}
-        </h3>
-        <h1 class="uppercase tracking-wider navy text-sm bold leading-none">
-          <strong>Regionalism</strong> Programs
-        </h1>
-        <div class="navy text-xs mt-2 mb-2 md:mb-4 text-justify">
-          Programs developed to promote regionalism throughout the Southern
-          Tier.
-        </div>
-        <nuxt-link
-          to="/economic-development-programs/regionalism"
-          class="uppercase tracking-wider navy text-xs initiatives__intro-card-link"
-          >Learn More
-          <arrow-right-icon
-            size="1.5x"
-            stroke-width="1"
-            class="inline-block"
-          ></arrow-right-icon
-        ></nuxt-link>
-      </div>
-      <div
-        class="w-full sm:w-5/6 lg:w-1/3 lg:pr-8 mt-8 mb-8 relative flex flex-col justify-start order-2 lg:order-1 middle programs__intro-card"
-      >
-        <h3 class="green-two absolute programs__intro-card-sort">
-          3
-        </h3>
-        <h1 class="uppercase tracking-wider navy text-sm bold leading-none">
-          <strong>Regionalism</strong> Programs
-        </h1>
-        <div class="navy text-xs mt-2 mb-2 md:mb-4 text-justify">
-          Programs developed to promote regionalism throughout the Southern
-          Tier.
-        </div>
-        <nuxt-link
-          to="/economic-development-programs/regionalism"
-          class="uppercase tracking-wider navy text-xs initiatives__intro-card-link"
-          >Learn More
-          <arrow-right-icon
-            size="1.5x"
-            stroke-width="1"
-            class="inline-block"
-          ></arrow-right-icon
-        ></nuxt-link>
-      </div>
-      <div
-        class="w-full sm:w-5/6 lg:w-1/3 lg:pr-8 mt-8 mb-8 relative flex flex-col justify-start order-2 lg:order-1 programs__intro-card"
-      >
-        <h3 class="green-two absolute programs__intro-card-sort">
-          3
-        </h3>
-        <h1 class="uppercase tracking-wider navy text-sm bold leading-none">
-          <strong>Regionalism</strong> Programs
-        </h1>
-        <div class="navy text-xs mt-2 mb-2 md:mb-4 text-justify">
-          Programs developed to promote regionalism throughout the Southern
-          Tier.
-        </div>
-        <nuxt-link
-          to="/economic-development-programs/regionalism"
-          class="uppercase tracking-wider navy text-xs initiatives__intro-card-link"
-          >Learn More
-          <arrow-right-icon
-            size="1.5x"
-            stroke-width="1"
-            class="inline-block"
-          ></arrow-right-icon
-        ></nuxt-link>
-      </div>
-      <h2
-        id="programs__page-title"
-        class="w-full sm:w-5/6 lg:w-full uppercase navy text-center tracking-widest order-1 lg:order-2"
-      >
+      <h1 class="uppercase tracking-widest mb-2 w-5/6 sm:w-3/5 md:w-1/2">
         Programs
-      </h2>
-      <div
-        class="w-full sm:w-5/6 lg:w-1/3 lg:pr-8 mt-8 mb-8 relative flex flex-col justify-start order-3 bottomRow programs__intro-card"
-      >
-        <h3 class="green-two absolute programs__intro-card-sort">
-          3
+      </h1>
+      <p class="w-5/6 sm:w-3/5 md:w-1/2">
+        We are always looking to partner with organizations and businesses to
+        achieve the greater goal of growing our region.
+      </p>
+      <div class="w-full absolute background text-right">
+        <h3
+          v-for="initiative in initiatives"
+          :key="initiative.id"
+          class="uppercase bold"
+        >
+          {{ initiative.title }}
         </h3>
-        <h1 class="uppercase tracking-wider navy text-sm bold leading-none">
-          <strong>Regionalism</strong> Programs
-        </h1>
-        <div class="navy text-xs mt-2 mb-2 md:mb-4 text-justify">
-          Programs developed to promote regionalism throughout the Southern
-          Tier.
-        </div>
-        <nuxt-link
-          to="/economic-development-programs/regionalism"
-          class="uppercase tracking-wider navy text-xs initiatives__intro-card-link"
-          >Learn More
-          <arrow-right-icon
-            size="1.5x"
-            stroke-width="1"
-            class="inline-block"
-          ></arrow-right-icon
-        ></nuxt-link>
       </div>
+    </div>
+    <div
+      id="programs__program-cards"
+      class="w-full flex items-center justify-center flex-col pb-20"
+    >
+      <!-- <div class="w-full text-center programs__filters">
+        <a
+          v-for="(initiative, index) in initiatives"
+          :key="index"
+          class="uppercase mx-4"
+          @click.prevent="setFilter(initiative.title)"
+          >{{ initiative.title }}</a
+        >
+      </div> -->
       <div
-        class="w-full sm:w-5/6 lg:w-1/3 lg:pr-8 mt-8 mb-8 relative flex flex-col justify-start order-3 bottomRow middleBottom programs__intro-card"
+        class="w-full md:w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 grid-flow-row gap-x-8 gap-y-8 px-8"
       >
-        <h3 class="green-two absolute programs__intro-card-sort">
-          3
-        </h3>
-        <h1 class="uppercase tracking-wider navy text-sm bold leading-none">
-          <strong>Regionalism</strong> Programs
-        </h1>
-        <div class="navy text-xs mt-2 mb-2 md:mb-4 text-justify">
-          Programs developed to promote regionalism throughout the Southern
-          Tier.
-        </div>
-        <nuxt-link
-          to="/economic-development-programs/regionalism"
-          class="uppercase tracking-wider navy text-xs initiatives__intro-card-link"
-          >Learn More
-          <arrow-right-icon
-            size="1.5x"
-            stroke-width="1"
-            class="inline-block"
-          ></arrow-right-icon
-        ></nuxt-link>
-      </div>
-      <div
-        class="w-full sm:w-5/6 lg:w-1/3 lg:pr-8 mt-8 mb-8 relative flex flex-col justify-start order-3 bottomRow programs__intro-card"
-      >
-        <h3 class="green-two absolute programs__intro-card-sort">
-          3
-        </h3>
-        <h1 class="uppercase tracking-wider navy text-sm bold leading-none">
-          <strong>Regionalism</strong> Programs
-        </h1>
-        <div class="navy text-xs mt-2 mb-2 md:mb-4 text-justify">
-          Programs developed to promote regionalism throughout the Southern
-          Tier.
-        </div>
-        <nuxt-link
-          to="/economic-development-programs/regionalism"
-          class="uppercase tracking-wider navy text-xs initiatives__intro-card-link"
-          >Learn More
-          <arrow-right-icon
-            size="1.5x"
-            stroke-width="1"
-            class="inline-block"
-          ></arrow-right-icon
-        ></nuxt-link>
+        <program-card
+          v-for="(program, index) in programs"
+          :key="index"
+          :program="program"
+        ></program-card>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { ArrowRightIcon } from 'vue-feather-icons'
+import programCard from '~/components/programs/programCard'
 export default {
   components: {
-    ArrowRightIcon
-  },
-  computed: {
-    workforcePrograms() {
-      return this.programs.filter(
-        (program) => program.initiatives[0].initiative_id.id === 1
-      )
-    },
-
-    economicDevelopmentPrograms() {
-      return this.programs.filter(
-        (program) => program.initiatives[0].initiative_id.id === 6
-      )
-    }
+    programCard
   },
   async asyncData({ params, $axios }) {
-    const programsReq = await $axios.$get('/items/programs?fields=*.*.*')
+    const [programsReq, initiativesReq] = await Promise.all([
+      $axios.$get(
+        '/items/programs?fields=id,title,what_is_it,url,collaboration,what_it_accomplishes,website,url,activity.activity_id.*,counties.county_id.title,images.file_id.private_hash,initiatives.initiative_id.title,initiatives.initiative_id.url,partners.partner_id.title,resources.resources_id.*'
+      ),
+      $axios.$get('/items/initiatives?fields=*.*.*')
+    ])
     return {
-      programs: programsReq.data
+      programs: programsReq.data,
+      initiatives: initiativesReq.data
     }
   },
-  async fetch({ store, app }) {
-    // await store.dispatch('getUser', app.$auth.user.email)
+  data() {
+    return {
+      programFilters: []
+    }
   },
   head() {},
+  computed: {
+    filteredPrograms() {
+      const app = this
+      // const itemFilters = []
+      if (app.programFilters.length < 1) {
+        return app.programs
+      } else {
+        return app.programs.filter((item) => {
+          return item.initiatives.forEach(function(initiative, index) {
+            return app.programFilters.includes(initiative.intiative_id.title)
+          })
+          // return app.programFilters.includes(
+          //   item.initiatives.initiative_id.title
+          // )
+        })
+      }
+    }
+  },
   created() {
-    console.log(this.workforcePrograms)
+    this.checkInitiative()
   },
   methods: {
-    initiativeProgramsCount(initiative) {
-      const filteredPrograms = this.programs.filter(
-        (program) => program.initiatives[0].initiative_id.id === initiative
-      )
-      return filteredPrograms.length
+    checkInitiative() {
+      if (this.programFilters.includes('Workforce Development')) {
+        console.log('Yes')
+      }
+    },
+    removeFilter(value) {
+      const app = this
+      const index = app.programFilters.indexOf(value)
+      if (index > -1) {
+        app.programFilters.splice(index, 1)
+      }
+      return app.programFilters
+    },
+    setFilter(filter) {
+      const app = this
+      console.log(filter)
+      if (app.programFilters.includes(filter)) {
+        app.removeFilter(filter)
+      } else {
+        app.programFilters.push(filter)
+      }
+
+      console.log(app.programFilters)
     }
   }
 }

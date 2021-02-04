@@ -1,0 +1,40 @@
+#home {
+  @media (min-width: $breakpoint-small) {
+  }
+  @media (min-width: $breakpoint-medium) {
+  }
+  #home-intro {
+    height: 600px;
+    .logo-name {
+      svg {
+        transform: scale(1);
+        @media (min-width: $breakpoint-small) {
+          margin-top: -25px;
+          transform: scale(2);
+        }
+        @media (min-width: $breakpoint-medium) {
+          margin-top: -30px;
+          transform: scale(2.2);
+        }
+        @media (min-width: $breakpoint-large) {
+          margin-top: -35px;
+          transform: scale(3);
+        }
+      }
+    }
+    .home-intro__navigation {
+      @media (min-width: $breakpoint-small) {
+      }
+      @media (min-width: $breakpoint-medium) {
+        width: 800px;
+      }
+    }
+  }
+  #home-motto {
+  }
+  #home-graphic {
+    svg {
+      max-width: 900px;
+    }
+  }
+}

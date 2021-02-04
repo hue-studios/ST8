@@ -24,23 +24,10 @@
         >Services</nuxt-link
       >
     </p>
-    <p class="mobile-nav-title">
+    <nuxt-link class="mobile-nav-link" to="">
       Regional
-    </p>
-    <p>
-      <nuxt-link
-        to="/creative-services/branding-agency/"
-        class="mobile-nav-link"
-        >Data</nuxt-link
-      >
-    </p>
-    <p>
-      <nuxt-link
-        to="/creative-services/branding-agency/"
-        class="mobile-nav-link"
-        >Counties</nuxt-link
-      >
-    </p>
+    </nuxt-link>
+
     <p class="mobile-nav-title">
       Now
     </p>
@@ -65,30 +52,14 @@
         >Resources</nuxt-link
       >
     </p>
-    <p class="mobile-nav-title">
+    <nuxt-link to="/regional-organization/" class="mobile-nav-link">
       Organization
-    </p>
-    <p>
-      <nuxt-link
-        to="/creative-services/branding-agency/"
-        class="mobile-nav-link"
-        >Mission</nuxt-link
-      >
-    </p>
-    <p>
-      <nuxt-link
-        to="/creative-services/branding-agency/"
-        class="mobile-nav-link"
-        >Leadership</nuxt-link
-      >
-    </p>
-    <p>
-      <nuxt-link
-        to="/creative-services/branding-agency/"
-        class="mobile-nav-link"
-        >Contact</nuxt-link
-      >
-    </p>
+    </nuxt-link>
+
+    <nuxt-link to="/creative-services/branding-agency/" class="mobile-nav-link"
+      >Contact</nuxt-link
+    >
+
     <div id="social-links">
       <a href="https://twitter.com/hue_studios" target="_blank"
         ><i class="fa fa-twitter" aria-hidden="true"></i

@@ -1,0 +1,39 @@
+#program-card {
+  height: auto !important;
+  border: thin solid $green;
+  border-radius: 3px;
+  .progam-card__title {
+    font-size: 16px;
+    line-height: 1.1em;
+    @media (min-width: $breakpoint-small) {
+    }
+    @media (min-width: $breakpoint-medium) {
+      font-size: 16px;
+    }
+    @media (min-width: $breakpoint-large) {
+      font-size: 18px;
+    }
+  }
+  .progam-card__tags {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    h5 {
+      font-weight: 400;
+    }
+  }
+  .progam-card__description {
+    font-size: 13px;
+    @media (min-width: $breakpoint-small) {
+    }
+    @media (min-width: $breakpoint-medium) {
+    }
+  }
+  a {
+    .feather-arrow-right {
+      background: $green;
+      border-radius: 50%;
+      color: $white;
+      padding: 4px;
+    }
+  }
+}

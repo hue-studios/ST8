@@ -1,6 +1,6 @@
 export default {
-  ssr: 'true',
-  static: 'false',
+  // ssr: 'true',
+  // static: 'false',
   server: {
     port: 8080, // default: 3000
     host: '0.0.0.0' // default: localhost
@@ -46,14 +46,18 @@ export default {
       lang: 'scss'
     }
   ],
+  router: {
+    middleware: 'pages'
+  },
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: [{ src: '~plugins/v-calendar.js', ssr: false }],
   /*
    ** Nuxt.js dev-modules
    */
   buildModules: [
+    '@nuxtjs/moment',
     // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module',
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
@@ -66,8 +70,28 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
+    'nuxt-izitoast',
+    'vue-social-sharing/nuxt',
+    [
+      'nuxt-validate',
+      {
+        lang: 'en'
+      }
+    ],
+    '@nuxtjs/google-analytics'
   ],
+  // 'google-analytics': {
+  //   id: 'UA-106815130-1'
+  // },
+  tailwindcss: {
+    cssPath: '~/assets/css/tailwind.scss',
+    configPath: 'tailwind.config.js',
+    exposeConfig: false
+  },
+  moment: {
+    defaultTimezone: 'America/New_York'
+  },
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
@@ -75,6 +99,23 @@ export default {
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
     baseURL: 'https://admin.steny.org/southern-tier-8'
+  },
+  izitoast: {
+    timeout: 3000,
+    position: 'bottomRight',
+    transitionIn: 'flipInX',
+    transitionOut: 'flipOutX',
+    backgroundColor: '#fb00da',
+    color: '#ffffff',
+    titleColor: '#ffffff',
+    messageColor: '#ffffff',
+    layout: 2,
+    imageWidth: 80,
+    pauseOnHover: false,
+    progressBarColor: '#00ff1b',
+    overlay: true,
+    overlayClose: true,
+    overlayColor: 'rgba(0,0,0,0.7)'
   },
   pwa: {
     meta: {
@@ -104,7 +145,25 @@ export default {
     /*
      ** You can extend webpack config here
      */
+    postcss: {
+      preset: {
+        features: {
+          // Fixes: https://github.com/tailwindcss/tailwindcss/issues/1190#issuecomment-546621554
+          'focus-within-pseudo-class': false
+        }
+      }
+    },
     transpile: ['gsap'],
-    extend(config, ctx) {}
+    extend(config, ctx) {
+      // Run ESLint on save
+      if (ctx.isDev && ctx.isClient) {
+        config.module.rules.push({
+          enforce: 'pre',
+          test: /\.(js|vue)$/,
+          loader: 'eslint-loader',
+          exclude: /(node_modules)/
+        })
+      }
+    }
   }
 }
