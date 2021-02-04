@@ -6,33 +6,169 @@
     }
   }
   #organization-intro {
-    height: 600px;
-    background-image: url('https://admin.steny.org/southern-tier-8/assets/7lck4gu6lq804wcc?key=large');
-    background-size: 350px auto;
-    background-repeat: no-repeat;
-    background-position: center top;
-    @media (min-width: $breakpoint-small) {
-      background-size: 600px auto;
-    }
-    @media (min-width: $breakpoint-medium) {
-      background-size: 800px auto;
-    }
-    .logo-name {
-      margin-top: 400px;
+    .counties-outline {
       width: 90% !important;
-      max-width: 800px;
+      max-width: 900px;
       svg {
-        width: 100%;
         height: auto;
         display: inline-block;
       }
     }
-  }
-  #organization-industry {
-    #industry-chart {
+    .logo-name {
+      position: absolute;
+      top: calc(50% - 20px);
+      left: calc(50% - 300px);
+      width: 600px;
+      text-align: center;
       svg {
-        height: 600px;
-        width: auto;
+        width: 100%;
+        height: auto;
+      }
+    }
+    #mission-btn {
+      left: calc(50% - 280px);
+      top: calc(50% - 110px);
+      border-bottom: thin solid $navy;
+    }
+    #organization-btn {
+      left: calc(50% - 188px);
+      bottom: calc(50% - 160px);
+      border-bottom: thin solid $navy;
+    }
+    #staff-btn {
+      right: calc(50% - 380px);
+      top: calc(50% - 120px);
+      border-bottom: thin solid $navy;
+    }
+    #board-btn {
+      right: calc(50% - 260px);
+      bottom: calc(50% - 100px);
+      border-bottom: thin solid $navy;
+    }
+  }
+  #mission-section {
+    background-image: url('/images/organization/field-rainbow.jpg');
+    height: 600px;
+    overflow: hidden;
+    border: none;
+    background-color: rgba($black, 0.25);
+    background-blend-mode: darken;
+    background-position: center bottom;
+    background-size: cover;
+    background-repeat: no-repeat;
+    box-shadow: inset 0px -2px 50px rgba($black, 1);
+    #mission {
+      margin-left: 400px;
+      h2 {
+        font-size: 42px;
+        line-height: 40px;
+      }
+      p {
+        width: 500px;
+        line-height: 20px;
+        font-size: 16px;
+      }
+    }
+    #cropped-overlay {
+      right: 0px;
+      top: 0px;
+      width: 60%;
+      height: 700px;
+      overflow: hidden;
+      border: none;
+      // -webkit-clip-path: polygon(0 0, 0 0px, 800px 600px, 600px 0);
+      // clip-path: polygon(0 0, 100% 0, 100% 100%, 70% 100%);
+      background-image: url('https://admin.steny.org/southern-tier-8/assets/ojt65p84t5w048cc?key=large');
+      background-position: left center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      filter: drop-shadow(0px 2px 55px rgba($black, 1));
+    }
+  }
+  #organization-info {
+    #organization-info__container {
+      max-width: 960px;
+      .page-title:after {
+        content: '';
+        width: calc(100% + 60px);
+        height: 1px;
+        background: $green;
+        position: absolute;
+        bottom: -1px;
+        left: 0px;
+      }
+      a {
+        border: thin solid $green;
+        border-radius: 3px;
+      }
+    }
+  }
+  #staff-section {
+    box-shadow: inset 0px -2px 150px rgba($black, 0.5);
+
+    background: $navy;
+    .people-card {
+      max-width: 800px;
+      margin: 30px 0;
+      .people-card__image {
+        width: 200px;
+        height: 130px;
+        overflow: hidden;
+        box-shadow: 0px 2px 15px rgba($black, 0.3);
+        filter: grayscale(1);
+      }
+      .people-card__info {
+        width: calc(100% - 220px);
+        .people-card__name {
+          padding-bottom: 15px;
+          margin-bottom: 15px;
+          border-bottom: thin solid rgba($white, 1);
+          h3 {
+            color: $white;
+          }
+
+          .people-card__links {
+            a {
+              color: $white;
+              font-size: 8px;
+              letter-spacing: 0.3em;
+            }
+          }
+        }
+        h5.people-card__title {
+          color: $green;
+          font-size: 12px;
+          letter-spacing: 0.3em;
+          font-weight: 400;
+        }
+      }
+    }
+  }
+  #board-section {
+    .board-card {
+      margin: 15px 5%;
+      width: 90%;
+      @media (min-width: $breakpoint-small) {
+        width: 40%;
+        margin: 20px 5%;
+      }
+      @media (min-width: $breakpoint-medium) {
+        width: 21%;
+        margin: 20px 2%;
+      }
+      h3 {
+        color: $green;
+        font-size: 12px;
+        letter-spacing: 0.3em;
+        font-weight: 400;
+        border-bottom: thin solid $navy;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+      }
+      h5 {
+        color: $navy;
+        font-size: 12px;
+        letter-spacing: 0.3em;
       }
     }
   }

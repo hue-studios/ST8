@@ -5,6 +5,9 @@
 @import 'layout/layout';
 @import 'uikit/animation';
 @import 'transitions';
+html {
+  scroll-behavior: smooth;
+}
 body {
   background: $white;
   font-family: $body-font;
