@@ -1,13 +1,29 @@
 <template>
-  <div id="events">
-    <v-calendar :attributes="attrs" @dayclick="dayClicked" is-expanded />
+  <div id="events" class="flex flex-col items-center justify-center">
+    <div
+      id="events__intro"
+      class="flex flex-col flex-wrap justify-center items-center relative w-full"
+    >
+      <h1 class="navy uppercase tracking-widest mb-2 w-5/6 sm:w-3/5 md:w-1/2">
+        Events
+      </h1>
+      <p class="navy w-5/6 sm:w-3/5 md:w-1/2">
+        This is our organizational calendar.
+      </p>
+    </div>
+    <v-calendar
+      class="flex flex-col items-center justify-center"
+      :attributes="attrs"
+      is-expanded
+      @dayclick="dayClicked"
+    />
     <transition
       enter-active-class="uk-animation-slide-top uk-animation-fast"
       leave-active-class="uk-animation-slide-top-small uk-animation-reverse uk-animation-fast"
       mode="out-in"
     >
-      <div v-if="selectedDay" class="selected-day">
-        <h5 class="brand text-center uppercase">
+      <div v-if="selectedDay" class="mb-20 p-8 selected-day">
+        <h5 class="green text-center uppercase tracking-widest">
           {{ selectedDay.date.toDateString() }}
         </h5>
         <transition
@@ -19,10 +35,10 @@
             <li
               v-for="attr in selectedDay.attributes"
               :key="attr.key"
-              class="flex justify-center items-center selected-day-event"
+              class="flex justify-start items-start selected-day-event"
             >
               <div class="selected-day-event-header">
-                <h5 class="text-uppercase bold">
+                <h5 class="uppercase bold">
                   {{ attr.customData.summary }} @
                   {{ formatTime(attr.customData.start.dateTime) }}
                   <span v-if="attr.customData.end.dateTime"
@@ -66,6 +82,9 @@ export default {
       }
     }
   },
+  head() {
+    return {}
+  },
   // async asyncData({ params, $axios }) {
   //   const servicesReq = await $axios.get(
   //     process.env.apiUrl + '/items/services?fields=*.*.*'
@@ -89,11 +108,11 @@ export default {
         //   color: 'orange',
         //   fillMode: 'light'
         // },
-        // highlight: {
-        //   style: {
-        //     backgroundColor: '#1effbc'
-        //   }
-        // },
+        highlight: {
+          style: {
+            backgroundColor: '#eeeeee'
+          }
+        },
         dot: {
           style: {
             backgroundColor: '#1effbc'
@@ -113,14 +132,11 @@ export default {
       .get(
         'https://www.googleapis.com/calendar/v3/calendars/calendarst8@gmail.com/events?key=' +
           this.calendarKey +
-          '&timeMin=2020-01-01T00:00:00Z&timeMax=2020-12-31T23:59:59Z&singleEvents=true&orderBy=startTime&maxResults=500'
+          '&timeMin=2019-01-01T00:00:00Z&timeMax=2021-12-31T23:59:59Z&singleEvents=true&orderBy=startTime&maxResults=2500'
       )
       .then(function(res) {
         app.events = res.data.items
       })
-  },
-  head() {
-    return {}
   },
   methods: {
     formatTime(time) {

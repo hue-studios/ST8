@@ -1,6 +1,7 @@
 <template>
   <div id="services" class="flex items-center justify-center flex-col">
-    <div class="mt-20 pt-24 flex flex-col justify-center items-center">
+    <h3 class="green bold text-sm uppercase tracking-widest">Coming soon.</h3>
+    <!-- <div class="mt-20 pt-24 flex flex-col justify-center items-center">
       <h1 v-for="(service, index) in services" :key="index">
         {{ service.title }}
       </h1>
@@ -46,15 +47,15 @@
         >
         </program-card>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
-import programCard from '~/components/programs/programCard'
+// import programCard from '~/components/programs/programCard'
 export default {
   components: {
-    programCard
+    // programCard
   },
   async asyncData({ params, $axios }) {
     const servicesReq = await $axios.get(
@@ -73,5 +74,6 @@ export default {
 
 <style lang="scss">
 #services {
+  height: 60vh;
 }
 </style>

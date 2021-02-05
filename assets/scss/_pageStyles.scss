@@ -8,3 +8,10 @@
     font-size: 42px;
   }
 }
+.page-paragraph {
+  @media (min-width: $breakpoint-small) {
+  }
+  @media (min-width: $breakpoint-medium) {
+    max-width: 960px;
+  }
+}

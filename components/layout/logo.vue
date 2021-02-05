@@ -88,19 +88,20 @@
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
+@import './assets/scss/vars';
 .logo {
   .cls-1 {
     isolation: isolate;
   }
   .cls-2 {
-    fill: #013e51;
+    fill: $darkBlue;
   }
   .cls-3 {
-    fill: #99e00d;
+    fill: $green;
   }
   .cls-4 {
-    fill: #001a38;
+    fill: $darkBlue;
   }
 }
 </style>
