@@ -967,14 +967,19 @@
         transform="translate(-0.01)"
       />
       <g class="cls-23">
-        <text class="cls-24" transform="translate(495.11 636.72)">
+        <text class="cls-24 body-font" transform="translate(495.11 636.72)">
           SOUTHERN TIER
         </text>
-        <text class="cls-25" transform="translate(723.14 636.72)"></text>
-        <text class="cls-26" transform="translate(730.88 636.72)">8</text>
+        <text
+          class="cls-25 body-font"
+          transform="translate(723.14 636.72)"
+        ></text>
+        <text class="cls-26 body-font" transform="translate(730.88 636.72)">
+          8
+        </text>
       </g>
       <g class="cls-23">
-        <text class="cls-27" transform="translate(498.51 659.46)">
+        <text class="cls-27 body-font" transform="translate(498.51 659.46)">
           REGIONAL B
           <tspan class="cls-28" x="184.55" y="0">O</tspan>
           <tspan class="cls-29" x="205.01" y="0">ARD</tspan>
