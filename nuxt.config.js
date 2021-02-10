@@ -78,8 +78,8 @@ export default {
       {
         lang: 'en'
       }
-    ],
-    '@nuxtjs/google-analytics'
+    ]
+    // '@nuxtjs/google-analytics'
   ],
   // 'google-analytics': {
   //   id: 'UA-106815130-1'

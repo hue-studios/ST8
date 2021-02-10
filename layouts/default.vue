@@ -3,31 +3,27 @@
     <page-header></page-header>
     <div
       id="page-container"
-      @click.prevent="closeSideMenu()"
       class="page-container"
+      @click.prevent="closeSideMenu()"
     >
       <nuxt />
-      <page-partners :imageLocation="imageUrl"></page-partners>
+      <page-partners :image-location="imageUrl"></page-partners>
       <page-footer></page-footer>
     </div>
 
     <nav id="nav-bar" @click.prevent="closeSideMenu()">
       <logo-name> </logo-name>
-      <p class="mobile-nav-title">
-        Active
-      </p>
+
       <p>
         <nuxt-link
-          to="/creative-services/branding-agency/"
+          to="/economic-development-initiatives/"
           class="mobile-nav-link"
           >Initiatives</nuxt-link
         >
       </p>
 
       <p>
-        <nuxt-link
-          to="/creative-services/web-design-app-development/"
-          class="mobile-nav-link"
+        <nuxt-link to="/economic-development-programs/" class="mobile-nav-link"
           >Programs</nuxt-link
         >
       </p>
@@ -36,37 +32,17 @@
           >Services</nuxt-link
         >
       </p>
-      <p class="mobile-nav-title">
-        Regional
-      </p>
+
       <p>
-        <nuxt-link
-          to="/creative-services/branding-agency/"
-          class="mobile-nav-link"
-          >Data</nuxt-link
+        <nuxt-link to="/regional-profile/" class="mobile-nav-link"
+          >Regional</nuxt-link
         >
       </p>
       <p>
-        <nuxt-link
-          to="/creative-services/branding-agency/"
-          class="mobile-nav-link"
-          >Counties</nuxt-link
-        >
-      </p>
-      <p class="mobile-nav-title">
-        Now
+        <nuxt-link to="/regional-news/" class="mobile-nav-link">News</nuxt-link>
       </p>
       <p>
-        <nuxt-link
-          to="/creative-services/branding-agency/"
-          class="mobile-nav-link"
-          >News</nuxt-link
-        >
-      </p>
-      <p>
-        <nuxt-link
-          to="/creative-services/branding-agency/"
-          class="mobile-nav-link"
+        <nuxt-link to="/regional-news/events/" class="mobile-nav-link"
           >Events</nuxt-link
         >
       </p>
@@ -77,16 +53,23 @@
           >Resources</nuxt-link
         >
       </p>
-      <nuxt-link to="/regional-organization/" class="mobile-nav-link">
-        Organization
-      </nuxt-link>
+      <p>
+        <nuxt-link to="/regional-organization/" class="mobile-nav-link">
+          Organization
+        </nuxt-link>
+      </p>
+      <div class="absolute tagline">
+        <h4>Active</h4>
+        <h4>Regional</h4>
+        <h4>Now</h4>
+      </div>
     </nav>
     <div id="nav-btn" @click.prevent="sideMenuToggle()">
       <div id="nav-icon"><span></span> <span></span> <span></span></div>
     </div>
     <div id="mobile-toolbar">
-      <nuxt-link to="/creative-design-portfolio/">News</nuxt-link>
-      <nuxt-link to="/creative-services/">Incentives</nuxt-link>
+      <nuxt-link to="/regional-news/">News</nuxt-link>
+      <nuxt-link to="/economic-development-initiatives/">Incentives</nuxt-link>
     </div>
   </div>
 </template>

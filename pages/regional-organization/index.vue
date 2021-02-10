@@ -37,7 +37,7 @@
     </div>
     <div
       id="mission-section"
-      class="w-full flex items-start justify-end flex-col relative font-normal"
+      class="w-full flex items-start justify-end flex-col relative"
     >
       <div
         id="mission"

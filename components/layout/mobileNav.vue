@@ -52,10 +52,11 @@
         >Resources</nuxt-link
       >
     </p>
-    <nuxt-link to="/regional-organization/" class="mobile-nav-link">
-      Organization
-    </nuxt-link>
-
+    <p>
+      <nuxt-link to="/regional-organization/" class="mobile-nav-link">
+        Organization
+      </nuxt-link>
+    </p>
     <nuxt-link to="/creative-services/branding-agency/" class="mobile-nav-link"
       >Contact</nuxt-link
     >

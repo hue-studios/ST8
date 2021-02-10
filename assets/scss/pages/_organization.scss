@@ -56,11 +56,19 @@
       h2 {
         font-size: 42px;
         line-height: 40px;
+        font-weight: 100;
+
+        @media (min-width: $breakpoint-medium) {
+          width: 483px;
+        }
       }
       p {
-        width: 500px;
         line-height: 20px;
         font-size: 16px;
+        font-weight: 100;
+        @media (min-width: $breakpoint-medium) {
+          width: 500px;
+        }
       }
     }
     #cropped-overlay {

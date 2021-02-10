@@ -76,6 +76,20 @@ module.exports = {
       'pages/**/*.vue',
       'plugins/**/*.js',
       'nuxt.config.js'
-    ]
+    ],
+    options: {
+      safelist: [
+        'filled',
+        'overlay',
+        'swiper-wrapper',
+        'iziToast',
+        'iziToast-buttons',
+        'iziToast-title',
+        /^swiper-/,
+        /^iziToast-/,
+        /^vc-/
+      ],
+      rejected: true
+    }
   }
 }
