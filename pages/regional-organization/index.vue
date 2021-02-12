@@ -102,7 +102,7 @@
             'background-image: url(' +
               imageLocation +
               person.image.private_hash +
-              '?key=thumbnail)'
+              '?key=small)'
           "
           class="bg-cover bg-center bg-no-repeat people-card__image"
         ></div>

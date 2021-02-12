@@ -1,25 +1,35 @@
 <template>
   <div id="programs">
+    <div class="w-full fixed background text-right">
+      <h3
+        v-for="initiative in initiatives"
+        :key="initiative.id"
+        class="uppercase bold"
+      >
+        {{ initiative.title }}
+      </h3>
+    </div>
     <div
       id="programs__intro"
       class="flex flex-col flex-wrap justify-center items-center relative"
     >
       <h1 class="navy uppercase tracking-widest mb-2 w-5/6 sm:w-3/5 md:w-1/2">
-        Programs
+        <span class="tracking-tighter mr-3 font-normal green">{{
+          programs.length
+        }}</span
+        >Programs
       </h1>
-      <p class="navy w-5/6 sm:w-3/5 md:w-1/2">
-        We are always looking to partner with organizations and businesses to
-        achieve the greater goal of growing our region.
-      </p>
-      <div class="w-full absolute background text-right">
-        <h3
+      <p class="navy w-5/6 sm:w-3/5 md:w-1/2 font-normal">
+        Our programs are developed to further one of the
+        {{ initiatives.length }} initiatives -
+        <span
           v-for="initiative in initiatives"
           :key="initiative.id"
-          class="uppercase bold"
-        >
-          {{ initiative.title }}
-        </h3>
-      </div>
+          class="initiative-title"
+          >{{ initiative.title }}<span class="comma">,</span>
+        </span>
+        - each designed to help grow our region.
+      </p>
     </div>
     <div
       id="programs__program-cards"
@@ -35,18 +45,18 @@
         >
       </div> -->
       <div
-        class="w-full md:w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 grid-flow-row gap-x-8 gap-y-8 px-8"
+        class="w-full flex flex-col items-center justify-center px-3 sm:px-8"
       >
         <program-card
           v-for="(program, index) in programs"
           :key="index"
           :program="program"
+          class="blur-bg"
         ></program-card>
       </div>
     </div>
   </div>
 </template>
-
 <script>
 import programCard from '~/components/programs/programCard'
 export default {
@@ -90,9 +100,15 @@ export default {
     }
   },
   created() {
-    this.checkInitiative()
+    // this.checkInitiative()
   },
   methods: {
+    returnInitiativesTitle(initiatives) {
+      console.log(initiatives)
+      initiatives.map((initiative) => {
+        return initiative.initiative_id.title
+      })
+    },
     checkInitiative() {
       if (this.programFilters.includes('Workforce Development')) {
         console.log('Yes')

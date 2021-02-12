@@ -129,7 +129,6 @@ export default {
   },
   env: {
     apiUrl: 'https://admin.steny.org/southern-tier-8',
-
     imageUrl: 'https://admin.steny.org/southern-tier-8/assets/'
   },
 

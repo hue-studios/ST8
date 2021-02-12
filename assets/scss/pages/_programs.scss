@@ -2,22 +2,53 @@
   height: auto !important;
   overflow: hidden;
   width: 100%;
-  #programs__intro {
-    height: 400px;
-
-    @media (min-width: $breakpoint-small) {
-      height: 450px;
-    }
+  .background {
+    right: 0px;
+    top: 70px;
     @media (min-width: $breakpoint-medium) {
-      height: 600px;
+      margin-top: 0px;
+    }
+    @media (min-width: $breakpoint-large) {
+      top: 130px;
+    }
+    h3 {
+      color: $grey;
+      opacity: 0.2;
+      font-size: 32px;
+      line-height: 0.8em;
+      font-weight: 400;
+      @media (min-width: $breakpoint-small) {
+        font-size: 48px;
+      }
+      @media (min-width: $breakpoint-medium) {
+        font-size: 56px;
+      }
+      @media (min-width: $breakpoint-large) {
+        font-size: 62px;
+      }
+      @media (min-width: $breakpoint-xlarge) {
+        font-size: 72px;
+      }
+    }
+  }
+  #programs__intro {
+    height: 260px;
+    margin-top: 70px;
+    @media (min-width: $breakpoint-small) {
+      height: 300px;
+    }
+    @media (min-width: $breakpoint-large) {
+      margin-top: 0px;
+      height: 350px;
     }
     h1 {
-      font-size: 42px;
+      font-size: 32px;
       line-height: 1.2em;
       position: relative;
-      margin-top: 70px;
+
       @media (min-width: $breakpoint-small) {
         font-size: 62px;
+        margin-top: 70px;
       }
       @media (min-width: $breakpoint-medium) {
         margin-top: 0px;
@@ -37,29 +68,14 @@
       @media (min-width: $breakpoint-medium) {
       }
     }
-    .background {
-      right: 0px;
-      margin-top: 70px;
-      @media (min-width: $breakpoint-medium) {
-        margin-top: 0px;
+    p {
+      font-size: 14px;
+      .comma {
+        padding-right: 4px;
       }
-      h3 {
-        color: $grey;
-        opacity: 0.2;
-        font-size: 32px;
-        line-height: 0.8em;
-        font-weight: 400;
-        @media (min-width: $breakpoint-small) {
-          font-size: 48px;
-        }
-        @media (min-width: $breakpoint-medium) {
-          font-size: 56px;
-        }
-        @media (min-width: $breakpoint-large) {
-          font-size: 62px;
-        }
-        @media (min-width: $breakpoint-xlarge) {
-          font-size: 72px;
+      .initiative-title:last-of-type {
+        .comma {
+          display: none;
         }
       }
     }

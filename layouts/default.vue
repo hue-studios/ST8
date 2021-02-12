@@ -7,7 +7,7 @@
       @click.prevent="closeSideMenu()"
     >
       <nuxt />
-      <page-partners :image-location="imageUrl"></page-partners>
+      <!-- <page-partners :image-location="imageUrl"></page-partners> -->
       <page-footer></page-footer>
     </div>
 
@@ -75,13 +75,13 @@
 </template>
 <script>
 import pageHeader from '~/components/layout/pageHeader'
-import pagePartners from '~/components/layout/pagePartners'
+// import pagePartners from '~/components/layout/pagePartners'
 import pageFooter from '~/components/layout/pageFooter'
 import logoName from '~/components/layout/logoName.vue'
 export default {
   components: {
     pageHeader,
-    pagePartners,
+    // pagePartners,
     pageFooter,
     logoName
   },

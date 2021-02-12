@@ -71,32 +71,86 @@
         v-if="service.example_programs.length > 0"
         class="md:w-1/2 services-section__content"
       >
-        <h3 class="w-full uppercase text-xs green text-left">
+        <h3 class="w-full uppercase text-xs green text-left ">
           Work Portfolio
         </h3>
-        <!-- <program-card
-          v-for="(program, index) in service.example_programs"
-          :key="index"
-          :program="program.program_id"
-        >
-        </program-card> -->
-        <div>
-          <ul class="list-disc list-inside">
-            <li
-              v-for="(program, index) in service.example_programs"
-              :key="index"
+        <div class="w-full flex flex-col items-center justify-start mt-4">
+          <nuxt-link
+            v-for="(program, index) in service.example_programs"
+            :key="index"
+            :to="'/economic-development-programs/' + program.program_id.url"
+            class="flex flex-row items-center justify-start mb-6 shadow-lg services-section__program"
+          >
+            <div
+              v-if="program.program_id.images.length > 0"
+              class="services-section__program-image"
+              :style="
+                'background-image: url(' +
+                  imageLocation +
+                  program.program_id.images[0].file_id.private_hash +
+                  ')'
+              "
+            ></div>
+            <div class="flex flex-col services-section__program-content">
+              <h4 class="uppercase mb-2">{{ program.program_id.title }}</h4>
+              <div
+                class="w-full flex flex-row items-start justify-start text-xs services-section__program-tags"
+              >
+                <h5
+                  v-if="program.program_id.initiatives.length > 0"
+                  class="uppercase navy"
+                >
+                  {{ program.program_id.initiatives.length }}
+                  <span class="green"
+                    >Initiative<span
+                      v-if="program.program_id.initiatives.length > 1"
+                      >s</span
+                    >
+                  </span>
+                </h5>
+                <span
+                  v-if="program.program_id.counties.length > 0"
+                  class="ml-1 mr-1"
+                  >/</span
+                >
+                <h5
+                  v-if="program.program_id.counties.length > 0"
+                  class="uppercase navy"
+                >
+                  {{ program.program_id.counties.length }}
+                  <span class="green"
+                    >Count<span v-if="program.program_id.counties.length > 1"
+                      >ies</span
+                    ><span v-else>y</span>
+                  </span>
+                </h5>
+                <span
+                  v-if="
+                    program.program_id.counties.length > 0 &&
+                      program.program_id.partners.length > 0
+                  "
+                  class="ml-1 mr-1"
+                  >/</span
+                >
+                <h5
+                  v-if="program.program_id.partners.length > 0"
+                  class="uppercase navy "
+                >
+                  {{ program.program_id.partners.length }}
+                  <span class="green"
+                    >Partner<span v-if="program.program_id.partners.length > 1"
+                      >s</span
+                    >
+                  </span>
+                </h5>
+              </div>
+            </div>
+            <div
+              class="flex items-center justify-center services-section__program-link"
             >
-              {{ program.program_id.title }}
-              <nuxt-link
-                :to="'/economic-development-programs/' + program.program_id.url"
-                ><arrow-right-icon
-                  size="1x"
-                  stroke-width="1"
-                  class="inline-block"
-                ></arrow-right-icon
-              ></nuxt-link>
-            </li>
-          </ul>
+              <arrow-right-icon size="1x" stroke-width="1.5"></arrow-right-icon>
+            </div>
+          </nuxt-link>
         </div>
       </div>
     </div>
@@ -104,7 +158,6 @@
 </template>
 
 <script>
-// import programCard from '~/components/programs/programCard'
 import { ArrowRightIcon } from 'vue-feather-icons'
 export default {
   components: {
@@ -112,10 +165,16 @@ export default {
   },
   async asyncData({ params, $axios }) {
     const servicesReq = await $axios.get(
-      process.env.apiUrl + '/items/services?fields=*.*.*.*.*'
+      process.env.apiUrl +
+        '/items/services?fields=*.*.*.*.*&filter[status]=published'
     )
     return {
       services: servicesReq.data.data
+    }
+  },
+  data() {
+    return {
+      imageLocation: process.env.imageUrl
     }
   },
   async fetch({ store, app }) {
