@@ -11,6 +11,10 @@ module.exports = {
     purgeLayersByDefault: true
   },
   theme: {
+    fontFamily: {
+      sans: 'proxima-nova, sans-serif',
+      body: 'proxima-nova, sans-serif'
+    },
     screens: {
       xs: '450px',
       sm: '640px',

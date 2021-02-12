@@ -21,11 +21,11 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      {
-        rel: 'preconnect',
-        href: 'https://use.typekit.net/xnk2eiu.css',
-        crossorigin: 'true'
-      },
+      // {
+      //   rel: 'preconnect',
+      //   href: 'https://use.typekit.net/xnk2eiu.css',
+      //   crossorigin: 'true'
+      // },
       {
         rel: 'preconnect',
         href: 'https://admin.steny.org',
