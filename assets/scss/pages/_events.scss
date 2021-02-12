@@ -35,7 +35,8 @@
   }
   .vc-container {
     border-radius: 0px;
-    border: none;
+    border: none !important;
+    border-color: $white !important;
     font-family: $body-font;
     // height: 500px;
     width: 100%;
@@ -49,17 +50,17 @@
         height: 600px;
       }
       .vc-pane-layout {
-        // width: 100%;
+        width: 100%;
         max-width: 1200px;
-        // @media (min-width: $breakpoint-medium) {
-        //   height: 600px;
-        // }
-        // .vc-weeks {
-        //   height: 400px;
-        //   @media (min-width: $breakpoint-medium) {
-        //     height: 500px;
-        //   }
-        // }
+        @media (min-width: $breakpoint-medium) {
+          height: 600px !important;
+        }
+        .vc-weeks {
+          height: 400px !important;
+          @media (min-width: $breakpoint-medium) {
+            height: 500px !important;
+          }
+        }
       }
       .vc-header {
         margin-bottom: 30px;
@@ -73,7 +74,7 @@
       max-width: 500px;
     }
     .vc-day {
-      height: 60px;
+      height: 60px !important;
     }
     .vc-title {
       text-transform: uppercase;

@@ -150,7 +150,7 @@
         <swiper-slide
           v-for="(item, index) in resources"
           :key="index"
-          class="flex flex-col items-center justify-center px-3 sm:px-8 pt-4 pb-4"
+          class="flex flex-col items-center justify-center px-3 sm:px-8 pt-4 pb-8"
         >
           <resource-card :item="item.resources_id"></resource-card>
         </swiper-slide>
@@ -174,7 +174,7 @@
         <swiper-slide
           v-for="(item, index) in news"
           :key="index"
-          class="flex flex-col items-center justify-center px-3 sm:px-8 pt-4 pb-4"
+          class="flex flex-col items-center justify-center px-3 sm:px-8 pt-4 pb-8"
         >
           <news-card-vertical :item="item.news_id"></news-card-vertical>
         </swiper-slide>

@@ -34,7 +34,7 @@
     <h2
       class="uppercase tracking-widest w-full px-4 md:px-6 news-card-vertical__title"
     >
-      {{ item.title }}
+      {{ truncateString(item.title, 65) }}
     </h2>
 
     <h5
@@ -50,7 +50,7 @@
       {{ $moment(item.modified_on).format('dddd MMMM Do, YYYY') }}
     </h5>
     <p
-      class="w-full px-4 md:px-6 mb-4 navy hidden lg:inline-block news-card-vertical__description"
+      class="w-full px-4 md:px-6 mb-4 navy hidden  news-card-vertical__description"
     >
       {{ truncateString(item.article, 120) }}
     </p>

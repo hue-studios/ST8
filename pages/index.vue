@@ -1,6 +1,9 @@
 <template>
   <div id="home">
-    <div
+    <div id="temp" class="h-screen flex items-center justify-center w-full">
+      <h2>Hey Jen...don't freak out...the home page is not done.</h2>
+    </div>
+    <!-- <div
       id="home-intro"
       class="flex flex-col justify-center items-center relative"
     >
@@ -40,15 +43,15 @@
       </div>
     </div>
     <div id="home-graphic" class="w-full relative py-20">
-      <!-- <h1>Our Mission</h1>
+      <h1>Our Mission</h1>
       <p>
         TO PARTNER with member counties to identify and address multi-county
         issues in order to improve the quality of life within the region.
-      </p> -->
+      </p>
       <home-graphic />
     </div>
     <div class="">
-      <!-- <h1>How do we achieve our mission?</h1>
+      <h1>How do we achieve our mission?</h1>
       <p>
         To us, partnerships are everything. One of the main goals of our
         organization at Southern Tier 8 Regional Board is to encourage and
@@ -56,20 +59,20 @@
         planning and economic development organizations, we offer the community
         more support to effectively address creative solutions for many
         cross-boundary challenges at hand.
-      </p> -->
-    </div>
+      </p>
+    </div> -->
   </div>
 </template>
 
 <script>
-import counties from '~/components/layout/countiesOutline'
-import logoName from '~/components/layout/logoName'
-import homeGraphic from '~/components/homeGraphic'
+// import counties from '~/components/layout/countiesOutline'
+// import logoName from '~/components/layout/logoName'
+// import homeGraphic from '~/components/homeGraphic'
 export default {
   components: {
-    counties,
-    logoName,
-    homeGraphic
+    // counties,
+    // logoName,
+    // homeGraphic
   },
   async asyncData({ params, $axios }) {
     const countiesReq = await $axios.get(

@@ -43,8 +43,10 @@
         id="mission"
         class="flex flex-row justify-center items-start mb-32 statement"
       >
-        <h2 class="uppercase white tracking-wider">Mission Statement</h2>
-        <p class="white ml-4">{{ organization.mission_statement }}</p>
+        <h2 class="uppercase white tracking-wider">
+          Mission Statement
+        </h2>
+        <p class="white ml-2">{{ organization.mission_statement }}</p>
       </div>
       <div id="cropped-overlay" class="absolute"></div>
     </div>
