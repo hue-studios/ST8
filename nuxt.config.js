@@ -21,15 +21,17 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      // {
-      //   rel: 'preconnect',
-      //   href: 'https://use.typekit.net/xnk2eiu.css',
-      //   crossorigin: 'true'
-      // },
       {
         rel: 'preconnect',
         href: 'https://admin.steny.org',
         crossorigin: 'true'
+      }
+    ],
+    script: [
+      {
+        src:
+          'https://fast.fonts.net/jsapi/21a0c137-b931-4f95-8773-dabd5b0c50f7.js',
+        rel: 'dns-prefetch'
       }
     ]
   },

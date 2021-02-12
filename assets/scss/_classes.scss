@@ -1,14 +1,12 @@
 /* Scss Document */
 
 .body-font {
-  font-family: $body-font !important;
-  font-weight: 100;
+  font-family: $body-font;
 }
 
 .bold,
 strong {
-  font-family: $body-font !important;
-  font-weight: 400;
+  font-family: $bold-font;
 }
 
 a,

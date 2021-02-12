@@ -12,8 +12,8 @@ module.exports = {
   },
   theme: {
     fontFamily: {
-      sans: 'proxima-nova, sans-serif',
-      body: 'proxima-nova, sans-serif'
+      sans: 'Proxima Nova W01 Thin, sans-serif',
+      body: 'Proxima Nova W01 Thin, sans-serif'
     },
     screens: {
       xs: '450px',

@@ -1,5 +1,4 @@
 /* Scss Document */
-@import url('https://use.typekit.net/xnk2eiu.css');
 @import 'vars';
 @import 'classes';
 @import 'layout/layout';
@@ -10,8 +9,7 @@ html {
 }
 body {
   background: $white;
-  font-family: proxima-nova, sans-serif;
-  font-weight: 100;
+  font-family: $body-font;
   color: $black;
 }
 .container {
