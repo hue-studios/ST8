@@ -2,12 +2,13 @@
 
 .body-font {
   font-family: $body-font !important;
+  font-weight: 100;
 }
 
 .bold,
 strong {
   font-family: $body-font !important;
-  font-weight: 700;
+  font-weight: 400;
 }
 
 a,
