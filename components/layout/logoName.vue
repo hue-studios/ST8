@@ -26,7 +26,7 @@
 @import './assets/scss/vars';
 .logo-name {
   .blue-fill {
-    fill: $darkBlue;
+    fill: $navy;
   }
   .green-fill {
     fill: $green;

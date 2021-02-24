@@ -1,12 +1,12 @@
 <template>
-  <div id="program">
+  <div id="program" class="relative">
     <div
       id="program__intro"
       class="flex flex-col justify-center items-center relative"
     >
       <div
         id="program__intro-caption"
-        class="flex items-center justify-center flex-col relative lg:py-8 max-w-5xl"
+        class="flex items-center justify-center flex-col relative lg:py-8 max-w-4xl"
       >
         <div
           class="w-5/6 lg:w-full flex flex-row items-end justify-center mb-6"
@@ -25,19 +25,22 @@
               :alt="program.title"
             />
           </div>
-          <h1 class="w-1/2 uppercase green pl-4 text-left program__page-title">
-            <span class=" navy">Program: </span> {{ program.title }}
+          <h1
+            class="w-1/2 uppercase green pl-4 text-left program__page-title"
+            :class="{ 'text-xs': tooLong }"
+          >
+            <span class=" navy">Program: </span>
+            {{ program.title }}
           </h1>
         </div>
         <div
           v-if="program.counties.length > 0"
           class="w-5/6 lg:w-full flex flex-col items-center justify-center pt-6 mt-4 program__stats"
         >
-          <!-- <h4 class="uppercase green mb-2">Counties Served:</h4> -->
           <div
             class="w-full flex flex-row flex-wrap items-center justify-start"
           >
-            <h4 class="uppercase green mr-2 mb-2">
+            <h4 class="uppercase green mr-2 mb-2 bold">
               {{ program.counties.length }} Counties Served:
             </h4>
             <h5
@@ -56,11 +59,10 @@
           v-if="program.initiatives.length > 0"
           class="w-5/6 lg:w-full flex flex-col items-center justify-center pt-6 mt-4 program__stats"
         >
-          <!-- <h4 class="uppercase green mb-2">{{program.initiatives.length}} Initiatives Served:</h4> -->
           <div
             class="w-full flex flex-row flex-wrap items-center justify-start"
           >
-            <h4 class="uppercase green mr-2 mb-2">
+            <h4 class="uppercase green mr-2 mb-2 bold">
               {{ program.initiatives.length }} Initiatives Served:
             </h4>
             <h5
@@ -78,21 +80,61 @@
       </div>
     </div>
     <div
-      class="flex relative justify-center items-center flex-col relative program__section"
+      id="program__story"
+      class="flex flex-col justify-start items-center relative program__story"
     >
+      <svg
+        id="start-btn"
+        class="button"
+        expanded="true"
+        height="40px"
+        width="40px"
+      >
+        <circle fill="#1accb8" cx="50%" cy="50%" r="7px"></circle>
+        <circle class="pulse" cx="50%" cy="50%" r="10px"></circle>
+      </svg>
+      <svg
+        id="straightLineSVG"
+        data-name="Layer 1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 1 695.51"
+      >
+        <path
+          id="straight-line"
+          data-name="Path 6808"
+          class="cls-1"
+          fill="none"
+          stroke="#1accb8"
+          stroke-width="2"
+          d="M.5,0V695.51"
+        />
+      </svg>
+      <svg
+        id="lineSVG"
+        data-name="Layer 1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 963 1479.58"
+      >
+        <path
+          id="program-line"
+          class="cls-1"
+          fill="none"
+          stroke="#1accb8"
+          stroke-width="2"
+          d="M961.5,0V155.37H1.5V456.1h960V753.44H481.12v300.23H1.5v298.51H481.12v127.4"
+        />
+      </svg>
+
       <h3 id="purpose-title" class="uppercase green relative program__title">
-        What is it?
+        What it is.
       </h3>
 
       <div
-        id="the-goal-description"
+        id="purpose-description"
         class="relative p-6 program__description"
         v-html="program.what_is_it"
       ></div>
-    </div>
-    <div
-      class="flex relative justify-center items-center flex-col relative program__section"
-    >
+
       <h3
         id="accomplishes-title"
         class="uppercase green relative program__title"
@@ -101,19 +143,29 @@
       </h3>
 
       <div
-        id="the-challenge-description"
+        id="accomplishes-description"
         class="relative p-6 program__description"
         v-html="program.what_it_accomplishes"
       ></div>
+      <svg
+        id="finish-btn"
+        class="button"
+        expanded="true"
+        height="40px"
+        width="40px"
+      >
+        <circle fill="#1accb8" cx="50%" cy="50%" r="7px"></circle>
+        <circle class="pulse" cx="50%" cy="50%" r="10px"></circle>
+      </svg>
     </div>
     <div
-      id="program__partners"
-      class="w-full flex flex-col items-center justify-center program__section"
+      class="flex flex-col justify-center items-center relative program__related"
     >
       <h3 class="uppercase green relative program__title">
         Partners
       </h3>
       <div
+        id="program__partners"
         class="w-full flex flex-row justify-center items-center flex-wrap mt-6 px-10 max-w-5xl"
       >
         <div
@@ -134,77 +186,77 @@
           />
         </div>
       </div>
-    </div>
-    <div
-      v-if="resources.length"
-      id="program__resources"
-      class="w-full flex relative justify-center items-center flex-row flex-wrap relative program__section"
-    >
-      <h2 class="uppercase green relative program__title">
-        Resources
-      </h2>
-      <swiper
-        :options="resourcesSwiperOption"
-        class="swiper w-full flex flex-row items-center justify-center pt-4 pb-4"
+      <div
+        v-if="resources.length"
+        id="program__resources"
+        class="w-full flex relative justify-center items-center flex-row flex-wrap relative"
       >
-        <swiper-slide
-          v-for="(item, index) in resources"
-          :key="index"
-          class="flex flex-col items-center justify-center px-3 sm:px-8 pt-4 pb-8"
+        <h2 class="uppercase green relative program__title">
+          Resources
+        </h2>
+        <swiper
+          :options="resourcesSwiperOption"
+          class="swiper w-full flex flex-row items-center justify-center pt-4 pb-4"
         >
-          <resource-card :item="item.resources_id"></resource-card>
-        </swiper-slide>
-        <div slot="pagination" class="swiper-pagination"></div>
-        <div slot="button-next" class="swiper-button-next"></div>
-        <div slot="button-prev" class="swiper-button-prev"></div>
-      </swiper>
-    </div>
-    <div
-      v-if="news.length"
-      id="program__news"
-      class="w-full flex relative justify-center items-center flex-row flex-wrap relative program__section"
-    >
-      <h2 class="uppercase green relative program__title">
-        Related News
-      </h2>
-      <swiper
-        :options="resourcesSwiperOption"
-        class="swiper w-full flex flex-row pt-4 pb-4"
+          <swiper-slide
+            v-for="(item, index) in resources"
+            :key="index"
+            class="flex flex-col items-center justify-center px-3 sm:px-8 pt-4 pb-8"
+          >
+            <resource-card :item="item.resources_id"></resource-card>
+          </swiper-slide>
+          <div slot="pagination" class="swiper-pagination"></div>
+          <div slot="button-next" class="swiper-button-next"></div>
+          <div slot="button-prev" class="swiper-button-prev"></div>
+        </swiper>
+      </div>
+      <div
+        v-if="news.length"
+        id="program__news"
+        class="w-full flex relative justify-center items-center flex-row flex-wrap relative program__section"
       >
-        <swiper-slide
-          v-for="(item, index) in news"
-          :key="index"
-          class="flex flex-col items-center justify-center px-3 sm:px-8 pt-4 pb-8"
+        <h2 class="uppercase green relative program__title">
+          Related News
+        </h2>
+        <swiper
+          :options="resourcesSwiperOption"
+          class="swiper w-full flex flex-row pt-4 pb-4"
         >
-          <news-card-vertical :item="item.news_id"></news-card-vertical>
-        </swiper-slide>
-        <div slot="pagination" class="swiper-pagination"></div>
-        <div slot="button-next" class="swiper-button-next"></div>
-        <div slot="button-prev" class="swiper-button-prev"></div>
-      </swiper>
-    </div>
-    <div
-      id="program__programs"
-      class="w-full flex relative justify-center items-center flex-row flex-wrap relative program__section"
-    >
-      <h2 class="uppercase green relative program__title">
-        Explore Our Programs
-      </h2>
-      <swiper
-        :options="programsSwiperOption"
-        class="swiper w-full flex flex-row pt-4 pb-4"
+          <swiper-slide
+            v-for="(item, index) in news"
+            :key="index"
+            class="flex flex-col items-center justify-center px-3 sm:px-8 pt-4 pb-8"
+          >
+            <news-card-vertical :item="item.news_id"></news-card-vertical>
+          </swiper-slide>
+          <div slot="pagination" class="swiper-pagination"></div>
+          <div slot="button-next" class="swiper-button-next"></div>
+          <div slot="button-prev" class="swiper-button-prev"></div>
+        </swiper>
+      </div>
+      <div
+        id="program__programs"
+        class="w-full flex relative justify-center items-center flex-row flex-wrap relative program__section"
       >
-        <swiper-slide
-          v-for="program in programs"
-          :key="program.sort"
-          class="flex flex-col items-center justify-center px-3 sm:px-8"
+        <h2 class="uppercase green relative program__title">
+          Explore Our Programs
+        </h2>
+        <swiper
+          :options="programsSwiperOption"
+          class="swiper w-full flex flex-row pt-4 pb-4"
         >
-          <program-card :program="program"></program-card>
-        </swiper-slide>
-        <div slot="pagination" class="swiper-pagination"></div>
-        <div slot="button-next" class="swiper-button-next"></div>
-        <div slot="button-prev" class="swiper-button-prev"></div>
-      </swiper>
+          <swiper-slide
+            v-for="program in programs"
+            :key="program.sort"
+            class="flex flex-col items-center justify-center px-3 sm:px-8"
+          >
+            <program-card :program="program"></program-card>
+          </swiper-slide>
+          <div slot="pagination" class="swiper-pagination"></div>
+          <div slot="button-next" class="swiper-button-next"></div>
+          <div slot="button-prev" class="swiper-button-prev"></div>
+        </swiper>
+      </div>
     </div>
   </div>
 </template>
@@ -290,24 +342,70 @@ export default {
           prevEl: '.swiper-button-prev',
           hideOnClick: true
         }
-      }
+      },
+      tooLong: false
     }
   },
   head() {},
+  mounted() {
+    // const triangle = document.getElementById('straight-line')
+    // const length = triangle.getTotalLength()
+    //
+    // // The start position of the drawing
+    // triangle.style.strokeDasharray = length
+    //
+    // // Hide the triangle by offsetting dash. Remove this line to show the triangle before scroll draw
+    // triangle.style.strokeDashoffset = length
+    //
+    // // Find scroll percentage on scroll (using cross-browser properties), and offset dash same amount as percentage scrolled
+    // window.addEventListener('scroll', myFunction)
+    //
+    // function myFunction() {
+    //   requestAnimationFrame(function() {
+    //     // get the section containing the SVG
+    //     const svgContainer = document.getElementById('program__story')
+    //
+    //     const svgContainerRect = svgContainer.getBoundingClientRect()
+    //     const svgDivHeight = svgContainerRect.height
+    //
+    //     // var windowScroll = $(window).scrollTop();
+    //     const windowScroll = window.pageYOffset
+    //
+    //     // divide by 2 so the scroll-draw completes halfway
+    //     const scrollPercent = (windowScroll / svgDivHeight) * 2
+    //     // console.log(scrollPercent)
+    //
+    //     if (scrollPercent < 1) {
+    //       // draw the length of SVG path according to the scroll
+    //       const draw = length * scrollPercent
+    //       // Reverse the drawing (when scrolling upwards)
+    //       triangle.style.strokeDashoffset = length - draw
+    //     }
+    //   })
+    // }
+  },
   created() {
     this.$axios
       .$get(
         '/items/programs?filter[id][neq]=' + this.program.id + '&fields=*.*.*'
       )
       .then((response) => {
-        console.log(response)
         this.programs = response.data
       })
       .catch(function(error) {
         console.log(error)
       })
+    this.countTitle(this.program.title)
   },
-  methods: {}
+  methods: {
+    countTitle(title) {
+      if (title.length > 30) {
+        this.tooLong = true
+      } else {
+        this.tooLong = false
+      }
+    }
+  }
 }
 </script>
 

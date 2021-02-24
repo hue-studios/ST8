@@ -1,16 +1,44 @@
 #program {
   color: $navy;
+  #line-container {
+    width: 100%;
+    position: sticky;
+    height: 50px;
+    margin-top: -50px;
+    top: 0px;
+    z-index: -1;
+    #line-container-inner {
+      position: relative;
+      // padding-top: 500px;
+      #line {
+        position: sticky;
+        top: 0%;
+        width: 90%;
+        left: 5%;
+        height: auto;
+        z-index: 0;
+        margin-left: 0px;
+        .cls-1 {
+          fill: none;
+          stroke: #707070;
+          stroke-width: 3px;
+        }
+      }
+    }
+  }
   #program__intro {
     // height: calc(100vh - 120px);
     min-height: 600px;
     margin-top: 70px;
     margin-bottom: 0px;
+    // background: $white;
     @media (min-width: $breakpoint-small) {
     }
     @media (min-width: $breakpoint-medium) {
     }
     @media (min-width: $breakpoint-large) {
       // margin-bottom: 100px;
+      margin-top: 0px;
       min-height: calc(100vh - 140px);
     }
     #program__intro-caption {
@@ -41,6 +69,25 @@
           line-height: 32px;
           font-weight: 100;
           letter-spacing: 0.2em;
+        }
+      }
+      .program__page-title.text-xs {
+        font-size: 17px;
+        line-height: 19px;
+        letter-spacing: 0.1em;
+        font-weight: 400;
+        margin-bottom: -4px;
+        @media (min-width: $breakpoint-small) {
+          font-size: 22px;
+          line-height: 24px;
+        }
+        @media (min-width: $breakpoint-medium) {
+          font-size: 26px;
+          line-height: 28px;
+        }
+        @media (min-width: $breakpoint-large) {
+          font-size: 28px;
+          line-height: 30px;
         }
       }
       .progam__image {
@@ -106,46 +153,231 @@
       }
     }
   }
-  .program__section {
-    padding-top: 40px;
-    padding-bottom: 40px;
-    @media (min-width: $breakpoint-small) {
-      padding-top: 60px;
-      padding-bottom: 60px;
-    }
-    @media (min-width: $breakpoint-medium) {
-      padding-top: 80px;
-      padding-bottom: 80px;
-    }
+
+  .program__story {
+    // height: 900px;
     @media (min-width: $breakpoint-large) {
-      padding-top: 100px;
-      padding-bottom: 100px;
+      height: 1400px;
+    }
+    .program__title {
+      z-index: 5;
+      background: $white;
+      font-size: 22px;
+      line-height: 24px;
+      letter-spacing: 0.1em;
+      font-weight: 400;
+      margin-top: 40px;
+      margin-bottom: 40px;
+      @media (min-width: $breakpoint-small) {
+        font-size: 22px;
+        line-height: 24px;
+        margin-top: 60px;
+        margin-bottom: 60px;
+      }
+      @media (min-width: $breakpoint-medium) {
+        font-size: 26px;
+        line-height: 28px;
+        margin-top: 80px;
+        margin-bottom: 80px;
+      }
+      @media (min-width: $breakpoint-large) {
+        font-size: 42px;
+        line-height: 40px;
+        letter-spacing: 0.2em;
+        margin-top: 100px;
+        margin-bottom: 100px;
+      }
+    }
+    .program__description {
+      z-index: 5;
+      background: $white;
+      max-width: 550px;
+      margin-top: 40px;
+      margin-bottom: 40px;
+      font-size: 14px;
+
+      @media (min-width: $breakpoint-small) {
+        margin-top: 60px;
+        margin-bottom: 60px;
+      }
+      @media (min-width: $breakpoint-medium) {
+        margin-top: 80px;
+        margin-bottom: 80px;
+        font-size: 15px;
+      }
+      @media (min-width: $breakpoint-large) {
+        margin-top: 100px;
+        margin-bottom: 100px;
+      }
+    }
+    #start-btn {
+      position: absolute;
+      top: -70px;
+      left: calc(50% - 19px);
+      filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.25));
+      @media (min-width: $breakpoint-small) {
+      }
+      @media (min-width: $breakpoint-medium) {
+      }
+      @media (min-width: $breakpoint-large) {
+        top: -70px;
+        left: calc(50% + 435px);
+      }
+      @media (min-width: $breakpoint-xlarge) {
+      }
+    }
+    #finish-btn {
+      position: absolute;
+      bottom: -20px;
+      left: calc(50% - 19px);
+      filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.25));
+      @media (min-width: $breakpoint-small) {
+      }
+      @media (min-width: $breakpoint-medium) {
+      }
+      @media (min-width: $breakpoint-large) {
+        bottom: 25px;
+        left: calc(50% - 20px);
+      }
+      @media (min-width: $breakpoint-xlarge) {
+      }
+    }
+    #straightLineSVG {
+      position: absolute;
+      z-index: -1;
+      top: -50px;
+      left: calc(50% - 1px);
+      height: calc(100% + 50px);
+      width: 3px;
+      @media (min-width: $breakpoint-large) {
+        display: none;
+      }
+    }
+    #lineSVG {
+      display: none;
+      position: absolute;
+      z-index: -1;
+      top: -50px;
+      left: calc(50% - 185px);
+      height: 100%;
+      width: 370px;
+      @media (min-width: $breakpoint-small) {
+      }
+      @media (min-width: $breakpoint-medium) {
+      }
+      @media (min-width: $breakpoint-large) {
+        top: -50px;
+        left: calc(50% - 456px);
+        height: 100%;
+        width: 912px;
+        display: block;
+      }
+      @media (min-width: $breakpoint-xlarge) {
+      }
+    }
+    #line-mask {
+      position: sticky;
+      height: 100px;
+      width: 100%;
+      z-index: 1;
+      background: $white;
+      bottom: 0;
+    }
+    #purpose-title {
+      padding: 20px;
+      @media (min-width: $breakpoint-large) {
+        margin-right: 65%;
+        margin-top: 200px;
+        width: 360px;
+        padding: 20px;
+      }
+      @media (min-width: $breakpoint-xlarge) {
+        margin-right: 900px;
+        margin-top: 200px;
+        width: 360px;
+        padding: 20px;
+      }
+    }
+    #purpose-description {
+      padding: 20px;
+      @media (min-width: $breakpoint-large) {
+        width: 480px;
+        margin-left: 250px;
+        padding: 20px;
+        margin-top: -52px;
+      }
+    }
+    #accomplishes-title {
+      padding: 20px;
+      @media (min-width: $breakpoint-large) {
+        margin-right: 0px;
+        margin-top: 200px;
+        width: 360px;
+        padding: 20px;
+      }
+    }
+    #accomplishes-description {
+      padding: 20px;
+      @media (min-width: $breakpoint-large) {
+        width: 480px;
+        margin-right: 50%;
+        padding: 20px;
+        margin-top: 90px;
+      }
+      @media (min-width: $breakpoint-xlarge) {
+        width: 480px;
+        margin-right: 780px;
+        padding: 20px 0;
+      }
+    }
+  }
+  .program__related {
+    margin-bottom: 60px;
+    @media (min-width: $breakpoint-large) {
+      margin-top: -100px;
     }
     .program__title {
       font-size: 22px;
       line-height: 24px;
       letter-spacing: 0.1em;
-      font-weight: 400;
+      padding-top: 40px;
+      padding-bottom: 20px;
       @media (min-width: $breakpoint-small) {
         font-size: 22px;
         line-height: 24px;
+        padding-top: 60px;
       }
       @media (min-width: $breakpoint-medium) {
         font-size: 26px;
         line-height: 28px;
+        padding-top: 80px;
       }
       @media (min-width: $breakpoint-large) {
-        font-size: 32px;
-        line-height: 34px;
-        font-weight: 100;
+        font-size: 42px;
+        line-height: 40px;
         letter-spacing: 0.2em;
+        padding-top: 100px;
       }
     }
     .program__description {
       max-width: 840px;
+      padding-top: 40px;
+      padding-bottom: 40px;
+      font-size: 14px;
+      @media (min-width: $breakpoint-small) {
+        padding-top: 60px;
+        padding-bottom: 60px;
+      }
+      @media (min-width: $breakpoint-medium) {
+        padding-top: 80px;
+        padding-bottom: 80px;
+        max-width: 800px;
+      }
+      @media (min-width: $breakpoint-large) {
+        padding-top: 100px;
+        padding-bottom: 100px;
+      }
     }
-  }
-  #program__story {
   }
 
   #program__partners {
@@ -156,7 +388,7 @@
       width: 60px;
       height: 60px;
       padding: 10px;
-      overflow: hidden;
+
       margin: 10px;
       transition: all 0.25s $bounce;
       img {
@@ -240,4 +472,33 @@
 }
 .swiper-button-disabled {
   opacity: 0;
+}
+
+circle {
+  stroke: $green;
+  stroke-width: 2px;
+  stroke-opacity: 1;
+}
+
+.pulse {
+  stroke: rgba($navy, 0.5);
+  fill: white;
+  fill-opacity: 0;
+  transform-origin: 50% 50%;
+  animation-duration: 2s;
+  animation-name: pulse;
+  animation-iteration-count: infinite;
+}
+
+@keyframes pulse {
+  from {
+    stroke-width: 3px;
+    stroke-opacity: 1;
+    transform: scale(0.3);
+  }
+  to {
+    stroke-width: 0;
+    stroke-opacity: 0;
+    transform: scale(2);
+  }
 }

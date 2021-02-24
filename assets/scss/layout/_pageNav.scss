@@ -12,6 +12,7 @@
       font-weight: 300;
       z-index: 10;
       cursor: pointer;
+      color: $navy;
     }
     h3:after {
       content: '';
@@ -20,7 +21,7 @@
       left: 50%;
       bottom: -24px;
       width: 1px;
-      border-left: thin solid $blue;
+      border-left: thin solid $green;
       transform: scaleY(0);
       transition: all 0.15s $curve 0.3s;
       transform-origin: top center;
@@ -48,12 +49,12 @@
       }
     }
     a:hover {
-      color: $blue;
+      color: $green;
       background: $white;
       transition-delay: 0s;
     }
     .nuxt-link-active {
-      color: $blue;
+      color: $green;
       background: $white;
     }
     .page-nav__drop-links:before {
@@ -63,7 +64,7 @@
       width: 100%;
       height: 1px;
       top: 50%;
-      border-top: thin solid $blue;
+      border-top: thin solid $green;
       transform: scaleX(0);
       transition: all 0.3s $curve 0s;
       transform-origin: center left;
