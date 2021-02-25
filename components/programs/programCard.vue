@@ -88,7 +88,6 @@ export default {
   created() {
     const app = this
     if (this.program.initiatives.length > 0) {
-      console.log(this.program.initiatives)
       this.program.initiatives.map((initiative) => {
         return app.programInitiatives.push(initiative.initiative_id.title)
       })

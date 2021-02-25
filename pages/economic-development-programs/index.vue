@@ -1,20 +1,22 @@
 <template>
   <div id="programs">
     <div class="w-full fixed background text-right">
-      <h3
+      <!-- <h3
         v-for="initiative in initiatives"
         :key="initiative.id"
         class="uppercase bold"
       >
         {{ initiative.title }}
-      </h3>
+      </h3> -->
     </div>
     <div
       id="programs__intro"
       class="flex flex-col flex-wrap justify-center items-center relative"
     >
-      <h1 class="navy uppercase tracking-widest mb-2 w-5/6 sm:w-3/5 md:w-1/2">
-        <span class="mr-3 font-normal green">{{ programs.length }}</span
+      <h1
+        class="navy uppercase tracking-widest mb-2 w-5/6 sm:w-3/5 md:w-1/2 thin-font"
+      >
+        <span class="mr-3 green">{{ programs.length }}</span
         >Programs
       </h1>
       <p class="navy w-5/6 sm:w-3/5 md:w-1/2 font-normal">

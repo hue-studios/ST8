@@ -90,21 +90,27 @@
   }
   .progam-card__link {
     z-index: 5;
-    width: 40px;
+    width: 35px;
+    height: 35px;
     font-size: 9px;
+    background: $green;
+    border-radius: 50%;
+    color: $white;
+    padding: 4px;
+    margin-left: 15px;
+    margin-right: 5px;
     @media (min-width: $breakpoint-small) {
-      width: 50px;
+      width: 45px;
+      height: 45px;
       font-size: 11px;
     }
     @media (min-width: $breakpoint-medium) {
-      width: 80px;
+      margin-left: 30px;
+      margin-right: 10px;
       font-size: 14px;
     }
     .feather-arrow-right {
-      background: $green;
-      border-radius: 50%;
       color: $white;
-      padding: 4px;
     }
   }
 }

@@ -40,13 +40,16 @@
           <div
             class="w-full flex flex-row flex-wrap items-center justify-start"
           >
-            <h4 class="uppercase green mr-2 mb-2 bold">
-              {{ program.counties.length }} Counties Served:
+            <h4 class="uppercase green mr-2 mb-1 bold">
+              {{ program.counties.length }} Count<span
+                v-if="program.counties.length > 1"
+                >ies</span
+              ><span v-else>y</span> Served:
             </h4>
             <h5
               v-for="(county, index) in program.counties"
               :key="index"
-              class="uppercase mr-1 mb-2"
+              class="uppercase mr-1 mb-1"
             >
               {{ county.county_id.title }}
               <span v-if="index + 1 < program.counties.length" class="green">
@@ -62,13 +65,17 @@
           <div
             class="w-full flex flex-row flex-wrap items-center justify-start"
           >
-            <h4 class="uppercase green mr-2 mb-2 bold">
-              {{ program.initiatives.length }} Initiatives Served:
+            <h4 class="uppercase green mr-2 mb-1 bold">
+              {{ program.initiatives.length }} Initiative<span
+                v-if="program.initiatives.length > 1"
+                >s</span
+              >
+              Served:
             </h4>
             <h5
               v-for="(initiative, index) in program.initiatives"
               :key="index"
-              class="uppercase mr-1 mb-2"
+              class="uppercase mr-1 mb-1"
             >
               {{ initiative.initiative_id.title }}
               <span v-if="index + 1 < program.initiatives.length" class="green">
@@ -87,11 +94,12 @@
         id="start-btn"
         class="button"
         expanded="true"
-        height="40px"
-        width="40px"
+        height="41px"
+        width="41px"
       >
         <circle fill="#1accb8" cx="50%" cy="50%" r="7px"></circle>
         <circle class="pulse" cx="50%" cy="50%" r="10px"></circle>
+        <circle class="pulse2" cx="50%" cy="50%" r="10px"></circle>
       </svg>
       <svg
         id="straightLineSVG"
@@ -151,11 +159,12 @@
         id="finish-btn"
         class="button"
         expanded="true"
-        height="40px"
-        width="40px"
+        height="41px"
+        width="41px"
       >
         <circle fill="#1accb8" cx="50%" cy="50%" r="7px"></circle>
         <circle class="pulse" cx="50%" cy="50%" r="10px"></circle>
+        <circle class="pulse2" cx="50%" cy="50%" r="10px"></circle>
       </svg>
     </div>
     <div
@@ -164,6 +173,16 @@
       <h3 class="uppercase green relative program__title">
         Partners
       </h3>
+      <p class="px-4 text-center program__p">
+        We had
+        <span class="bold"
+          >{{ program.partners.length }} partner<span
+            v-if="program.partners.length > 1"
+            >s</span
+          ></span
+        >
+        for the {{ program.title }} program.
+      </p>
       <div
         id="program__partners"
         class="w-full flex flex-row justify-center items-center flex-wrap mt-6 px-10 max-w-5xl"
@@ -241,6 +260,7 @@
         <h2 class="uppercase green relative program__title">
           Explore Our Programs
         </h2>
+
         <swiper
           :options="programsSwiperOption"
           class="swiper w-full flex flex-row pt-4 pb-4"
@@ -348,41 +368,32 @@ export default {
   },
   head() {},
   mounted() {
-    // const triangle = document.getElementById('straight-line')
-    // const length = triangle.getTotalLength()
-    //
-    // // The start position of the drawing
-    // triangle.style.strokeDasharray = length
-    //
-    // // Hide the triangle by offsetting dash. Remove this line to show the triangle before scroll draw
-    // triangle.style.strokeDashoffset = length
-    //
-    // // Find scroll percentage on scroll (using cross-browser properties), and offset dash same amount as percentage scrolled
-    // window.addEventListener('scroll', myFunction)
-    //
-    // function myFunction() {
-    //   requestAnimationFrame(function() {
-    //     // get the section containing the SVG
-    //     const svgContainer = document.getElementById('program__story')
-    //
-    //     const svgContainerRect = svgContainer.getBoundingClientRect()
-    //     const svgDivHeight = svgContainerRect.height
-    //
-    //     // var windowScroll = $(window).scrollTop();
-    //     const windowScroll = window.pageYOffset
-    //
-    //     // divide by 2 so the scroll-draw completes halfway
-    //     const scrollPercent = (windowScroll / svgDivHeight) * 2
-    //     // console.log(scrollPercent)
-    //
-    //     if (scrollPercent < 1) {
-    //       // draw the length of SVG path according to the scroll
-    //       const draw = length * scrollPercent
-    //       // Reverse the drawing (when scrolling upwards)
-    //       triangle.style.strokeDashoffset = length - draw
-    //     }
-    //   })
-    // }
+    // mobile line animation
+    const straightLine = document.getElementById('straight-line')
+    const straightLength = straightLine.getTotalLength()
+    straightLine.style.strokeDasharray = straightLength
+    straightLine.style.strokeDashoffset = straightLength
+    // desktop line animation
+    const longLine = document.getElementById('program-line')
+    const length = longLine.getTotalLength()
+    longLine.style.strokeDasharray = length
+    longLine.style.strokeDashoffset = length
+    window.addEventListener('scroll', lineFunction)
+    function lineFunction() {
+      requestAnimationFrame(function() {
+        const svgContainer = document.getElementById('program__story')
+        const svgContainerRect = svgContainer.getBoundingClientRect()
+        const svgDivHeight = svgContainerRect.height
+        const windowScroll = window.pageYOffset
+        const scrollPercent = (windowScroll / svgDivHeight) * 0.72
+        if (scrollPercent < 1) {
+          const draw = length * scrollPercent
+          longLine.style.strokeDashoffset = length - draw
+          const drawStraight = straightLength * scrollPercent
+          straightLine.style.strokeDashoffset = straightLength - drawStraight
+        }
+      })
+    }
   },
   created() {
     this.$axios
