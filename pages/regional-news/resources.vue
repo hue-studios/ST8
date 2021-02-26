@@ -1,32 +1,50 @@
 <template>
-  <div id="events" class="flex flex-col items-center justify-center">
-    <div id="temp" class="h-screen flex items-center justify-center w-full">
-      <h2>
-        Hey Jen...don't freak out...the
-        <span class="green">resources</span> page is not done.
-      </h2>
+  <div id="resources" class="flex flex-col items-center justify-center">
+    <div
+      id="resources__intro"
+      class="flex flex-col flex-wrap justify-center items-center relative w-full"
+    >
+      <h1
+        class="navy uppercase tracking-wider sm:tracking-widest mb-2 w-5/6 sm:w-3/5 md:w-1/2 thin-font"
+      >
+        Resources
+      </h1>
+      <p class="navy w-5/6 sm:w-3/5 md:w-1/2">
+        This is a collection of resources.
+      </p>
+    </div>
+    <div
+      class="flex items-center justify-center items-row flex-row flex-wrap py-12"
+    >
+      <resource-card
+        v-for="(item, index) in resources"
+        :key="index"
+        :item="item"
+        class="mb-6 mx-6"
+      ></resource-card>
     </div>
   </div>
 </template>
 
 <script>
 import moment from 'moment'
+import resourceCard from '~/components/now/resourceCard'
 export default {
-  components: {},
+  components: { resourceCard },
+  async asyncData({ params, $axios }) {
+    const resourcesReq = await $axios.get(
+      process.env.apiUrl + '/items/resources?fields=*.*.*'
+    )
+    return {
+      resources: resourcesReq.data.data
+    }
+  },
   data() {
     return {}
   },
   head() {
     return {}
   },
-  // async asyncData({ params, $axios }) {
-  //   const servicesReq = await $axios.get(
-  //     process.env.apiUrl + '/items/services?fields=*.*.*'
-  //   )
-  //   return {
-  //     services: servicesReq.data.data
-  //   }
-  // },
   computed: {},
   created() {},
   methods: {
@@ -55,5 +73,5 @@ export default {
 
 <style lang="scss">
 @import './assets/scss/vars';
-@import './assets/scss/pages/events';
+@import './assets/scss/pages/resources';
 </style>

@@ -47,9 +47,7 @@
         >
       </p>
       <p>
-        <nuxt-link
-          to="/creative-services/branding-agency/"
-          class="mobile-nav-link"
+        <nuxt-link to="/regional-news/resources/" class="mobile-nav-link"
           >Resources</nuxt-link
         >
       </p>
@@ -69,7 +67,7 @@
     </div>
     <div id="mobile-toolbar">
       <nuxt-link to="/regional-news/">News</nuxt-link>
-      <nuxt-link to="/economic-development-initiatives/">Incentives</nuxt-link>
+      <nuxt-link to="/economic-development-initiatives/">Initiatives</nuxt-link>
     </div>
   </div>
 </template>

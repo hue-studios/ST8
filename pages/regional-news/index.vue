@@ -4,12 +4,14 @@
       id="news__intro"
       class="flex flex-col flex-wrap justify-center items-center relative"
     >
-      <h1 class="navy uppercase tracking-widest mb-2 w-5/6 sm:w-3/5 md:w-1/2">
+      <h1
+        class="navy uppercase tracking-widest mb-2 w-5/6 sm:w-3/5 md:w-1/2 thin-font"
+      >
         News
       </h1>
       <p class="navy w-5/6 sm:w-3/5 md:w-1/2">
-        We are always looking to partner with organizations and businesses to
-        achieve the greater goal of growing our region.
+        The latest economic and community development news from the Southern
+        Tier 8 region.
       </p>
       <div class="w-full absolute background text-right">
         <h3 class="uppercase bold"></h3>
@@ -32,7 +34,7 @@
         name="list"
         mode="out-in"
         tag="div"
-        class="w-full md:w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 grid-flow-row gap-x-8 gap-y-8 px-8"
+        class="w-full flex flex-col items-center justify-center px-3 sm:px-8"
       >
         <news-card
           v-for="(item, index) in filteredArticles"

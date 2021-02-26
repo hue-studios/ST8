@@ -4,7 +4,9 @@
       id="events__intro"
       class="flex flex-col flex-wrap justify-center items-center relative w-full"
     >
-      <h1 class="navy uppercase tracking-widest mb-2 w-5/6 sm:w-3/5 md:w-1/2">
+      <h1
+        class="navy uppercase tracking-widest mb-2 w-5/6 sm:w-3/5 md:w-1/2 thin-font"
+      >
         Events
       </h1>
       <p class="navy w-5/6 sm:w-3/5 md:w-1/2">

@@ -5,17 +5,13 @@
       Active
     </p>
     <p>
-      <nuxt-link
-        to="/creative-services/branding-agency/"
-        class="mobile-nav-link"
+      <nuxt-link to="/economic-development-initiatives/" class="mobile-nav-link"
         >Initiatives</nuxt-link
       >
     </p>
 
     <p>
-      <nuxt-link
-        to="/creative-services/web-design-app-development/"
-        class="mobile-nav-link"
+      <nuxt-link to="/economic-development-programs/" class="mobile-nav-link"
         >Programs</nuxt-link
       >
     </p>
@@ -24,7 +20,7 @@
         >Services</nuxt-link
       >
     </p>
-    <nuxt-link class="mobile-nav-link" to="">
+    <nuxt-link class="mobile-nav-link" to="/regional-profile/">
       Regional
     </nuxt-link>
 
@@ -32,23 +28,15 @@
       Now
     </p>
     <p>
-      <nuxt-link
-        to="/creative-services/branding-agency/"
-        class="mobile-nav-link"
-        >News</nuxt-link
-      >
+      <nuxt-link to="/regional-news/" class="mobile-nav-link">News</nuxt-link>
     </p>
     <p>
-      <nuxt-link
-        to="/creative-services/branding-agency/"
-        class="mobile-nav-link"
+      <nuxt-link to="/regional-news/events/" class="mobile-nav-link"
         >Events</nuxt-link
       >
     </p>
     <p>
-      <nuxt-link
-        to="/creative-services/branding-agency/"
-        class="mobile-nav-link"
+      <nuxt-link to="regional-news/resources/" class="mobile-nav-link"
         >Resources</nuxt-link
       >
     </p>

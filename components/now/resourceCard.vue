@@ -1,16 +1,17 @@
 <template>
   <div
     :id="'resource-card-' + item.id"
-    class="flex items-center justify-center flex-col py-12 resource-card"
+    class="flex items-center justify-center flex-col py-12 shadow-lg resource-card"
   >
     <h2
       class="uppercase tracking-widest w-full mb-4 px-4 md:px-6 resource-card__title"
+      :class="{ 'text-xs': tooLong }"
     >
       {{ item.title }}
     </h2>
 
     <a
-      v-if="item.type === 'Internal File / PDF'"
+      v-if="item.type === 'Internal File / PDF' && item.file"
       :href="imageLocation + item.file.private_hash"
       class="w-full uppercase text-xs green bold tracking-widest px-4 md:px-6 resource-card__link"
       target="_blank"
@@ -50,11 +51,21 @@ export default {
   },
   data() {
     return {
-      imageLocation: process.env.imageUrl
+      imageLocation: process.env.imageUrl,
+      tooLong: false
     }
   },
-  created() {},
+  created() {
+    this.countTitle(this.item.title)
+  },
   methods: {
+    countTitle(title) {
+      if (title.length > 30) {
+        this.tooLong = true
+      } else {
+        this.tooLong = false
+      }
+    },
     removeTags(str) {
       if (str === null || str === '') return false
       else str = str.toString()

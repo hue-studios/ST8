@@ -43,7 +43,7 @@
         id="mission"
         class="flex flex-row justify-center items-start mb-32 statement"
       >
-        <h2 class="uppercase white tracking-wider">
+        <h2 class="uppercase white tracking-wider thin-font">
           Mission Statement
         </h2>
         <p class="white ml-2">{{ organization.mission_statement }}</p>

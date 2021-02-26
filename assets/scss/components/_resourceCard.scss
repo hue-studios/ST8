@@ -1,7 +1,8 @@
 .resource-card {
   height: 220px;
   border: thin solid rgba($grey, 0.2);
-  box-shadow: 0px 2px 15px rgba($black, 0.2);
+  background: $navy;
+  color: $white;
   border-radius: 3px;
   width: 220px;
   .resource-card__title {
@@ -17,7 +18,18 @@
       font-size: 18px;
     }
   }
+  .resource-card__title.text-xs {
+    font-size: 12px;
+    line-height: 16px;
 
+    @media (min-width: $breakpoint-small) {
+    }
+    @media (min-width: $breakpoint-medium) {
+    }
+    @media (min-width: $breakpoint-large) {
+      font-size: 16px;
+    }
+  }
   .resource-card__description {
     font-size: 13px;
     @media (min-width: $breakpoint-small) {

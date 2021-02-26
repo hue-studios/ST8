@@ -1,21 +1,26 @@
 #initiative {
   #initiative__intro {
-    height: 500px;
+    height: calc(100vh - 70px);
+    min-height: 640px;
+    @media (min-width: $breakpoint-medium) {
+      height: calc(100vh - 150px);
+    }
     #initiative__bg-title {
       color: $grey;
       left: 0px;
-      top: 0px;
-
-      height: 450px;
-      width: 300px;
-      font-size: 42px;
+      top: calc(50% - 200px);
+      height: 240px;
+      width: 150px;
+      font-size: 102px;
+      line-height: 80px;
       white-space: pre-line;
-      font-weight: 300;
       z-index: -1;
-      opacity: 0.25;
-      letter-spacing: 0.15em;
+      opacity: 0.15;
+
       @media (min-width: $breakpoint-small) {
-        font-size: 68px;
+        font-size: 212px;
+        line-height: 150px;
+        margin-top: -125px;
       }
       @media (min-width: $breakpoint-medium) {
         font-size: 212px;
@@ -23,63 +28,400 @@
         margin-top: -125px;
       }
     }
-    #initiative__intro-caption {
-      padding-left: 100px;
-      .initiative__intro-sort {
-        left: 0px;
-        top: 0px;
-        font-size: 96px;
-        line-height: 70px;
-
-        @media (min-width: $breakpoint-medium) {
-          font-size: 212px;
-          line-height: 150px;
-          margin-top: -45px;
-        }
+    .initiative__title-box {
+      max-width: 300px;
+      @media (min-width: $breakpoint-small) {
+        max-width: 600px;
       }
-      .initiative__page-title {
-        font-size: 42px;
-        line-height: 40px;
+      @media (min-width: $breakpoint-large) {
+        max-width: 740px;
+      }
+      .initiative__title {
+        font-size: 28px;
+        line-height: 26px;
         letter-spacing: 0.25em;
+        padding-left: 20px;
+        font-family: $bold-font;
         @media (min-width: $breakpoint-small) {
+          font-size: 56px;
+          line-height: 50px;
+          font-family: $body-font;
         }
         @media (min-width: $breakpoint-medium) {
         }
         @media (min-width: $breakpoint-large) {
-          font-size: 48px;
-          line-height: 40px;
+          font-size: 72px;
+          line-height: 60px;
         }
       }
-      p {
-        font-size: 18px;
+      .initiative__sort {
+        font-size: 96px;
+        line-height: 70px;
+        @media (min-width: $breakpoint-small) {
+          font-size: 188px;
+          line-height: 180px;
+        }
+        @media (min-width: $breakpoint-medium) {
+          font-size: 224px;
+          line-height: 220px;
+        }
+        @media (min-width: $breakpoint-large) {
+          font-size: 256px;
+          line-height: 250px;
+        }
       }
     }
   }
-  #initiative__vertical-story {
-    .initiative__vertical-story-title {
-      font-size: 42px;
-      line-height: 40px;
-      letter-spacing: 0.3em;
+  .initiative__story {
+    // height: 900px;
+    @media (min-width: $breakpoint-large) {
+      height: 2000px;
     }
-    .initiative__vertical-story-description {
-      max-width: 500px;
+    .initiative__title {
+      z-index: 5;
+      background: $white;
+      font-size: 22px;
+      line-height: 24px;
+      letter-spacing: 0.1em;
+      font-weight: 400;
+      margin-top: 40px;
+      margin-bottom: 40px;
+      @media (min-width: $breakpoint-small) {
+        font-size: 22px;
+        line-height: 24px;
+        margin-top: 60px;
+        margin-bottom: 60px;
+      }
+      @media (min-width: $breakpoint-medium) {
+        font-size: 26px;
+        line-height: 28px;
+        margin-top: 80px;
+        margin-bottom: 80px;
+      }
+      @media (min-width: $breakpoint-large) {
+        font-size: 42px;
+        line-height: 40px;
+        letter-spacing: 0.2em;
+        margin-top: 100px;
+        margin-bottom: 100px;
+      }
+    }
+
+    .initiative__description {
+      z-index: 5;
+      background: $white;
+      max-width: 550px;
+      margin-top: 40px;
+      margin-bottom: 40px;
+      font-size: 14px;
+
+      @media (min-width: $breakpoint-small) {
+        margin-top: 60px;
+        margin-bottom: 60px;
+      }
+      @media (min-width: $breakpoint-medium) {
+        margin-top: 80px;
+        margin-bottom: 80px;
+        font-size: 15px;
+      }
+      @media (min-width: $breakpoint-large) {
+        margin-top: 100px;
+        margin-bottom: 100px;
+      }
+    }
+    #start-btn {
+      position: absolute;
+      top: -70px;
+      left: calc(50% - 20px);
+      filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.25));
+      @media (min-width: $breakpoint-small) {
+      }
+      @media (min-width: $breakpoint-medium) {
+      }
+      @media (min-width: $breakpoint-large) {
+        top: -30px;
+        left: calc(50% + 435px);
+      }
+      @media (min-width: $breakpoint-xlarge) {
+      }
+    }
+    #finish-btn {
+      position: absolute;
+      bottom: -20px;
+      left: calc(50% - 20px);
+      filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.25));
+      @media (min-width: $breakpoint-small) {
+      }
+      @media (min-width: $breakpoint-medium) {
+      }
+      @media (min-width: $breakpoint-large) {
+        bottom: 25px;
+        left: calc(50% - 20px);
+      }
+      @media (min-width: $breakpoint-xlarge) {
+      }
+    }
+    #straightLineSVG {
+      position: absolute;
+      z-index: -1;
+      top: -50px;
+      left: calc(50% - 1px);
+      height: calc(100% + 50px);
+      width: 3px;
+      @media (min-width: $breakpoint-large) {
+        display: none;
+      }
+    }
+    #lineSVG {
+      display: none;
+      position: absolute;
+      z-index: -1;
+      top: -50px;
+      left: calc(50% - 185px);
+      height: 100%;
+      width: 370px;
+      @media (min-width: $breakpoint-small) {
+      }
+      @media (min-width: $breakpoint-medium) {
+      }
+      @media (min-width: $breakpoint-large) {
+        top: -50px;
+        left: calc(50% - 456px);
+        height: 100%;
+        width: 912px;
+        display: block;
+      }
+      @media (min-width: $breakpoint-xlarge) {
+      }
+    }
+
+    #goal-title {
+      padding: 20px;
+      @media (min-width: $breakpoint-large) {
+        margin-right: 65%;
+        margin-top: 460px;
+        width: 360px;
+        padding: 20px;
+      }
+      @media (min-width: $breakpoint-xlarge) {
+        width: 360px;
+        padding: 20px;
+        margin-right: 840px;
+      }
+    }
+    #goal-description {
+      padding: 20px;
+      @media (min-width: $breakpoint-large) {
+        width: 480px;
+        margin-left: 250px;
+        padding: 20px;
+        margin-top: -40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        max-height: 140px;
+      }
+    }
+    #opportunity-title {
+      padding: 20px;
+      @media (min-width: $breakpoint-large) {
+        margin-right: 0px;
+        margin-top: 200px;
+        width: 360px;
+        padding: 20px;
+      }
+    }
+    #opportunity-description {
+      padding: 20px;
+      @media (min-width: $breakpoint-large) {
+        width: 660px;
+        max-width: 660px;
+        margin-right: calc(50% - 180px);
+        padding: 20px;
+        margin-top: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        max-height: 350px;
+      }
+      @media (min-width: $breakpoint-xlarge) {
+        margin-right: 580px;
+        padding: 20px 0;
+      }
+      p {
+        margin-bottom: 15px;
+      }
     }
   }
-  .initiative__bg-title {
-    color: $grey;
-    right: 0px;
-    top: 0px;
-    font-size: 42px;
-    font-weight: 300;
-    z-index: -1;
-    opacity: 0.25;
-    letter-spacing: 0.15em;
-    @media (min-width: $breakpoint-small) {
-      font-size: 68px;
+  .initiative__related {
+    margin-bottom: 60px;
+    @media (min-width: $breakpoint-large) {
+      margin-top: -100px;
     }
-    @media (min-width: $breakpoint-medium) {
-      font-size: 172px;
-      line-height: 130px;
+    .program__title {
+      font-size: 22px;
+      line-height: 24px;
+      letter-spacing: 0.1em;
+      padding-top: 40px;
+      padding-bottom: 20px;
+      @media (min-width: $breakpoint-small) {
+        font-size: 22px;
+        line-height: 24px;
+        padding-top: 60px;
+      }
+      @media (min-width: $breakpoint-medium) {
+        font-size: 26px;
+        line-height: 28px;
+        padding-top: 80px;
+      }
+      @media (min-width: $breakpoint-large) {
+        font-size: 42px;
+        line-height: 40px;
+        letter-spacing: 0.2em;
+        padding-top: 100px;
+      }
     }
+    .program__p {
+      font-size: 14px;
+      margin-top: -10px;
+      @media (min-width: $breakpoint-small) {
+      }
+      @media (min-width: $breakpoint-medium) {
+      }
+      @media (min-width: $breakpoint-large) {
+      }
+    }
+    .program__description {
+      max-width: 840px;
+      padding-top: 40px;
+      padding-bottom: 40px;
+      font-size: 14px;
+      @media (min-width: $breakpoint-small) {
+        padding-top: 60px;
+        padding-bottom: 60px;
+      }
+      @media (min-width: $breakpoint-medium) {
+        padding-top: 80px;
+        padding-bottom: 80px;
+        max-width: 800px;
+      }
+      @media (min-width: $breakpoint-large) {
+        padding-top: 100px;
+        padding-bottom: 100px;
+      }
+    }
+  }
+  #program__news {
+    .swiper-slide {
+      width: 350px;
+      @media (min-width: $breakpoint-small) {
+        width: 350px;
+      }
+      @media (min-width: $breakpoint-medium) {
+      }
+    }
+  }
+}
+.swiper-button-next,
+.swiper-button-prev {
+  width: 32px;
+  height: 32px;
+  color: $black;
+
+  border-radius: 50%;
+  transition: all 0.3s $curve;
+  outline: none;
+  top: calc(100% - 8px);
+  @media (min-width: $breakpoint-small) {
+    width: 35px;
+    height: 35px;
+  }
+  @media (min-width: $breakpoint-medium) {
+    width: 40px;
+    height: 40px;
+  }
+  @media (min-width: $breakpoint-large) {
+    top: 50%;
+    // background: rgba(245, 245, 245, 1);
+    background: $white;
+  }
+}
+.swiper-button-prev,
+.swiper-container-rtl .swiper-button-next {
+  left: 6px;
+  right: auto;
+  @media (min-width: $breakpoint-medium) {
+    left: 6px;
+  }
+}
+.swiper-button-next,
+.swiper-container-rtl .swiper-button-prev {
+  left: auto;
+  right: 6px;
+  @media (min-width: $breakpoint-medium) {
+    right: 6px;
+  }
+}
+.swiper-button-prev:after,
+.swiper-button-next:after {
+  font-size: 12px !important;
+}
+.swiper-button-disabled {
+  opacity: 0;
+}
+
+circle {
+  stroke: $green;
+  stroke-width: 2px;
+  stroke-opacity: 1;
+}
+
+.pulse {
+  stroke: rgba($navy, 0.25);
+  fill: white;
+  fill-opacity: 0;
+  transform-origin: 50% 50%;
+  animation-duration: 2s;
+  animation-name: pulse;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-out;
+}
+
+.pulse2 {
+  stroke: rgba($green, 0.75);
+  fill: white;
+  fill-opacity: 0;
+  transform-origin: 50% 50%;
+  animation-duration: 2s;
+  animation-name: pulse2;
+  animation-delay: 0.75s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-out;
+}
+
+@keyframes pulse {
+  from {
+    stroke-width: 3px;
+    stroke-opacity: 1;
+    transform: scale(0.3);
+  }
+  to {
+    stroke-width: 0;
+    stroke-opacity: 0;
+    transform: scale(2);
+  }
+}
+@keyframes pulse2 {
+  from {
+    stroke-width: 3px;
+    stroke-opacity: 1;
+    transform: scale(0.3);
+  }
+  to {
+    stroke-width: 0;
+    stroke-opacity: 0;
+    transform: scale(2);
   }
 }
