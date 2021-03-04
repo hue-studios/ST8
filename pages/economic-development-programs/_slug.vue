@@ -299,7 +299,7 @@ export default {
       $axios.$get(
         '/items/programs?filter[url][eq]=' +
           params.slug +
-          '&fields=*.*.*.*.*&single=1'
+          '&fields=id,title,what_is_it,what_it_accomplishes,url,counties.county_id.title,initiatives.initiative_id.title,images.file_id.private_hash,partners.partner_id.title,partners.partner_id.logo.private_hash,resources.resources_id.title,resources.resources_id.type,resources.resources_id.file.private_hash,news.news_id.title,news.news_id.article,news.news_id.link,news.news_id.type,news.news_id.tags,news.news_id.date_published,news.news_id.url,news.news_id.link,url,news.news_id.cover_image.private_hash&single=1'
       )
     ])
     return {
@@ -308,17 +308,17 @@ export default {
       resources: programReq.data.resources
     }
   },
-  data() {
+  data(app) {
     return {
       imageLocation: process.env.imageUrl,
       programs: [],
+
       resourcesSwiperOption: {
-        // freeMode: true,
-        // freeModeSticky: true,
         slidesPerView: 'auto',
         slidesOffsetBefore: 15,
         slidesOffsetAfter: 15,
-        // centeredSlides: true,
+        centeredSlides: true,
+        initialSlide: 1,
         spaceBetween: 30,
         pagination: {
           el: '.swiper-pagination',
@@ -367,6 +367,9 @@ export default {
     }
   },
   head() {},
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.lineFunction)
+  },
   mounted() {
     // mobile line animation
     const straightLine = document.getElementById('straight-line')
@@ -378,8 +381,29 @@ export default {
     const length = longLine.getTotalLength()
     longLine.style.strokeDasharray = length
     longLine.style.strokeDashoffset = length
-    window.addEventListener('scroll', lineFunction)
-    function lineFunction() {
+    window.addEventListener('scroll', this.lineFunction)
+  },
+  created() {
+    this.$axios
+      .$get(
+        '/items/programs?filter[id][neq]=' +
+          this.program.id +
+          '&fields=id,title,what_is_it,url,counties.county_id.title,initiatives.initiative_id.title,images.file_id.private_hash,partners.partner_id.title'
+      )
+      .then((response) => {
+        this.programs = response.data
+      })
+      .catch(function(error) {
+        console.log(error)
+      })
+    this.countTitle(this.program.title)
+  },
+  methods: {
+    lineFunction() {
+      const straightLine = document.getElementById('straight-line')
+      const straightLength = straightLine.getTotalLength()
+      const longLine = document.getElementById('program-line')
+      const length = longLine.getTotalLength()
       requestAnimationFrame(function() {
         const svgContainer = document.getElementById('program__story')
         const svgContainerRect = svgContainer.getBoundingClientRect()
@@ -393,22 +417,7 @@ export default {
           straightLine.style.strokeDashoffset = straightLength - drawStraight
         }
       })
-    }
-  },
-  created() {
-    this.$axios
-      .$get(
-        '/items/programs?filter[id][neq]=' + this.program.id + '&fields=*.*.*'
-      )
-      .then((response) => {
-        this.programs = response.data
-      })
-      .catch(function(error) {
-        console.log(error)
-      })
-    this.countTitle(this.program.title)
-  },
-  methods: {
+    },
     countTitle(title) {
       if (title.length > 30) {
         this.tooLong = true

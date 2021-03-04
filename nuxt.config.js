@@ -63,8 +63,8 @@ export default {
     // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module',
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
-    '@nuxtjs/tailwindcss',
-    'nuxt-purgecss'
+    '@nuxtjs/tailwindcss'
+    // 'nuxt-purgecss'
   ],
   /*
    ** Nuxt.js modules

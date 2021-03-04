@@ -1759,7 +1759,10 @@
 </template>
 
 <style scoped lang="scss">
+@import './assets/scss/vars';
 #industry-chart {
+  width: 100%;
+  max-width: 800px;
   .cls-1,
   .cls-14,
   .cls-3 {

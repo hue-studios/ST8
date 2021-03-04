@@ -1,93 +1,633 @@
 <template>
   <div id="home">
-    <div id="temp" class="h-screen flex items-center justify-center w-full">
-      <h2>Hey Jen...don't freak out...the home page is not done.</h2>
-    </div>
-    <!-- <div
-      id="home-intro"
+    <div
+      id="home__intro"
       class="flex flex-col justify-center items-center relative"
     >
-      <counties></counties>
-      <logo-name></logo-name>
+      <a id="home-intro__logo" @click.prevent="changePanel('home', 0)">
+        <logo-name></logo-name>
+      </a>
       <div
+        id="home-intro__navigation"
         class="w-full flex justify-around items-center absolute home-intro__navigation"
       >
-        <nuxt-link to="/" class="uppercase tracking-widest">Active</nuxt-link>
-        <nuxt-link
-          to="/regional-profile"
-          class="uppercase tracking-widest shadow-md"
-          >Regional</nuxt-link
+        <a
+          :class="[panel === 'active' ? 'current' : '']"
+          class="uppercase tracking-widest home-intro__navigation-btn"
+          @click.prevent="changePanel('active', 1)"
         >
-        <nuxt-link to="/" class="uppercase tracking-widest shadow-lg"
-          >Now</nuxt-link
+          Active</a
+        >
+        <a
+          :class="[panel === 'regional' ? 'current' : '']"
+          class="uppercase tracking-widest home-intro__navigation-btn"
+          @click.prevent="changePanel('regional', 2)"
+          >Regional</a
+        >
+        <a
+          :class="[panel === 'now' ? 'current' : '']"
+          class="uppercase tracking-widest home-intro__navigation-btn"
+          @click.prevent="changePanel('now', 3)"
+          >Now</a
         >
       </div>
+      <transition
+        :enter-active-class="animateIn"
+        :leave-active-class="animateOut"
+        mode="out-in"
+      >
+        <div v-if="panel === 'home'" key="0"></div>
+        <div
+          v-if="panel === 'active'"
+          id="active-caption"
+          key="1"
+          class="home-intro__navigation-description"
+        >
+          <h5 class="uppercase grey tracking-widest mb-4 ">Active</h5>
+          <p>
+            Our Initiatives, Programs, and Services are designed to serve and
+            adapt to the region’s economic, workforce, infrastructure, rural,
+            and quality of life needs. We are ACTIVE because we are always
+            evolving and partnering with organizations throughout the region to
+            create innovative, practical, and timely solutions with vision,
+            dedication, and commitment to our region’s growth and success.
+          </p>
+          <nuxt-link
+            to="/economic-development-initiatives"
+            class="green w-full text-right mt-4 tracking-widest uppercase inline-block link-font"
+            >Learn about our Initiatives <link-icon class="ml-2"></link-icon
+          ></nuxt-link>
+        </div>
+
+        <div
+          v-if="panel === 'regional'"
+          id="regional-caption"
+          key="2"
+          class="home-intro__navigation-description"
+        >
+          <h5 class="uppercase grey tracking-widest mb-4 ">Regional</h5>
+          <p>
+            We are a 8 County Organization so we are not one place, one county,
+            we cover a large portion of Upstate NY. Every county that is part of
+            our organization is unique with its own natural, economic, and
+            business assets. We Are committed to evaluating and innovating for
+            each, while still looking at the strength of our region as a whole.
+            We believe that as one united region, we are stronger, we build a
+            more powerful economy, and create the best opportunities for growth.
+          </p>
+          <nuxt-link
+            to="/regional-profile"
+            class="green w-full text-right mt-4 tracking-widest uppercase inline-block link-font"
+            >View Regional Profile <link-icon class="ml-2"></link-icon
+          ></nuxt-link>
+        </div>
+
+        <div
+          v-if="panel === 'now'"
+          id="now-caption"
+          key="3"
+          class="home-intro__navigation-description"
+        >
+          <h5 class="uppercase grey tracking-widest mb-4">Now</h5>
+          <p>
+            Our News, Resources, and Events are published to share progress of
+            our organization’s initiatives, programs, and services. We also
+            focus on gathering and announcing funding opportunities to help
+            county legislatures and organizations benefit from every opportunity
+            that is available to them in order to continually strengthen the
+            economic growth of our region.
+          </p>
+          <nuxt-link
+            to="/regional-news"
+            class="green w-full text-right mt-4 tracking-widest uppercase inline-block link-font"
+            >View All {{ newsMeta.meta.status_count.published }} Articles
+            <link-icon class="ml-2"></link-icon
+          ></nuxt-link>
+        </div>
+      </transition>
     </div>
-    <div id="home-motto" class="w-full py-20">
-      <div id="motto-1" class="flex flex-col items-start">
-        <h1 class="green uppercase tracking-widest">Our Motto</h1>
-        <h2 class="green uppercase tracking-widest">
-          Partnership Propels Progress
+    <div
+      id="home__mission"
+      class="w-full flex items-start justify-end flex-col relative"
+    >
+      <div
+        id="mission"
+        class="flex flex-col lg:flex-row justify-center items-start mb-20 md:mb-24 lg:mb-32 xl:mb-40 statement"
+      >
+        <h2 class="uppercase white tracking-wider thin-font mb-2 lg:mb-0">
+          Mission Statement
         </h2>
+        <p class="white xl:ml-2">{{ organization.mission_statement }}</p>
       </div>
-      <div id="motto-2" class="flex flex-row items-start justify-center">
-        <h3 class="navy lowercase font-medium mr-4">[ pahrt-ner-ship ]</h3>
-        <p class="navy lowercase">
-          the state or condition of being a partner; participation; association;
-          joint interest.
+      <nuxt-link
+        to="/regional-organization"
+        class="uppercase green pt-2 link-font"
+        >Learn More<span class="hidden md:inline-block ml-2">
+          About Southern Tier 8</span
+        >
+        <link-icon class="ml-1"></link-icon
+      ></nuxt-link>
+      <div id="cropped-overlay" class="absolute"></div>
+    </div>
+    <div
+      v-if="news.length"
+      id="home__news"
+      class="w-full flex relative justify-center items-center flex-row flex-wrap relative shadow-lg home__section"
+    >
+      <h2
+        class="uppercase green relative thin-font grey w-full mb-2 pl-2 home__title"
+      >
+        <span class="green small-title block tracking-widest bold"
+          >Featured </span
+        >News
+      </h2>
+      <div class="w-full pl-3 pr-3 mb-2 lg:pl-5 lg:pr-5 home__subtitle">
+        <p class="">
+          Read the latest news from the Southern Tier region focused on economic
+          development, workforce initiatives, and all things regional.
         </p>
       </div>
-      <div id="motto-3" class="w-full text-center">
-        Our <span class="bold uppercase">Collaborative Interest</span> is the
-        Southern Tier 8 Region.
+      <swiper
+        :options="newsSwiperOption"
+        class="swiper w-full flex flex-row pt-4 pb-4"
+      >
+        <swiper-slide
+          v-for="(item, index) in news"
+          :key="index"
+          class="flex flex-col items-center justify-center px-3 sm:px-8 pt-4 pb-8"
+        >
+          <news-card-vertical :item="item"></news-card-vertical>
+        </swiper-slide>
+        <div slot="pagination" class="swiper-pagination"></div>
+        <div slot="button-next" class="swiper-button-next"></div>
+        <div slot="button-prev" class="swiper-button-prev"></div>
+      </swiper>
+      <nuxt-link
+        to="/economic-development-programs"
+        class="green w-full text-center pt-8 tracking-widest uppercase link-font"
+        >View All {{ newsMeta.meta.status_count.published }} Articles
+        <link-icon class="ml-2"></link-icon
+      ></nuxt-link>
+    </div>
+    <div
+      id="home__funding"
+      class="w-full flex relative justify-center items-center flex-col flex-wrap relative home__section"
+    >
+      <h2
+        class="uppercase thin-font w-full relative mb-2 pl-2 green home__title"
+      >
+        Looking for funding?
+      </h2>
+      <div class="w-full pl-3 pr-3 lg:pl-5 lg:pr-5 mb-8 white home__subtitle">
+        <p class="">
+          Our team will assist applicants with questions about program
+          development, partner engagement, grant writing, matchm support
+          requirements and budgets. If you have a project concept that you would
+          like to review with us, complete the JOT form online.
+        </p>
       </div>
+      <a
+        :href="jotForm.link"
+        target="_blank"
+        class="mt-4 sm:mt-8 uppercase py-4 px-12"
+        >{{ jotForm.title }} <link-icon class="ml-1"></link-icon
+      ></a>
     </div>
-    <div id="home-graphic" class="w-full relative py-20">
-      <h1>Our Mission</h1>
-      <p>
-        TO PARTNER with member counties to identify and address multi-county
-        issues in order to improve the quality of life within the region.
-      </p>
-      <home-graphic />
+
+    <div
+      id="home__partners"
+      class="w-full flex relative justify-center items-center md:items-end flex-col flex-wrap relative shadow-lg home__section"
+    >
+      <h2
+        class="uppercase thin-font grey w-full relative mb-2 pl-2 home__title"
+      >
+        Partnerships
+        <span class="absolute right-0 tracking-widest navy pr-1 date">{{
+          $moment().format('MMMM Do, YYYY')
+        }}</span>
+      </h2>
+      <div class="w-full pl-3 pr-3 lg:pl-5 lg:pr-5 mb-8 home__subtitle">
+        <p class="">
+          We partner with numerous organizations to collaborate on programs that
+          support our mission.
+        </p>
+      </div>
+      <observer
+        :options="options"
+        @intersect="
+          animateValue(
+            'regional-total',
+            0,
+            regionalPartners.length,
+            regionalPartners.length * 75
+          )
+        "
+      ></observer>
+      <h3
+        v-if="regionalPartners.length"
+        class="uppercase w-5/6 md:w-1/2 flex items-center justify-start flex-row py-4"
+      >
+        <span id="regional-total" class="green thin-font number">{{
+          regionalPartners.length
+        }}</span>
+        Federal &amp; State Partners
+      </h3>
+      <observer
+        :options="options"
+        @intersect="
+          animateValue(
+            'planner-total',
+            0,
+            plannerPartners.length,
+            plannerPartners.length * 75
+          )
+        "
+      ></observer>
+      <h3
+        v-if="plannerPartners.length"
+        class="uppercase w-5/6 md:w-1/2 flex items-center justify-start flex-row py-4"
+      >
+        <span id="planner-total" class="green thin-font number">{{
+          plannerPartners.length
+        }}</span>
+        County Planners
+      </h3>
+      <observer
+        :options="options"
+        @intersect="
+          animateValue(
+            'developer-total',
+            0,
+            developerPartners.length,
+            developerPartners.length * 75
+          )
+        "
+      ></observer>
+      <h3
+        v-if="developerPartners.length"
+        class="uppercase w-5/6 md:w-1/2 flex items-center justify-start flex-row py-4"
+      >
+        <span id="developer-total" class="green thin-font number">{{
+          developerPartners.length
+        }}</span>
+        Economic Development Agencies
+      </h3>
+      <observer
+        :options="options"
+        @intersect="
+          animateValue(
+            'workforce-total',
+            0,
+            workforcePartners.length,
+            workforcePartners.length * 75
+          )
+        "
+      ></observer>
+      <h3
+        v-if="workforcePartners.length"
+        class="uppercase w-5/6 md:w-1/2 flex items-center justify-start flex-row py-4"
+      >
+        <span id="workforce-total" class="green thin-font number">{{
+          workforcePartners.length
+        }}</span>
+        Workforce Partners
+      </h3>
+
+      <nuxt-link
+        to="/partnerships"
+        class="green w-full text-center pt-8 link-font"
+        >LEARN MORE<span class="hidden sm:inline-block ml-2">
+          ABOUT PARTNERSHIPS</span
+        ><span class="hidden md:inline-block ml-2">
+          AND HOW YOU CAN BE INVOLVED</span
+        >
+        <link-icon class="ml-2"></link-icon
+      ></nuxt-link>
     </div>
-    <div class="">
-      <h1>How do we achieve our mission?</h1>
-      <p>
-        To us, partnerships are everything. One of the main goals of our
-        organization at Southern Tier 8 Regional Board is to encourage and
-        promote partnerships in all that we do. By working together with county
-        planning and economic development organizations, we offer the community
-        more support to effectively address creative solutions for many
-        cross-boundary challenges at hand.
-      </p>
-    </div> -->
+
+    <div
+      id="home__programs"
+      class="w-full flex relative justify-center items-center flex-row flex-wrap relative home__section"
+    >
+      <h2
+        class="uppercase green relative thin-font grey mb-2 pl-2 w-full home__title"
+      >
+        <span class="green small-title block tracking-widest bold"
+          >Featured </span
+        >Programs
+      </h2>
+      <div class="w-full pl-3 pr-3 lg:pl-5 lg:pr-5 mb-8 home__subtitle">
+        <p class="white">
+          Our programs are designed to help grow our region. Select a program
+          below to learn the what it is, who we partnered with, and what it
+          accomplishes.
+        </p>
+      </div>
+      <swiper
+        :options="programsSwiperOption"
+        class="swiper w-full flex flex-row pt-4 pb-4"
+      >
+        <swiper-slide
+          v-for="program in programs"
+          :key="program.sort"
+          class="flex flex-col items-center justify-center px-3 sm:px-8"
+        >
+          <program-card :program="program"></program-card>
+        </swiper-slide>
+        <div slot="pagination" class="swiper-pagination"></div>
+        <div slot="button-next" class="swiper-button-next"></div>
+        <div slot="button-prev" class="swiper-button-prev"></div>
+      </swiper>
+      <nuxt-link
+        to="/economic-development-programs"
+        class="green w-full text-center pt-8 tracking-widest uppercase link-font"
+        >View All {{ programsMeta.meta.status_count.published }} Programs
+        <link-icon class="ml-2"></link-icon
+      ></nuxt-link>
+    </div>
+    <div
+      id="home__data"
+      class="w-full flex relative justify-center items-center flex-col relative shadow-lg home__section"
+    >
+      <h2
+        class="uppercase green relative thin-font grey mb-2 pl-2 pr-2 w-full text-center home__title"
+      >
+        <span class="green small-title block tracking-widest bold"
+          >Featured Regional </span
+        >Data
+      </h2>
+      <div class="pl-3 pr-3 lg:pl-5 lg:pr-5 mb-8 text-center home__subtitle">
+        <p class="">
+          The Southern Tier region features 10 major industry sectors.
+        </p>
+      </div>
+      <industry-chart></industry-chart>
+      <nuxt-link
+        to="/regional-profile"
+        class="green w-full text-center pt-16 tracking-widest uppercase link-font"
+        >View Regional Profile <link-icon class="ml-2"></link-icon
+      ></nuxt-link>
+    </div>
   </div>
 </template>
 
 <script>
-// import counties from '~/components/layout/countiesOutline'
-// import logoName from '~/components/layout/logoName'
-// import homeGraphic from '~/components/homeGraphic'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+import observer from '~/components/utilities/observer'
+import linkIcon from '~/components/universal/linkIcon'
+import logoName from '~/components/layout/logoName'
+import programCard from '~/components/programs/programCard'
+import newsCardVertical from '~/components/now/newsCardVertical'
+import industryChart from '~/components/industryChart'
+
 export default {
   components: {
-    // counties,
-    // logoName,
-    // homeGraphic
+    logoName,
+    Swiper,
+    SwiperSlide,
+    programCard,
+    newsCardVertical,
+    linkIcon,
+    observer,
+    industryChart
   },
-  async asyncData({ params, $axios }) {
-    const countiesReq = await $axios.get(
-      process.env.apiUrl + '/items/counties?fields=*.*.*'
-    )
+  async asyncData({ app, $axios }) {
+    const [
+      partnersReq,
+      newsReq,
+      eventsReq,
+      programsReq,
+      organizationReq
+    ] = await Promise.all([
+      $axios.get(process.env.apiUrl + '/items/partners?fields=*.*'),
+      $axios.get(
+        process.env.apiUrl +
+          '/items/news?fields=*.*.*&filter[featured]=1&meta=*'
+      ),
+      $axios.get(process.env.apiUrl + '/items/events?fields=*.*.*'),
+      $axios.get(
+        process.env.apiUrl +
+          '/items/programs?fields=*.*.*&filter[featured]=1&meta=*'
+      ),
+      $axios.$get('/items/organization?single=1&fields=mission_statement')
+    ])
     return {
-      counties: countiesReq.data.data
+      partners: partnersReq.data.data,
+      news: newsReq.data.data,
+      newsMeta: newsReq.data,
+      events: eventsReq.data.data,
+      programs: programsReq.data.data,
+      programsMeta: programsReq.data,
+      organization: organizationReq.data
     }
   },
-  head() {}
+  data() {
+    return {
+      panel: 'home',
+      previousPanelKey: 1,
+      panelKey: 0,
+      animateIn: 'uk-animation-slide-right-medium uk-animation-fast',
+      animateOut:
+        'uk-animation-slide-left-medium uk-animation-reverse uk-animation-fast',
+      options: {
+        rootMargin: '0px',
+        threshold: 1.0
+      },
+      jotForm: '',
+      newsSwiperOption: {
+        slidesPerView: 'auto',
+        slidesOffsetBefore: 15,
+        slidesOffsetAfter: 15,
+        centeredSlides: false,
+        spaceBetween: 30,
+        loop: false,
+        pagination: {
+          el: '.swiper-pagination',
+          dynamicBullets: true
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+          hideOnClick: true
+        }
+      },
+      programsSwiperOption: {
+        centeredSlides: true,
+        spaceBetween: 30,
+        pagination: {
+          el: '.swiper-pagination',
+          dynamicBullets: true
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+          hideOnClick: true
+        }
+      }
+    }
+  },
+  head() {},
+  computed: {
+    regionalPartners() {
+      const vm = this
+      return vm.partners.filter(function(item) {
+        return item.category.includes('Regional')
+      })
+    },
+    plannerPartners() {
+      const vm = this
+      return vm.partners.filter(function(item) {
+        return item.category.includes('Planner')
+      })
+    },
+    developerPartners() {
+      const vm = this
+      return vm.partners.filter(function(item) {
+        return item.category.includes('Economic Developer')
+      })
+    },
+    workforcePartners() {
+      const vm = this
+      return vm.partners.filter(function(item) {
+        return item.category.includes('Workforce')
+      })
+    }
+  },
+  // beforeDestroy() {
+  //   gsap.registerPlugin(ScrollTrigger)
+  //   ScrollTrigger.disable()
+  // },
+  mounted() {
+    gsap.registerPlugin(ScrollTrigger)
+    // ScrollTrigger.create({
+    //   trigger: '#home__partners',
+    //   start: 'top ',
+    //   end: 'bottom',
+    //   scrub: true,
+    //   onEnter: this.animateValue(
+    //     'planner-total',
+    //     0,
+    //     this.plannerPartners.length,
+    //     this.plannerPartners.length * 100
+    //   )
+    // })
+
+    ScrollTrigger.matchMedia({
+      '(max-width: 1023px)'() {
+        gsap.to('#cropped-overlay', {
+          scrollTrigger: {
+            trigger: '#home__mission',
+            start: 'top bottom-=100px',
+            end: '+=200%',
+            scrub: true
+          },
+          x: '100px'
+        })
+        gsap.to('#mission', {
+          scrollTrigger: {
+            trigger: '#home__mission',
+            start: 'top bottom-=100px',
+            end: '+=200%',
+            scrub: true
+          },
+          x: '-100px'
+        })
+      },
+      '(min-width: 1024px) and (max-width: 1279px)'() {
+        gsap.to('#cropped-overlay', {
+          scrollTrigger: {
+            trigger: '#home__mission',
+            start: 'top bottom-=100px',
+            end: '+=200%',
+            scrub: true
+          },
+          x: '100px'
+        })
+        gsap.to('#mission', {
+          scrollTrigger: {
+            trigger: '#home__mission',
+            start: 'top bottom-=100px',
+            end: '+=200%',
+            scrub: true
+          },
+          x: '-100px'
+        })
+      },
+      '(min-width: 1280px)'() {
+        gsap.to('#cropped-overlay', {
+          scrollTrigger: {
+            trigger: '#home__mission',
+            start: 'top bottom-=100px',
+            end: '+=200%',
+            scrub: true
+          },
+          x: '-100px'
+        })
+        gsap.to('#mission', {
+          scrollTrigger: {
+            trigger: '#home__mission',
+            start: 'top bottom-=100px',
+            end: '+=200%',
+            scrub: true
+          },
+          x: '100px'
+        })
+      }
+    })
+  },
+  created() {
+    this.$axios
+      .$get('/items/resources?single=1&fields=*&filter[title][contains]=JOT')
+      .then((response) => {
+        this.jotForm = response.data
+      })
+      .catch(function(error) {
+        console.log(error)
+      })
+  },
+  methods: {
+    animateValue(id, start, end, duration) {
+      if (start === end) return
+      const range = end - start
+      let current = start
+      const increment = end > start ? 1 : -1
+      const stepTime = Math.abs(Math.floor(duration / range))
+      const obj = document.getElementById(id)
+      const timer = setInterval(function() {
+        current += increment
+        obj.innerHTML = current
+        if (current === end) {
+          clearInterval(timer)
+        }
+      }, stepTime)
+    },
+    changePanel(panel, key) {
+      const container = document.getElementById('home__intro')
+      if (panel !== 'home') {
+        container.classList.add('show')
+      } else {
+        container.classList.remove('show')
+      }
+      if (this.previousPanelKey < key) {
+        this.animateIn = 'uk-animation-slide-right-medium uk-animation-fast'
+        this.animateOut =
+          'uk-animation-slide-left-medium uk-animation-reverse uk-animation-fast'
+      } else {
+        this.animateIn = 'uk-animation-slide-left-medium uk-animation-fast'
+        this.animateOut =
+          'uk-animation-slide-right-medium uk-animation-reverse uk-animation-fast'
+      }
+      this.previousPanelKey = key
+      this.panel = panel
+    }
+  }
 }
 </script>
 
 <style lang="scss">
 @import './assets/scss/vars';
-
+@import './assets/scss/layout/swiper';
 @import './assets/scss/pages/home';
 </style>

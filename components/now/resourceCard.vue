@@ -16,11 +16,7 @@
       class="w-full uppercase text-xs green bold tracking-widest px-4 md:px-6 resource-card__link"
       target="_blank"
       >View Resource
-      <arrow-right-icon
-        size="2.2x"
-        stroke-width="2"
-        class="inline-block"
-      ></arrow-right-icon>
+      <link-icon class="ml-2"></link-icon>
     </a>
     <a
       v-if="item.type === 'External Link'"
@@ -29,19 +25,15 @@
       rel="noreferrer"
       class=" w-full uppercase text-xs green bold tracking-widest px-4 md:px-6 resource-card__link"
       >View Resource
-      <arrow-right-icon
-        size="2.2x"
-        stroke-width="2"
-        class="inline-block"
-      ></arrow-right-icon>
+      <link-icon class="ml-2"></link-icon>
     </a>
   </div>
 </template>
 <script>
-import { ArrowRightIcon } from 'vue-feather-icons'
+import linkIcon from '~/components/universal/linkIcon'
 export default {
   components: {
-    ArrowRightIcon
+    linkIcon
   },
   props: {
     item: {

@@ -7,7 +7,7 @@
       class="w-full flex items-center justify-center flex-col py-20 md:py-32 article__header"
       :style="'background-image: url( ' + coverImage + ')'"
     >
-      <h1 class="uppercase green bold px-4 md:px-12 article__title">
+      <h1 class="uppercase green thin-font px-4 md:px-12 article__title">
         {{ article.title }}
       </h1>
       <h5 class="w-full uppercase px-4 md:px-12 mt-2 white tracking-wider">
@@ -29,11 +29,7 @@
           ><span class="mr-1 uppercase grey tracking-wider">Link:</span
           >{{ article.link }}</span
         >
-        <arrow-right-icon
-          size="2.2x"
-          stroke-width="2"
-          class="inline-block"
-        ></arrow-right-icon
+        <link-icon></link-icon
       ></a>
     </div>
     <div
@@ -97,15 +93,11 @@
 </template>
 
 <script>
-import {
-  ArrowRightIcon,
-  FacebookIcon,
-  TwitterIcon,
-  LinkedinIcon
-} from 'vue-feather-icons'
+import { FacebookIcon, TwitterIcon, LinkedinIcon } from 'vue-feather-icons'
+import linkIcon from '~/components/universal/linkIcon'
 export default {
   components: {
-    ArrowRightIcon,
+    linkIcon,
     FacebookIcon,
     TwitterIcon,
     LinkedinIcon

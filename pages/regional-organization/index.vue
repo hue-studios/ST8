@@ -1,54 +1,24 @@
 <template>
   <div id="organization">
     <div
-      id="organization-intro"
-      class="w-full py-20 flex flex-col justify-center items-center relative"
-    >
-      <counties></counties>
-      <logo-name></logo-name>
-      <a
-        id="mission-btn"
-        href="#mission-section"
-        class="uppercase tracking-widest navy absolute font-normal"
-        @click.prevent="smoothScroll"
-        >Mission</a
-      >
-      <a
-        id="organization-btn"
-        href="#organization-info"
-        class="uppercase tracking-widest navy absolute font-normal"
-        @click.prevent="smoothScroll"
-        >Who We Are</a
-      >
-      <a
-        id="staff-btn"
-        href="#staff-section"
-        class="uppercase tracking-widest navy absolute font-normal"
-        @click.prevent="smoothScroll"
-        >Team</a
-      >
-      <a
-        id="board-btn"
-        href="#board-section"
-        class="uppercase tracking-widest navy absolute font-normal"
-        @click.prevent="smoothScroll"
-        >Board</a
-      >
-    </div>
-    <div
       id="mission-section"
-      class="w-full flex items-start justify-end flex-col relative"
+      class="w-full flex items-center justify-center flex-col relative"
     >
-      <div
-        id="mission"
-        class="flex flex-row justify-center items-start mb-32 statement"
-      >
-        <h2 class="uppercase white tracking-wider thin-font">
-          Mission Statement
-        </h2>
-        <p class="white ml-2">{{ organization.mission_statement }}</p>
+      <div id="mission-section__counties" class="absolute left-0">
+        <h1
+          v-for="(county, index) in counties"
+          :key="index"
+          class="uppercase grey block opacity-25 thin-font"
+        >
+          {{ county.title }}
+        </h1>
       </div>
-      <div id="cropped-overlay" class="absolute"></div>
+      <div class="flex flex-col justify-center items-start statement">
+        <h2 class="uppercase green tracking-widest thin-font">
+          Mission
+        </h2>
+        <p class="navy">{{ organization.mission_statement }}</p>
+      </div>
     </div>
     <div
       id="organization-info"
@@ -91,13 +61,15 @@
       id="staff-section"
       class="w-full flex flex-col justify-center items-center py-20"
     >
-      <h2 class="uppercase white w-full text-center page-title tracking-widest">
+      <h2
+        class="uppercase navy thin-font w-full text-center page-title tracking-widest"
+      >
         Team
       </h2>
       <div
         v-for="(person, index) in staff"
         :key="index"
-        class="flex flex-row justify-between items-center w-5/6 people-card"
+        class="flex flex-row justify-between items-center w-full md:w-5/6 people-card"
       >
         <div
           :style="
@@ -110,7 +82,7 @@
         ></div>
         <div class="people-card__info">
           <div
-            class="flex flex-row justify-between items-center people-card__name"
+            class="flex flex-row justify-between items-center tracking-widest bold people-card__name"
           >
             <h3 class="uppercase">{{ person.name }}</h3>
             <div class="flex flex-col justify-end items-end people-card__links">
@@ -128,7 +100,7 @@
               >
             </div>
           </div>
-          <h5 v-if="person.title" class="uppercase people-card__title">
+          <h5 v-if="person.title" class="uppercase bold people-card__title">
             {{ person.title }}
           </h5>
         </div>
@@ -140,11 +112,11 @@
       class="w-full flex justify-center items-center flex-row flex-wrap py-20"
     >
       <h2
-        class="uppercase w-full text-center page-title tracking-widest navy mb-0"
+        class="uppercase w-full text-center page-title tracking-widest thin-font white mb-0"
       >
         Board of Directors
       </h2>
-      <p class="w-full text-center navy mb-6">
+      <p class="w-full text-center white mb-6">
         Our experienced board is comprised of 23 members, including many
         long-standing contributors.
       </p>
@@ -243,24 +215,18 @@
 </template>
 
 <script>
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import counties from '~/components/layout/countiesOutline'
-import logoName from '~/components/layout/logoName'
-
 export default {
-  components: {
-    counties,
-    logoName
-  },
+  components: {},
   async asyncData({ $axios }) {
-    const [organizationReq, peopleReq] = await Promise.all([
+    const [organizationReq, peopleReq, countiesReq] = await Promise.all([
       $axios.$get('/items/organization?single=1&fields=*.*.*'),
-      $axios.$get('/items/people?fields=*.*.*')
+      $axios.$get('/items/people?fields=*.*.*'),
+      $axios.$get('/items/counties?fields=*.*')
     ])
     return {
       organization: organizationReq.data,
-      people: peopleReq.data
+      people: peopleReq.data,
+      counties: countiesReq.data
     }
   },
   data() {
@@ -278,27 +244,7 @@ export default {
     }
   },
   created() {},
-  mounted() {
-    gsap.registerPlugin(ScrollTrigger)
-    gsap.to('#cropped-overlay', {
-      scrollTrigger: {
-        trigger: '#mission-section', // this is the element that will trigger the animation
-        start: 'top bottom-=100px', // this string defines the trigger and scroller start
-        end: '+=100%', // this string defines the trigger and scroller end
-        scrub: true // this tells GSAP to link animation progress to scroll progress
-      },
-      x: '100px'
-    })
-    gsap.to('#mission', {
-      scrollTrigger: {
-        trigger: '#mission-section', // this is the element that will trigger the animation
-        start: 'top bottom-=100px', // this string defines the trigger and scroller start
-        end: '+=100%', // this string defines the trigger and scroller end
-        scrub: true // this tells GSAP to link animation progress to scroll progress
-      },
-      x: '-100px'
-    })
-  },
+  mounted() {},
   methods: {
     smoothScroll(e) {
       console.log(e.target.getAttribute('href'))

@@ -58,6 +58,14 @@
           ><h3 class="uppercase">Organization</h3></nuxt-link
         >
       </div>
+      <div
+        id="partnershipsNavContainer"
+        class="relative page-nav__drop-container"
+      >
+        <nuxt-link to="/partnerships"
+          ><h3 class="uppercase">Partnerships</h3></nuxt-link
+        >
+      </div>
     </div>
     <new-york-state />
   </div>

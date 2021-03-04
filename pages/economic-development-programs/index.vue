@@ -68,7 +68,7 @@ export default {
       $axios.$get(
         '/items/programs?fields=id,title,what_is_it,url,collaboration,what_it_accomplishes,website,url,activity.activity_id.*,counties.county_id.title,images.file_id.private_hash,initiatives.initiative_id.title,initiatives.initiative_id.url,partners.partner_id.title,resources.resources_id.*'
       ),
-      $axios.$get('/items/initiatives?fields=*.*.*')
+      $axios.$get('/items/initiatives?fields=*.*.*&filter[status]=published')
     ])
     return {
       programs: programsReq.data,

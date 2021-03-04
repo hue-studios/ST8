@@ -16,7 +16,13 @@ a:link,
 a:visited {
   transition: all 0.25s $curve;
 }
-
+a.link-font,
+.link-font {
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-family: $bold-font;
+}
 .green {
   color: $green;
 }

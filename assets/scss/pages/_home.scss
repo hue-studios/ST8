@@ -3,86 +3,418 @@
   }
   @media (min-width: $breakpoint-medium) {
   }
-  #home-intro {
-    height: 600px;
-    .counties-outline {
-      width: 90% !important;
-      max-width: 900px;
-      svg {
-        height: auto;
-        display: inline-block;
-      }
+  #home__intro {
+    overflow: hidden;
+    width: 100%;
+    min-height: 600px;
+    height: calc(100vh - 115px);
+    @media (min-width: $breakpoint-medium) {
     }
-    .logo-name {
+    @media (min-width: $breakpoint-large) {
+      height: calc(100vh - 70px);
+    }
+    #home-intro__logo {
       position: absolute;
-      top: calc(50% - 20px);
-      left: calc(50% - 300px);
-      width: 600px;
+      top: calc(50% - 70px);
+      width: 320px;
+      left: calc(50% - 160px);
       text-align: center;
+      transition: all 0.4s $curve;
+      @media (min-width: $breakpoint-small) {
+        width: 400px;
+        left: calc(50% - 200px);
+      }
+      @media (min-width: $breakpoint-medium) {
+      }
+      @media (min-width: $breakpoint-large) {
+        top: calc(50% - 90px);
+        left: calc(50% - 300px);
+        width: 600px;
+      }
       svg {
         width: 100%;
         height: auto;
       }
     }
-
     .home-intro__navigation {
+      width: 96%;
+      left: 2%;
+      top: calc(50% + 0px);
+      flex-direction: row;
+      z-index: 10;
+      transition: all 0.4s $curve;
       @media (min-width: $breakpoint-small) {
+        flex-direction: row;
+        top: calc(50% + 50px);
       }
       @media (min-width: $breakpoint-medium) {
         width: 800px;
         left: calc(50% - 400px);
         top: calc(50% + 100px);
       }
-      a {
-        background: rgba($navy, 1.25);
-        padding: 15px 30px 15px;
+      a.home-intro__navigation-btn {
+        margin-bottom: 15px;
+        padding: 15px 20px;
+        color: $navy;
+        border: thin solid $green;
+        font-size: 14px;
+        // width: 200px;
+        text-align: center;
+        transition: all 0.5s $curve;
+        opacity: 1;
+        background: rgba($white, 1);
+        box-shadow: none;
+        @media (min-width: $breakpoint-small) {
+          font-size: 15px;
+          margin-bottom: 0px;
+          width: 160px;
+        }
+        @media (min-width: $breakpoint-large) {
+          font-size: 16px;
+        }
+      }
+      a.home-intro__navigation-btn.current {
+        background: rgba($black, 0.5);
         color: $green;
-        font-weight: 400;
-        border-radius: 3px;
       }
     }
-  }
-  #home-motto {
-    #motto-1 {
-      margin-left: 5%;
-      margin-bottom: 140px;
-      h1 {
+    .home-intro__navigation-description {
+      width: 90%;
+      margin-top: -20px;
+      transition: all 0.3s $curve;
+      max-width: 800px;
+      h5 {
         font-size: 32px;
-        @media (min-width: $breakpoint-medium) {
-          font-size: 82px;
-          line-height: 80px;
-        }
-      }
-      h2 {
-        font-size: 18px;
-        @media (min-width: $breakpoint-medium) {
-          font-size: 32px;
-        }
-      }
-    }
-    #motto-2 {
-      margin-bottom: 140px;
-      h3 {
-        font-size: 40px;
-        line-height: 40px;
-        height: 40px;
+        line-height: 30px;
+        opacity: 0.5;
       }
       p {
-        font-size: 20px;
-        line-height: 20px;
-        width: 400px;
-        height: 40px;
+        font-size: 14px;
       }
     }
-    #motto-3 {
-      font-size: 28px;
-      line-height: 30px;
-      letter-spacing: 0.05em;
+    .uk-animation-fast {
+      animation-duration: 0.3s;
+      animation-timing-function: $curve;
     }
   }
-  #home-graphic {
-    svg {
-      max-width: 900px;
+  #home__intro.show {
+    #home-intro__logo {
+      transform: translate3d(0, -100px, 0);
+      @media (min-width: $breakpoint-small) {
+        transform: translate3d(0, -200px, 0);
+      }
+      @media (min-width: $breakpoint-medium) {
+      }
+      @media (min-width: $breakpoint-large) {
+        font-size: 16px;
+      }
     }
+    #home-intro__navigation {
+      transform: translate3d(0, 120px, 0);
+      a.home-intro__navigation-btn {
+        padding: 10px 20px;
+        @media (min-width: $breakpoint-medium) {
+          padding: 15px 20px;
+        }
+        @media (min-width: $breakpoint-large) {
+        }
+      }
+    }
+  }
+  #home__mission {
+    background-image: url('/images/organization/field-rainbow.jpg');
+    height: 600px;
+    overflow: hidden;
+    border: none;
+    background-color: rgba($black, 0.25);
+    background-blend-mode: darken;
+    background-position: center bottom;
+    background-size: cover;
+    background-repeat: no-repeat;
+    box-shadow: inset 0px -2px 50px rgba($black, 1);
+    @media (min-width: $breakpoint-small) {
+    }
+    @media (min-width: $breakpoint-large) {
+    }
+    #mission {
+      margin-left: 120px;
+      @media (min-width: $breakpoint-large) {
+        margin-left: 110px;
+      }
+      @media (min-width: $breakpoint-xlarge) {
+        margin-left: 0px;
+      }
+      h2 {
+        font-size: 32px;
+        line-height: 30px;
+
+        @media (min-width: $breakpoint-small) {
+        }
+        @media (min-width: $breakpoint-medium) {
+        }
+        @media (min-width: $breakpoint-large) {
+          width: 508px;
+          font-size: 42px;
+          line-height: 40px;
+        }
+      }
+      p {
+        margin-top: 2px;
+        line-height: 18px;
+        font-size: 16px;
+        @media (min-width: $breakpoint-medium) {
+          width: 600px;
+        }
+        @media (min-width: $breakpoint-large) {
+          width: 470px;
+        }
+      }
+    }
+    a {
+      width: auto;
+      position: absolute;
+      bottom: 25px;
+      left: calc(50% - 175px);
+      width: 350px;
+      text-align: center;
+      @media (min-width: $breakpoint-small) {
+        width: 500px;
+        left: calc(50% - 250px);
+        bottom: 30px;
+      }
+      @media (min-width: $breakpoint-large) {
+        bottom: 50px;
+      }
+      @media (min-width: $breakpoint-xlarge) {
+        bottom: 70px;
+      }
+    }
+    #cropped-overlay {
+      right: 0px;
+      top: 0px;
+      width: 170%;
+      height: 700px;
+      overflow: hidden;
+      border: none;
+      // -webkit-clip-path: polygon(0 0, 0 0px, 800px 600px, 600px 0);
+      // clip-path: polygon(0 0, 100% 0, 100% 100%, 70% 100%);
+      background-image: url('https://admin.steny.org/southern-tier-8/assets/ojt65p84t5w048cc?key=medium');
+      background-position: left center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      filter: drop-shadow(0px 2px 55px rgba($black, 1));
+      @media (min-width: 460px) {
+        width: 140%;
+      }
+      @media (min-width: 560px) {
+        width: 120%;
+      }
+      @media (min-width: $breakpoint-small) {
+        width: 100%;
+      }
+      @media (min-width: $breakpoint-medium) {
+        width: 80%;
+        background-image: url('https://admin.steny.org/southern-tier-8/assets/ojt65p84t5w048cc?key=large');
+      }
+      @media (min-width: $breakpoint-large) {
+        right: 0px;
+        background-position: left center;
+        background-repeat: no-repeat;
+        width: 60%;
+      }
+      @media (min-width: $breakpoint-xlarge) {
+        right: -100px;
+        background-position: left center;
+        background-repeat: no-repeat;
+        width: 60%;
+      }
+    }
+  }
+  #home__news {
+    .swiper-slide {
+      width: 300px;
+    }
+  }
+  #home__funding {
+    background: $navy;
+    box-shadow: inset 0px -2px 30px rgba($black, 0.9);
+    a {
+      border: thin solid $green;
+      color: $green;
+      letter-spacing: 0.1em;
+    }
+  }
+  #home__partners {
+    h3 {
+      font-size: 14px;
+      letter-spacing: 0.1em;
+      @media (min-width: $breakpoint-medium) {
+        margin-right: 180px;
+      }
+      @media (min-width: $breakpoint-large) {
+      }
+      .number {
+        font-size: 120px;
+        line-height: 100px;
+        @media (min-width: $breakpoint-small) {
+          font-size: 120px;
+          line-height: 100px;
+        }
+        @media (min-width: $breakpoint-medium) {
+          font-size: 156px;
+          line-height: 140px;
+          width: 180px;
+          text-align: right;
+        }
+        @media (min-width: $breakpoint-large) {
+          font-size: 188px;
+          line-height: 170px;
+        }
+        span {
+          display: none;
+        }
+      }
+    }
+  }
+  #home__programs {
+    background: $navy;
+    box-shadow: inset 0px -2px 30px rgba($black, 0.9);
+  }
+  #home__data {
+    #industry-chart {
+      svg {
+        width: 100%;
+        height: auto;
+        @media (min-width: $breakpoint-small) {
+        }
+        @media (min-width: $breakpoint-medium) {
+        }
+        @media (min-width: $breakpoint-large) {
+        }
+      }
+    }
+  }
+  .home__section {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    @media (min-width: $breakpoint-small) {
+      padding-top: 60px;
+      padding-bottom: 60px;
+    }
+    @media (min-width: $breakpoint-medium) {
+      padding-top: 80px;
+      padding-bottom: 80px;
+    }
+    @media (min-width: $breakpoint-large) {
+      padding-top: 100px;
+      padding-bottom: 100px;
+    }
+    .home__title {
+      font-size: 46px;
+      line-height: 40px;
+      letter-spacing: 0.1em;
+      @media (min-width: $breakpoint-small) {
+        font-size: 72px;
+        line-height: 58px;
+      }
+      @media (min-width: $breakpoint-medium) {
+        font-size: 100px;
+        line-height: 80px;
+      }
+      @media (min-width: $breakpoint-large) {
+        font-size: 128px;
+        line-height: 110px;
+      }
+      @media (min-width: $breakpoint-xlarge) {
+        font-size: 156px;
+        line-height: 140px;
+      }
+
+      .small-title {
+        margin-left: 4px;
+        margin-bottom: 0px;
+        font-size: 12px;
+        line-height: 10px;
+        @media (min-width: $breakpoint-small) {
+          margin-left: 8px;
+          margin-bottom: -5px;
+        }
+        @media (min-width: $breakpoint-medium) {
+        }
+        @media (min-width: $breakpoint-large) {
+          margin-left: 13px;
+          margin-bottom: -14px;
+          font-size: 14px;
+          line-height: 12px;
+        }
+      }
+      .date {
+        font-size: 16px;
+        line-height: 14px;
+        top: calc(50% - 0px);
+        display: none;
+      }
+    }
+    .home__subtitle {
+      p {
+        letter-spacing: 0.1em;
+        font-size: 14px;
+        max-width: 1024px;
+        line-height: 1.4em;
+        @media (min-width: $breakpoint-small) {
+        }
+        @media (min-width: $breakpoint-medium) {
+        }
+        @media (min-width: $breakpoint-large) {
+        }
+      }
+    }
+  }
+  .swiper-button-next,
+  .swiper-button-prev {
+    width: 32px;
+    height: 32px;
+    color: $black;
+
+    border-radius: 50%;
+    transition: all 0.3s $curve;
+    outline: none;
+    top: calc(100% - 8px);
+    @media (min-width: $breakpoint-small) {
+      width: 35px;
+      height: 35px;
+    }
+    @media (min-width: $breakpoint-medium) {
+      width: 40px;
+      height: 40px;
+    }
+    @media (min-width: $breakpoint-large) {
+      top: 50%;
+      // background: rgba(245, 245, 245, 1);
+      background: $white;
+    }
+  }
+  .swiper-button-prev,
+  .swiper-container-rtl .swiper-button-next {
+    left: 6px;
+    right: auto;
+    @media (min-width: $breakpoint-medium) {
+      left: 6px;
+    }
+  }
+  .swiper-button-next,
+  .swiper-container-rtl .swiper-button-prev {
+    left: auto;
+    right: 6px;
+    @media (min-width: $breakpoint-medium) {
+      right: 6px;
+    }
+  }
+  .swiper-button-prev:after,
+  .swiper-button-next:after {
+    font-size: 12px !important;
+  }
+  .swiper-button-disabled {
+    opacity: 0;
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <div
     :id="'program-card-' + program.id"
-    class="w-full relative flex items-center justify-center flex-row mb-8 program-card"
+    class="w-full relative flex items-center justify-center flex-row mb-8 shadow-lg program-card"
     :data-initiatives="programInitiatives"
   >
     <div class="w-full h-full absolute program-card__background"></div>
@@ -59,19 +59,15 @@
       :to="'/economic-development-programs/' + program.url"
       class="flex items-center justify-center progam-card__link"
     >
-      <arrow-right-icon
-        size="2.2x"
-        stroke-width="1.5"
-        class="inline-block"
-      ></arrow-right-icon>
+      <link-icon></link-icon>
     </nuxt-link>
   </div>
 </template>
 <script>
-import { ArrowRightIcon } from 'vue-feather-icons'
+import linkIcon from '~/components/universal/linkIcon'
 export default {
   components: {
-    ArrowRightIcon
+    linkIcon
   },
   props: {
     program: {

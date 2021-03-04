@@ -36,7 +36,7 @@
       :class="{ dark: index % 2 == 0 }"
       class=" w-full flex items-start justify-start flex-col relative py-12 md:py-0 services-section"
     >
-      <h2 class="uppercase green md:sticky">
+      <h2 class="uppercase green thin-font md:sticky">
         {{ service.title }}
       </h2>
 
@@ -148,9 +148,51 @@
             <div
               class="flex items-center justify-center services-section__program-link"
             >
-              <arrow-right-icon size="1x" stroke-width="1.5"></arrow-right-icon>
+              <link-icon></link-icon>
             </div>
           </nuxt-link>
+        </div>
+      </div>
+      <div
+        v-if="service.resources.length > 0"
+        class="md:w-1/2 services-section__content"
+      >
+        <h3 class="w-full uppercase text-xs green text-left ">
+          Resources
+        </h3>
+        <div class="w-full flex flex-col items-center justify-start mt-4">
+          <div
+            v-for="(resource, index) in service.resources"
+            :key="index"
+            class="w-full flex items-center justify-center flex-col mb-10 services-section__resource-card"
+          >
+            <h5
+              class="uppercase tracking-widest w-full mb-4 pb-4 services-section__resource-card-title"
+            >
+              {{ resource.resources_id.title }}
+            </h5>
+
+            <a
+              v-if="
+                resource.resources_id.type === 'Internal File / PDF' &&
+                  resource.resources_id.file
+              "
+              :href="imageLocation + resource.resources_id.file.private_hash"
+              class="w-full uppercase text-xs green bold tracking-widest text-right services-section__resource-card-link"
+              target="_blank"
+              >View Resource
+              <link-icon class="ml-2"></link-icon>
+            </a>
+            <a
+              v-if="resource.resources_id.type === 'External Link'"
+              :href="resource.resources_id.link"
+              target="_blank"
+              rel="noreferrer"
+              class=" w-full uppercase text-xs green bold tracking-widest text-right services-section__resource-card-link"
+              >View Resource
+              <link-icon class="ml-2"></link-icon>
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -158,10 +200,10 @@
 </template>
 
 <script>
-import { ArrowRightIcon } from 'vue-feather-icons'
+import linkIcon from '~/components/universal/linkIcon'
 export default {
   components: {
-    ArrowRightIcon
+    linkIcon
   },
   async asyncData({ params, $axios }) {
     const servicesReq = await $axios.get(

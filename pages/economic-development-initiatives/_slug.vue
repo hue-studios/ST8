@@ -191,6 +191,9 @@ export default {
     }
   },
   head() {},
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.lineFunction)
+  },
   mounted() {
     // mobile line animation
     const straightLine = document.getElementById('straight-line')
@@ -202,14 +205,20 @@ export default {
     const length = longLine.getTotalLength()
     longLine.style.strokeDasharray = length
     longLine.style.strokeDashoffset = length
-    window.addEventListener('scroll', lineFunction)
-    function lineFunction() {
+    window.addEventListener('scroll', this.lineFunction)
+  },
+  methods: {
+    lineFunction() {
+      const straightLine = document.getElementById('straight-line')
+      const straightLength = straightLine.getTotalLength()
+      const longLine = document.getElementById('initiative-line')
+      const length = longLine.getTotalLength()
       requestAnimationFrame(function() {
         const svgContainer = document.getElementById('initiative__story')
         const svgContainerRect = svgContainer.getBoundingClientRect()
         const svgDivHeight = svgContainerRect.height
         const windowScroll = window.pageYOffset
-        const scrollPercent = (windowScroll / svgDivHeight) * 0.9
+        const scrollPercent = (windowScroll / svgDivHeight) * 0.72
         if (scrollPercent < 1) {
           const draw = length * scrollPercent
           longLine.style.strokeDashoffset = length - draw

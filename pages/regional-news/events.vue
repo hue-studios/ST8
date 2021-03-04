@@ -166,5 +166,143 @@ export default {
 
 <style lang="scss">
 @import './assets/scss/vars';
-@import './assets/scss/pages/events';
+#events {
+  #events__intro {
+    height: 300px;
+
+    @media (min-width: $breakpoint-small) {
+    }
+    @media (min-width: $breakpoint-medium) {
+      margin-top: 0px;
+    }
+    h1 {
+      font-size: 42px;
+      line-height: 1.2em;
+      position: relative;
+      margin-top: 70px;
+      @media (min-width: $breakpoint-small) {
+        font-size: 62px;
+      }
+      @media (min-width: $breakpoint-medium) {
+        margin-top: 0px;
+      }
+    }
+    h1:after {
+      content: '';
+      position: absolute;
+      bottom: 0px;
+      left: 0px;
+      width: 100%;
+      height: 1px;
+      background: $navy;
+      @media (min-width: $breakpoint-small) {
+        width: 120%;
+      }
+      @media (min-width: $breakpoint-medium) {
+      }
+    }
+    p {
+      font-size: 14px;
+    }
+  }
+  .vc-container {
+    border-radius: 0px;
+    border: none !important;
+    border-color: $white !important;
+    font-family: $body-font;
+    // height: 500px;
+    width: 100%;
+    @media (min-width: $breakpoint-medium) {
+      // height: 600px;
+    }
+    .vc-pane-container {
+      display: flex;
+      justify-content: center;
+      @media (min-width: $breakpoint-medium) {
+        height: 600px;
+      }
+      .vc-pane-layout {
+        width: 100%;
+        max-width: 1200px;
+        @media (min-width: $breakpoint-medium) {
+          height: 600px !important;
+        }
+        .vc-weeks {
+          height: 400px !important;
+          @media (min-width: $breakpoint-medium) {
+            height: 500px !important;
+          }
+        }
+      }
+      .vc-header {
+        margin-bottom: 30px;
+      }
+      .vc-grid-container {
+        width: 100%;
+      }
+    }
+    .vc-arrows-container {
+      // padding: 0 30px 0;
+      max-width: 500px;
+    }
+    .vc-day {
+      height: 60px !important;
+    }
+    .vc-title {
+      text-transform: uppercase;
+      letter-spacing: 0.35em;
+      font-weight: 400;
+    }
+    .vc-popover {
+      .vc-bar {
+        background-color: red;
+      }
+    }
+    .vc-dots {
+      .vc-dot:nth-of-type(1) {
+        opacity: 1;
+      }
+      .vc-dot:nth-of-type(2) {
+        opacity: 0.95;
+      }
+      .vc-dot:nth-of-type(3) {
+        opacity: 0.9;
+      }
+      .vc-dot:nth-of-type(4) {
+        opacity: 0.85;
+      }
+      .vc-dot:nth-of-type(5) {
+        opacity: 0.8;
+      }
+      .vc-dot:nth-of-type(6) {
+        opacity: 0.75;
+      }
+      .vc-dot:nth-of-type(7) {
+        opacity: 0.7;
+      }
+      .vc-dot:nth-of-type(8) {
+        opacity: 0.65;
+      }
+      .vc-dot:nth-of-type(9) {
+        opacity: 0.6;
+      }
+      .vc-dot:nth-of-type(10) {
+        opacity: 0.55;
+      }
+    }
+  }
+  .selected-day {
+    max-width: 600px;
+    ul {
+      list-style: disc;
+
+      .selected-day-event {
+        list-style-type: disc;
+        h5 {
+          font-size: 13px;
+        }
+      }
+    }
+  }
+}
 </style>

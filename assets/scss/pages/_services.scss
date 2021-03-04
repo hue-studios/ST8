@@ -277,6 +277,18 @@
           // font-weight: 100;
         }
       }
+      .services-section__resource-card {
+        .services-section__resource-card-title {
+          color: $white;
+          letter-spacing: 0.1em;
+          font-size: 13px;
+          line-height: 13px;
+          max-height: 40px;
+          border-bottom: thin solid $white;
+        }
+        .services-section__resource-card-link {
+        }
+      }
     }
     .services-section__program {
       // border: thin solid rgba($green, 1);
@@ -338,24 +350,6 @@
         @media (min-width: $breakpoint-large) {
           width: 50px;
           display: flex;
-        }
-        svg {
-          height: 22px;
-          width: 22px;
-          background: $green;
-          color: $white;
-          border-radius: 50%;
-          padding: 5px;
-          display: inline-block;
-
-          @media (min-width: $breakpoint-small) {
-          }
-          @media (min-width: $breakpoint-medium) {
-          }
-          @media (min-width: $breakpoint-large) {
-            height: 24px;
-            width: 24px;
-          }
         }
       }
     }

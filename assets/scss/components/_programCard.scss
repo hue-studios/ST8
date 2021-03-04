@@ -1,13 +1,14 @@
 .program-card {
   height: auto !important;
-  box-shadow: 0px 2px 10px rgba($black, 0.25);
-  border-radius: 3px;
+  // box-shadow: 0px 2px 10px rgba($black, 0.25);
+  // border-radius: 3px;
+  border: thin solid rgba($grey, 0.25);
   max-width: 840px;
   .program-card__background {
     left: 0px;
     top: 0px;
-    z-index: 0;
-    background-color: rgba($white, 0.5);
+    z-index: -1;
+    background-color: rgba($white, 1);
   }
   .progam-card__image {
     width: 100px;
@@ -35,7 +36,6 @@
       margin-left: 20px;
     }
     @media (min-width: $breakpoint-medium) {
-      width: calc(100% - 290px);
     }
     .progam-card__title {
       font-size: 12px;
@@ -89,28 +89,11 @@
     }
   }
   .progam-card__link {
-    z-index: 5;
-    width: 35px;
-    height: 35px;
-    font-size: 9px;
-    background: $green;
-    border-radius: 50%;
-    color: $white;
-    padding: 4px;
-    margin-left: 15px;
-    margin-right: 5px;
+    width: 40px;
     @media (min-width: $breakpoint-small) {
-      width: 45px;
-      height: 45px;
-      font-size: 11px;
+      width: 50px;
     }
     @media (min-width: $breakpoint-medium) {
-      margin-left: 30px;
-      margin-right: 10px;
-      font-size: 14px;
-    }
-    .feather-arrow-right {
-      color: $white;
     }
   }
 }
