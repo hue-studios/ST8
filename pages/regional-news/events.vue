@@ -5,70 +5,149 @@
       class="flex flex-col flex-wrap justify-center items-center relative w-full"
     >
       <h1
-        class="navy uppercase tracking-widest mb-2 w-5/6 sm:w-3/5 md:w-1/2 thin-font"
+        class="navy uppercase tracking-widest mb-2 w-5/6 sm:w-3/5 md:w-1/2 text-center thin-font"
       >
         Events
       </h1>
-      <p class="navy w-5/6 sm:w-3/5 md:w-1/2">
-        This is our organizational calendar.
+      <p class="navy w-5/6 sm:w-3/5 md:w-1/2 text-center">
+        View our featured events and organizational calendar.
       </p>
     </div>
-    <v-calendar
-      class="flex flex-col items-center justify-center"
-      :attributes="attrs"
-      is-expanded
-      @dayclick="dayClicked"
-    />
-    <transition
-      enter-active-class="uk-animation-slide-top uk-animation-fast"
-      leave-active-class="uk-animation-slide-top-small uk-animation-reverse uk-animation-fast"
-      mode="out-in"
+    <div
+      class="w-full flex items-start justify-center flex-col md:flex-row h-full"
     >
-      <div v-if="selectedDay" class="mb-20 p-8 selected-day">
-        <h5 class="green text-center uppercase tracking-widest">
-          {{ selectedDay.date.toDateString() }}
-        </h5>
+      <div class="w-full md:w-2/5 flex item-center justify-center flex-col">
+        <div id="events__featured" class="">
+          <h3 id="title" class="uppercase navy w-full text-center mt-3">
+            Featured Events
+          </h3>
+
+          <swiper
+            :options="swiperOptions"
+            class="swiper w-full flex flex-row pt-4 pb-4"
+          >
+            <swiper-slide
+              v-for="(item, index) in featuredEvents"
+              :key="index"
+              class=""
+            >
+              <div class="shadow-lg mx-4 events__event">
+                <div class="w-full flex items-center justify-center flex-row">
+                  <div
+                    class="bg-cover bg-no-repeat bg-center events__event-image"
+                    :style="
+                      'background-image: url(' +
+                      imageLocation +
+                      item.image.private_hash +
+                      '?key=small)'
+                    "
+                  ></div>
+                  <div class="events__event-title">
+                    <h3 class="uppercase tracking-wider">{{ item.title }}</h3>
+                    <h4 class="uppercase tracking-wider bold">
+                      {{ $moment(item.date).format('MM / DD / YYYY') }}
+                    </h4>
+                  </div>
+                </div>
+                <p
+                  class="w-full events__event-description"
+                  v-text="item.description"
+                ></p>
+              </div>
+            </swiper-slide>
+
+            <div slot="button-next" class="swiper-button-next"></div>
+            <div slot="button-prev" class="swiper-button-prev"></div>
+          </swiper>
+        </div>
         <transition
-          enter-active-class="uk-animation-slide-top uk-animation-fast"
-          leave-active-class="uk-animation-slide-top-small uk-animation-reverse uk-animation-fast"
+          enter-active-class="uk-animation-slide-left uk-animation-fast"
+          leave-active-class="uk-animation-slide-left-small uk-animation-reverse uk-animation-fast"
           mode="out-in"
         >
-          <ul v-if="selectedDay.attributes.length > 0">
-            <li
-              v-for="attr in selectedDay.attributes"
-              :key="attr.key"
-              class="flex justify-start items-start selected-day-event"
+          <div v-if="selectedDay" class="p-8 selected-day">
+            <h5 class="green mb-3 uppercase tracking-widest">
+              {{ selectedDay.date.toDateString() }}
+            </h5>
+            <transition
+              enter-active-class="uk-animation-slide-left uk-animation-fast"
+              leave-active-class="uk-animation-slide-left-small uk-animation-reverse uk-animation-fast"
+              mode="out-in"
             >
-              <div class="selected-day-event-header">
-                <h5 class="uppercase bold">
-                  {{ attr.customData.summary }} @
-                  {{ formatTime(attr.customData.start.dateTime) }}
-                  <span v-if="attr.customData.end.dateTime"
-                    >- {{ formatTime(attr.customData.end.dateTime) }}</span
-                  >
-                </h5>
-                <div v-if="attr.customData.location">
-                  <p>{{ attr.customData.location }}</p>
-                </div>
-              </div>
-            </li>
-          </ul>
-          <p v-else class="navy text-center">
-            There are no events scheduled for this day.
-          </p>
+              <ul v-if="selectedDay.attributes.length > 0">
+                <li
+                  v-for="attr in selectedDay.attributes"
+                  :key="attr.key"
+                  class="flex justify-start items-start selected-day-event"
+                >
+                  <div class="selected-day-event-header">
+                    <h5 class="uppercase bold">
+                      {{ attr.customData.summary }} @
+                      {{ formatTime(attr.customData.start.dateTime) }}
+                      <span v-if="attr.customData.end.dateTime"
+                        >- {{ formatTime(attr.customData.end.dateTime) }}</span
+                      >
+                    </h5>
+                    <div v-if="attr.customData.location">
+                      <p>{{ attr.customData.location }}</p>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+              <p v-else class="navy uppercase text-xs">
+                There are no events scheduled for this day.
+              </p>
+            </transition>
+          </div>
+          <div v-else class="p-8 selected-day">
+            <p class="text-center navy uppercase text-xs">
+              Select a day on the calendar to view scheduled events for that
+              day.
+            </p>
+          </div>
         </transition>
       </div>
-    </transition>
+      <div class="w-full md:w-3/5 relative">
+        <transition
+          enter-active-class="uk-animation-fade"
+          leave-active-class="uk-animation-fade uk-animation-reverse"
+        >
+          <div
+            v-if="calendarLoading"
+            id="calendar-loader"
+            class="flex items-center justify-center"
+          >
+            <img src="/images/loader.gif" alt="Loading GIF" />
+          </div>
+        </transition>
+        <v-calendar
+          class="flex flex-col items-center justify-center"
+          :attributes="attrs"
+          is-expanded
+          @dayclick="dayClicked"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import moment from 'moment'
 import axios from 'axios'
+import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 export default {
-  components: {},
+  components: { Swiper, SwiperSlide },
+  async asyncData({ params, $axios }) {
+    const eventsReq = await $axios.get(
+      process.env.apiUrl + '/items/events?fields=*.*.*&filter[status]=published'
+    )
+    return {
+      featuredEvents: eventsReq.data.data,
+    }
+  },
   data() {
     return {
+      calendarLoading: true,
       calendarKey: 'AIzaSyAWRNx_1aSXBJxQcJPJg3QSpjx9R9jGRSk',
       selectedDay: null,
       events: [],
@@ -79,22 +158,34 @@ export default {
           border: '0',
           borderRadius: '5px',
           boxShadow:
-            '0 4px 8px 0 rgba(0, 0, 0, 0.14), 0 6px 20px 0 rgba(0, 0, 0, 0.13)'
-        }
-      }
+            '0 4px 8px 0 rgba(0, 0, 0, 0.14), 0 6px 20px 0 rgba(0, 0, 0, 0.13)',
+        },
+      },
+      imageLocation: process.env.imageUrl,
+      swiperOptions: {
+        slidesPerView: 1,
+        slidesOffsetBefore: 15,
+        slidesOffsetAfter: 15,
+        spaceBetween: 30,
+        loop: false,
+        centeredSlides: true,
+        centerInsufficientSlides: true,
+        // initialSlide: 4,
+        // pagination: {
+        //   el: '.swiper-pagination',
+        //   dynamicBullets: true
+        // },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+          hideOnClick: true,
+        },
+      },
     }
   },
   head() {
     return {}
   },
-  // async asyncData({ params, $axios }) {
-  //   const servicesReq = await $axios.get(
-  //     process.env.apiUrl + '/items/services?fields=*.*.*'
-  //   )
-  //   return {
-  //     services: servicesReq.data.data
-  //   }
-  // },
   computed: {
     attrs() {
       const app = this
@@ -112,21 +203,21 @@ export default {
         // },
         highlight: {
           style: {
-            backgroundColor: '#eeeeee'
-          }
+            backgroundColor: '#eeeeee',
+          },
         },
         dot: {
           style: {
-            backgroundColor: '#1effbc'
-          }
+            backgroundColor: '#1effbc',
+          },
         },
         popover: {
           label: t.summary + ' @ ' + app.formatTime(t.start.dateTime),
-          labelClass: 'testClass'
+          labelClass: 'testClass',
         },
-        customData: t
+        customData: t,
       }))
-    }
+    },
   },
   created() {
     const app = this
@@ -134,10 +225,12 @@ export default {
       .get(
         'https://www.googleapis.com/calendar/v3/calendars/calendarst8@gmail.com/events?key=' +
           this.calendarKey +
-          '&timeMin=2019-01-01T00:00:00Z&timeMax=2021-12-31T23:59:59Z&singleEvents=true&orderBy=startTime&maxResults=2500'
+          '&timeMin=2020-01-01T00:00:00Z&timeMax=2021-12-31T23:59:59Z&singleEvents=true&orderBy=startTime&maxResults=2500'
       )
-      .then(function(res) {
+      .then(function (res) {
+        app.calendarLoading = false
         app.events = res.data.items
+        // app.dayClicked()
       })
   },
   methods: {
@@ -146,7 +239,22 @@ export default {
       return moment(newTime).format('h:mm a')
     },
     dayClicked(day) {
-      this.selectedDay = day
+      console.log('today ' + moment().format('YYYY-MM-DD'))
+      let date
+      if (!day) {
+        date = {
+          id: moment().format('YYYY-MM-DD'),
+          attributes: this.todaysEvents,
+          isToday: true,
+          date: new Date(),
+        }
+      } else {
+        date = day
+        console.log(day)
+      }
+
+      console.log(date)
+      this.selectedDay = date
     },
     checkDates(start, end) {
       let dates
@@ -155,12 +263,12 @@ export default {
       } else if (end) {
         dates = {
           start: start.dateTime,
-          end: end.dateTime
+          end: end.dateTime,
         }
       }
       return dates
-    }
-  }
+    },
+  },
 }
 </script>
 
@@ -168,12 +276,9 @@ export default {
 @import './assets/scss/vars';
 #events {
   #events__intro {
-    height: 300px;
-
-    @media (min-width: $breakpoint-small) {
-    }
+    height: 200px;
     @media (min-width: $breakpoint-medium) {
-      margin-top: 0px;
+      height: 250px;
     }
     h1 {
       font-size: 42px;
@@ -197,6 +302,7 @@ export default {
       background: $navy;
       @media (min-width: $breakpoint-small) {
         width: 120%;
+        left: -10%;
       }
       @media (min-width: $breakpoint-medium) {
       }
@@ -205,12 +311,62 @@ export default {
       font-size: 14px;
     }
   }
+  #events__featured {
+    height: 300px;
+    #title {
+      font-size: 18px;
+      letter-spacing: 0.35em;
+    }
+    .swiper-slide {
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .events__event {
+      width: 96%;
+      border: thin solid rgba($grey, 0.2);
+
+      .events__event-image {
+        width: 100px;
+        height: 100px;
+      }
+      .events__event-title {
+        width: calc(100% - 120px);
+        margin-left: 20px;
+        padding-right: 20px;
+        h3 {
+        }
+        h4 {
+          font-size: 10px;
+        }
+      }
+      .events__event-description {
+        padding: 20px;
+        font-size: 12px;
+        line-height: 1.2em;
+      }
+    }
+  }
+  #calendar-loader {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 10;
+    height: 100%;
+    width: 100%;
+    backdrop-filter: blur(6px);
+    img {
+      width: 40px;
+      height: 40px;
+    }
+  }
   .vc-container {
     border-radius: 0px;
     border: none !important;
     border-color: $white !important;
     font-family: $body-font;
-    // height: 500px;
+    background: none;
     width: 100%;
     @media (min-width: $breakpoint-medium) {
       // height: 600px;
@@ -219,7 +375,6 @@ export default {
       display: flex;
       justify-content: center;
       @media (min-width: $breakpoint-medium) {
-        height: 600px;
       }
       .vc-pane-layout {
         width: 100%;
@@ -230,7 +385,7 @@ export default {
         .vc-weeks {
           height: 400px !important;
           @media (min-width: $breakpoint-medium) {
-            height: 500px !important;
+            height: 450px !important;
           }
         }
       }
@@ -299,7 +454,19 @@ export default {
       .selected-day-event {
         list-style-type: disc;
         h5 {
+          position: relative;
           font-size: 13px;
+          padding-left: 12px;
+          margin-bottom: 5px;
+        }
+        h5:before {
+          content: '';
+          width: 5px;
+          position: absolute;
+          left: 0px;
+          top: 5px;
+          height: 10px;
+          background: $navy;
         }
       }
     }

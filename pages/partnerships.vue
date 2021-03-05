@@ -49,7 +49,7 @@
       </p>
     </div>
     <div
-      id="partnerships__regional"
+      id="partnerships__sliders"
       class="w-full flex flex-col items-center justify-center partnerships__section"
     >
       <h2 class="w-full text-center uppercase thin-font partnerships__title">
@@ -58,7 +58,7 @@
       <div
         class="w-full flex items-center justify-center flex-col partnerships__partner-category"
       >
-        <h3 class="green thin-font mt-8 mb-1 number">
+        <h3 class="green thin-font mt-5 mb-1 number">
           <span v-if="regionalPartners.length < 10">0</span
           >{{ regionalPartners.length }}
         </h3>
@@ -71,7 +71,7 @@
             <swiper-slide
               v-for="(item, index) in regionalPartners"
               :key="index"
-              class="px-3 sm:px-8 pt-4 pb-8 partnerships__partner"
+              class="partnerships__partner"
             >
               <a
                 :href="item.website"
@@ -79,31 +79,29 @@
                 class="shadow-lg border-gray-100 rounded-full bg-cover bg-no-repeat mx-4"
                 :style="
                   'background-image: url(' +
-                    imageLocation +
-                    item.logo.private_hash +
-                    ')'
+                  imageLocation +
+                  item.logo.private_hash +
+                  ')'
                 "
               ></a>
             </swiper-slide>
-            <div slot="pagination" class="swiper-pagination"></div>
+            <!-- <div slot="pagination" class="swiper-pagination"></div> -->
             <div slot="button-next" class="swiper-button-next"></div>
             <div slot="button-prev" class="swiper-button-prev"></div>
           </swiper>
         </div>
       </div>
-    </div>
-    <div
-      id="partnerships__county"
-      class="w-full flex flex-col items-center justify-center partnerships__section"
-    >
-      <h2 class="w-full text-center uppercase thin-font partnerships__title">
+
+      <h2
+        class="w-full text-center uppercase thin-font mt-8 partnerships__title"
+      >
         OUR COUNTY PARTNERS
       </h2>
 
       <div
         class="w-full flex items-center justify-center flex-col partnerships__partner-category"
       >
-        <h3 class="green thin-font mt-8 number">
+        <h3 class="green thin-font mt-5 number">
           <span v-if="plannerPartners.length < 10">0</span
           >{{ plannerPartners.length }}
         </h3>
@@ -118,7 +116,7 @@
             <swiper-slide
               v-for="(item, index) in plannerPartners"
               :key="index"
-              class="px-3 sm:px-8 pt-4 pb-8 partnerships__partner"
+              class="partnerships__partner"
             >
               <a
                 :href="item.website"
@@ -126,13 +124,13 @@
                 class="shadow-lg border-gray-100 rounded-full bg-cover bg-no-repeat mx-4"
                 :style="
                   'background-image: url(' +
-                    imageLocation +
-                    item.logo.private_hash +
-                    ')'
+                  imageLocation +
+                  item.logo.private_hash +
+                  ')'
                 "
               ></a>
             </swiper-slide>
-            <div slot="pagination" class="swiper-pagination"></div>
+            <!-- <div slot="pagination" class="swiper-pagination"></div> -->
             <div slot="button-next" class="swiper-button-next"></div>
             <div slot="button-prev" class="swiper-button-prev"></div>
           </swiper>
@@ -141,7 +139,7 @@
       <div
         class="w-full flex items-center justify-center flex-col partnerships__partner-category"
       >
-        <h3 class="green thin-font mt-8 number">
+        <h3 class="green thin-font mt-5 number">
           <span v-if="workforcePartners.length < 10">0</span
           >{{ workforcePartners.length }}
         </h3>
@@ -156,7 +154,7 @@
             <swiper-slide
               v-for="(item, index) in workforcePartners"
               :key="index"
-              class="px-3 sm:px-8 pt-4 pb-8 partnerships__partner"
+              class="partnerships__partner"
             >
               <a
                 :href="item.website"
@@ -164,13 +162,13 @@
                 class="shadow-lg border-gray-100 rounded-full bg-no-repeat mx-4"
                 :style="
                   'background-image: url(' +
-                    imageLocation +
-                    item.logo.private_hash +
-                    ')'
+                  imageLocation +
+                  item.logo.private_hash +
+                  ')'
                 "
               ></a>
             </swiper-slide>
-            <div slot="pagination" class="swiper-pagination"></div>
+            <!-- <div slot="pagination" class="swiper-pagination"></div> -->
             <div slot="button-next" class="swiper-button-next"></div>
             <div slot="button-prev" class="swiper-button-prev"></div>
           </swiper>
@@ -179,7 +177,7 @@
       <div
         class="w-full flex items-center justify-center flex-col partnerships__partner-category"
       >
-        <h3 class="green thin-font mt-8 number">
+        <h3 class="green thin-font mt-5 number">
           <span v-if="developerPartners.length < 10">0</span
           >{{ developerPartners.length }}
         </h3>
@@ -194,7 +192,7 @@
             <swiper-slide
               v-for="(item, index) in developerPartners"
               :key="index"
-              class="px-3 sm:px-8 pt-4 pb-8 partnerships__partner"
+              class="partnerships__partner"
             >
               <a
                 :href="item.website"
@@ -202,13 +200,13 @@
                 class="shadow-lg border-gray-100 rounded-full bg-cover bg-no-repeat mx-4"
                 :style="
                   'background-image: url(' +
-                    imageLocation +
-                    item.logo.private_hash +
-                    ')'
+                  imageLocation +
+                  item.logo.private_hash +
+                  ')'
                 "
               ></a>
             </swiper-slide>
-            <div slot="pagination" class="swiper-pagination"></div>
+            <!-- <div slot="pagination" class="swiper-pagination"></div> -->
             <div slot="button-next" class="swiper-button-next"></div>
             <div slot="button-prev" class="swiper-button-prev"></div>
           </swiper>
@@ -235,7 +233,7 @@ export default {
   components: {
     homeGraphic,
     Swiper,
-    SwiperSlide
+    SwiperSlide,
   },
   async asyncData({ params, $axios }) {
     const partnersReq = await $axios.get(
@@ -243,7 +241,7 @@ export default {
         '/items/partners?fields=id,title,website,category,logo.private_hash,programs.program_id.initiatives.initiative_id.title'
     )
     return {
-      partners: partnersReq.data.data
+      partners: partnersReq.data.data,
     }
   },
   data() {
@@ -253,27 +251,28 @@ export default {
         slidesPerView: 'auto',
         slidesOffsetBefore: 15,
         slidesOffsetAfter: 15,
-        centeredSlides: true,
         spaceBetween: 30,
-        initialSlide: 4,
         loop: false,
-        pagination: {
-          el: '.swiper-pagination',
-          dynamicBullets: true
-        },
+        centeredSlides: false,
+        centerInsufficientSlides: true,
+        // initialSlide: 4,
+        // pagination: {
+        //   el: '.swiper-pagination',
+        //   dynamicBullets: true
+        // },
         navigation: {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',
-          hideOnClick: true
-        }
-      }
+          hideOnClick: true,
+        },
+      },
     }
   },
   head() {},
   computed: {
     economicDevelopmentPartners() {
       const vm = this
-      return vm.partners.filter(function(item) {
+      return vm.partners.filter(function (item) {
         return item.programs.program_id.initiatives.initiative_id.title.includes(
           'Economic Development'
         )
@@ -281,29 +280,29 @@ export default {
     },
     regionalPartners() {
       const vm = this
-      return vm.partners.filter(function(item) {
+      return vm.partners.filter(function (item) {
         return item.category.includes('Regional')
       })
     },
     plannerPartners() {
       const vm = this
-      return vm.partners.filter(function(item) {
+      return vm.partners.filter(function (item) {
         return item.category.includes('Planner')
       })
     },
     developerPartners() {
       const vm = this
-      return vm.partners.filter(function(item) {
+      return vm.partners.filter(function (item) {
         return item.category.includes('Economic Developer')
       })
     },
     workforcePartners() {
       const vm = this
-      return vm.partners.filter(function(item) {
+      return vm.partners.filter(function (item) {
         return item.category.includes('Workforce')
       })
-    }
-  }
+    },
+  },
 }
 </script>
 

@@ -15,24 +15,34 @@
 
     @media (min-width: $breakpoint-small) {
       background-size: 600px auto;
+      height: 600px;
     }
     @media (min-width: $breakpoint-medium) {
-      background-size: 700px auto;
-      height: 700px;
+      // background-size: 700px auto;
+      // height: 700px;
     }
     .logo-name {
       position: absolute;
       top: calc(50% - 20px);
-      left: calc(50% - 450px);
-      width: 900px;
+      left: 5%;
+      width: 90%;
       z-index: 10;
+      @media (min-width: $breakpoint-small) {
+      }
+      @media (min-width: $breakpoint-medium) {
+        left: calc(50% - 450px);
+        width: 900px;
+      }
       svg {
-        // filter: drop-shadow(0px 5px 15px (rgba($black, 0.25)));
+        filter: drop-shadow(0px 2px 4px (rgba($black, 0.5)));
         width: 100%;
         height: auto;
         display: inline-block;
         .blue-fill {
-          fill: $green;
+          fill: $white;
+          @media (min-width: $breakpoint-medium) {
+            // fill: $green;
+          }
         }
         .green-fill {
           fill: $navy;
@@ -57,7 +67,7 @@
       z-index: 1;
     }
     #tag {
-      margin-top: 500px;
+      margin-top: 400px;
     }
   }
   #regional-info {

@@ -1,32 +1,27 @@
 {
-  "name": "southerntier8.org",
+  "name": "southerntier.org",
   "version": "1.0.0",
-  "description": "Southern Tier 8 Regional Board website.",
-  "author": "hue",
   "private": true,
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
-    "lint": "eslint --ext .js,.vue --ignore-path .gitignore ."
+    "lint:js": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",
+    "lint": "npm run lint:js"
   },
   "lint-staged": {
     "*.{js,vue}": "eslint"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "dependencies": {
-    "@nuxtjs/axios": "^5.13.1",
+    "@nuxtjs/axios": "^5.12.5",
     "@nuxtjs/google-analytics": "^2.4.0",
     "@nuxtjs/moment": "^1.6.1",
     "@nuxtjs/pwa": "^3.3.5",
+    "core-js": "^3.8.3",
     "gsap": "^3.6.0",
     "moment": "^2.29.1",
-    "nuxt": "^2.0.0",
+    "nuxt": "^2.14.12",
     "nuxt-izitoast": "^0.1.2",
     "nuxt-validate": "^0.1.3",
     "swiper": "^5.4.5",
@@ -37,24 +32,20 @@
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^5.0.0",
-    "@nuxtjs/eslint-module": "^3.0.1",
+    "@nuxtjs/eslint-module": "^3.0.2",
     "@nuxtjs/tailwindcss": "^3.4.2",
-    "@tailwindcss/postcss7-compat": "^2.0.3",
-    "autoprefixer": "^9.8.6",
-    "babel-eslint": "^10.0.1",
-    "eslint": "^7.19.0",
-    "eslint-config-prettier": "^6.15.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.18.0",
+    "eslint-config-prettier": "^7.2.0",
     "eslint-loader": "^4.0.2",
     "eslint-plugin-nuxt": "^2.0.0",
-    "eslint-plugin-prettier": "^3.1.4",
-    "husky": "^2.6.0",
-    "lint-staged": "^8.2.1",
-    "nanoid": "^2.1.11",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-vue": "^7.5.0",
+    "husky": "^4.3.8",
+    "lint-staged": "^10.5.3",
     "node-sass": "^4.14.1",
-    "nuxt-purgecss": "^1.0.0",
     "postcss": "^7.0.35",
-    "prettier": "^1.19.1",
-    "sass-loader": "^10.1.1",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.3"
+    "prettier": "^2.2.1",
+    "sass-loader": "^10.1.1"
   }
 }

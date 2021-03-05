@@ -19,8 +19,8 @@
               class=""
               :src="
                 imageLocation +
-                  program.images[0].file_id.private_hash +
-                  '?key=medium'
+                program.images[0].file_id.private_hash +
+                '?key=medium'
               "
               :alt="program.title"
             />
@@ -29,7 +29,7 @@
             class="w-1/2 uppercase green pl-4 text-left program__page-title"
             :class="{ 'text-xs': tooLong }"
           >
-            <span class=" navy">Program: </span>
+            <span class="navy">Program: </span>
             {{ program.title }}
           </h1>
         </div>
@@ -170,9 +170,7 @@
     <div
       class="flex flex-col justify-center items-center relative program__related"
     >
-      <h3 class="uppercase green relative program__title">
-        Partners
-      </h3>
+      <h3 class="uppercase green relative program__title">Partners</h3>
       <p class="px-4 text-center program__p">
         We had
         <span class="bold"
@@ -196,8 +194,8 @@
             v-if="partner.partner_id.logo"
             :src="
               imageLocation +
-                partner.partner_id.logo.private_hash +
-                '?key=thumbnail'
+              partner.partner_id.logo.private_hash +
+              '?key=thumbnail'
             "
             :alt="partner.partner_id.title"
             :width="partner.partner_id.logo.width"
@@ -210,9 +208,7 @@
         id="program__resources"
         class="w-full flex relative justify-center items-center flex-row flex-wrap relative"
       >
-        <h2 class="uppercase green relative program__title">
-          Resources
-        </h2>
+        <h2 class="uppercase green relative program__title">Resources</h2>
         <swiper
           :options="resourcesSwiperOption"
           class="swiper w-full flex flex-row items-center justify-center pt-4 pb-4"
@@ -234,9 +230,7 @@
         id="program__news"
         class="w-full flex relative justify-center items-center flex-row flex-wrap relative program__section"
       >
-        <h2 class="uppercase green relative program__title">
-          Related News
-        </h2>
+        <h2 class="uppercase green relative program__title">Related News</h2>
         <swiper
           :options="resourcesSwiperOption"
           class="swiper w-full flex flex-row pt-4 pb-4"
@@ -285,27 +279,27 @@
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 import programCard from '~/components/programs/programCard'
 import newsCardVertical from '~/components/now/newsCardVertical'
-import resourceCard from '~/components/now/resourceCard'
+import resourceCard from '~/components/now/resourceCardVertical'
 export default {
   components: {
     Swiper,
     SwiperSlide,
     programCard,
     newsCardVertical,
-    resourceCard
+    resourceCard,
   },
   async asyncData({ params, $axios }) {
     const [programReq] = await Promise.all([
       $axios.$get(
         '/items/programs?filter[url][eq]=' +
           params.slug +
-          '&fields=id,title,what_is_it,what_it_accomplishes,url,counties.county_id.title,initiatives.initiative_id.title,images.file_id.private_hash,partners.partner_id.title,partners.partner_id.logo.private_hash,resources.resources_id.title,resources.resources_id.type,resources.resources_id.file.private_hash,news.news_id.title,news.news_id.article,news.news_id.link,news.news_id.type,news.news_id.tags,news.news_id.date_published,news.news_id.url,news.news_id.link,url,news.news_id.cover_image.private_hash&single=1'
-      )
+          '&fields=id,title,what_is_it,what_it_accomplishes,url,counties.county_id.title,initiatives.initiative_id.title,images.file_id.private_hash,partners.partner_id.title,partners.partner_id.logo.private_hash,resources.resources_id.title,resources.resources_id.type,resources.resources_id.link,resources.resources_id.file.private_hash,news.news_id.title,news.news_id.article,news.news_id.link,news.news_id.type,news.news_id.tags,news.news_id.date_published,news.news_id.url,news.news_id.link,url,news.news_id.cover_image.private_hash&single=1'
+      ),
     ])
     return {
       program: programReq.data,
       news: programReq.data.news,
-      resources: programReq.data.resources
+      resources: programReq.data.resources,
     }
   },
   data(app) {
@@ -317,12 +311,13 @@ export default {
         slidesPerView: 'auto',
         slidesOffsetBefore: 15,
         slidesOffsetAfter: 15,
-        centeredSlides: true,
+        centeredSlides: false,
+        centerInsufficientSlides: true,
         initialSlide: 1,
         spaceBetween: 30,
         pagination: {
           el: '.swiper-pagination',
-          dynamicBullets: true
+          dynamicBullets: true,
         },
         breakpoints: {
           // 640: {
@@ -338,32 +333,33 @@ export default {
         navigation: {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',
-          hideOnClick: true
-        }
+          hideOnClick: true,
+        },
       },
       programsSwiperOption: {
         // freeMode: true,
         // freeModeSticky: true,
         // slidesPerView: 'auto',
         // slidesOffsetBefore: 15,
-        centeredSlides: true,
+        centeredSlides: false,
+        centerInsufficientSlides: true,
         spaceBetween: 30,
         pagination: {
           el: '.swiper-pagination',
-          dynamicBullets: true
+          dynamicBullets: true,
         },
         breakpoints: {
           1024: {
             // slidesOffsetBefore: 24
-          }
+          },
         },
         navigation: {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',
-          hideOnClick: true
-        }
+          hideOnClick: true,
+        },
       },
-      tooLong: false
+      tooLong: false,
     }
   },
   head() {},
@@ -393,7 +389,7 @@ export default {
       .then((response) => {
         this.programs = response.data
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error)
       })
     this.countTitle(this.program.title)
@@ -404,7 +400,7 @@ export default {
       const straightLength = straightLine.getTotalLength()
       const longLine = document.getElementById('program-line')
       const length = longLine.getTotalLength()
-      requestAnimationFrame(function() {
+      requestAnimationFrame(function () {
         const svgContainer = document.getElementById('program__story')
         const svgContainerRect = svgContainer.getBoundingClientRect()
         const svgDivHeight = svgContainerRect.height
@@ -424,8 +420,8 @@ export default {
       } else {
         this.tooLong = false
       }
-    }
-  }
+    },
+  },
 }
 </script>
 

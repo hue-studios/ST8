@@ -1,13 +1,13 @@
 export const state = () => ({
   loading: {
     status: false,
-    loader: true
+    loader: true,
   },
 
-  page: ''
+  page: '',
 })
 export const getters = {
-  loading: (state) => state.loading
+  loading: (state) => state.loading,
 }
 
 export const mutations = {
@@ -17,6 +17,6 @@ export const mutations = {
 
   SET_LOADING(state, loading) {
     state.loading = loading
-  }
+  },
 }
 export const actions = {}

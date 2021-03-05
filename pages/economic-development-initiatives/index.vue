@@ -23,11 +23,7 @@
           :to="'/economic-development-initiatives/' + initiative.url"
           class="uppercase tracking-wider navy text-xs initiatives__intro-card-link"
           >Learn More<span class="hidden"> about {{ initiative.title }}.</span>
-          <arrow-right-icon
-            size="1.5x"
-            stroke-width="1"
-            class="inline-block"
-          ></arrow-right-icon
+          <link-icon class="ml-2"></link-icon
         ></nuxt-link>
       </div>
       <h2
@@ -62,11 +58,7 @@
           :to="'/economic-development-initiatives/' + initiative.url"
           class="uppercase tracking-wider navy text-xs initiatives__intro-card-link"
           >Learn More<span class="hidden"> about {{ initiative.title }}.</span>
-          <arrow-right-icon
-            size="1.5x"
-            stroke-width="1"
-            class="inline-block"
-          ></arrow-right-icon
+          <link-icon class="ml-2"></link-icon
         ></nuxt-link>
       </div>
     </div>
@@ -122,40 +114,50 @@
 
       <div id="what-description" class="relative p-6 initiatives__description">
         <p>
-          To showcase our region in a concise way encompassing regional assets,
-          businesses, organizations, news, events, with the goal to educate,
-          inspire, and build interest in our region. This focus is for both
-          current ST8 residents as well as for people looking to relocate and to
-          find a place with opportunities and the lifestyle they are looking
-          for.
+          Southern Tier 8 regional goals. As an Eight County Regional Economic
+          Development Organization, we’ve analyzed the region’s needs and
+          strategically outlined goals of core importance to support, sustain,
+          and advance the economic growth of the Southern Tier 8 region. We
+          refer to these goals as initiatives.
         </p>
       </div>
 
       <h3 id="where-title" class="uppercase green relative initiatives__title">
-        WHERE DO THEY COME FROM?
+        How do these initiatives work?
       </h3>
 
       <div id="where-description" class="relative p-6 initiatives__description">
         <p>
-          To showcase our region in a concise way encompassing regional assets,
-          businesses, organizations, news, events, with the goal to educate,
-          inspire, and build interest in our region. This focus is for both
-          current ST8 residents as well as for people looking to relocate and to
-          find a place with opportunities and the lifestyle they are looking
-          for.
+          Our 5 regional initiatives are designed to target the area’s
+          challenges with a holistic approach. Our process involves developing
+          innovative ideas, aligning the right partnerships, and developing
+          feasible and smart solutions to meet the region’s current and future
+          needs. Within these initiatives, we develop programs, assist with
+          funding and grant writing, support projects from other organizations
+          that further these goals, and continuously adapt our initiatives to
+          meet the demands of the ever-changing economic forecast and growth of
+          our region.
         </p>
+        <nuxt-link
+          to="/economic-development-programs"
+          class="w-full absolute uppercase tracking-wider green text-center lg:text-left lg:px-6"
+          >Learn about our programs <link-icon class="ml-2"></link-icon
+        ></nuxt-link>
       </div>
       <h3 id="how-title" class="uppercase green relative initiatives__title">
-        HOW DO THEY WORK?
+        Where do these initiatives come from?
       </h3>
       <div id="how-description" class="relative p-6 initiatives__description">
         <p>
-          To showcase our region in a concise way encompassing regional assets,
-          businesses, organizations, news, events, with the goal to educate,
-          inspire, and build interest in our region. This focus is for both
-          current ST8 residents as well as for people looking to relocate and to
-          find a place with opportunities and the lifestyle they are looking
-          for.
+          In 2018, the Southern Tier 8 Regional Board re-structured the region’s
+          Comprehensive Economic Development Strategy (CEDS) process. The CEDS
+          is designed to serve as our organization’s guiding document to be used
+          in directing and evaluating regional community and economic
+          development progress over the next five years. Due to the COVID-19
+          pandemic in 2020, we’ve focused on our resiliency goals to meet the
+          current and pressing needs of our area. But, the CEDS still serves as
+          a strong foundation to evaluate and access our regional needs,
+          challenges and opportunities.
         </p>
       </div>
       <svg
@@ -186,31 +188,26 @@
         :key="index"
         :to="'/economic-development-initiatives/' + initiative.url"
         class="uppercase tracking-widest py-4"
-        >{{ initiative.title }}
-        <arrow-right-icon
-          size="1x"
-          stroke-width="1"
-          class="inline-block"
-        ></arrow-right-icon
+        >{{ initiative.title }} <link-icon class="ml-2"></link-icon
       ></nuxt-link>
     </div>
   </div>
 </template>
 
 <script>
-import { ArrowRightIcon, ArrowDownIcon } from 'vue-feather-icons'
-
+import { ArrowDownIcon } from 'vue-feather-icons'
+import linkIcon from '~/components/universal/linkIcon'
 export default {
   components: {
-    ArrowRightIcon,
-    ArrowDownIcon
+    linkIcon,
+    ArrowDownIcon,
   },
   async asyncData({ params, $axios }) {
     const initiativesReq = await $axios.$get(
       '/items/initiatives?fields=*.*.*&filter[status]=published'
     )
     return {
-      initiatives: initiativesReq.data
+      initiatives: initiativesReq.data,
     }
   },
   head() {},
@@ -221,7 +218,7 @@ export default {
     },
     lastThreeInitiatives() {
       return this.initiatives.filter((initiative) => initiative.sort > 3)
-    }
+    },
   },
   beforeDestroy() {
     window.removeEventListener('scroll', this.lineFunction)
@@ -245,12 +242,12 @@ export default {
       const straightLength = straightLine.getTotalLength()
       const longLine = document.getElementById('initiatives-line')
       const length = longLine.getTotalLength()
-      requestAnimationFrame(function() {
+      requestAnimationFrame(function () {
         const svgContainer = document.getElementById('initiatives__story')
         const svgContainerRect = svgContainer.getBoundingClientRect()
         const svgDivHeight = svgContainerRect.height
         const windowScroll = window.pageYOffset
-        const scrollPercent = (windowScroll / svgDivHeight) * 0.72
+        const scrollPercent = (windowScroll / svgDivHeight) * 0.7
         if (scrollPercent < 1) {
           const draw = length * scrollPercent
           longLine.style.strokeDashoffset = length - draw
@@ -265,7 +262,7 @@ export default {
       const offsetTop = document.querySelector(target).offsetTop
       scroll({
         top: offsetTop,
-        behavior: 'smooth'
+        behavior: 'smooth',
       })
     },
     removeTags(str) {
@@ -280,8 +277,8 @@ export default {
         return newStr
       }
       return newStr.slice(0, num) + '...'
-    }
-  }
+    },
+  },
 }
 </script>
 

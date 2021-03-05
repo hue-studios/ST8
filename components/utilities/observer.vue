@@ -6,7 +6,7 @@
 export default {
   props: ['options'],
   data: () => ({
-    observer: null
+    observer: null,
   }),
   mounted() {
     const options = this.options || {}
@@ -20,6 +20,6 @@ export default {
   },
   destroyed() {
     this.observer.disconnect()
-  }
+  },
 }
 </script>

@@ -128,11 +128,12 @@
     border: none;
     background-color: rgba($black, 0.25);
     background-blend-mode: darken;
-    background-position: center bottom;
+    background-position: left bottom;
     background-size: cover;
     background-repeat: no-repeat;
     box-shadow: inset 0px -2px 50px rgba($black, 1);
     @media (min-width: $breakpoint-small) {
+      background-position: center bottom;
     }
     @media (min-width: $breakpoint-large) {
     }

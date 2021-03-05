@@ -80,13 +80,13 @@ export default {
   components: {
     logo,
     newYorkState,
-    logoName
+    logoName,
   },
   data() {
     return {
       showHeader: true,
       lastScrollPosition: 0,
-      scrollValue: 0
+      scrollValue: 0,
     }
   },
   beforeMount() {
@@ -122,8 +122,8 @@ export default {
           .getElementById(id + 'NavContainer')
           .classList.remove('showDropNav')
       }
-    }
-  }
+    },
+  },
 }
 </script>
 <style lang="scss">

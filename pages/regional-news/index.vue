@@ -5,11 +5,11 @@
       class="flex flex-col flex-wrap justify-center items-center relative"
     >
       <h1
-        class="navy uppercase tracking-widest mb-2 w-5/6 sm:w-3/5 md:w-1/2 thin-font"
+        class="navy uppercase tracking-widest mb-2 w-5/6 sm:w-3/5 md:w-1/2 thin-font text-center"
       >
         News
       </h1>
-      <p class="navy w-5/6 sm:w-3/5 md:w-1/2">
+      <p class="navy w-5/6 sm:w-3/5 md:w-1/2 text-center">
         The latest economic and community development news from the Southern
         Tier 8 region.
       </p>
@@ -21,14 +21,14 @@
       id="news__news-cards"
       class="w-full flex items-center justify-center flex-col pb-20"
     >
-      <div class="w-full text-center px-8 mb-4 news__filters">
+      <!-- <div class="w-full text-center px-8 mb-4 news__filters">
         <input
           v-model="search"
           class="condensed uppercase shadow appearance-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline search-input"
           type="text"
           placeholder="Search."
         />
-      </div>
+      </div> -->
 
       <transition-group
         name="list"
@@ -62,21 +62,21 @@
 import newsCard from '~/components/now/newsCard'
 export default {
   components: {
-    newsCard
+    newsCard,
   },
   async asyncData({ params, $axios }) {
     const [newsReq] = await Promise.all([
       $axios.$get(
         '/items/news?fields=id,title,article,url,cover_image.private_hash,tags,type,featured,date_published,initiatives.initiative_id.title,programs.*,related_resources.*'
-      )
+      ),
     ])
     return {
-      news: newsReq.data
+      news: newsReq.data,
     }
   },
   data() {
     return {
-      search: ''
+      search: '',
     }
   },
   head() {},
@@ -87,7 +87,7 @@ export default {
       if (search === '') {
         return app.news
       } else {
-        return app.news.filter(function(item) {
+        return app.news.filter(function (item) {
           return (
             search === '' ||
             item.tags.includes(app.search.toLowerCase()) ||
@@ -95,7 +95,7 @@ export default {
           )
         })
       }
-    }
+    },
   },
   created() {},
   methods: {
@@ -122,8 +122,8 @@ export default {
       }
 
       console.log(app.programFilters)
-    }
-  }
+    },
+  },
 }
 </script>
 

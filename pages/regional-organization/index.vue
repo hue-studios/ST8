@@ -8,15 +8,13 @@
         <h1
           v-for="(county, index) in counties"
           :key="index"
-          class="uppercase grey block opacity-25 thin-font"
+          class="uppercase grey block opacity-25 bold"
         >
           {{ county.title }}
         </h1>
       </div>
       <div class="flex flex-col justify-center items-start statement">
-        <h2 class="uppercase green tracking-widest thin-font">
-          Mission
-        </h2>
+        <h2 class="uppercase green tracking-widest thin-font">Mission</h2>
         <p class="navy">{{ organization.mission_statement }}</p>
       </div>
     </div>
@@ -48,7 +46,7 @@
         <div class="whitespace-pre-wrap">{{ organization.our_history }}</div>
 
         <div class="w-full mt-6 text-center">
-          <p lass="mt-6">View our 5 year plan released in 2019:</p>
+          <p lass="mt-6">View our 5 year plan 2018-2022:</p>
           <a
             class="mt-4 inline-block px-12 py-6 uppercase green tracking-widest font-medium"
             href="#"
@@ -74,9 +72,9 @@
         <div
           :style="
             'background-image: url(' +
-              imageLocation +
-              person.image.private_hash +
-              '?key=small)'
+            imageLocation +
+            person.image.private_hash +
+            '?key=small)'
           "
           class="bg-cover bg-center bg-no-repeat people-card__image"
         ></div>
@@ -221,17 +219,17 @@ export default {
     const [organizationReq, peopleReq, countiesReq] = await Promise.all([
       $axios.$get('/items/organization?single=1&fields=*.*.*'),
       $axios.$get('/items/people?fields=*.*.*'),
-      $axios.$get('/items/counties?fields=*.*')
+      $axios.$get('/items/counties?fields=*.*'),
     ])
     return {
       organization: organizationReq.data,
       people: peopleReq.data,
-      counties: countiesReq.data
+      counties: countiesReq.data,
     }
   },
   data() {
     return {
-      imageLocation: process.env.imageUrl
+      imageLocation: process.env.imageUrl,
     }
   },
   head() {},
@@ -241,7 +239,7 @@ export default {
     },
     board() {
       return this.people.filter((person) => person.category === 'Board')
-    }
+    },
   },
   created() {},
   mounted() {},
@@ -252,13 +250,13 @@ export default {
       const offsetTop = document.querySelector(href).offsetTop
       scroll({
         top: offsetTop,
-        behavior: 'smooth'
+        behavior: 'smooth',
       })
     },
     filteredBoard(county) {
       return this.board.filter((person) => person.county.title === county)
-    }
-  }
+    },
+  },
 }
 </script>
 

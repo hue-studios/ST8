@@ -1,8 +1,6 @@
 <template>
   <div id="article" class="flex flex-col justify-center items-center relative">
-    <h2 id="article__bg-title" class="uppercase absolute">
-      News
-    </h2>
+    <h2 id="article__bg-title" class="uppercase absolute">News</h2>
     <div
       class="w-full flex items-center justify-center flex-col py-20 md:py-32 article__header"
       :style="'background-image: url( ' + coverImage + ')'"
@@ -100,22 +98,22 @@ export default {
     linkIcon,
     FacebookIcon,
     TwitterIcon,
-    LinkedinIcon
+    LinkedinIcon,
   },
   async asyncData({ params, $axios }) {
     const [newsReq] = await Promise.all([
       $axios.$get(
         '/items/news?filter[url][eq]=' + params.slug + '&fields=*.*.*&single=1'
-      )
+      ),
     ])
     return {
-      article: newsReq.data
+      article: newsReq.data,
     }
   },
   data() {
     return {
       imageLocation: process.env.imageUrl,
-      coverImage: ''
+      coverImage: '',
     }
   },
   head() {},
@@ -136,8 +134,8 @@ export default {
       const thirdEdit = secondEdit.replace('&hellip;', '...')
       const fourthEdit = thirdEdit.replace('&rsquo;', "'")
       return fourthEdit
-    }
-  }
+    },
+  },
 }
 </script>
 

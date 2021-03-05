@@ -1,11 +1,7 @@
 <template>
   <div class="container">
     <page-header></page-header>
-    <div
-      id="page-container"
-      class="page-container"
-      @click.prevent="closeSideMenu()"
-    >
+    <div id="page-container" class="page-container" @click="closeSideMenu()">
       <nuxt />
       <!-- <page-partners :image-location="imageUrl"></page-partners> -->
       <page-footer></page-footer>
@@ -81,11 +77,11 @@ export default {
     pageHeader,
     // pagePartners,
     pageFooter,
-    logoName
+    logoName,
   },
   data() {
     return {
-      imageUrl: process.env.imageUrl
+      imageUrl: process.env.imageUrl,
     }
   },
   created() {},
@@ -105,8 +101,8 @@ export default {
       element.classList.remove('in-left')
       element2.classList.remove('open')
       element3.classList.remove('open')
-    }
-  }
+    },
+  },
 }
 </script>
 <style lang="scss">

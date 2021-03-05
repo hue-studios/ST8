@@ -1,28 +1,24 @@
 <template>
-  <div id="resources" class="flex flex-col items-center justify-center">
+  <div id="resources" class="flex flex-col items-center justify-center pb-32">
     <div
       id="resources__intro"
       class="flex flex-col flex-wrap justify-center items-center relative w-full"
     >
       <h1
-        class="navy uppercase tracking-wider sm:tracking-widest mb-2 w-5/6 sm:w-3/5 md:w-1/2 thin-font"
+        class="navy uppercase tracking-wider sm:tracking-widest text-center mb-2 w-5/6 sm:w-3/5 md:w-1/2 thin-font"
       >
         Resources
       </h1>
-      <p class="navy w-5/6 sm:w-3/5 md:w-1/2">
+      <p class="navy text-center w-5/6 sm:w-3/5 md:w-1/2">
         This is a collection of resources.
       </p>
     </div>
-    <div
-      class="flex items-center justify-center items-row flex-row flex-wrap py-12"
-    >
-      <resource-card
-        v-for="(item, index) in resources"
-        :key="index"
-        :item="item"
-        class="mb-6 mx-6"
-      ></resource-card>
-    </div>
+    <resource-card
+      v-for="(item, index) in resources"
+      :key="index"
+      :item="item"
+      class="mb-6 mx-6"
+    ></resource-card>
   </div>
 </template>
 
@@ -33,10 +29,11 @@ export default {
   components: { resourceCard },
   async asyncData({ params, $axios }) {
     const resourcesReq = await $axios.get(
-      process.env.apiUrl + '/items/resources?fields=*.*.*'
+      process.env.apiUrl +
+        '/items/resources?fields=*.*.*&filter[status]=published'
     )
     return {
-      resources: resourcesReq.data.data
+      resources: resourcesReq.data.data,
     }
   },
   data() {
@@ -62,12 +59,12 @@ export default {
       } else if (end) {
         dates = {
           start: start.dateTime,
-          end: end.dateTime
+          end: end.dateTime,
         }
       }
       return dates
-    }
-  }
+    },
+  },
 }
 </script>
 

@@ -14,21 +14,16 @@
       class="flex flex-col flex-wrap justify-center items-center relative"
     >
       <h1
-        class="navy uppercase tracking-widest mb-2 w-5/6 sm:w-3/5 md:w-1/2 thin-font"
+        class="navy uppercase tracking-widest mb-2 w-5/6 sm:w-3/5 md:w-1/2 thin-font text-center"
       >
         <span class="mr-3 green">{{ programs.length }}</span
         >Programs
       </h1>
-      <p class="navy w-5/6 sm:w-3/5 md:w-1/2 font-normal">
-        Our programs are developed to further one of the
-        {{ initiatives.length }} initiatives -
-        <span
-          v-for="initiative in initiatives"
-          :key="initiative.id"
-          class="initiative-title"
-          >{{ initiative.title }}<span class="comma">,</span>
-        </span>
-        - each designed to help grow our region.
+      <p class="navy w-5/6 sm:w-3/5 md:w-1/2 font-normal text-center">
+        Our programs are designed to implement our five core initiatives. Each
+        program is designed to create innovative ideas, develop practical
+        solutions, and align strategic partnerships to meet the challenges and
+        advance economic growth in the Southern Tier 8 Region.
       </p>
     </div>
     <div
@@ -61,23 +56,23 @@
 import programCard from '~/components/programs/programCard'
 export default {
   components: {
-    programCard
+    programCard,
   },
   async asyncData({ params, $axios }) {
     const [programsReq, initiativesReq] = await Promise.all([
       $axios.$get(
-        '/items/programs?fields=id,title,what_is_it,url,collaboration,what_it_accomplishes,website,url,activity.activity_id.*,counties.county_id.title,images.file_id.private_hash,initiatives.initiative_id.title,initiatives.initiative_id.url,partners.partner_id.title,resources.resources_id.*'
+        '/items/programs?fields=id,title,what_is_it,url,collaboration,what_it_accomplishes,website,url,activity.activity_id.*,counties.county_id.title,images.file_id.private_hash,initiatives.initiative_id.title,initiatives.initiative_id.url,partners.partner_id.title,resources.resources_id.*&filter[status]=published'
       ),
-      $axios.$get('/items/initiatives?fields=*.*.*&filter[status]=published')
+      $axios.$get('/items/initiatives?fields=*.*.*&filter[status]=published'),
     ])
     return {
       programs: programsReq.data,
-      initiatives: initiativesReq.data
+      initiatives: initiativesReq.data,
     }
   },
   data() {
     return {
-      programFilters: []
+      programFilters: [],
     }
   },
   head() {},
@@ -89,7 +84,7 @@ export default {
         return app.programs
       } else {
         return app.programs.filter((item) => {
-          return item.initiatives.forEach(function(initiative, index) {
+          return item.initiatives.forEach(function (initiative, index) {
             return app.programFilters.includes(initiative.intiative_id.title)
           })
           // return app.programFilters.includes(
@@ -97,7 +92,7 @@ export default {
           // )
         })
       }
-    }
+    },
   },
   created() {
     // this.checkInitiative()
@@ -132,8 +127,8 @@ export default {
       }
 
       console.log(app.programFilters)
-    }
-  }
+    },
+  },
 }
 </script>
 

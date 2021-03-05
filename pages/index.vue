@@ -43,7 +43,7 @@
           key="1"
           class="home-intro__navigation-description"
         >
-          <h5 class="uppercase grey tracking-widest mb-4 ">Active</h5>
+          <h5 class="uppercase grey tracking-widest mb-4">Active</h5>
           <p>
             Our Initiatives, Programs, and Services are designed to serve and
             adapt to the region’s economic, workforce, infrastructure, rural,
@@ -65,12 +65,12 @@
           key="2"
           class="home-intro__navigation-description"
         >
-          <h5 class="uppercase grey tracking-widest mb-4 ">Regional</h5>
+          <h5 class="uppercase grey tracking-widest mb-4">Regional</h5>
           <p>
-            We are a 8 County Organization so we are not one place, one county,
+            We are an 8 County Organization so we are not one place, one county,
             we cover a large portion of Upstate NY. Every county that is part of
             our organization is unique with its own natural, economic, and
-            business assets. We Are committed to evaluating and innovating for
+            business assets. We are committed to evaluating and innovating for
             each, while still looking at the strength of our region as a whole.
             We believe that as one united region, we are stronger, we build a
             more powerful economy, and create the best opportunities for growth.
@@ -181,16 +181,16 @@
       <div class="w-full pl-3 pr-3 lg:pl-5 lg:pr-5 mb-8 white home__subtitle">
         <p class="">
           Our team will assist applicants with questions about program
-          development, partner engagement, grant writing, matchm support
+          development, partner engagement, grant writing, match support
           requirements and budgets. If you have a project concept that you would
-          like to review with us, complete the JOT form online.
+          like to review with us, complete the pre-application form online.
         </p>
       </div>
       <a
         :href="jotForm.link"
         target="_blank"
         class="mt-4 sm:mt-8 uppercase py-4 px-12"
-        >{{ jotForm.title }} <link-icon class="ml-1"></link-icon
+        >Pre-Application Form<link-icon class="ml-1"></link-icon
       ></a>
     </div>
 
@@ -391,7 +391,7 @@ export default {
     newsCardVertical,
     linkIcon,
     observer,
-    industryChart
+    industryChart,
   },
   async asyncData({ app, $axios }) {
     const [
@@ -399,7 +399,7 @@ export default {
       newsReq,
       eventsReq,
       programsReq,
-      organizationReq
+      organizationReq,
     ] = await Promise.all([
       $axios.get(process.env.apiUrl + '/items/partners?fields=*.*'),
       $axios.get(
@@ -411,7 +411,7 @@ export default {
         process.env.apiUrl +
           '/items/programs?fields=*.*.*&filter[featured]=1&meta=*'
       ),
-      $axios.$get('/items/organization?single=1&fields=mission_statement')
+      $axios.$get('/items/organization?single=1&fields=mission_statement'),
     ])
     return {
       partners: partnersReq.data.data,
@@ -420,7 +420,7 @@ export default {
       events: eventsReq.data.data,
       programs: programsReq.data.data,
       programsMeta: programsReq.data,
-      organization: organizationReq.data
+      organization: organizationReq.data,
     }
   },
   data() {
@@ -433,7 +433,7 @@ export default {
         'uk-animation-slide-left-medium uk-animation-reverse uk-animation-fast',
       options: {
         rootMargin: '0px',
-        threshold: 1.0
+        threshold: 1.0,
       },
       jotForm: '',
       newsSwiperOption: {
@@ -445,55 +445,55 @@ export default {
         loop: false,
         pagination: {
           el: '.swiper-pagination',
-          dynamicBullets: true
+          dynamicBullets: true,
         },
         navigation: {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',
-          hideOnClick: true
-        }
+          hideOnClick: true,
+        },
       },
       programsSwiperOption: {
         centeredSlides: true,
         spaceBetween: 30,
         pagination: {
           el: '.swiper-pagination',
-          dynamicBullets: true
+          dynamicBullets: true,
         },
         navigation: {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',
-          hideOnClick: true
-        }
-      }
+          hideOnClick: true,
+        },
+      },
     }
   },
   head() {},
   computed: {
     regionalPartners() {
       const vm = this
-      return vm.partners.filter(function(item) {
+      return vm.partners.filter(function (item) {
         return item.category.includes('Regional')
       })
     },
     plannerPartners() {
       const vm = this
-      return vm.partners.filter(function(item) {
+      return vm.partners.filter(function (item) {
         return item.category.includes('Planner')
       })
     },
     developerPartners() {
       const vm = this
-      return vm.partners.filter(function(item) {
+      return vm.partners.filter(function (item) {
         return item.category.includes('Economic Developer')
       })
     },
     workforcePartners() {
       const vm = this
-      return vm.partners.filter(function(item) {
+      return vm.partners.filter(function (item) {
         return item.category.includes('Workforce')
       })
-    }
+    },
   },
   // beforeDestroy() {
   //   gsap.registerPlugin(ScrollTrigger)
@@ -521,18 +521,18 @@ export default {
             trigger: '#home__mission',
             start: 'top bottom-=100px',
             end: '+=200%',
-            scrub: true
+            scrub: true,
           },
-          x: '100px'
+          x: '100px',
         })
         gsap.to('#mission', {
           scrollTrigger: {
             trigger: '#home__mission',
             start: 'top bottom-=100px',
             end: '+=200%',
-            scrub: true
+            scrub: true,
           },
-          x: '-100px'
+          x: '-100px',
         })
       },
       '(min-width: 1024px) and (max-width: 1279px)'() {
@@ -541,18 +541,18 @@ export default {
             trigger: '#home__mission',
             start: 'top bottom-=100px',
             end: '+=200%',
-            scrub: true
+            scrub: true,
           },
-          x: '100px'
+          x: '100px',
         })
         gsap.to('#mission', {
           scrollTrigger: {
             trigger: '#home__mission',
             start: 'top bottom-=100px',
             end: '+=200%',
-            scrub: true
+            scrub: true,
           },
-          x: '-100px'
+          x: '-100px',
         })
       },
       '(min-width: 1280px)'() {
@@ -561,29 +561,29 @@ export default {
             trigger: '#home__mission',
             start: 'top bottom-=100px',
             end: '+=200%',
-            scrub: true
+            scrub: true,
           },
-          x: '-100px'
+          x: '-100px',
         })
         gsap.to('#mission', {
           scrollTrigger: {
             trigger: '#home__mission',
             start: 'top bottom-=100px',
             end: '+=200%',
-            scrub: true
+            scrub: true,
           },
-          x: '100px'
+          x: '100px',
         })
-      }
+      },
     })
   },
   created() {
     this.$axios
-      .$get('/items/resources?single=1&fields=*&filter[title][contains]=JOT')
+      .$get('/items/resources?single=1&fields=*&filter[title][contains]=Pre')
       .then((response) => {
         this.jotForm = response.data
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error)
       })
   },
@@ -595,7 +595,7 @@ export default {
       const increment = end > start ? 1 : -1
       const stepTime = Math.abs(Math.floor(duration / range))
       const obj = document.getElementById(id)
-      const timer = setInterval(function() {
+      const timer = setInterval(function () {
         current += increment
         obj.innerHTML = current
         if (current === end) {
@@ -621,8 +621,8 @@ export default {
       }
       this.previousPanelKey = key
       this.panel = panel
-    }
-  }
+    },
+  },
 }
 </script>
 

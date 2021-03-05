@@ -1693,8 +1693,8 @@ export default {
   props: {
     program: {
       type: Object,
-      default: null
-    }
+      default: null,
+    },
   },
   methods: {
     removeTags(str) {
@@ -1709,8 +1709,8 @@ export default {
         return newStr
       }
       return newStr.slice(0, num) + '...'
-    }
-  }
+    },
+  },
 }
 </script>
 

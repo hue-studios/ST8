@@ -70,10 +70,8 @@
         <div
           class="flex relative justify-center items-center flex-col relative panel-section"
         >
-          <h3 class="green-two uppercase">
-            WHAT ARE INITIATIVES?
-          </h3>
-          <div class="w-5/6 sm:w-1/2 relative  initiatives__description">
+          <h3 class="green-two uppercase">WHAT ARE INITIATIVES?</h3>
+          <div class="w-5/6 sm:w-1/2 relative initiatives__description">
             <p>
               To showcase our region in a concise way encompassing regional
               assets, businesses, organizations, news, events, with the goal to
@@ -90,7 +88,7 @@
           class="flex relative justify-center items-end flex-col relative panel-section"
         >
           <h3 class="green-two uppercase">WHERE DO THEY COME FROM?</h3>
-          <div class="w-5/6 sm:w-1/2 relative  initiatives__description">
+          <div class="w-5/6 sm:w-1/2 relative initiatives__description">
             <p>
               To showcase our region in a concise way encompassing regional
               assets, businesses, organizations, news, events, with the goal to
@@ -136,7 +134,7 @@
               >
                 <nuxt-link
                   :to="'/economic-development-initiatives/' + initiative.url"
-                  class="uppercase "
+                  class="uppercase"
                   >{{ initiative.title }}
                   <arrow-right-icon
                     size="1x"
@@ -160,14 +158,14 @@ import { ArrowRightIcon } from 'vue-feather-icons'
 
 export default {
   components: {
-    ArrowRightIcon
+    ArrowRightIcon,
   },
   async asyncData({ params, $axios }) {
     const initiativesReq = await $axios.$get(
       '/items/initiatives?fields=*.*.*&filter[status]=published'
     )
     return {
-      initiatives: initiativesReq.data
+      initiatives: initiativesReq.data,
     }
   },
   head() {},
@@ -178,7 +176,7 @@ export default {
     },
     lastThreeInitiatives() {
       return this.initiatives.filter((initiative) => initiative.sort > 3)
-    }
+    },
   },
   mounted() {
     gsap.registerPlugin(ScrollTrigger)
@@ -190,13 +188,13 @@ export default {
         pinSpacing: true,
         scrub: 1,
         trigger: container,
-        end: () => '+=' + (container.scrollWidth - container.clientWidth)
+        end: () => '+=' + (container.scrollWidth - container.clientWidth),
       },
-      defaults: { ease: 'none', duration: 1 }
+      defaults: { ease: 'none', duration: 1 },
     })
 
     tl.to('.panel-section', {
-      x: () => -(container.scrollWidth - container.clientWidth)
+      x: () => -(container.scrollWidth - container.clientWidth),
     })
 
     tl.to(
@@ -206,12 +204,12 @@ export default {
         scale: 1,
         duration: 0.6,
         stagger: {
-          amount: 0.8
-        }
+          amount: 0.8,
+        },
       },
       0
     )
-  }
+  },
 }
 </script>
 

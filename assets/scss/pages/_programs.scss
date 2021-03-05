@@ -32,14 +32,9 @@
     }
   }
   #programs__intro {
-    height: 260px;
-    margin-top: 70px;
-    @media (min-width: $breakpoint-small) {
-      height: 300px;
-    }
-    @media (min-width: $breakpoint-large) {
-      margin-top: 0px;
-      height: 350px;
+    height: 200px;
+    @media (min-width: $breakpoint-medium) {
+      height: 250px;
     }
     h1 {
       font-size: 32px;
@@ -64,6 +59,7 @@
       background: $navy;
       @media (min-width: $breakpoint-small) {
         width: 120%;
+        left: -10%;
       }
       @media (min-width: $breakpoint-medium) {
       }

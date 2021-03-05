@@ -28,9 +28,7 @@
       </svg>
     </section>
 
-    <section id="some-space">
-      some space here
-    </section>
+    <section id="some-space">some space here</section>
   </div>
 </template>
 
@@ -59,7 +57,7 @@ export default {
     straightLine.style.strokeDashoffset = length
     window.addEventListener('scroll', straightLineFunction)
     function straightLineFunction() {
-      requestAnimationFrame(function() {
+      requestAnimationFrame(function () {
         const svgContainer = document.getElementById('program__story')
         const svgContainerRect = svgContainer.getBoundingClientRect()
         const svgDivHeight = svgContainerRect.height
@@ -73,7 +71,7 @@ export default {
     }
   },
 
-  methods: {}
+  methods: {},
 }
 </script>
 

@@ -7,7 +7,7 @@
       id="regional-intro"
       class="w-full flex flex-col justify-center items-center relative"
     >
-      <logo-name id="logo-name-2"></logo-name>
+      <!-- <logo-name id="logo-name-2"></logo-name> -->
 
       <logo-name></logo-name>
 
@@ -71,7 +71,7 @@
         And we have many industries on the rise such as Agriculture, Smart
         Energy, and Communications.
       </p>
-      <industry-chart></industry-chart>
+      <industry-chart class="flex items-center justify-center"></industry-chart>
     </div>
   </div>
 </template>
@@ -85,12 +85,12 @@ import logoName from '~/components/layout/logoName'
 export default {
   components: {
     logoName,
-    industryChart
+    industryChart,
   },
 
   data() {
     return {
-      imageLocation: process.env.imageUrl
+      imageLocation: process.env.imageUrl,
     }
   },
   head() {},
@@ -113,8 +113,8 @@ export default {
   methods: {
     filteredBoard(county) {
       return this.board.filter((person) => person.county.title === county)
-    }
-  }
+    },
+  },
 }
 </script>
 

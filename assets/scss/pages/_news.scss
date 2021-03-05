@@ -3,12 +3,11 @@
   overflow: hidden;
   width: 100%;
   #news__intro {
-    height: 300px;
-
-    @media (min-width: $breakpoint-small) {
-    }
+    height: 200px;
     @media (min-width: $breakpoint-medium) {
+      height: 250px;
     }
+
     h1 {
       font-size: 42px;
       line-height: 1.2em;
@@ -31,6 +30,7 @@
       background: $navy;
       @media (min-width: $breakpoint-small) {
         width: 120%;
+        left: -10%;
       }
       @media (min-width: $breakpoint-medium) {
       }

@@ -146,14 +146,7 @@ export default {
     /*
      ** You can extend webpack config here
      */
-    postcss: {
-      preset: {
-        features: {
-          // Fixes: https://github.com/tailwindcss/tailwindcss/issues/1190#issuecomment-546621554
-          'focus-within-pseudo-class': false
-        }
-      }
-    },
+    postcss: {},
     transpile: ['gsap'],
     extend(config, ctx) {
       // Run ESLint on save
@@ -162,7 +155,10 @@ export default {
           enforce: 'pre',
           test: /\.(js|vue)$/,
           loader: 'eslint-loader',
-          exclude: /(node_modules)/
+          exclude: /(node_modules)/,
+          options: {
+            fix: true
+          }
         })
       }
     }

@@ -1,35 +1,33 @@
 .resource-card {
+  height: 220px;
   border: thin solid rgba($grey, 0.2);
-  background: rgba($grey, 0.05);
-  backdrop-filter: blur(2px);
-  color: $navy;
+  background: $navy;
+  color: $white;
   border-radius: 3px;
-  max-width: 840px;
-  width: 90%;
+  width: 220px;
   .resource-card__title {
     font-size: 16px;
     line-height: 18px;
-    border-bottom: thin solid $navy;
+
     @media (min-width: $breakpoint-small) {
     }
     @media (min-width: $breakpoint-medium) {
-      font-size: 18px;
+      font-size: 16px;
     }
     @media (min-width: $breakpoint-large) {
-      font-size: 22px;
-      line-height: 22px;
+      font-size: 18px;
     }
   }
   .resource-card__title.text-xs {
-    // font-size: 12px;
-    // line-height: 16px;
+    font-size: 12px;
+    line-height: 16px;
 
     @media (min-width: $breakpoint-small) {
     }
     @media (min-width: $breakpoint-medium) {
     }
     @media (min-width: $breakpoint-large) {
-      // font-size: 16px;
+      font-size: 16px;
     }
   }
   .resource-card__description {

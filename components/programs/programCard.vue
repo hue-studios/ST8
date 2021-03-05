@@ -10,9 +10,9 @@
       class="progam-card__image"
       :style="
         'background-image: url(' +
-          imageLocation +
-          program.images[0].file_id.private_hash +
-          '?key=small)'
+        imageLocation +
+        program.images[0].file_id.private_hash +
+        '?key=small)'
       "
     ></div>
     <div v-else class="progam-card__image" style=""></div>
@@ -42,7 +42,7 @@
           class="ml-1 mr-1"
           >/</span
         >
-        <h5 v-if="program.partners.length > 0" class="uppercase navy ">
+        <h5 v-if="program.partners.length > 0" class="uppercase navy">
           {{ program.partners.length }}
           <span class="green"
             >Partner<span v-if="program.partners.length > 1">s</span>
@@ -67,18 +67,18 @@
 import linkIcon from '~/components/universal/linkIcon'
 export default {
   components: {
-    linkIcon
+    linkIcon,
   },
   props: {
     program: {
       type: Object,
-      default: null
-    }
+      default: null,
+    },
   },
   data() {
     return {
       programInitiatives: [],
-      imageLocation: process.env.imageUrl
+      imageLocation: process.env.imageUrl,
     }
   },
   created() {
@@ -94,7 +94,8 @@ export default {
       if (str === null || str === '') return false
       else str = str.toString()
       const strOne = str.replace(/&nbsp;/gi, ' ')
-      return strOne.replace(/(<([^>]+)>)/gi, '')
+      const strTwo = strOne.replace(/&amp;/gi, '&')
+      return strTwo.replace(/(<([^>]+)>)/gi, '')
     },
     truncateString(str, num) {
       const newStr = this.removeTags(str)
@@ -102,8 +103,8 @@ export default {
         return newStr
       }
       return newStr.slice(0, num) + '...'
-    }
-  }
+    },
+  },
 }
 </script>
 

@@ -115,14 +115,14 @@ export default {
   components: {
     LinkedinIcon,
     FacebookIcon,
-    TwitterIcon
+    TwitterIcon,
   },
   data() {
     return {
       initiatives: [],
       organization: {},
       social_links: [],
-      locations: []
+      locations: [],
     }
   },
   created() {
@@ -138,21 +138,21 @@ export default {
           this.social_links = response.data.social_links
           this.locations = response.data.locations
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log(error)
         })
     },
     getInitiatives() {
       this.$axios
-        .$get('/items/initiatives?fields=*.*.*')
+        .$get('/items/initiatives?fields=*.*.*&filter[status]=published')
         .then((response) => {
           this.initiatives = response.data
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log(error)
         })
-    }
-  }
+    },
+  },
 }
 </script>
 <style lang="scss">

@@ -34,7 +34,8 @@
       border-left: 5px solid $green;
       padding-left: 5px;
       text-align: center;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.1em;
+      cursor: pointer;
       @media (min-width: $breakpoint-small) {
       }
       @media (min-width: $breakpoint-medium) {
@@ -278,13 +279,17 @@
         }
       }
       .services-section__resource-card {
+        width: calc(100% - 30px);
+        background: rgba($white, 1);
         .services-section__resource-card-title {
-          color: $white;
           letter-spacing: 0.1em;
           font-size: 13px;
           line-height: 13px;
           max-height: 40px;
-          border-bottom: thin solid $white;
+          border-bottom: thin solid $navy;
+        }
+        .services-section__resource-card-description {
+          padding: 0;
         }
         .services-section__resource-card-link {
         }
@@ -292,14 +297,13 @@
     }
     .services-section__program {
       // border: thin solid rgba($green, 1);
-      border-radius: 3px;
+
       background: $white;
       width: calc(100% - 50px);
       @media (min-width: $breakpoint-medium) {
         width: calc(100% - 30px);
       }
       .services-section__program-image {
-        border-radius: 3px 0px 0px 3px;
         width: 100px;
         height: 100px;
         background-position: center;

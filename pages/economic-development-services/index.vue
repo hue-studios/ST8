@@ -4,7 +4,9 @@
       id="services-intro"
       class="pt-24 pb-12 md:py-24 flex flex-col justify-center items-center"
     >
-      <h1 class="uppercase navy pb-3 md:pb-0 md:mb-6 relative tracking-widest">
+      <h1
+        class="uppercase navy pb-3 md:pb-0 md:mb-6 relative thin-font tracking-widest"
+      >
         Services
       </h1>
       <div
@@ -14,7 +16,7 @@
           v-for="(service, index) in services"
           :key="index"
           :data-section="'#service-' + index"
-          class="uppercase relative my-3 md:my-0 md:py-10 services-intro__link"
+          class="uppercase relative my-3 md:my-0 md:py-10 thin-font services-intro__link"
           @click.prevent="smoothScroll($event)"
         >
           <span v-if="index === 1 || index === 3" class="dot"></span>
@@ -34,7 +36,7 @@
       :id="'service-' + index"
       :key="service.id"
       :class="{ dark: index % 2 == 0 }"
-      class=" w-full flex items-start justify-start flex-col relative py-12 md:py-0 services-section"
+      class="w-full flex items-start justify-start flex-col relative py-12 md:py-0 services-section"
     >
       <h2 class="uppercase green thin-font md:sticky">
         {{ service.title }}
@@ -44,18 +46,14 @@
         v-if="service.purpose"
         class="w-full md:w-1/2 services-section__content"
       >
-        <h3 class="w-full uppercase text-xs green text-left">
-          Purpose
-        </h3>
+        <h3 class="w-full uppercase text-xs green text-left">Purpose</h3>
         <div v-html="service.purpose"></div>
       </div>
       <div
         v-if="service.how_we_help"
         class="w-full md:w-1/2 services-section__content"
       >
-        <h3 class="w-full uppercase text-xs green text-left">
-          How we help
-        </h3>
+        <h3 class="w-full uppercase text-xs green text-left">How we help</h3>
         <div v-html="service.how_we_help"></div>
       </div>
       <div
@@ -71,9 +69,7 @@
         v-if="service.example_programs.length > 0"
         class="md:w-1/2 services-section__content"
       >
-        <h3 class="w-full uppercase text-xs green text-left ">
-          Work Portfolio
-        </h3>
+        <h3 class="w-full uppercase text-xs green text-left">Work Portfolio</h3>
         <div class="w-full flex flex-col items-center justify-start mt-4">
           <nuxt-link
             v-for="(program, index) in service.example_programs"
@@ -86,9 +82,9 @@
               class="services-section__program-image"
               :style="
                 'background-image: url(' +
-                  imageLocation +
-                  program.program_id.images[0].file_id.private_hash +
-                  ')'
+                imageLocation +
+                program.program_id.images[0].file_id.private_hash +
+                ')'
               "
             ></div>
             <div class="flex flex-col services-section__program-content">
@@ -127,14 +123,14 @@
                 <span
                   v-if="
                     program.program_id.counties.length > 0 &&
-                      program.program_id.partners.length > 0
+                    program.program_id.partners.length > 0
                   "
                   class="ml-1 mr-1"
                   >/</span
                 >
                 <h5
                   v-if="program.program_id.partners.length > 0"
-                  class="uppercase navy "
+                  class="uppercase navy"
                 >
                   {{ program.program_id.partners.length }}
                   <span class="green"
@@ -157,30 +153,33 @@
         v-if="service.resources.length > 0"
         class="md:w-1/2 services-section__content"
       >
-        <h3 class="w-full uppercase text-xs green text-left ">
-          Resources
-        </h3>
+        <h3 class="w-full uppercase text-xs green text-left">Resources</h3>
         <div class="w-full flex flex-col items-center justify-start mt-4">
           <div
             v-for="(resource, index) in service.resources"
             :key="index"
-            class="w-full flex items-center justify-center flex-col mb-10 services-section__resource-card"
+            class="w-full flex items-center justify-center flex-col mb-10 p-4 md:p-6 shadow-lg services-section__resource-card"
           >
             <h5
-              class="uppercase tracking-widest w-full mb-4 pb-4 services-section__resource-card-title"
+              class="uppercase tracking-widest w-full mb-4 pb-4 navy services-section__resource-card-title"
             >
               {{ resource.resources_id.title }}
             </h5>
-
+            <p
+              v-if="resource.resources_id.description"
+              class="navy services-section__resource-card-description"
+            >
+              {{ resource.resources_id.description }}
+            </p>
             <a
               v-if="
                 resource.resources_id.type === 'Internal File / PDF' &&
-                  resource.resources_id.file
+                resource.resources_id.file
               "
               :href="imageLocation + resource.resources_id.file.private_hash"
               class="w-full uppercase text-xs green bold tracking-widest text-right services-section__resource-card-link"
               target="_blank"
-              >View Resource
+              >View File
               <link-icon class="ml-2"></link-icon>
             </a>
             <a
@@ -188,8 +187,8 @@
               :href="resource.resources_id.link"
               target="_blank"
               rel="noreferrer"
-              class=" w-full uppercase text-xs green bold tracking-widest text-right services-section__resource-card-link"
-              >View Resource
+              class="w-full uppercase text-xs green bold tracking-widest text-right services-section__resource-card-link"
+              >Go to Resource
               <link-icon class="ml-2"></link-icon>
             </a>
           </div>
@@ -203,7 +202,7 @@
 import linkIcon from '~/components/universal/linkIcon'
 export default {
   components: {
-    linkIcon
+    linkIcon,
   },
   async asyncData({ params, $axios }) {
     const servicesReq = await $axios.get(
@@ -211,12 +210,12 @@ export default {
         '/items/services?fields=*.*.*.*.*&filter[status]=published'
     )
     return {
-      services: servicesReq.data.data
+      services: servicesReq.data.data,
     }
   },
   data() {
     return {
-      imageLocation: process.env.imageUrl
+      imageLocation: process.env.imageUrl,
     }
   },
   async fetch({ store, app }) {
@@ -230,10 +229,10 @@ export default {
       const offsetTop = document.querySelector(href).offsetTop
       scroll({
         top: offsetTop,
-        behavior: 'smooth'
+        behavior: 'smooth',
       })
-    }
-  }
+    },
+  },
 }
 </script>
 

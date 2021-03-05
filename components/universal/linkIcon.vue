@@ -10,22 +10,22 @@
 import { ArrowRightIcon } from 'vue-feather-icons'
 export default {
   components: {
-    ArrowRightIcon
+    ArrowRightIcon,
   },
   props: {
     size: {
       type: String,
-      default: '1x'
+      default: '1x',
     },
     stroke: {
       type: String,
-      default: '1.5'
+      default: '1.5',
     },
     className: {
       type: String,
-      default: 'inline-block'
-    }
-  }
+      default: 'inline-block',
+    },
+  },
 }
 </script>
 <style lang="scss" scoped>

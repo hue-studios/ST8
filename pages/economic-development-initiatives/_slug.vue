@@ -12,7 +12,7 @@
       >
         <h3 class="navy thin-font initiative__sort">{{ initiative.sort }}</h3>
         <h1
-          class="flex-shrink uppercase text-left green  relative initiative__title"
+          class="flex-shrink uppercase text-left green relative initiative__title"
         >
           {{ initiative.title }}
         </h1>
@@ -137,7 +137,7 @@ export default {
   components: {
     Swiper,
     SwiperSlide,
-    programCard
+    programCard,
   },
   async asyncData({ params, $axios }) {
     const [initiativeReq, programsReq, newsReq] = await Promise.all([
@@ -155,12 +155,12 @@ export default {
         '/items/news?filter[initiatives.initiative_id.url][eq]=' +
           params.slug +
           '&fields=*.*.*&limit=5'
-      )
+      ),
     ])
     return {
       initiative: initiativeReq.data,
       programs: programsReq.data,
-      news: newsReq.data
+      news: newsReq.data,
     }
   },
   data() {
@@ -175,19 +175,19 @@ export default {
         spaceBetween: 30,
         pagination: {
           el: '.swiper-pagination',
-          dynamicBullets: true
+          dynamicBullets: true,
         },
         breakpoints: {
           1024: {
             // slidesOffsetBefore: 24
-          }
+          },
         },
         navigation: {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',
-          hideOnClick: true
-        }
-      }
+          hideOnClick: true,
+        },
+      },
     }
   },
   head() {},
@@ -213,12 +213,12 @@ export default {
       const straightLength = straightLine.getTotalLength()
       const longLine = document.getElementById('initiative-line')
       const length = longLine.getTotalLength()
-      requestAnimationFrame(function() {
+      requestAnimationFrame(function () {
         const svgContainer = document.getElementById('initiative__story')
         const svgContainerRect = svgContainer.getBoundingClientRect()
         const svgDivHeight = svgContainerRect.height
         const windowScroll = window.pageYOffset
-        const scrollPercent = (windowScroll / svgDivHeight) * 0.72
+        const scrollPercent = (windowScroll / svgDivHeight) * 0.8
         if (scrollPercent < 1) {
           const draw = length * scrollPercent
           longLine.style.strokeDashoffset = length - draw
@@ -226,8 +226,8 @@ export default {
           straightLine.style.strokeDashoffset = straightLength - drawStraight
         }
       })
-    }
-  }
+    },
+  },
 }
 </script>
 

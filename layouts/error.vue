@@ -10,15 +10,15 @@
 <script>
 export default {
   components: {},
-  props: ['error'],
   layout: 'error',
+  props: ['error'],
   data() {
     return {
-      imageUrl: process.env.imageUrl
+      imageUrl: process.env.imageUrl,
     }
   },
   created() {},
-  methods: {}
+  methods: {},
 }
 </script>
 <style lang="scss">
