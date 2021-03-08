@@ -90,17 +90,7 @@
       id="program__story"
       class="flex flex-col justify-start items-center relative program__story"
     >
-      <svg
-        id="start-btn"
-        class="button"
-        expanded="true"
-        height="41px"
-        width="41px"
-      >
-        <circle fill="#1accb8" cx="50%" cy="50%" r="7px"></circle>
-        <circle class="pulse" cx="50%" cy="50%" r="10px"></circle>
-        <circle class="pulse2" cx="50%" cy="50%" r="10px"></circle>
-      </svg>
+      <pulse-icon icon-i-d="start-btn" class-name="button"></pulse-icon>
       <svg
         id="straightLineSVG"
         data-name="Layer 1"
@@ -155,17 +145,7 @@
         class="relative p-6 program__description"
         v-html="program.what_it_accomplishes"
       ></div>
-      <svg
-        id="finish-btn"
-        class="button"
-        expanded="true"
-        height="41px"
-        width="41px"
-      >
-        <circle fill="#1accb8" cx="50%" cy="50%" r="7px"></circle>
-        <circle class="pulse" cx="50%" cy="50%" r="10px"></circle>
-        <circle class="pulse2" cx="50%" cy="50%" r="10px"></circle>
-      </svg>
+      <pulse-icon icon-i-d="finish-btn" class-name="button"></pulse-icon>
     </div>
     <div
       class="flex flex-col justify-center items-center relative program__related"
@@ -186,12 +166,12 @@
         class="w-full flex flex-row justify-center items-center flex-wrap mt-6 px-10 max-w-5xl"
       >
         <div
-          v-for="partner in program.partners"
-          :key="partner.partner_id.sort"
+          v-for="(partner, index) in program.partners"
+          :key="index"
           class="rounded-full flex items-center justify-center partners-badge"
         >
           <img
-            v-if="partner.partner_id.logo"
+            v-if="partner.partner_id"
             :src="
               imageLocation +
               partner.partner_id.logo.private_hash +
@@ -280,8 +260,10 @@ import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 import programCard from '~/components/programs/programCard'
 import newsCardVertical from '~/components/now/newsCardVertical'
 import resourceCard from '~/components/now/resourceCardVertical'
+import pulseIcon from '~/components/universal/pulseIcon'
 export default {
   components: {
+    pulseIcon,
     Swiper,
     SwiperSlide,
     programCard,
@@ -425,7 +407,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import './assets/scss/vars';
 @import './assets/scss/layout/swiper';
 @import './assets/scss/pages/program';

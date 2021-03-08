@@ -2,81 +2,52 @@
   <div id="initiatives">
     <div
       id="initiatives__intro"
-      class="flex flex-row flex-wrap justify-center lg:justify-between items-center relative"
+      class="flex flex-row flex-wrap justify-center md:justify-between lg:justify-center items-center relative"
     >
-      <div
-        v-for="(initiative, index) in firstThreeInitiatives"
-        :key="initiative.sort"
-        :class="{ middle: index === 1 }"
-        class="w-full sm:w-5/6 lg:w-1/3 lg:pr-8 mt-8 mb-8 relative flex flex-col justify-start order-2 lg:order-1 initiatives__intro-card"
-      >
-        <h3 class="green absolute initiatives__intro-card-sort">
-          {{ initiative.sort }}
-        </h3>
-        <h1 class="uppercase tracking-wider navy text-sm bold leading-none">
-          {{ initiative.title }}
-        </h1>
-        <div class="navy text-xs mt-2 mb-2 md:mb-4 text-justify">
-          {{ truncateString(initiative.goal, 170) }}
-        </div>
-        <nuxt-link
-          :to="'/economic-development-initiatives/' + initiative.url"
-          class="uppercase tracking-wider navy text-xs initiatives__intro-card-link"
-          >Learn More<span class="hidden"> about {{ initiative.title }}.</span>
-          <link-icon class="ml-2"></link-icon
-        ></nuxt-link>
-      </div>
       <h2
         id="initiatives__page-title"
-        class="w-full sm:w-5/6 lg:w-full uppercase navy text-center tracking-widest order-1 lg:order-2 relative"
+        class="w-full sm:w-5/6 md:w-full uppercase navy text-center tracking-widest relative thin-font mb-4 md:mb-0 navy"
         @click="smoothScroll('#initiatives__story')"
       >
         Initiatives
         <span class="tracking-wider"
-          >Learn what initiatives are and how they are created<arrow-down-icon
-            size="1.5x"
-            stroke-width="1"
-            class="inline-block"
-          ></arrow-down-icon
+          >Learn what initiatives are and how they are created
+          <pulse-icon class-name="inline-block"></pulse-icon
         ></span>
       </h2>
       <div
-        v-for="initiative in lastThreeInitiatives"
+        v-for="initiative in initiatives"
         :key="initiative.sort"
-        class="w-full sm:w-5/6 lg:w-1/3 lg:pr-8 mt-8 mb-8 relative flex flex-col justify-start order-3 bottomRow initiatives__intro-card"
+        class="relative flex flex-row flex-wrap justify-start items-end w-full sm:w-5/6 md:w-1/5 mt-3 mb-3 md:mt-0 md:mb-0 px-12 md:px-4 lg:px-6 md:py-6 initiatives__intro-card"
       >
-        <h3 class="green absolute initiatives__intro-card-sort">
+        <h3 class="green initiatives__intro-card-sort">
           {{ initiative.sort }}
         </h3>
-        <h1 class="uppercase tracking-wider navy text-sm bold leading-none">
+        <h1
+          class="uppercase tracking-wider navy text-sm bold ml-2 initiatives__intro-card-title"
+        >
           {{ initiative.title }}
         </h1>
-        <div class="navy text-xs mt-2 mb-2 md:mb-4 text-justify">
-          {{ truncateString(initiative.goal, 170) }}
+        <div class="w-full md:absolute w-full initiatives__intro-card-back">
+          <div class="navy text-xs mt-2 mb-2 md:mb-4 text-justify">
+            {{ truncateString(initiative.goal, 170) }}
+          </div>
+          <nuxt-link
+            :to="'/economic-development-initiatives/' + initiative.url"
+            class="uppercase tracking-wider navy bold text-xs w-full text-right block initiatives__intro-card-link"
+            >Learn More<span class="hidden">
+              about {{ initiative.title }}.</span
+            >
+            <link-icon class="ml-0"></link-icon
+          ></nuxt-link>
         </div>
-        <nuxt-link
-          :to="'/economic-development-initiatives/' + initiative.url"
-          class="uppercase tracking-wider navy text-xs initiatives__intro-card-link"
-          >Learn More<span class="hidden"> about {{ initiative.title }}.</span>
-          <link-icon class="ml-2"></link-icon
-        ></nuxt-link>
       </div>
     </div>
     <div
       id="initiatives__story"
       class="flex flex-col justify-start items-center relative initiatives__story"
     >
-      <svg
-        id="start-btn"
-        class="button"
-        expanded="true"
-        height="41px"
-        width="41px"
-      >
-        <circle fill="#1accb8" cx="50%" cy="50%" r="7px"></circle>
-        <circle class="pulse" cx="50%" cy="50%" r="10px"></circle>
-        <circle class="pulse2" cx="50%" cy="50%" r="10px"></circle>
-      </svg>
+      <pulse-icon icon-i-d="start-btn" class-name="button"></pulse-icon>
       <svg
         id="straightLineSVG"
         data-name="Layer 1"
@@ -160,26 +131,14 @@
           challenges and opportunities.
         </p>
       </div>
-      <svg
-        id="finish-btn"
-        class="button"
-        expanded="true"
-        height="41px"
-        width="41px"
-      >
-        <circle fill="#1accb8" cx="50%" cy="50%" r="7px"></circle>
-        <circle class="pulse" cx="50%" cy="50%" r="10px"></circle>
-        <circle class="pulse2" cx="50%" cy="50%" r="10px"></circle>
-      </svg>
+      <pulse-icon icon-i-d="finish-btn" class-name="button"></pulse-icon>
     </div>
 
     <div
       id="initiatives__conclusion"
       class="w-full flex items-center justify-center flex-col py-20"
     >
-      <h3
-        class="green bold sm:thin-font uppercase relative tracking-widest pb-8"
-      >
+      <h3 class="green thin-font uppercase relative tracking-widest pb-8">
         SELECT AN INITIATIVE TO LEARN MORE:
       </h3>
 
@@ -187,7 +146,7 @@
         v-for="(initiative, index) in initiatives"
         :key="index"
         :to="'/economic-development-initiatives/' + initiative.url"
-        class="uppercase tracking-widest py-4"
+        class="uppercase tracking-widest py-4 bold"
         >{{ initiative.title }} <link-icon class="ml-2"></link-icon
       ></nuxt-link>
     </div>
@@ -195,12 +154,12 @@
 </template>
 
 <script>
-import { ArrowDownIcon } from 'vue-feather-icons'
+import pulseIcon from '~/components/universal/pulseIcon'
 import linkIcon from '~/components/universal/linkIcon'
 export default {
   components: {
+    pulseIcon,
     linkIcon,
-    ArrowDownIcon,
   },
   async asyncData({ params, $axios }) {
     const initiativesReq = await $axios.$get(
@@ -247,7 +206,7 @@ export default {
         const svgContainerRect = svgContainer.getBoundingClientRect()
         const svgDivHeight = svgContainerRect.height
         const windowScroll = window.pageYOffset
-        const scrollPercent = (windowScroll / svgDivHeight) * 0.7
+        const scrollPercent = (windowScroll / svgDivHeight) * 0.8
         if (scrollPercent < 1) {
           const draw = length * scrollPercent
           longLine.style.strokeDashoffset = length - draw
@@ -265,6 +224,7 @@ export default {
         behavior: 'smooth',
       })
     },
+
     removeTags(str) {
       if (str === null || str === '') return false
       else str = str.toString()

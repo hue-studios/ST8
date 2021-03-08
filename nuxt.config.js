@@ -3,7 +3,7 @@ export default {
   // static: 'false',
   server: {
     port: 8080, // default: 3000
-    host: '0.0.0.0' // default: localhost
+    host: '0.0.0.0', // default: localhost
   },
   /*
    ** Headers of the page
@@ -16,24 +16,24 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content: process.env.npm_package_description || ''
-      }
+        content: process.env.npm_package_description || '',
+      },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       {
         rel: 'preconnect',
         href: 'https://admin.steny.org',
-        crossorigin: 'true'
-      }
+        crossorigin: 'true',
+      },
     ],
     script: [
       {
         src:
           'https://fast.fonts.net/jsapi/21a0c137-b931-4f95-8773-dabd5b0c50f7.js',
-        rel: 'dns-prefetch'
-      }
-    ]
+        rel: 'dns-prefetch',
+      },
+    ],
   },
   /*
    ** Customize the progress-bar color
@@ -45,11 +45,11 @@ export default {
   css: [
     {
       src: '~/assets/scss/main.scss',
-      lang: 'scss'
-    }
+      lang: 'scss',
+    },
   ],
   router: {
-    middleware: 'pages'
+    middleware: 'pages',
   },
   /*
    ** Plugins to load before mounting the App
@@ -63,7 +63,7 @@ export default {
     // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module',
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
-    '@nuxtjs/tailwindcss'
+    '@nuxtjs/tailwindcss',
     // 'nuxt-purgecss'
   ],
   /*
@@ -78,9 +78,9 @@ export default {
     [
       'nuxt-validate',
       {
-        lang: 'en'
-      }
-    ]
+        lang: 'en',
+      },
+    ],
     // '@nuxtjs/google-analytics'
   ],
   // 'google-analytics': {
@@ -89,10 +89,10 @@ export default {
   tailwindcss: {
     cssPath: '~/assets/css/tailwind.scss',
     configPath: 'tailwind.config.js',
-    exposeConfig: false
+    exposeConfig: false,
   },
   moment: {
-    defaultTimezone: 'America/New_York'
+    defaultTimezone: 'America/New_York',
   },
   /*
    ** Axios module configuration
@@ -100,7 +100,7 @@ export default {
    */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-    baseURL: 'https://admin.steny.org/southern-tier-8'
+    baseURL: 'https://admin.steny.org/southern-tier-8',
   },
   izitoast: {
     timeout: 3000,
@@ -117,7 +117,7 @@ export default {
     progressBarColor: '#00ff1b',
     overlay: true,
     overlayClose: true,
-    overlayColor: 'rgba(0,0,0,0.7)'
+    overlayColor: 'rgba(0,0,0,0.7)',
   },
   pwa: {
     meta: {
@@ -126,18 +126,18 @@ export default {
       theme_color: '#193658',
       nativeUI: true,
       short_name: 'ST8',
-      background_color: '#ffffff'
-    }
+      background_color: '#ffffff',
+    },
   },
   env: {
     apiUrl: 'https://admin.steny.org/southern-tier-8',
-    imageUrl: 'https://admin.steny.org/southern-tier-8/assets/'
+    imageUrl: 'https://admin.steny.org/southern-tier-8/assets/',
   },
 
   render: {
     dist: {
-      maxAge: '1d'
-    }
+      maxAge: '1d',
+    },
   },
   /*
    ** Build configuration
@@ -157,10 +157,10 @@ export default {
           loader: 'eslint-loader',
           exclude: /(node_modules)/,
           options: {
-            fix: true
-          }
+            fix: true,
+          },
         })
       }
-    }
-  }
+    },
+  },
 }

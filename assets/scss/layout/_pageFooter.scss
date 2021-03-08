@@ -55,14 +55,14 @@
     .footer-col__contact-section.social {
       a {
         background: $navy;
-        color: $white !important;
+        color: $green !important;
         cursor: pointer;
         z-index: 5;
         svg {
-          color: $white !important;
-          fill: $white !important;
+          color: $green !important;
+          fill: $green !important;
           path {
-            stroke: $white;
+            stroke: $green;
           }
         }
       }

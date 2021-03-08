@@ -16,17 +16,15 @@
           v-for="(service, index) in services"
           :key="index"
           :data-section="'#service-' + index"
-          class="uppercase relative my-3 md:my-0 md:py-10 thin-font services-intro__link"
+          class="uppercase relative my-3 md:my-0 md:py-10 bold services-intro__link"
           @click.prevent="smoothScroll($event)"
         >
-          <span v-if="index === 1 || index === 3" class="dot"></span>
           {{ service.title }}
-          <span v-if="index === 0 || index === 2" class="dot"></span>
-          <arrow-right-icon
-            :data-section="'#service-' + index"
-            size="1x"
-            stroke-width="1"
-          ></arrow-right-icon>
+
+          <pulse-icon
+            icon-i-d="start-btn"
+            class-name="inline-block button"
+          ></pulse-icon>
         </h2>
       </div>
     </div>
@@ -199,9 +197,11 @@
 </template>
 
 <script>
+import pulseIcon from '~/components/universal/pulseIcon'
 import linkIcon from '~/components/universal/linkIcon'
 export default {
   components: {
+    pulseIcon,
     linkIcon,
   },
   async asyncData({ params, $axios }) {

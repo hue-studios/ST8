@@ -28,10 +28,14 @@
           >Services</nuxt-link
         >
       </p>
-
       <p>
-        <nuxt-link to="/regional-profile/" class="mobile-nav-link"
-          >Regional</nuxt-link
+        <nuxt-link to="/regional-partnerships" class="mobile-nav-link"
+          >Partnerships</nuxt-link
+        >
+      </p>
+      <p>
+        <nuxt-link to="/regional-profile" class="mobile-nav-link"
+          >Regional Profile</nuxt-link
         >
       </p>
       <p>

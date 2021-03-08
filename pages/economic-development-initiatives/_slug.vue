@@ -22,17 +22,7 @@
       id="initiative__story"
       class="flex flex-col justify-start items-center relative initiative__story"
     >
-      <svg
-        id="start-btn"
-        class="button"
-        expanded="true"
-        height="41px"
-        width="41px"
-      >
-        <circle fill="#1accb8" cx="50%" cy="50%" r="7px"></circle>
-        <circle class="pulse" cx="50%" cy="50%" r="10px"></circle>
-        <circle class="pulse2" cx="50%" cy="50%" r="10px"></circle>
-      </svg>
+      <pulse-icon icon-i-d="start-btn" class-name="button"></pulse-icon>
       <svg
         id="straightLineSVG"
         data-name="Layer 1"
@@ -87,17 +77,7 @@
         class="relative p-6 initiative__description"
         v-html="initiative.opportunity"
       ></div>
-      <svg
-        id="finish-btn"
-        class="button"
-        expanded="true"
-        height="41px"
-        width="41px"
-      >
-        <circle fill="#1accb8" cx="50%" cy="50%" r="7px"></circle>
-        <circle class="pulse" cx="50%" cy="50%" r="10px"></circle>
-        <circle class="pulse2" cx="50%" cy="50%" r="10px"></circle>
-      </svg>
+      <pulse-icon icon-i-d="finish-btn" class-name="button"></pulse-icon>
     </div>
     <div
       class="flex flex-col justify-center items-center relative initiative__related"
@@ -132,9 +112,11 @@
 
 <script>
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+import pulseIcon from '~/components/universal/pulseIcon'
 import programCard from '~/components/programs/programCard'
 export default {
   components: {
+    pulseIcon,
     Swiper,
     SwiperSlide,
     programCard,
@@ -231,7 +213,8 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import './assets/scss/vars';
+@import './assets/scss/layout/swiper';
 @import './assets/scss/pages/initiative';
 </style>

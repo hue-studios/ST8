@@ -1,7 +1,7 @@
 <template>
   <div
     id="page-footer"
-    class="flex items-center md:items-start justify-center flex-col md:flex-row pt-10 pb-10"
+    class="flex items-center md:items-start justify-center flex-col md:flex-row pt-10 pb-20"
   >
     <div
       class="flex flex-col items-start justify-start w-full md:w-1/3 text-center md:text-left pr-8 pl-8 footer-col"
@@ -29,7 +29,12 @@
         class="uppercase w-full footer-link"
         >Services</nuxt-link
       >
-      <nuxt-link to="/regional-profile/" class="uppercase w-full footer-link"
+      <nuxt-link
+        to="/regional-partnerships"
+        class="uppercase w-full footer-link"
+        >Partnerships</nuxt-link
+      >
+      <nuxt-link to="/regional-profile" class="uppercase w-full footer-link"
         >Regional Profile</nuxt-link
       >
       <nuxt-link to="/regional-news/" class="uppercase w-full footer-link"
@@ -74,7 +79,7 @@
         <p class="w-full uppercase">{{ item.locations_id.address }}</p>
       </div>
       <div
-        class="flex flex-row flex-wrap items-center justify-center w-full footer-col__contact-section social"
+        class="flex flex-row flex-wrap items-center justify-center md:justify-start w-full footer-col__contact-section social"
       >
         <div
           v-for="(item, index) in social_links"
@@ -84,7 +89,7 @@
           <a
             :href="item.social_links_id.link"
             target="_blank"
-            class="rounded-full w-12 h-12 flex justify-center items-center mr-4"
+            class="rounded-full w-10 h-10 flex justify-center items-center mr-1 ml-1 md:mr-2 md:ml-0"
             ><linkedin-icon
               v-if="item.social_links_id.platform == 'Linkedin'"
               size="1x"

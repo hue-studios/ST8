@@ -26,10 +26,23 @@
           >
         </div>
       </div>
-      <div id="regionalNavContainer" class="relative page-nav__drop-container">
-        <nuxt-link to="/regional-profile"
-          ><h3 class="uppercase">Regional</h3></nuxt-link
+      <div
+        id="regionalNavContainer"
+        class="relative page-nav__drop-container"
+        @mouseover="toggleDropNav('regional', true)"
+        @mouseleave="toggleDropNav('regional', false)"
+      >
+        <h3 class="uppercase">Regional</h3>
+        <div
+          class="flex items-center justify-center flex-row page-nav__drop-links"
         >
+          <nuxt-link to="/regional-partnerships" class="uppercase"
+            >Partnerships</nuxt-link
+          >
+          <nuxt-link to="/regional-profile" class="uppercase"
+            >Profile</nuxt-link
+          >
+        </div>
       </div>
       <div
         id="nowNavContainer"
@@ -58,21 +71,11 @@
           ><h3 class="uppercase">Organization</h3></nuxt-link
         >
       </div>
-      <div
-        id="partnershipsNavContainer"
-        class="relative page-nav__drop-container"
-      >
-        <nuxt-link to="/partnerships"
-          ><h3 class="uppercase">Partnerships</h3></nuxt-link
-        >
-      </div>
     </div>
     <new-york-state />
   </div>
 </template>
 <script>
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import logo from '~/components/layout/logo.vue'
 import newYorkState from '~/components/layout/newYorkState.vue'
 import logoName from '~/components/layout/logoName.vue'
@@ -96,9 +99,7 @@ export default {
   beforeDestroy() {
     window.removeEventListener('scroll', this.toggleHeader)
   },
-  mounted() {
-    gsap.registerPlugin(ScrollTrigger)
-  },
+  mounted() {},
   methods: {
     toggleHeader() {
       const currentScrollPosition =

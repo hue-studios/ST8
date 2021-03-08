@@ -1,0 +1,45 @@
+.resource-card {
+  border: thin solid rgba($grey, 0.2);
+  background: rgba($grey, 0.05);
+  backdrop-filter: blur(2px);
+  color: $navy;
+  border-radius: 3px;
+  max-width: 840px;
+  width: 90%;
+  .resource-card__title {
+    font-size: 16px;
+    line-height: 18px;
+    border-bottom: thin solid $navy;
+    @media (min-width: $breakpoint-small) {
+    }
+    @media (min-width: $breakpoint-medium) {
+      font-size: 18px;
+    }
+    @media (min-width: $breakpoint-large) {
+      font-size: 22px;
+      line-height: 22px;
+    }
+  }
+  .resource-card__title.text-xs {
+    // font-size: 12px;
+    // line-height: 16px;
+
+    @media (min-width: $breakpoint-small) {
+    }
+    @media (min-width: $breakpoint-medium) {
+    }
+    @media (min-width: $breakpoint-large) {
+      // font-size: 16px;
+    }
+  }
+  .resource-card__description {
+    font-size: 13px;
+    @media (min-width: $breakpoint-small) {
+    }
+    @media (min-width: $breakpoint-medium) {
+    }
+  }
+  a {
+    font-size: 10px;
+  }
+}

@@ -22,7 +22,7 @@
       <h2
         class="w-full text-center uppercase thin-font mb-2 partnerships__title"
       >
-        Partnerships are Everything
+        Collaboration is Everything
       </h2>
       <p>
         One of the main goals of our organization at Southern Tier 8, is to

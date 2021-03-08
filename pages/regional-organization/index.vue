@@ -6,7 +6,7 @@
     >
       <div id="mission-section__counties" class="absolute left-0">
         <h1
-          v-for="(county, index) in counties"
+          v-for="(county, index) in filteredCounties"
           :key="index"
           class="uppercase grey block opacity-25 bold"
         >
@@ -209,6 +209,48 @@
         </h5>
       </div>
     </div>
+    <div
+      id="roi-section"
+      class="w-full flex justify-center items-center flex-col py-20"
+    >
+      <h2
+        class="uppercase w-full text-center page-title tracking-widest thin-font mb-8 navy"
+      >
+        Return on Investment
+      </h2>
+      <div
+        class="flex items-center justify-center flex-col relative py-12 mb-8 roi-card"
+      >
+        <h5 class="absolute uppercase thin-font">ROI</h5>
+        <h3 class="green uppercase tracking-widest bold">Regional</h3>
+      </div>
+      <p class="w-full px-8 mb-8">
+        Southern Tier 8 Regional Board represents eight counties as the 6th
+        largest Local Development District for the Appalachian Regional
+        Commission (ARC), and five counties as an Economic Development District
+        under the US Economic Development Administration (EDA). Federal
+        partners, ARC and EDA offer investments to leverage private sector
+        dollars that increase job opportunities, raise per capita income,
+        promote infrastructure improvements and strengthen the capacity of our
+        people to compete in global economies. County participation and
+        investments make these programs possible, with an average annual return
+        of $5,500 per $1 of local investment.
+      </p>
+      <div
+        class="flex flex-row flex-wrap items-center justify-center max-w-3xl"
+      >
+        <div
+          v-for="(county, index) in filteredCounties"
+          :key="index"
+          class="flex items-center justify-center flex-col relative py-12 mx-2 mb-4 roi-card"
+        >
+          <h5 class="absolute uppercase thin-font">ROI</h5>
+          <h3 class="green uppercase tracking-widest bold">
+            {{ county.title }}
+          </h3>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -239,6 +281,12 @@ export default {
     },
     board() {
       return this.people.filter((person) => person.category === 'Board')
+    },
+    filteredCounties(county) {
+      return this.counties.filter((county) => county.title !== 'Regional')
+    },
+    regionalData(county) {
+      return this.counties.filter((county) => county.title === 'Regional')
     },
   },
   created() {},

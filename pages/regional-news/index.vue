@@ -37,8 +37,8 @@
         class="w-full flex flex-col items-center justify-center px-3 sm:px-8"
       >
         <news-card
-          v-for="(item, index) in filteredArticles"
-          :key="index"
+          v-for="item in filteredArticles"
+          :key="item.id"
           :item="item"
         ></news-card>
       </transition-group>
