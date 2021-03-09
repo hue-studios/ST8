@@ -10,13 +10,17 @@
         'background-image: url(' +
         imageLocation +
         item.cover_image.private_hash +
-        ')'
+        '?key=medium)'
       "
     ></div>
     <div
       v-else
       class="w-full mb-4 news-card-vertical__image"
-      :style="'background-image: url(' + imageLocation + '1avcl3u0gukko40g)'"
+      :style="
+        'background-image: url(' +
+        imageLocation +
+        '1avcl3u0gukko40g?key=medium)'
+      "
     ></div>
 
     <div

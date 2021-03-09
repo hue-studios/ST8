@@ -10,7 +10,7 @@
         'background-image: url(' +
         imageLocation +
         item.cover_image.private_hash +
-        ')'
+        '?key=medium)'
       "
     ></div>
     <div
