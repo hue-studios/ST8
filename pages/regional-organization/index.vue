@@ -20,37 +20,66 @@
     </div>
     <div
       id="organization-info"
-      class="w-full flex items-center flex-col justify-center py-20"
+      class="w-full flex items-center flex-col justify-center py-20 relative"
     >
+      <pulse-icon icon-i-d="start-btn" class-name="button"></pulse-icon>
+      <svg
+        id="straightLineSVG"
+        data-name="Layer 1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 1 695.51"
+      >
+        <path
+          id="straight-line"
+          data-name="Path 6808"
+          class="cls-1"
+          fill="none"
+          stroke="#1accb8"
+          stroke-width="2"
+          d="M.5,0V695.51"
+        />
+      </svg>
       <div
         id="organization-info__container"
         class="flex flex-col items-start px-8"
       >
-        <h2 class="page-title uppercase green tracking-widest mb-4 relative">
-          Who We Are
-        </h2>
-        <div class="whitespace-pre-wrap">{{ organization.who_we_are }}</div>
-
         <h2
-          class="page-title uppercase green tracking-widest mt-8 mb-4 relative"
+          class="w-full page-title uppercase tracking-widest mb-4 pt-2 pb-1 thin-font mb-20 relative text-center"
         >
-          Our Role
+          Our Vision
         </h2>
-        <div class="whitespace-pre-wrap">{{ organization.our_role }}</div>
+        <div class="whitespace-pre-wrap mb-20 pb-4">
+          {{ organization.who_we_are }}
+        </div>
 
         <h2
-          class="page-title uppercase green tracking-widest mt-8 mb-4 relative"
+          class="w-full page-title uppercase tracking-widest mt-8 mb-4 thin-font pt-2 pb-1 mb-20 text-center relative"
+        >
+          Our Approach
+        </h2>
+        <div class="whitespace-pre-wrap mb-20 pb-4">
+          {{ organization.our_role }}
+        </div>
+
+        <h2
+          class="w-full page-title uppercase text-center tracking-widest thin-font mt-8 mb-4 pt-2 pb-1 mb-20 relative"
         >
           Our History
         </h2>
-        <div class="whitespace-pre-wrap">{{ organization.our_history }}</div>
+        <div class="whitespace-pre-wrap mb-20 pb-4">
+          {{ organization.our_history }}
+        </div>
 
-        <div class="w-full mt-6 text-center">
-          <p lass="mt-6">View our 5 year plan 2018-2022:</p>
+        <p
+          class="w-full text-center mb-20 py-4 tracking-widest uppercase bold text-xs"
+        >
+          View our 5 year plan 2018-2022:
+        </p>
+        <div class="w-full text-center bg-transparent">
           <a
-            class="mt-4 inline-block px-12 py-6 uppercase green tracking-widest font-medium"
+            class="inline-block px-12 py-6 uppercase green bold tracking-widest font-medium"
             href="#"
-            >5 Year Plan</a
+            >CEDS</a
           >
         </div>
       </div>
@@ -255,8 +284,9 @@
 </template>
 
 <script>
+import pulseIcon from '~/components/universal/pulseIcon'
 export default {
-  components: {},
+  components: { pulseIcon },
   async asyncData({ $axios }) {
     const [organizationReq, peopleReq, countiesReq] = await Promise.all([
       $axios.$get('/items/organization?single=1&fields=*.*.*'),
@@ -290,7 +320,18 @@ export default {
     },
   },
   created() {},
-  mounted() {},
+
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.lineFunction)
+  },
+  mounted() {
+    // mobile line animation
+    const straightLine = document.getElementById('straight-line')
+    const straightLength = straightLine.getTotalLength()
+    straightLine.style.strokeDasharray = straightLength
+    straightLine.style.strokeDashoffset = straightLength
+    window.addEventListener('scroll', this.lineFunction)
+  },
   methods: {
     smoothScroll(e) {
       console.log(e.target.getAttribute('href'))
@@ -303,6 +344,21 @@ export default {
     },
     filteredBoard(county) {
       return this.board.filter((person) => person.county.title === county)
+    },
+    lineFunction() {
+      const straightLine = document.getElementById('straight-line')
+      const straightLength = straightLine.getTotalLength()
+      requestAnimationFrame(function () {
+        const svgContainer = document.getElementById('organization-info')
+        const svgContainerRect = svgContainer.getBoundingClientRect()
+        const svgDivHeight = svgContainerRect.height
+        const windowScroll = window.pageYOffset
+        const scrollPercent = (windowScroll / svgDivHeight) * 0.8
+        if (scrollPercent < 1) {
+          const drawStraight = straightLength * scrollPercent
+          straightLine.style.strokeDashoffset = straightLength - drawStraight
+        }
+      })
     },
   },
 }

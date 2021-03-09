@@ -26,7 +26,7 @@
       </h2>
       <p>
         One of the main goals of our organization at Southern Tier 8, is to
-        encourage and promote partnership in all that we do, or anything we get
+        encourage and promote partnerships in all that we do, or anything we get
         involved with. We believe that only in this manner can we accomplish
         things more effectively, smoothly, and creatively.
       </p>
@@ -34,18 +34,17 @@
         As a regional organization for the Southern Tier, we have the task of
         assisting 8 counties in Upstate NY, hence why we strongly believe that
         only by working together with our partners we’ll find the best solutions
-        for any challenge at hand.
+        for any community challenge at hand.
       </p>
-      <p>
+      <!-- <p>
         We love our partnerships and we are always open to any ideas,
         collaboration concepts, project discussions…anything that it takes to
         help continually evolve our region.
-      </p>
+      </p> -->
       <p>
-        We welcome organizations and municipalities to partner with us to
-        accomplish ideas, tackle challenges, and accomplish crucial projects
-        with innovative solutions and collaboration to help grow the Southern
-        Tier 8 region.
+        We work with our County representatives to assess community challenges,
+        design innovative strategies, collaborate with partners to support
+        ecosystems that encourage economic growth in the Southern Tier.
       </p>
     </div>
     <div
@@ -221,17 +220,19 @@
         class="w-full text-center uppercase thin-font partnerships__title"
       ></h2>
 
-      <home-graphic />
+      <img
+        id="partnerships-graphic"
+        src="/images/partnerships-graphic@2x.png"
+        alt="Partnerships Graphic"
+      />
     </div>
   </div>
 </template>
 
 <script>
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
-import homeGraphic from '~/components/homeGraphic'
 export default {
   components: {
-    homeGraphic,
     Swiper,
     SwiperSlide,
   },

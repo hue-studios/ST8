@@ -1,7 +1,13 @@
 #organization {
   #mission-section {
-    height: 600px;
+    height: calc(100vh - 70px);
+    min-height: 560px;
     overflow: hidden;
+    @media (min-width: $breakpoint-large) {
+      // margin-bottom: 100px;
+      height: calc(100vh - 120px);
+      margin-top: 0px;
+    }
     .statement {
       width: 90%;
       max-width: 550px;
@@ -59,20 +65,45 @@
   }
   #organization-info {
     box-shadow: 0px 2px 20px rgba($black, 0.25);
+    #start-btn {
+      position: absolute;
+      top: -70px;
+      left: calc(50% - 20px);
+      filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.25));
+      @media (min-width: $breakpoint-small) {
+      }
+      @media (min-width: $breakpoint-medium) {
+      }
+      @media (min-width: $breakpoint-large) {
+        top: -70px;
+        // left: calc(50% + 435px);
+      }
+      @media (min-width: $breakpoint-xlarge) {
+      }
+    }
+
+    #straightLineSVG {
+      position: absolute;
+      z-index: -1;
+      top: -50px;
+      left: calc(50% - 1px);
+      height: calc(100% - 50px);
+      width: 3px;
+      @media (min-width: $breakpoint-large) {
+      }
+    }
     #organization-info__container {
       max-width: 960px;
-      .page-title:after {
-        content: '';
-        width: calc(100% + 60px);
-        height: 1px;
-        background: $green;
-        position: absolute;
-        bottom: -1px;
-        left: 0px;
+      h2 {
+        background: $white;
+      }
+      div,
+      p {
+        background: $white;
       }
       a {
         border: thin solid $green;
-        border-radius: 3px;
+        background: $white;
       }
     }
   }
