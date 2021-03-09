@@ -1,11 +1,8 @@
 #events {
   #events__intro {
-    height: 300px;
-
-    @media (min-width: $breakpoint-small) {
-    }
+    height: 200px;
     @media (min-width: $breakpoint-medium) {
-      margin-top: 0px;
+      height: 250px;
     }
     h1 {
       font-size: 42px;
@@ -29,6 +26,7 @@
       background: $navy;
       @media (min-width: $breakpoint-small) {
         width: 120%;
+        left: -10%;
       }
       @media (min-width: $breakpoint-medium) {
       }
@@ -37,103 +35,71 @@
       font-size: 14px;
     }
   }
-  .vc-container {
-    border-radius: 0px;
-    border: none !important;
-    border-color: $white !important;
-    font-family: $body-font;
-    // height: 500px;
+
+  #calendar-loader {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 10;
+    height: 100%;
     width: 100%;
+    backdrop-filter: blur(6px);
+    img {
+      width: 40px;
+      height: 40px;
+    }
+  }
+  #events__featured-container {
+    max-width: 700px;
+    @media (min-width: $breakpoint-large) {
+      border-right: thin solid rgba($grey, 0.5);
+    }
+  }
+  #events__featured {
+    height: auto;
+    max-width: 700px;
     @media (min-width: $breakpoint-medium) {
-      // height: 600px;
+      height: 300px;
     }
-    .vc-pane-container {
-      display: flex;
-      justify-content: center;
-      @media (min-width: $breakpoint-medium) {
-        height: 600px;
-      }
-      .vc-pane-layout {
-        width: 100%;
-        max-width: 1200px;
-        @media (min-width: $breakpoint-medium) {
-          height: 600px !important;
-        }
-        .vc-weeks {
-          height: 400px !important;
-          @media (min-width: $breakpoint-medium) {
-            height: 500px !important;
-          }
-        }
-      }
-      .vc-header {
-        margin-bottom: 30px;
-      }
-      .vc-grid-container {
-        width: 100%;
-      }
-    }
-    .vc-arrows-container {
-      // padding: 0 30px 0;
-      max-width: 500px;
-    }
-    .vc-day {
-      height: 60px !important;
-    }
-    .vc-title {
-      text-transform: uppercase;
+    #title {
+      font-size: 18px;
       letter-spacing: 0.35em;
-      font-weight: 400;
     }
-    .vc-popover {
-      .vc-bar {
-        background-color: red;
-      }
+    .swiper-slide {
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .vc-dots {
-      .vc-dot:nth-of-type(1) {
-        opacity: 1;
+    .events__event {
+      width: 96%;
+      border: thin solid rgba($grey, 0.2);
+
+      .events__event-image {
+        width: 100px;
+        height: 100px;
       }
-      .vc-dot:nth-of-type(2) {
-        opacity: 0.95;
+
+      .events__event-description {
+        border-left: thin solid rgba($grey, 0.5);
+        padding: 20px;
+        font-size: 12px;
+        line-height: 1.2em;
+        width: calc(100% - 150px);
+        h3 {
+        }
+        h4 {
+          font-size: 10px;
+        }
+        p {
+        }
       }
-      .vc-dot:nth-of-type(3) {
-        opacity: 0.9;
-      }
-      .vc-dot:nth-of-type(4) {
-        opacity: 0.85;
-      }
-      .vc-dot:nth-of-type(5) {
-        opacity: 0.8;
-      }
-      .vc-dot:nth-of-type(6) {
-        opacity: 0.75;
-      }
-      .vc-dot:nth-of-type(7) {
-        opacity: 0.7;
-      }
-      .vc-dot:nth-of-type(8) {
-        opacity: 0.65;
-      }
-      .vc-dot:nth-of-type(9) {
-        opacity: 0.6;
-      }
-      .vc-dot:nth-of-type(10) {
-        opacity: 0.55;
+      .events__event-link {
+        width: 50px;
       }
     }
   }
-  .selected-day {
-    max-width: 600px;
-    ul {
-      list-style: disc;
-
-      .selected-day-event {
-        list-style-type: disc;
-        h5 {
-          font-size: 13px;
-        }
-      }
-    }
+  #events__calendar {
+    max-width: 700px;
   }
 }

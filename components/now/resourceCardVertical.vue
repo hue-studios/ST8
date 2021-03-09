@@ -1,7 +1,8 @@
 <template>
   <div
+    v-if="item"
     :id="'resource-card-' + item.id"
-    class="flex items-center justify-center flex-col py-12 shadow-lg resource-card"
+    class="flex items-center justify-center flex-col py-12 shadow-lg resource-card-vertical"
   >
     <h2
       class="uppercase tracking-widest w-full mb-4 px-4 md:px-6 resource-card__title"
@@ -48,7 +49,9 @@ export default {
     }
   },
   created() {
-    this.countTitle(this.item.title)
+    if (this.item) {
+      this.countTitle(this.item.title)
+    }
   },
   methods: {
     countTitle(title) {

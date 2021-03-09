@@ -152,7 +152,7 @@
     >
       <h3 class="uppercase green relative program__title">Partners</h3>
       <p class="px-4 text-center program__p">
-        We had
+        We have
         <span class="bold"
           >{{ program.partners.length }} partner<span
             v-if="program.partners.length > 1"
@@ -407,7 +407,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './assets/scss/vars';
 @import './assets/scss/layout/swiper';
 @import './assets/scss/pages/program';

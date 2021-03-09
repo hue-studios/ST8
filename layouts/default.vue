@@ -39,20 +39,20 @@
         >
       </p>
       <p>
-        <nuxt-link to="/regional-news/" class="mobile-nav-link">News</nuxt-link>
+        <nuxt-link to="/regional-news" class="mobile-nav-link">News</nuxt-link>
       </p>
       <p>
-        <nuxt-link to="/regional-news/events/" class="mobile-nav-link"
+        <nuxt-link to="/regional-events" class="mobile-nav-link"
           >Events</nuxt-link
         >
       </p>
       <p>
-        <nuxt-link to="/regional-news/resources/" class="mobile-nav-link"
+        <nuxt-link to="/regional-news/resources" class="mobile-nav-link"
           >Resources</nuxt-link
         >
       </p>
       <p>
-        <nuxt-link to="/regional-organization/" class="mobile-nav-link">
+        <nuxt-link to="/regional-organization" class="mobile-nav-link">
           Organization
         </nuxt-link>
       </p>

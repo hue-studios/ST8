@@ -14,10 +14,13 @@
       </p>
     </div>
     <div
-      class="w-full flex items-start justify-center flex-col md:flex-row h-full"
+      class="w-full flex items-center lg:items-start justify-center flex-col lg:flex-row h-full"
     >
-      <div class="w-full md:w-2/5 flex item-center justify-center flex-col">
-        <div id="events__featured" class="">
+      <div
+        id="events__featured-container"
+        class="w-full lg:w-2/5 flex item-center justify-center flex-col"
+      >
+        <div id="events__featured">
           <h3 id="title" class="uppercase navy w-full text-center mt-3">
             Featured Events
           </h3>
@@ -42,22 +45,30 @@
                       '?key=small)'
                     "
                   ></div>
-                  <div class="events__event-title">
-                    <h3 class="uppercase tracking-wider">{{ item.title }}</h3>
-                    <h4 class="uppercase tracking-wider bold">
-                      {{ $moment(item.date).format('MM / DD / YYYY') }}
+                  <div class="events__event-description">
+                    <h3 class="uppercase tracking-wider bold mb-2">
+                      {{ truncateString(item.title, 100) }}
+                    </h3>
+                    <h4 class="uppercase tracking-wider bold mb-2">
+                      {{ $moment(item.date).format('MMMM Do YYYY') }}
                     </h4>
+                    <p
+                      class="w-full hidden md:inline-block"
+                      v-text="truncateString(item.description, 80)"
+                    ></p>
                   </div>
+                  <nuxt-link
+                    :to="'/regional-events/' + item.url"
+                    class="flex items-center justify-center events__event-link"
+                  >
+                    <link-icon></link-icon>
+                  </nuxt-link>
                 </div>
-                <p
-                  class="w-full events__event-description"
-                  v-text="item.description"
-                ></p>
               </div>
             </swiper-slide>
-
-            <div slot="button-next" class="swiper-button-next"></div>
-            <div slot="button-prev" class="swiper-button-prev"></div>
+            <div slot="pagination" class="swiper-pagination"></div>
+            <!-- <div slot="button-next" class="swiper-button-next"></div>
+            <div slot="button-prev" class="swiper-button-prev"></div> -->
           </swiper>
         </div>
         <transition
@@ -65,7 +76,10 @@
           leave-active-class="uk-animation-slide-left-small uk-animation-reverse uk-animation-fast"
           mode="out-in"
         >
-          <div v-if="selectedDay" class="p-8 selected-day">
+          <div
+            v-if="selectedDay"
+            class="hidden lg:inline-block p-8 selected-day"
+          >
             <h5 class="green mb-3 uppercase tracking-widest">
               {{ selectedDay.date.toDateString() }}
             </h5>
@@ -99,7 +113,7 @@
               </p>
             </transition>
           </div>
-          <div v-else class="p-8 selected-day">
+          <div v-else class="hidden lg:inline-block p-8 selected-day">
             <p class="text-center navy uppercase text-xs">
               Select a day on the calendar to view scheduled events for that
               day.
@@ -107,7 +121,7 @@
           </div>
         </transition>
       </div>
-      <div class="w-full md:w-3/5 relative">
+      <div id="events__calendar" class="w-full lg:w-3/5 relative">
         <transition
           enter-active-class="uk-animation-fade"
           leave-active-class="uk-animation-fade uk-animation-reverse"
@@ -135,11 +149,13 @@
 import moment from 'moment'
 import axios from 'axios'
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+import linkIcon from '~/components/universal/linkIcon'
 export default {
-  components: { Swiper, SwiperSlide },
+  components: { Swiper, SwiperSlide, linkIcon },
   async asyncData({ params, $axios }) {
     const eventsReq = await $axios.get(
-      process.env.apiUrl + '/items/events?fields=*.*.*&filter[status]=published'
+      process.env.apiUrl +
+        '/items/events?fields=*.*.*&filter[status]=published&sort=date'
     )
     return {
       featuredEvents: eventsReq.data.data,
@@ -164,22 +180,19 @@ export default {
       imageLocation: process.env.imageUrl,
       swiperOptions: {
         slidesPerView: 1,
-        slidesOffsetBefore: 15,
-        slidesOffsetAfter: 15,
-        spaceBetween: 30,
         loop: false,
         centeredSlides: true,
         centerInsufficientSlides: true,
-        // initialSlide: 4,
-        // pagination: {
-        //   el: '.swiper-pagination',
-        //   dynamicBullets: true
-        // },
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-          hideOnClick: true,
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+          // dynamicBullets: true,
         },
+        // navigation: {
+        //   nextEl: '.swiper-button-next',
+        //   prevEl: '.swiper-button-prev',
+        //   hideOnClick: true,
+        // },
       },
     }
   },
@@ -238,6 +251,19 @@ export default {
       const newTime = moment(time)
       return moment(newTime).format('h:mm a')
     },
+    removeTags(str) {
+      if (str === null || str === '') return false
+      else str = str.toString()
+      const strOne = str.replace(/&nbsp;/gi, ' ')
+      return strOne.replace(/(<([^>]+)>)/gi, '')
+    },
+    truncateString(str, num) {
+      const newStr = this.removeTags(str)
+      if (newStr.length <= num) {
+        return newStr
+      }
+      return newStr.slice(0, num) + '...'
+    },
     dayClicked(day) {
       console.log('today ' + moment().format('YYYY-MM-DD'))
       let date
@@ -274,94 +300,11 @@ export default {
 
 <style lang="scss">
 @import './assets/scss/vars';
+@import './assets/scss/pages/events';
 #events {
-  #events__intro {
-    height: 200px;
-    @media (min-width: $breakpoint-medium) {
-      height: 250px;
-    }
-    h1 {
-      font-size: 42px;
-      line-height: 1.2em;
-      position: relative;
-      margin-top: 70px;
-      @media (min-width: $breakpoint-small) {
-        font-size: 62px;
-      }
-      @media (min-width: $breakpoint-medium) {
-        margin-top: 0px;
-      }
-    }
-    h1:after {
-      content: '';
-      position: absolute;
-      bottom: 0px;
-      left: 0px;
-      width: 100%;
-      height: 1px;
-      background: $navy;
-      @media (min-width: $breakpoint-small) {
-        width: 120%;
-        left: -10%;
-      }
-      @media (min-width: $breakpoint-medium) {
-      }
-    }
-    p {
-      font-size: 14px;
-    }
-  }
-  #events__featured {
-    height: 300px;
-    #title {
-      font-size: 18px;
-      letter-spacing: 0.35em;
-    }
-    .swiper-slide {
-      height: 200px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .events__event {
-      width: 96%;
-      border: thin solid rgba($grey, 0.2);
-
-      .events__event-image {
-        width: 100px;
-        height: 100px;
-      }
-      .events__event-title {
-        width: calc(100% - 120px);
-        margin-left: 20px;
-        padding-right: 20px;
-        h3 {
-        }
-        h4 {
-          font-size: 10px;
-        }
-      }
-      .events__event-description {
-        padding: 20px;
-        font-size: 12px;
-        line-height: 1.2em;
-      }
-    }
-  }
-  #calendar-loader {
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    z-index: 10;
-    height: 100%;
-    width: 100%;
-    backdrop-filter: blur(6px);
-    img {
-      width: 40px;
-      height: 40px;
-    }
-  }
   .vc-container {
+    max-width: 700px;
+
     border-radius: 0px;
     border: none !important;
     border-color: $white !important;

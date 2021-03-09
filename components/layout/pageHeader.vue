@@ -58,9 +58,7 @@
           <nuxt-link to="/regional-news/resources" class="uppercase"
             >Resources</nuxt-link
           >
-          <nuxt-link to="/regional-news/events" class="uppercase"
-            >Events</nuxt-link
-          >
+          <nuxt-link to="/regional-events" class="uppercase">Events</nuxt-link>
         </div>
       </div>
       <div

@@ -1,35 +1,59 @@
 <template>
   <div id="programs">
-    <div class="w-full fixed background text-right">
-      <!-- <h3
-        v-for="initiative in initiatives"
-        :key="initiative.id"
-        class="uppercase bold"
-      >
-        {{ initiative.title }}
-      </h3> -->
-    </div>
     <div
       id="programs__intro"
-      class="flex flex-col flex-wrap justify-center items-center relative"
+      class="flex flex-col justify-center items-center relative"
     >
+      <div class="w-full absolute background text-left">
+        <h3
+          v-for="initiative in initiatives"
+          :key="initiative.id"
+          class="uppercase bold"
+        >
+          {{ initiative.title }}
+        </h3>
+      </div>
       <h1
-        class="navy uppercase tracking-widest mb-2 w-5/6 sm:w-3/5 md:w-1/2 thin-font text-center"
+        id="programs__page-title"
+        class="navy uppercase tracking-widest w-5/6 thin-font text-center mb-4"
       >
-        <span class="mr-3 green">{{ programs.length }}</span
-        >Programs
+        Programs
       </h1>
-      <p class="navy w-5/6 sm:w-3/5 md:w-1/2 font-normal text-center">
+      <p class="navy w-5/6 md:w-3/5 font-normal text-center">
         Our programs are designed to implement our five core initiatives. Each
         program is designed to create innovative ideas, develop practical
         solutions, and align strategic partnerships to meet the challenges and
         advance economic growth in the Southern Tier 8 Region.
       </p>
+      <div id="programs__total" class="mt-6">
+        <h5 class="uppercase tracking-widest bold px-8 py-6">
+          <span class="green mr-1">{{ programs.length }}</span
+          >Programs /
+          <span class="thin-font">{{ $moment().format('MMM Do YYYY') }}</span>
+        </h5>
+      </div>
     </div>
     <div
       id="programs__program-cards"
-      class="w-full flex items-center justify-center flex-col pb-20"
+      class="relative w-full flex items-center justify-center flex-col pb-60 mb-20 pt-20"
     >
+      <pulse-icon icon-i-d="start-btn" class-name="button"></pulse-icon>
+      <svg
+        id="straightLineSVG"
+        data-name="Layer 1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 1 695.51"
+      >
+        <path
+          id="straight-line"
+          data-name="Path 6808"
+          class="cls-1"
+          fill="none"
+          stroke="#1accb8"
+          stroke-width="2"
+          d="M.5,0V695.51"
+        />
+      </svg>
       <!-- <div class="w-full text-center programs__filters">
         <a
           v-for="(initiative, index) in initiatives"
@@ -48,15 +72,20 @@
           :program="program"
           class="blur-bg"
         ></program-card>
+        <div class="">
+          <pulse-icon icon-i-d="finish-btn" class-name="button"></pulse-icon>
+        </div>
       </div>
     </div>
   </div>
 </template>
 <script>
 import programCard from '~/components/programs/programCard'
+import pulseIcon from '~/components/universal/pulseIcon'
 export default {
   components: {
     programCard,
+    pulseIcon,
   },
   async asyncData({ params, $axios }) {
     const [programsReq, initiativesReq] = await Promise.all([
@@ -94,10 +123,39 @@ export default {
       }
     },
   },
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.lineFunction)
+  },
+  mounted() {
+    // mobile line animation
+    const straightLine = document.getElementById('straight-line')
+    const straightLength = straightLine.getTotalLength()
+    straightLine.style.strokeDasharray = straightLength
+    straightLine.style.strokeDashoffset = straightLength
+    // desktop line animation
+
+    window.addEventListener('scroll', this.lineFunction)
+  },
   created() {
     // this.checkInitiative()
   },
   methods: {
+    lineFunction() {
+      const straightLine = document.getElementById('straight-line')
+      const straightLength = straightLine.getTotalLength()
+
+      requestAnimationFrame(function () {
+        const svgContainer = document.getElementById('programs__program-cards')
+        const svgContainerRect = svgContainer.getBoundingClientRect()
+        const svgDivHeight = svgContainerRect.height
+        const windowScroll = window.pageYOffset
+        const scrollPercent = (windowScroll / svgDivHeight) * 0.8
+        if (scrollPercent < 1) {
+          const drawStraight = straightLength * scrollPercent
+          straightLine.style.strokeDashoffset = straightLength - drawStraight
+        }
+      })
+    },
     returnInitiativesTitle(initiatives) {
       console.log(initiatives)
       initiatives.map((initiative) => {

@@ -1,8 +1,8 @@
 .program-card {
   height: auto !important;
   border: thin solid rgba($grey, 0.2);
-  background: rgba($grey, 0.05);
-  backdrop-filter: blur(2px);
+  background: rgba($white, 1);
+  backdrop-filter: blur(10px);
   max-width: 840px;
   .program-card__background {
     left: 0px;

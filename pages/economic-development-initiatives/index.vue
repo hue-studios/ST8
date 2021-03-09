@@ -17,8 +17,11 @@
       </h2>
       <div
         v-for="initiative in initiatives"
+        :id="'intro-card-' + initiative.sort"
         :key="initiative.sort"
         class="relative flex flex-row flex-wrap justify-start items-end w-full sm:w-5/6 md:w-1/5 mt-3 mb-3 md:mt-0 md:mb-0 px-12 md:px-4 lg:px-6 md:py-6 initiatives__intro-card"
+        @mouseenter="showBackground(initiative.sort)"
+        @mouseleave="showBackground(initiative.sort)"
       >
         <h3 class="green initiatives__intro-card-sort">
           {{ initiative.sort }}
@@ -28,13 +31,15 @@
         >
           {{ initiative.title }}
         </h1>
-        <div class="w-full md:absolute w-full initiatives__intro-card-back">
-          <div class="navy text-xs mt-2 mb-2 md:mb-4 text-justify">
-            {{ truncateString(initiative.goal, 170) }}
-          </div>
+        <div
+          class="w-full md:absolute w-full flex flex-col justify-center px-2 initiatives__intro-card-back"
+        >
+          <p class="navy text-xs mt-2 mb-2 md:mt-0">
+            {{ truncateString(initiative.goal, 140) }}
+          </p>
           <nuxt-link
             :to="'/economic-development-initiatives/' + initiative.url"
-            class="uppercase tracking-wider navy bold text-xs w-full text-right block initiatives__intro-card-link"
+            class="uppercase tracking-wider navy bold text-xs w-full text-right md:text-center lg:mt-2 block initiatives__intro-card-link"
             >Learn More<span class="hidden">
               about {{ initiative.title }}.</span
             >
@@ -111,7 +116,7 @@
         </p>
         <nuxt-link
           to="/economic-development-programs"
-          class="w-full absolute uppercase tracking-wider green text-center lg:text-left lg:px-6"
+          class="w-full absolute uppercase tracking-wider green text-center lg:text-left lg:px-0"
           >Learn about our programs <link-icon class="ml-2"></link-icon
         ></nuxt-link>
       </div>
@@ -146,8 +151,8 @@
         v-for="(initiative, index) in initiatives"
         :key="index"
         :to="'/economic-development-initiatives/' + initiative.url"
-        class="uppercase tracking-widest py-4 bold"
-        >{{ initiative.title }} <link-icon class="ml-2"></link-icon
+        class="uppercase tracking-widest py-4 bold mb-6"
+        >{{ initiative.title }} <link-icon class=""></link-icon
       ></nuxt-link>
     </div>
   </div>
@@ -224,7 +229,23 @@ export default {
         behavior: 'smooth',
       })
     },
+    showBackground(number) {
+      const element = document.getElementById('intro-card-' + number)
+      if (element.classList.contains('show')) {
+        element.classList.remove('show')
+        this.removeShowClass()
+      } else {
+        this.removeShowClass()
+        element.classList.add('show')
+      }
+    },
+    removeShowClass() {
+      const elems = document.querySelectorAll('.initiatives__intro-card.show')
 
+      ;[].forEach.call(elems, function (el) {
+        el.className = el.className.replace(/\bshow\b/, '')
+      })
+    },
     removeTags(str) {
       if (str === null || str === '') return false
       else str = str.toString()

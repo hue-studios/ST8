@@ -53,6 +53,7 @@
   .initiatives__intro-card {
     overflow: hidden;
     background: $white;
+    cursor: pointer;
     @media (min-width: $breakpoint-small) {
     }
     @media (min-width: $breakpoint-medium) {
@@ -73,6 +74,8 @@
       @media (min-width: $breakpoint-medium) {
         font-size: 122px;
         line-height: 100px;
+        transition: all 0.25s $curve;
+        transform: translate3d(0, 0%, 0);
       }
     }
     .initiatives__intro-card-title {
@@ -82,13 +85,22 @@
       @media (min-width: $breakpoint-medium) {
         line-height: 13px;
         font-size: 12px;
+        transition: all 0.25s $curve;
+        transform: translate3d(0, 0%, 0);
+        opacity: 1;
       }
     }
     .initiatives__intro-card-back {
       @media (min-width: $breakpoint-medium) {
-        top: 120%;
+        top: 0%;
         left: 0px;
         background: rgba($grey, 1);
+        transition: all 0.25s $curve;
+        transform: translate3d(0, 100%, 0);
+        height: 100%;
+        line-height: 1.1em;
+        p {
+        }
       }
       .initiatives__intro-card-link {
         .link-icon {
@@ -101,7 +113,25 @@
       }
     }
   }
-
+  .initiatives__intro-card.show {
+    .initiatives__intro-card-sort {
+      @media (min-width: $breakpoint-medium) {
+        transform: translate3d(0, -60px, 0);
+        opacity: 0;
+      }
+    }
+    .initiatives__intro-card-title {
+      @media (min-width: $breakpoint-medium) {
+        transform: translate3d(0, -80px, 0);
+        opacity: 0;
+      }
+    }
+    .initiatives__intro-card-back {
+      @media (min-width: $breakpoint-medium) {
+        transform: translate3d(0, 0%, 0);
+      }
+    }
+  }
   .initiatives__story {
     // height: 900px;
     @media (min-width: $breakpoint-large) {
@@ -335,13 +365,20 @@
       }
     }
     a {
-      font-size: 15px;
-
+      font-size: 14px;
+      line-height: 16px;
+      height: 16px;
       color: $navy;
       @media (min-width: $breakpoint-small) {
-        // font-size: 22px;
       }
       @media (min-width: $breakpoint-medium) {
+      }
+      .link-icon {
+        width: 25px;
+        height: 25px;
+        svg {
+          margin-top: -2px;
+        }
       }
     }
   }

@@ -21,6 +21,7 @@
 }
 .swiper-container-vertical > .swiper-wrapper {
   flex-direction: column;
+  display: flex;
 }
 .swiper-wrapper {
   position: relative;
@@ -31,6 +32,7 @@
   transition-property: transform;
   box-sizing: content-box;
   flex-direction: row;
+  display: flex;
 }
 .swiper-container-android .swiper-slide,
 .swiper-wrapper {

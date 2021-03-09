@@ -4,6 +4,7 @@
     min-height: 640px;
     @media (min-width: $breakpoint-medium) {
       height: calc(100vh - 150px);
+      min-height: 500px;
     }
     #initiative__bg-title {
       color: $grey;

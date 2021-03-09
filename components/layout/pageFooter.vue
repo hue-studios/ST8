@@ -37,11 +37,15 @@
       <nuxt-link to="/regional-profile" class="uppercase w-full footer-link"
         >Regional Profile</nuxt-link
       >
-      <nuxt-link to="/regional-news/" class="uppercase w-full footer-link"
+      <nuxt-link to="/regional-news" class="uppercase w-full footer-link"
         >News</nuxt-link
       >
-      <nuxt-link to="" class="uppercase w-full footer-link">Events</nuxt-link>
-      <nuxt-link to="" class="uppercase w-full footer-link"
+      <nuxt-link to="/regional-events" class="uppercase w-full footer-link"
+        >Events</nuxt-link
+      >
+      <nuxt-link
+        to="/regional-news/resources"
+        class="uppercase w-full footer-link"
         >Resources</nuxt-link
       >
       <nuxt-link

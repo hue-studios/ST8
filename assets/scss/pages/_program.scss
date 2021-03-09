@@ -376,16 +376,11 @@
     }
   }
   #program__resources {
-    .swiper-wrapper {
-      // display: flex;
-      // align-items: center;
-      // justify-content: center;
-      // @media (min-width: $breakpoint-medium) {
-      //   display: flex;
-      //   align-items: center;
-      //   justify-content: center;
-      // }
-    }
+    // .swiper-wrapper {
+    //   display: flex;
+    //   flex-direction: row;
+    //   width: 100%;
+    // }
     .swiper-slide {
       width: 220px;
     }
@@ -401,5 +396,10 @@
     }
   }
   #program__programs {
+    // .swiper-wrapper {
+    //   display: flex;
+    //   flex-direction: row;
+    //   width: 100%;
+    // }
   }
 }

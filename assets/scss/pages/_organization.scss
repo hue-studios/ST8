@@ -4,7 +4,11 @@
     overflow: hidden;
     .statement {
       width: 90%;
-      max-width: 740px;
+      max-width: 550px;
+      @media (min-width: $breakpoint-xlarge) {
+        max-width: 675px;
+      }
+
       h2 {
         font-size: 46px;
         line-height: 40px;
@@ -25,15 +29,16 @@
           font-size: 156px;
           line-height: 140px;
         }
+      }
+      p {
+        margin-top: 2px;
+        line-height: 18px;
 
-        p {
-          margin-top: 2px;
-          line-height: 18px;
-          font-size: 16px;
-          font-weight: 100;
-          @media (min-width: $breakpoint-medium) {
-            width: 500px;
-          }
+        @media (min-width: $breakpoint-medium) {
+          margin-left: 10px;
+        }
+        @media (min-width: $breakpoint-large) {
+          text-align: justify;
         }
       }
     }
