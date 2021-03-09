@@ -147,6 +147,9 @@ export default {
     /*
      ** You can extend webpack config here
      */
+    babel: {
+      plugins: ['@babel/plugin-transform-spread'],
+    },
     postcss: {},
     transpile: ['gsap'],
     extend(config, ctx) {
@@ -157,9 +160,9 @@ export default {
           test: /\.(js|vue)$/,
           loader: 'eslint-loader',
           exclude: /(node_modules)/,
-          options: {
-            fix: true,
-          },
+          // options: {
+          //   fix: true,
+          // },
         })
       }
     },
