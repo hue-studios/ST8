@@ -147,9 +147,11 @@ export default {
     /*
      ** You can extend webpack config here
      */
-
+    babel: {
+      plugins: ['@babel/plugin-transform-spread'],
+    },
     postcss: {},
-    transpile: ['gsap', 'vue-feather-icons'],
+    transpile: ['gsap', 'vue-feather-icons', 'v-calendar'],
     extend(config, ctx) {
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
