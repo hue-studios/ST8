@@ -150,7 +150,6 @@ export default {
     babel: {
       plugins: ['@babel/plugin-transform-spread'],
     },
-    postcss: {},
     transpile: ['gsap', 'vue-feather-icons', 'v-calendar'],
     extend(config, ctx) {
       // Run ESLint on save

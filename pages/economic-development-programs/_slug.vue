@@ -295,7 +295,7 @@ export default {
         slidesOffsetAfter: 15,
         centeredSlides: false,
         centerInsufficientSlides: true,
-        initialSlide: 1,
+
         spaceBetween: 30,
         pagination: {
           el: '.swiper-pagination',
