@@ -3,8 +3,11 @@
     :id="'resource-card-' + item.id"
     class="flex items-center justify-center flex-col px-4 md:px-6 py-6 shadow-lg resource-card"
   >
+    <h3 v-if="program" class="uppercase absolute resource-card__program">
+      <span class="">Program: </span>{{ truncateString(program, 60) }}
+    </h3>
     <h2
-      class="uppercase tracking-widest w-full mb-4 pb-4 thin-font resource-card__title"
+      class="uppercase tracking-widest w-full mt-4 md:mt-6 mb-4 pb-4 thin-font resource-card__title"
       :class="{ 'text-xs': tooLong }"
     >
       {{ item.title }}
@@ -48,12 +51,34 @@ export default {
     return {
       imageLocation: process.env.imageUrl,
       tooLong: false,
+      program: '',
     }
+  },
+  computed: {
+    // program() {
+    //   const vm = this
+    //   if (vm.item.programs) {
+    //     return vm.item.programs(function (program) {
+    //       return program.programs_id.title
+    //     })
+    //   } else {
+    //     return ''
+    //   }
+    // },
   },
   created() {
     this.countTitle(this.item.title)
+    if (this.item.programs) {
+      this.programName(this.item.programs)
+    }
   },
   methods: {
+    programName(programs) {
+      if (programs.length) {
+        // console.log(programs[0].programs_id.title)
+        this.program = programs[0].programs_id.title
+      }
+    },
     countTitle(title) {
       if (title.length > 30) {
         this.tooLong = true
@@ -80,5 +105,6 @@ export default {
 
 <style lang="scss">
 @import './assets/scss/vars';
+
 @import './assets/scss/components/resourceCard';
 </style>

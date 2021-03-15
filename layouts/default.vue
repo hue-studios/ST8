@@ -1,9 +1,12 @@
 <template>
-  <div class="container">
-    <page-header></page-header>
+  <div class="container" :class="$store.state.page">
+    <transition name="fade" mode="out-in">
+      <page-header
+        :class="{ 'opacity-0': $store.state.page === 'index' }"
+      ></page-header>
+    </transition>
     <div id="page-container" class="page-container" @click="closeSideMenu()">
       <nuxt />
-      <!-- <page-partners :image-location="imageUrl"></page-partners> -->
       <page-footer></page-footer>
     </div>
 
@@ -54,6 +57,11 @@
       <p>
         <nuxt-link to="/regional-organization" class="mobile-nav-link">
           Organization
+        </nuxt-link>
+      </p>
+      <p>
+        <nuxt-link to="/how-to-apply" class="mobile-nav-link">
+          How To Apply
         </nuxt-link>
       </p>
       <div class="absolute tagline">

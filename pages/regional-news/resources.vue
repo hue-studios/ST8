@@ -42,9 +42,60 @@ export default {
   head() {
     return {}
   },
-  computed: {},
-  created() {},
+  computed: {
+    // project() {
+    //   const vm = this
+    //   return vm.resources.programs.map(function (item) {
+    //     return item.programs_id.filter(function (program) {
+    //       return program.title.includes('Project Development')
+    //     })
+    //   })
+    // },
+    // test() {
+    //   const vm = this
+    //   return vm.resources.filter(function (item) {
+    //     if (item.programs) {
+    //       return item.programs.map(function (program) {
+    //         return program.programs_id.title.includes('Project Development')
+    //       })
+    //     } else {
+    //       return item
+    //     }
+    //   })
+    // },
+    // project() {
+    //   const vm = this
+    //   return vm.resources.map((item) => {
+    //     return {
+    //       ...item,
+    //       programs: item.programs.filter(function (program) {
+    //         return program.programs_id.title.includes('Project Development')
+    //       }),
+    //     }
+    //   })
+    // },
+    // regional() {
+    //   const vm = this
+    //   return vm.resources.map((item) => {
+    //     return {
+    //       ...item,
+    //       programs: item.programs.filter(function (program) {
+    //         return program.programs_id.title.includes('Regional Opportunity')
+    //       }),
+    //     }
+    //   })
+    // },
+  },
+  created() {
+    this.resources.sort(this.sortFunction)
+  },
   methods: {
+    sortFunction(a, b) {
+      if (a[0] === b[0]) {
+        return 0
+      }
+      return a[1] < b[1] ? 1 : -1
+    },
     formatTime(time) {
       const newTime = moment(time)
       return moment(newTime).format('h:mm a')

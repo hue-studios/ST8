@@ -68,4 +68,44 @@
       }
     }
   }
+  h5#copyright {
+    font-size: 9px;
+
+    color: rgba($navy, 1);
+    margin-top: 50px;
+  }
+  h5#web-designer {
+    margin-top: 20px;
+    margin-bottom: 50px;
+    a {
+      font-size: 10px;
+      color: rgba($navy, 1);
+      svg {
+        width: 35px;
+        height: auto;
+        display: inline;
+        fill: rgba($navy, 1);
+        stroke: none;
+        margin-top: -11px;
+        margin-left: 3px;
+        path {
+          transition: all 0.3s linear;
+        }
+        path:nth-of-type(1) {
+          transition-delay: 0.1s;
+        }
+        path:nth-of-type(2) {
+          transition-delay: 0.2s;
+        }
+        path:nth-of-type(3) {
+          transition-delay: 0.3s;
+        }
+      }
+    }
+    a:hover {
+      svg path {
+        fill: #f90;
+      }
+    }
+  }
 }

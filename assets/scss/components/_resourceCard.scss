@@ -6,6 +6,26 @@
   border-radius: 3px;
   max-width: 840px;
   width: 90%;
+  .resource-card__program {
+    left: 1rem;
+    top: 1rem;
+    font-size: 9px;
+    line-height: 10px;
+    width: calc(100% - 2rem);
+    font-family: $bold-font;
+    color: $green;
+
+    @media (min-width: $breakpoint-small) {
+      bottom: 1rem;
+    }
+    @media (min-width: $breakpoint-medium) {
+      left: 1.5rem;
+    }
+    span {
+      color: $grey;
+      display: block;
+    }
+  }
   .resource-card__title {
     font-size: 16px;
     line-height: 18px;

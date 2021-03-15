@@ -61,7 +61,7 @@
 
       <div
         id="goal-description"
-        class="relative p-6 initiative__description"
+        class="relative p-6 text-justify initiative__description"
         v-html="initiative.goal"
       ></div>
 
@@ -74,7 +74,7 @@
 
       <div
         id="opportunity-description"
-        class="relative p-6 initiative__description"
+        class="relative p-6 text-justify initiative__description"
         v-html="initiative.opportunity"
       ></div>
       <pulse-icon icon-i-d="finish-btn" class-name="button"></pulse-icon>

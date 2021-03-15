@@ -223,6 +223,9 @@
         flex-direction: column;
         max-height: 140px;
       }
+      p {
+        margin-bottom: 5px;
+      }
     }
     #opportunity-title {
       padding: 20px;
@@ -252,10 +255,11 @@
         padding: 20px 0;
       }
       p {
-        margin-bottom: 15px;
+        margin-bottom: 5px;
       }
     }
   }
+
   .initiative__related {
     margin-bottom: 60px;
     @media (min-width: $breakpoint-large) {

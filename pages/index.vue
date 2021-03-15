@@ -3,10 +3,13 @@
     <div
       id="home__intro"
       class="flex flex-col justify-center items-center relative"
+      :class="{ show: panel !== 'home' }"
     >
       <a id="home-intro__logo" @click.prevent="changePanel('home', 0)">
         <logo-name></logo-name>
+        <pulse-icon icon-i-d="" class-name="block button"></pulse-icon>
       </a>
+
       <div
         id="home-intro__navigation"
         class="w-full flex justify-around items-center absolute home-intro__navigation"
@@ -41,9 +44,12 @@
           v-if="panel === 'active'"
           id="active-caption"
           key="1"
+          :class="{ show: panel === 'active' }"
           class="home-intro__navigation-description"
         >
-          <h5 class="uppercase grey tracking-widest mb-4">Active</h5>
+          <h5 class="text-center uppercase grey tracking-widest mb-4">
+            Active
+          </h5>
           <p>
             Our Initiatives, Programs, and Services are designed to serve and
             adapt to the region’s economic, workforce, infrastructure, rural,
@@ -52,20 +58,47 @@
             create innovative, practical, and timely solutions with vision,
             dedication, and commitment to our region’s growth and success.
           </p>
-          <nuxt-link
-            to="/economic-development-initiatives"
-            class="green w-full text-right mt-4 tracking-widest uppercase inline-block link-font"
-            >Learn about our Initiatives <link-icon class="ml-2"></link-icon
-          ></nuxt-link>
+          <div class="w-full flex items-center justify-center flex-row">
+            <nuxt-link
+              to="/economic-development-initiatives"
+              class="green w-full text-center mt-4 tracking-widest uppercase inline-block flex items-center justify-center flex-col link-font"
+              >Initiatives
+              <pulse-icon
+                icon-i-d=""
+                class-name="inline-block button"
+              ></pulse-icon
+            ></nuxt-link>
+            <nuxt-link
+              to="/economic-development-programs"
+              class="green w-full text-center mt-4 tracking-widest uppercase inline-block flex items-center justify-center flex-col link-font"
+              >Programs
+              <pulse-icon
+                icon-i-d=""
+                class-name="inline-block button"
+              ></pulse-icon
+            ></nuxt-link>
+            <nuxt-link
+              to="/economic-development-services"
+              class="green w-full text-center mt-4 tracking-widest uppercase inline-block flex items-center justify-center flex-col link-font"
+              >Services
+              <pulse-icon
+                icon-i-d=""
+                class-name="inline-block button"
+              ></pulse-icon
+            ></nuxt-link>
+          </div>
         </div>
 
         <div
           v-if="panel === 'regional'"
           id="regional-caption"
           key="2"
+          :class="{ show: panel === 'regional' }"
           class="home-intro__navigation-description"
         >
-          <h5 class="uppercase grey tracking-widest mb-4">Regional</h5>
+          <h5 class="uppercase grey tracking-widest mb-4 text-center">
+            Regional
+          </h5>
           <p>
             We are an 8 County Organization so we are not one place, one county,
             we cover a large portion of Upstate NY. Every county that is part of
@@ -75,20 +108,45 @@
             We believe that as one united region, we are stronger, we build a
             more powerful economy, and create the best opportunities for growth.
           </p>
-          <nuxt-link
-            to="/regional-profile"
-            class="green w-full text-right mt-4 tracking-widest uppercase inline-block link-font"
-            >View Regional Profile <link-icon class="ml-2"></link-icon
-          ></nuxt-link>
+          <div class="w-full flex items-center justify-center flex-row">
+            <nuxt-link
+              to="/regional-partnerships"
+              class="green w-full text-center mt-4 tracking-widest uppercase inline-block flex items-center justify-center flex-col link-font"
+              >Partnerships
+              <pulse-icon
+                icon-i-d=""
+                class-name="inline-block button"
+              ></pulse-icon
+            ></nuxt-link>
+            <nuxt-link
+              to="/regional-profile"
+              class="green w-full text-center mt-4 tracking-widest uppercase inline-block flex items-center justify-center flex-col link-font"
+              >Profile
+              <pulse-icon
+                icon-i-d=""
+                class-name="inline-block button"
+              ></pulse-icon
+            ></nuxt-link>
+            <nuxt-link
+              to="/regional-organization"
+              class="green w-full text-center mt-4 tracking-widest uppercase inline-block flex items-center justify-center flex-col link-font"
+              >Organization
+              <pulse-icon
+                icon-i-d=""
+                class-name="inline-block button"
+              ></pulse-icon
+            ></nuxt-link>
+          </div>
         </div>
 
         <div
           v-if="panel === 'now'"
           id="now-caption"
           key="3"
+          :class="{ show: panel === 'now' }"
           class="home-intro__navigation-description"
         >
-          <h5 class="uppercase grey tracking-widest mb-4">Now</h5>
+          <h5 class="uppercase grey tracking-widest mb-4 text-center">Now</h5>
           <p>
             Our News, Resources, and Events are published to share progress of
             our organization’s initiatives, programs, and services. We also
@@ -97,12 +155,26 @@
             that is available to them in order to continually strengthen the
             economic growth of our region.
           </p>
-          <nuxt-link
-            to="/regional-news"
-            class="green w-full text-right mt-4 tracking-widest uppercase inline-block link-font"
-            >View All {{ newsMeta.meta.status_count.published }} Articles
-            <link-icon class="ml-2"></link-icon
-          ></nuxt-link>
+          <div class="w-full flex items-center justify-center flex-row">
+            <nuxt-link
+              to="/regional-news"
+              class="green w-full text-center mt-4 tracking-widest uppercase inline-block flex items-center justify-center flex-col link-font"
+              >News
+              <pulse-icon icon-i-d="" class-name="block button"></pulse-icon
+            ></nuxt-link>
+            <nuxt-link
+              to="/regional-events"
+              class="green w-full text-center mt-4 tracking-widest uppercase inline-block flex items-center justify-center flex-col link-font"
+              >Events
+              <pulse-icon icon-i-d="" class-name="block button"></pulse-icon
+            ></nuxt-link>
+            <nuxt-link
+              to="/regional-news/resources"
+              class="green w-full text-center mt-4 tracking-widest uppercase inline-block flex items-center justify-center flex-col link-font"
+              >Resources
+              <pulse-icon icon-i-d="" class-name="block button"></pulse-icon
+            ></nuxt-link>
+          </div>
         </div>
       </transition>
     </div>
@@ -182,16 +254,12 @@
         <p class="">
           Our team will assist applicants with questions about program
           development, partner engagement, grant writing, match support
-          requirements and budgets. If you have a project concept that you would
-          like to review with us, complete the pre-application form online.
+          requirements and budgets.
         </p>
       </div>
-      <a
-        :href="jotForm.link"
-        target="_blank"
-        class="mt-4 sm:mt-8 uppercase py-4 px-12"
-        >Pre-Application Form<link-icon class="ml-1"></link-icon
-      ></a>
+      <nuxt-link to="how-to-apply" class="mt-4 sm:mt-8 uppercase py-4 px-12"
+        >How to Apply<link-icon class="ml-2"></link-icon
+      ></nuxt-link>
     </div>
 
     <div
@@ -376,6 +444,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 import observer from '~/components/utilities/observer'
+import pulseIcon from '~/components/universal/pulseIcon'
 import linkIcon from '~/components/universal/linkIcon'
 import logoName from '~/components/layout/logoName'
 import programCard from '~/components/programs/programCard'
@@ -384,6 +453,7 @@ import industryChart from '~/components/industryChart'
 
 export default {
   components: {
+    pulseIcon,
     logoName,
     Swiper,
     SwiperSlide,
@@ -404,7 +474,7 @@ export default {
       $axios.get(process.env.apiUrl + '/items/partners?fields=*.*'),
       $axios.get(
         process.env.apiUrl +
-          '/items/news?fields=*.*.*&filter[featured]=1&meta=*'
+          '/items/news?fields=*.*.*&filter[featured]=1&meta=*&filter[status]=published&sort=-date_published'
       ),
       $axios.get(process.env.apiUrl + '/items/events?fields=*.*.*'),
       $axios.get(
@@ -604,12 +674,15 @@ export default {
       }, stepTime)
     },
     changePanel(panel, key) {
-      const container = document.getElementById('home__intro')
-      if (panel !== 'home') {
-        container.classList.add('show')
-      } else {
-        container.classList.remove('show')
-      }
+      // const container = document.getElementById('home__intro')
+      //
+      // console.log(panel !== 'home')
+      // if (panel !== 'home') {
+      //   container.classList.add('show')
+      //   console.log(container)
+      // } else {
+      //   container.classList.remove('show')
+      // }
       if (this.previousPanelKey < key) {
         this.animateIn = 'uk-animation-slide-right-medium uk-animation-fast'
         this.animateOut =

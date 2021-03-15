@@ -53,6 +53,12 @@
       >
         <h3 class="w-full uppercase text-xs green text-left">How we help</h3>
         <div v-html="service.how_we_help"></div>
+        <nuxt-link
+          v-if="service.title.includes('Funding')"
+          to="how-to-apply"
+          class="green bold tracking-widest uppercase button-link"
+          >How to Apply <link-icon class="ml-2"></link-icon
+        ></nuxt-link>
       </div>
       <div
         v-if="service.who_it_is_for"
