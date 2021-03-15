@@ -4,7 +4,12 @@
 
 <script>
 export default {
-  props: ['options'],
+  props: {
+    options: {
+      type: Object,
+      default: () => {},
+    },
+  },
   data: () => ({
     observer: null,
   }),

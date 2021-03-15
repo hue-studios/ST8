@@ -136,7 +136,7 @@
 
     <div
       id="board-section"
-      class="w-full flex justify-center items-center flex-row flex-wrap py-20"
+      class="w-full flex justify-center items-start flex-row flex-wrap py-20"
     >
       <h2
         class="uppercase w-full text-center page-title tracking-widest thin-font white mb-0"

@@ -30,10 +30,10 @@
     </div>
 
     <div
-      v-for="(service, index) in services"
-      :id="'service-' + index"
+      v-for="(service, index1) in services"
+      :id="'service-' + index1"
       :key="service.id"
-      :class="{ dark: index % 2 == 0 }"
+      :class="{ dark: index1 % 2 == 0 }"
       class="w-full flex items-start justify-start flex-col relative py-12 md:py-0 services-section"
     >
       <h2 class="uppercase green thin-font md:sticky">
@@ -70,8 +70,8 @@
         <h3 class="w-full uppercase text-xs green text-left">Work Portfolio</h3>
         <div class="w-full flex flex-col items-center justify-start mt-4">
           <nuxt-link
-            v-for="(program, index) in service.example_programs"
-            :key="index"
+            v-for="(program, index2) in service.example_programs"
+            :key="index2"
             :to="'/economic-development-programs/' + program.program_id.url"
             class="flex flex-row items-center justify-start mb-6 shadow-lg services-section__program"
           >
@@ -154,8 +154,8 @@
         <h3 class="w-full uppercase text-xs green text-left">Resources</h3>
         <div class="w-full flex flex-col items-center justify-start mt-4">
           <div
-            v-for="(resource, index) in service.resources"
-            :key="index"
+            v-for="(resource, index3) in service.resources"
+            :key="index3"
             class="w-full flex items-center justify-center flex-col mb-10 p-4 md:p-6 shadow-lg services-section__resource-card"
           >
             <h5
