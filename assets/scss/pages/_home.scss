@@ -25,16 +25,7 @@
       background-position: right -120px;
       background-size: 700px auto;
     }
-    .new-york-state-two {
-      position: absolute;
-      right: -200px;
-      top: -20px;
 
-      svg {
-        width: 500px;
-        height: auto;
-      }
-    }
     #home-intro__logo {
       position: absolute;
       top: calc(50% - 100px);
@@ -192,19 +183,37 @@
     }
     .home-intro__navigation-description.show {
       h5 {
-        opacity: 1;
+        animation: fadeUpIn 2s forwards;
       }
       p {
         opacity: 1;
       }
       a {
-        opacity: 1;
-        transition: all 0.3s $curve 5s;
+        animation: fadeUpIn 0.3s forwards 0.2s;
+      }
+      a:nth-of-type(1) {
+        animation: fadeUpIn 0.3s forwards 0.2s;
+      }
+      a:nth-of-type(2) {
+        animation: fadeUpIn 0.3s forwards 0.3s;
+      }
+      a:nth-of-type(3) {
+        animation: fadeUpIn 0.3s forwards 0.4s;
       }
     }
     .uk-animation-fast {
       animation-duration: 0.3s;
       animation-timing-function: $curve;
+    }
+    @keyframes fadeUpIn {
+      from {
+        opacity: 0;
+        transform: translate3d(0, 10px, 0);
+      }
+      to {
+        opacity: 1;
+        transform: translate3d(0, 0px, 0);
+      }
     }
   }
   #home__intro.show {

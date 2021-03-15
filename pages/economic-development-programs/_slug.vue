@@ -130,6 +130,7 @@
       <div
         id="purpose-description"
         class="relative p-6 program__description"
+        :class="{ tooLong: tooLongContent }"
         v-html="program.what_is_it"
       ></div>
 
@@ -143,6 +144,7 @@
       <div
         id="accomplishes-description"
         class="relative p-6 program__description"
+        :class="{ tooLong: tooLongContent }"
         v-html="program.what_it_accomplishes"
       ></div>
       <pulse-icon icon-i-d="finish-btn" class-name="button"></pulse-icon>
@@ -341,6 +343,7 @@ export default {
           hideOnClick: true,
         },
       },
+      tooLongContent: false,
       tooLong: false,
     }
   },
@@ -375,6 +378,7 @@ export default {
         console.log(error)
       })
     this.countTitle(this.program.title)
+    this.countContent(this.program.what_is_it)
   },
   methods: {
     lineFunction() {
@@ -395,6 +399,13 @@ export default {
           straightLine.style.strokeDashoffset = straightLength - drawStraight
         }
       })
+    },
+    countContent(content) {
+      if (content.length > 30) {
+        this.tooLongContent = true
+      } else {
+        this.tooLongContent = false
+      }
     },
     countTitle(title) {
       if (title.length > 30) {
