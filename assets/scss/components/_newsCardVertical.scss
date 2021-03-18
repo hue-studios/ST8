@@ -1,5 +1,5 @@
 .news-card-vertical {
-  height: 500px;
+  height: 350px;
   // box-shadow: 0px 2px 15px rgba($black, 0.2);
   // border-radius: 3px;
   border: thin solid rgba($grey, 0.25);
@@ -10,11 +10,12 @@
   }
   .news-card-vertical__image {
     margin-top: 0px;
-    height: 300px;
+    height: 150px;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
     border-bottom: thin solid rgba($grey, 0.25);
+    filter: grayscale(1);
   }
   .news-card-vertical__title {
     font-size: 16px;

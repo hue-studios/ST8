@@ -213,8 +213,10 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './assets/scss/vars';
 @import './assets/scss/layout/swiper';
 @import './assets/scss/pages/initiative';
+#opportunity-description {
+}
 </style>

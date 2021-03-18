@@ -9,7 +9,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: row;
-  background: $white;
+  background: rgba($white, 1);
   width: 100%;
   overflow: hidden;
   height: 70px;
@@ -21,6 +21,7 @@
     height: 100px;
     box-shadow: none;
     position: relative;
+    z-index: 60;
   }
   .logo-name {
     @media (min-width: $breakpoint-large) {
@@ -28,22 +29,47 @@
     }
   }
   .logo {
-    widht: 175px;
+    width: 175px;
     display: none;
+    transition: all 0.4s $curve 0.05s;
     @media (min-width: $breakpoint-large) {
       display: inline-block;
+      opacity: 1;
+      transform: translate3d(0px, 0, 0);
     }
     svg {
       height: 100px;
       width: auto;
+      .cls-1,
+      .cls-2 {
+        transition: all 0.4s $curve 0.05s;
+        @media (min-width: $breakpoint-large) {
+          transform: translate3d(0px, 0, 0);
+          opacity: 1;
+        }
+      }
+      .cls-4 {
+        transition: all 0.4s $curve 0.05s;
+        @media (min-width: $breakpoint-large) {
+          transform: translate3d(0px, 0, 0);
+          fill: $navy;
+          opacity: 1;
+        }
+      }
     }
+  }
+  #page-nav {
+    transition: all 0.4s $curve;
   }
   .new-york-state {
     width: 135px;
     overflow: hidden;
     display: none;
+    transition: all 0.4s $curve 0.11s;
     @media (min-width: $breakpoint-large) {
       display: inline-block;
+      opacity: 1;
+      transform: translate3d(0px, 0, 0);
     }
     svg {
       margin-top: -20px;
@@ -56,7 +82,41 @@
     width: calc(100% - 310px);
   }
 }
-
+#page-header.home {
+  opacity: 0;
+  @media (min-width: $breakpoint-large) {
+    opacity: 1;
+    background: rgba($white, 0);
+  }
+  .logo {
+    @media (min-width: $breakpoint-large) {
+      transform: translate3d(-200px, 0, 0);
+      opacity: 0;
+    }
+    .cls-1,
+    .cls-2 {
+      @media (min-width: $breakpoint-large) {
+        transform: translate3d(-200px, 0, 0);
+        opacity: 0;
+      }
+    }
+    .cls-4 {
+      fill: $grey;
+      opacity: 0.15;
+    }
+  }
+  #page-nav {
+    @media (min-width: $breakpoint-large) {
+      transform: translate3d(-150px, 0, 0);
+    }
+  }
+  .new-york-state {
+    @media (min-width: $breakpoint-large) {
+      transform: translate3d(160px, 0, 0);
+      opacity: 0;
+    }
+  }
+}
 #page-header.hide {
   transform: translate3d(0, -80px, 0);
   @media (min-width: $breakpoint-large) {

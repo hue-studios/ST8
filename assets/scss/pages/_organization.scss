@@ -222,15 +222,30 @@
     .roi-card {
       border: thin solid rgba($grey, 1);
       width: 150px;
+      transition: all 0.4s $curve;
       h3 {
+        z-index: 3;
       }
       h5 {
         font-size: 88px;
-        opacity: 0.05;
+        opacity: 0.25;
         width: 136px;
         left: calc(50% - 68px);
         line-height: 60px;
         top: calc(50% - 35px);
+        transition: all 0.4s $curve;
+        z-index: 1;
+        color: $grey;
+      }
+    }
+    .roi-card:hover {
+      @media (min-width: $breakpoint-medium) {
+        background: $navy;
+      }
+      h5 {
+        @media (min-width: $breakpoint-medium) {
+          opacity: 0.05;
+        }
       }
     }
   }

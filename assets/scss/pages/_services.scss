@@ -323,9 +323,10 @@
 
         .services-section__program-tags {
           color: $navy;
+          font-size: 9px;
           h5 {
             font-weight: 400;
-            font-size: 8px;
+            letter-spacing: 0.2em;
           }
         }
       }
@@ -359,6 +360,7 @@
   .services-section.dark {
     background: $navy;
     color: $white;
+    box-shadow: inset 0px -2px 35px rgba($black, 1);
   }
 }
 

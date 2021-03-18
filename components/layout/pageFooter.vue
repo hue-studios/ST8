@@ -96,6 +96,7 @@
           <a
             :href="item.social_links_id.link"
             target="_blank"
+            rel="noopener"
             class="rounded-full w-10 h-10 flex justify-center items-center mr-1 ml-1 md:mr-2 md:ml-0"
             ><linkedin-icon
               v-if="item.social_links_id.platform == 'Linkedin'"

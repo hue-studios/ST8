@@ -8,23 +8,36 @@
       <h1 class="uppercase green thin-font px-4 md:px-12 article__title">
         {{ article.title }}
       </h1>
-      <h5 class="w-full uppercase px-4 md:px-12 mt-2 white tracking-wider">
+      <h5
+        v-if="article.date_published"
+        class="w-full uppercase px-4 md:px-12 mt-2 white tracking-wider"
+      >
         <span class="mr-1">Published on:</span>
         {{ $moment(article.date_published).format('dddd MMMM Do, YYYY') }}
+      </h5>
+      <h5
+        v-else
+        class="w-full uppercase px-4 md:px-12 mt-2 white tracking-wider"
+      >
+        <span class="mr-1">Published on:</span>
+        {{ $moment(article.modified_on).format('dddd MMMM Do, YYYY') }}
       </h5>
     </div>
     <div
       class="px-4 md:px-12 py-12 article__content"
       v-html="article.article"
     ></div>
-    <div v-if="article.link" class="w-full px-4 md:px-12 article__links">
-      <a :href="article.link" target="_blank" rel="noreferrer"
-        ><span v-if="article.type === 'External Article'"
-          ><span class="mr-1 uppercase grey tracking-wider">Link:</span>Go To
+    <div
+      v-if="article.link"
+      class="w-full px-4 md:px-12 pb-6 text-center article__links"
+    >
+      <a :href="article.link" target="_blank" class="" rel="noreferrer"
+        ><span v-if="article.type === 'External Article'" class="bold"
+          ><span class="mr-1 uppercase green tracking-wider">Link:</span>Go To
           Article</span
         ><span v-if="article.type === 'document'">View Document</span>
         <span v-else
-          ><span class="mr-1 uppercase grey tracking-wider">Link:</span
+          ><span class="mr-1 uppercase green bold tracking-wider">Link:</span
           >{{ article.link }}</span
         >
         <link-icon></link-icon
@@ -32,9 +45,9 @@
     </div>
     <div
       v-if="article.tags.length > 0"
-      class="w-full flex flex-row items-center justify-start text-xs px-4 md:px-12 py-6 article__tags"
+      class="w-full flex flex-row items-center justify-center text-xs px-4 md:px-12 py-6 article__tags"
     >
-      <span class="mr-1 uppercase grey tracking-wider mb-2">Tags:</span>
+      <span class="mr-1 uppercase bold grey tracking-wider mb-2">Tags:</span>
       <h5
         v-for="(tag, index) in article.tags"
         :key="index"
@@ -43,7 +56,7 @@
         {{ tag }}
       </h5>
     </div>
-    <div class="w-full px-4 md:px-12 pb-12 flex article__share-section">
+    <div class="w-full px-4 md:px-12 pb-12 pt-6 flex article__share-section">
       <div
         class="w-full mb-4 flex justify-center items-center flex-col text-center"
       >

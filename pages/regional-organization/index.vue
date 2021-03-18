@@ -78,7 +78,9 @@
         <div class="w-full text-center bg-transparent">
           <a
             class="inline-block px-12 py-6 uppercase green bold tracking-widest font-medium"
-            href="#"
+            href="https://admin.steny.org/southern-tier-8/assets/olp5pu0u2tc4000c"
+            target="_blank"
+            rel="noreferrer"
             >CEDS</a
           >
         </div>
@@ -144,8 +146,8 @@
         Board of Directors
       </h2>
       <p class="w-full text-center white mb-6">
-        Our experienced board is comprised of 23 members, including many
-        long-standing contributors.
+        Our board is comprised of {{ board.length }} members, providing
+        leadership from across the region.
       </p>
 
       <div class="text-center board-card">
@@ -247,12 +249,15 @@
       >
         Return on Investment
       </h2>
-      <div
+      <a
+        :href="imageLocation + 'd8t0rztonu0o8gow'"
+        target="_blank"
+        rel="noreferrer"
         class="flex items-center justify-center flex-col relative py-12 mb-8 roi-card"
       >
         <h5 class="absolute uppercase thin-font">ROI</h5>
         <h3 class="green uppercase tracking-widest bold">Regional</h3>
-      </div>
+      </a>
       <p class="w-full px-8 mb-8">
         Southern Tier 8 Regional Board represents eight counties as the 6th
         largest Local Development District for the Appalachian Regional
@@ -268,16 +273,19 @@
       <div
         class="flex flex-row flex-wrap items-center justify-center max-w-3xl"
       >
-        <div
+        <a
           v-for="(county, index) in filteredCounties"
           :key="index"
+          :href="imageLocation + county.roi.private_hash"
+          target="_blank"
+          rel="noreferrer"
           class="flex items-center justify-center flex-col relative py-12 mx-2 mb-4 roi-card"
         >
           <h5 class="absolute uppercase thin-font">ROI</h5>
           <h3 class="green uppercase tracking-widest bold">
             {{ county.title }}
           </h3>
-        </div>
+        </a>
       </div>
     </div>
   </div>

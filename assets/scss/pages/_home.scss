@@ -25,7 +25,44 @@
       background-position: right -120px;
       background-size: 700px auto;
     }
-
+    .feather-chevron-down {
+      bottom: 50px;
+      left: calc(50% - 10px);
+      color: $green;
+      animation: moveUpDown 2s infinite;
+      @media (min-width: $breakpoint-medium) {
+        bottom: 20px;
+      }
+      @media (min-width: $breakpoint-large) {
+        bottom: 30px;
+      }
+    }
+    @keyframes moveUpDown {
+      0% {
+        transform: translate3d(0, 0px, 0);
+      }
+      50% {
+        transform: translate3d(0, 10px, 0);
+      }
+      100% {
+        transform: translate3d(0, 0px, 0);
+      }
+    }
+    .home-intro__intro {
+      margin-top: 220px;
+      font-size: 12px;
+      transition: all 0.4s $curve;
+      @media (min-width: $breakpoint-small) {
+        margin-top: 320px;
+      }
+      @media (min-width: $breakpoint-large) {
+        margin-top: 240px;
+      }
+    }
+    .home-intro__intro.hide {
+      opacity: 0;
+      transform: translate3d(0, 100px, 0);
+    }
     #home-intro__logo {
       position: absolute;
       top: calc(50% - 100px);
@@ -33,6 +70,7 @@
       left: calc(50% - 160px);
       text-align: center;
       transition: all 0.4s $curve;
+      cursor: pointer;
       @media (min-width: $breakpoint-small) {
         width: 400px;
         left: calc(50% - 200px);
@@ -45,10 +83,14 @@
         width: 600px;
       }
       .logo-name {
+        transition: all 0.3s ease-out;
         svg {
+          transition: all 0.3s ease-out;
           width: 100%;
           height: auto;
-          // filter: drop-shadow(0px 2px 2px (rgba($black, 0.5)));
+          filter: drop-shadow(0px 0px 2px (rgba($black, 0)));
+          path {
+          }
         }
       }
       .button {
@@ -57,6 +99,23 @@
         position: absolute;
         left: calc(50% - 21px);
         bottom: -45px;
+      }
+    }
+    #home-intro__logo:hover {
+      .logo-name {
+        @media (min-width: $breakpoint-medium) {
+          transform: scale(1.05);
+        }
+        svg {
+          @media (min-width: $breakpoint-medium) {
+            filter: drop-shadow(5px 15px 5px (rgba($black, 0.35)));
+          }
+        }
+      }
+      .button {
+        @media (min-width: $breakpoint-medium) {
+          transform: scale(1.2);
+        }
       }
     }
     #home-intro__logo::after {
@@ -106,18 +165,24 @@
         transition: all 0.4s $curve;
         opacity: 1;
         background: rgba($white, 1);
-
+        cursor: pointer;
         position: relative;
+
         @media (min-width: $breakpoint-small) {
-          font-size: 15px;
+          font-size: 13px;
           margin-bottom: 0px;
           width: 160px;
         }
         @media (min-width: $breakpoint-large) {
-          font-size: 16px;
+          // font-size: 16px;
         }
         svg {
           display: block;
+        }
+      }
+      a.home-intro__navigation-btn:hover {
+        @media (min-width: $breakpoint-medium) {
+          letter-spacing: 0.4em;
         }
       }
       a.home-intro__navigation-btn:nth-of-type(2)::before {
@@ -141,8 +206,8 @@
         width: 120px;
       }
       a.home-intro__navigation-btn.current {
-        background: rgba($navy, 1);
-        color: $green;
+        background: rgba($grey, 1);
+        // color: $green;
       }
     }
     .home-intro__navigation-description {
@@ -174,6 +239,12 @@
         background: rgba($white, 1);
         opacity: 0;
         transition: all 0.3s $curve 0.1s;
+        @media (min-width: $breakpoint-medium) {
+          font-size: 13px;
+        }
+        @media (min-width: $breakpoint-large) {
+          font-size: 14px;
+        }
       }
       a {
         background: rgba($white, 1);
@@ -219,6 +290,7 @@
   #home__intro.show {
     #home-intro__logo {
       transform: translate3d(0, -120px, 0);
+      cursor: pointer;
       @media (min-width: $breakpoint-small) {
         transform: translate3d(0, -100px, 0);
       }
@@ -226,9 +298,11 @@
       }
       @media (min-width: $breakpoint-large) {
         font-size: 16px;
+        transform: translate3d(0, -60px, 0);
       }
       .button {
-        bottom: -205px;
+        bottom: -430px;
+        z-index: -1;
         opacity: 0;
       }
     }
@@ -288,7 +362,7 @@
         @media (min-width: $breakpoint-medium) {
         }
         @media (min-width: $breakpoint-large) {
-          width: 508px;
+          width: 478px;
           font-size: 42px;
           line-height: 40px;
         }

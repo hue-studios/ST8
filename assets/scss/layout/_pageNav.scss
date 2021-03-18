@@ -3,6 +3,7 @@
   @media (min-width: $breakpoint-large) {
     display: flex;
   }
+
   .page-nav__drop-container {
     z-index: 15;
     padding: 0 30px;
@@ -25,6 +26,14 @@
       transform: scaleY(0);
       transition: all 0.15s $curve 0.3s;
       transform-origin: top center;
+    }
+    .nuxt-link-exact-active {
+      h3 {
+        @media (min-width: $breakpoint-large) {
+          color: $green;
+          background: $white;
+        }
+      }
     }
     .page-nav__drop-links {
       position: absolute;
@@ -53,7 +62,7 @@
       background: $white;
       transition-delay: 0s;
     }
-    .nuxt-link-active {
+    .nuxt-link-exact-active {
       color: $green;
       background: $white;
     }

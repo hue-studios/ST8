@@ -144,9 +144,30 @@
       <div
         id="accomplishes-description"
         class="relative p-6 program__description"
-        :class="{ tooLong: tooLongContent }"
-        v-html="program.what_it_accomplishes"
-      ></div>
+      >
+        <div
+          :class="{ tooLong: tooLongContent }"
+          v-html="program.what_it_accomplishes"
+        ></div>
+        <div v-if="program.accomplishes_link.length" class="mt-2">
+          <nuxt-link
+            v-if="!program.accomplishes_link[0].external"
+            :to="program.accomplishes_link[0].link"
+            class="w-full absolute uppercase tracking-wider green bold text-center lg:text-left lg:px-0"
+            >{{ program.accomplishes_link[0].title }}
+            <link-icon class="ml-2"></link-icon
+          ></nuxt-link>
+          <a
+            v-else-if="program.accomplishes_link[0].external"
+            :href="program.accomplishes_link[0].link"
+            target="_blank"
+            rel="noreferrer"
+            class="w-full absolute uppercase tracking-wider green bold text-center lg:text-left lg:px-0"
+            >{{ program.accomplishes_link[0].title }}
+            <link-icon class="ml-2"></link-icon
+          ></a>
+        </div>
+      </div>
       <pulse-icon icon-i-d="finish-btn" class-name="button"></pulse-icon>
     </div>
     <div
@@ -263,6 +284,7 @@ import programCard from '~/components/programs/programCard'
 import newsCardVertical from '~/components/now/newsCardVertical'
 import resourceCard from '~/components/now/resourceCardVertical'
 import pulseIcon from '~/components/universal/pulseIcon'
+import linkIcon from '~/components/universal/linkIcon'
 export default {
   components: {
     pulseIcon,
@@ -271,13 +293,14 @@ export default {
     programCard,
     newsCardVertical,
     resourceCard,
+    linkIcon,
   },
   async asyncData({ params, $axios }) {
     const [programReq] = await Promise.all([
       $axios.$get(
         '/items/programs?filter[url][eq]=' +
           params.slug +
-          '&fields=id,title,what_is_it,what_it_accomplishes,url,counties.county_id.title,initiatives.initiative_id.title,images.file_id.private_hash,partners.partner_id.title,partners.partner_id.logo.private_hash,resources.resources_id.title,resources.resources_id.type,resources.resources_id.link,resources.resources_id.file.private_hash,news.news_id.title,news.news_id.article,news.news_id.link,news.news_id.type,news.news_id.tags,news.news_id.date_published,news.news_id.url,news.news_id.link,url,news.news_id.cover_image.private_hash&single=1'
+          '&fields=id,title,what_is_it,what_it_accomplishes,accomplishes_link.external,accomplishes_link.title,accomplishes_link.link,url,counties.county_id.title,initiatives.initiative_id.title,images.file_id.private_hash,partners.partner_id.title,partners.partner_id.logo.private_hash,resources.resources_id.title,resources.resources_id.type,resources.resources_id.link,resources.resources_id.file.private_hash,news.news_id.title,news.news_id.article,news.news_id.link,news.news_id.type,news.news_id.tags,news.news_id.date_published,news.news_id.url,news.news_id.link,url,news.news_id.cover_image.private_hash&single=1'
       ),
     ])
     return {

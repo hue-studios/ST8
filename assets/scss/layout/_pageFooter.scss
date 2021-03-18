@@ -25,6 +25,9 @@
       margin-bottom: 4px;
       color: $darkGrey;
     }
+    a.footer-link.nuxt-link-exact-active {
+      color: $green;
+    }
     .footer-col__contact-section {
       margin-bottom: 20px;
       p {

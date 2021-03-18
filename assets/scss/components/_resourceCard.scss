@@ -16,7 +16,8 @@
     color: $green;
 
     @media (min-width: $breakpoint-small) {
-      bottom: 1rem;
+      // top: auto;
+      // bottom: 1rem;
     }
     @media (min-width: $breakpoint-medium) {
       left: 1.5rem;

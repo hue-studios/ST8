@@ -2,7 +2,7 @@
   <div class="container" :class="$store.state.page">
     <transition name="fade" mode="out-in">
       <page-header
-        :class="{ 'opacity-0': $store.state.page === 'index' }"
+        :class="{ home: $store.state.page === 'index' }"
       ></page-header>
     </transition>
     <div id="page-container" class="page-container" @click="closeSideMenu()">

@@ -44,14 +44,16 @@
         v-if="service.purpose"
         class="w-full md:w-1/2 services-section__content"
       >
-        <h3 class="w-full uppercase text-xs green text-left">Purpose</h3>
+        <h3 class="w-full uppercase text-xs green text-left bold">Purpose</h3>
         <div v-html="service.purpose"></div>
       </div>
       <div
         v-if="service.how_we_help"
         class="w-full md:w-1/2 services-section__content"
       >
-        <h3 class="w-full uppercase text-xs green text-left">How we help</h3>
+        <h3 class="w-full uppercase text-xs green text-left bold">
+          How we help
+        </h3>
         <div v-html="service.how_we_help"></div>
         <nuxt-link
           v-if="service.title.includes('Funding')"
@@ -64,7 +66,7 @@
         v-if="service.who_it_is_for"
         class="w-full md:w-1/2 services-section__content"
       >
-        <h3 class="w-full uppercase text-xs green text-left">
+        <h3 class="w-full uppercase text-xs green text-left bold">
           Who is this for?
         </h3>
         <div v-html="service.who_it_is_for"></div>
@@ -73,7 +75,9 @@
         v-if="service.example_programs.length > 0"
         class="md:w-1/2 services-section__content"
       >
-        <h3 class="w-full uppercase text-xs green text-left">Work Portfolio</h3>
+        <h3 class="w-full uppercase text-xs green text-left bold">
+          Recent Investment
+        </h3>
         <div class="w-full flex flex-col items-center justify-start mt-4">
           <nuxt-link
             v-for="(program, index2) in service.example_programs"
@@ -98,7 +102,7 @@
               >
                 <h5
                   v-if="program.program_id.initiatives.length > 0"
-                  class="uppercase navy"
+                  class="uppercase navy bold"
                 >
                   {{ program.program_id.initiatives.length }}
                   <span class="green"
@@ -115,7 +119,7 @@
                 >
                 <h5
                   v-if="program.program_id.counties.length > 0"
-                  class="uppercase navy"
+                  class="uppercase navy bold"
                 >
                   {{ program.program_id.counties.length }}
                   <span class="green"
@@ -134,7 +138,7 @@
                 >
                 <h5
                   v-if="program.program_id.partners.length > 0"
-                  class="uppercase navy"
+                  class="uppercase navy bold"
                 >
                   {{ program.program_id.partners.length }}
                   <span class="green"
@@ -151,13 +155,62 @@
               <link-icon></link-icon>
             </div>
           </nuxt-link>
+
+          <nuxt-link
+            v-for="(article, index22) in service.news_programs"
+            :key="index22"
+            :to="'/regional-news/' + article.news_id.url"
+            class="flex flex-row items-center justify-start mb-6 shadow-lg services-section__program"
+          >
+            <div
+              v-if="article.news_id.cover_image"
+              class="services-section__program-image"
+              :style="
+                'background-image: url(' +
+                imageLocation +
+                article.news_id.cover_image.private_hash +
+                ')'
+              "
+            ></div>
+            <div class="flex flex-col services-section__program-content">
+              <h4 class="uppercase mb-2">{{ article.news_id.title }}</h4>
+              <div
+                class="w-full flex flex-row items-start justify-start text-xs services-section__program-tags"
+              >
+                <h5
+                  v-if="article.news_id.date_published"
+                  class="uppercase navy bold"
+                >
+                  <span class="green">Published </span>
+                  {{
+                    $moment(article.news_id.date_published).format(
+                      'dddd MMMM Do, YYYY'
+                    )
+                  }}
+                </h5>
+                <h5 v-else class="uppercase navy bold">
+                  <span class="green">Published </span>
+                  {{
+                    $moment(article.news_id.modified_on).format(
+                      'dddd MMMM Do, YYYY'
+                    )
+                  }}
+                </h5>
+              </div>
+            </div>
+            <div
+              class="flex items-center justify-center services-section__program-link"
+            >
+              <link-icon></link-icon>
+            </div>
+          </nuxt-link>
         </div>
       </div>
       <div
         v-if="service.resources.length > 0"
         class="md:w-1/2 services-section__content"
       >
-        <h3 class="w-full uppercase text-xs green text-left">Resources</h3>
+        <h3 class="w-full uppercase text-xs green text-left bold">Resources</h3>
         <div class="w-full flex flex-col items-center justify-start mt-4">
           <div
             v-for="(resource, index3) in service.resources"
@@ -213,7 +266,7 @@ export default {
   async asyncData({ params, $axios }) {
     const servicesReq = await $axios.get(
       process.env.apiUrl +
-        '/items/services?fields=*.*.*.*.*&filter[status]=published'
+        '/items/services?fields=id,title,url,purpose,how_we_help,who_it_is_for,activity,example_programs.program_id.*,example_programs.program_id.images.file_id.private_hash,resources.resources_id.*,news_programs.news_id.*,news_programs.news_id.cover_image.private_hash,&filter[status]=published'
     )
     return {
       services: servicesReq.data.data,

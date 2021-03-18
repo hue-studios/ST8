@@ -37,6 +37,7 @@
               <div class="shadow-lg mx-4 events__event">
                 <div class="w-full flex items-center justify-center flex-row">
                   <div
+                    v-if="item.image"
                     class="bg-cover bg-no-repeat bg-center events__event-image"
                     :style="
                       'background-image: url(' +
@@ -44,6 +45,10 @@
                       item.image.private_hash +
                       '?key=small)'
                     "
+                  ></div>
+                  <div
+                    v-else
+                    class="bg-cover bg-no-repeat bg-center events__event-image"
                   ></div>
                   <div class="events__event-description">
                     <h3 class="uppercase tracking-wider bold mb-2">

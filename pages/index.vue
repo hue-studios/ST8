@@ -5,7 +5,7 @@
       class="flex flex-col justify-center items-center relative"
       :class="{ show: panel !== 'home' }"
     >
-      <a id="home-intro__logo" @click.prevent="changePanel('home', 0)">
+      <a id="home-intro__logo" @click.prevent="changePanelTwo()">
         <logo-name></logo-name>
         <pulse-icon icon-i-d="" class-name="block button"></pulse-icon>
       </a>
@@ -34,6 +34,12 @@
           >Now</a
         >
       </div>
+      <h4
+        :class="{ hide: hideMessage }"
+        class="bold navy uppercase tracking-widest absolute home-intro__intro"
+      >
+        Welcome to our new digital experience.
+      </h4>
       <transition
         :enter-active-class="animateIn"
         :leave-active-class="animateOut"
@@ -51,9 +57,10 @@
             Active
           </h5>
           <p>
-            Our Initiatives, Programs, and Services are designed to serve and
-            adapt to the region’s economic, workforce, infrastructure, rural,
-            and quality of life needs. We are ACTIVE because we are always
+            Our <strong>Initiatives</strong>, <strong>Programs</strong>, and
+            <strong>Services</strong> are designed to serve and adapt to the
+            region’s economic, workforce, infrastructure, rural, and quality of
+            life needs. We are <strong>ACTIVE</strong> because we are always
             evolving and partnering with organizations throughout the region to
             create innovative, practical, and timely solutions with vision,
             dedication, and commitment to our region’s growth and success.
@@ -105,8 +112,9 @@
             our organization is unique with its own natural, economic, and
             business assets. We are committed to evaluating and innovating for
             each, while still looking at the strength of our region as a whole.
-            We believe that as one united region, we are stronger, we build a
-            more powerful economy, and create the best opportunities for growth.
+            We believe that as one <strong>united region</strong>, we are
+            stronger, we build a more <strong>powerful economy</strong>, and
+            create the best opportunities for <strong>growth</strong>.
           </p>
           <div class="w-full flex items-center justify-center flex-row">
             <nuxt-link
@@ -148,12 +156,13 @@
         >
           <h5 class="uppercase grey tracking-widest mb-4 text-center">Now</h5>
           <p>
-            Our News, Resources, and Events are published to share progress of
-            our organization’s initiatives, programs, and services. We also
-            focus on gathering and announcing funding opportunities to help
-            county legislatures and organizations benefit from every opportunity
-            that is available to them in order to continually strengthen the
-            economic growth of our region.
+            Our <strong>News</strong>, <strong>Resources</strong>, and
+            <strong>Events</strong> are published to share progress of our
+            organization’s initiatives, programs, and services. We also focus on
+            gathering and announcing funding opportunities to help county
+            legislatures and organizations benefit from every opportunity that
+            is available to them in order to continually strengthen the economic
+            growth of our region.
           </p>
           <div class="w-full flex items-center justify-center flex-row">
             <nuxt-link
@@ -177,6 +186,7 @@
           </div>
         </div>
       </transition>
+      <chevron-down-icon size="1.5x" class="absolute"></chevron-down-icon>
     </div>
     <div
       id="home__mission"
@@ -443,6 +453,7 @@
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+import { ChevronDownIcon } from 'vue-feather-icons'
 import observer from '~/components/utilities/observer'
 import pulseIcon from '~/components/universal/pulseIcon'
 import linkIcon from '~/components/universal/linkIcon'
@@ -453,6 +464,7 @@ import industryChart from '~/components/industryChart'
 
 export default {
   components: {
+    ChevronDownIcon,
     pulseIcon,
     logoName,
     Swiper,
@@ -467,19 +479,19 @@ export default {
     const [
       partnersReq,
       newsReq,
-      eventsReq,
+      // eventsReq,
       programsReq,
       organizationReq,
     ] = await Promise.all([
-      $axios.get(process.env.apiUrl + '/items/partners?fields=*.*'),
+      $axios.get(process.env.apiUrl + '/items/partners?fields=title,category'),
       $axios.get(
         process.env.apiUrl +
-          '/items/news?fields=*.*.*&filter[featured]=1&meta=*&filter[status]=published&sort=-date_published'
+          '/items/news?fields=title,article,url,cover_image.private_hash,featured,date_published,type,link,tags&filter[featured]=1&meta=*&filter[status]=published&sort=-date_published'
       ),
-      $axios.get(process.env.apiUrl + '/items/events?fields=*.*.*'),
+      // $axios.get(process.env.apiUrl + '/items/events?fields=*.*.*'),
       $axios.get(
         process.env.apiUrl +
-          '/items/programs?fields=*.*.*&filter[featured]=1&meta=*'
+          '/items/programs?fields=title,what_is_it,url,featured,counties.county_id.title,images.file_id.private_hash,initiatives.initiative_id.title,partners.partner_id.title&filter[featured]=1&meta=*'
       ),
       $axios.$get('/items/organization?single=1&fields=mission_statement'),
     ])
@@ -487,7 +499,7 @@ export default {
       partners: partnersReq.data.data,
       news: newsReq.data.data,
       newsMeta: newsReq.data,
-      events: eventsReq.data.data,
+      // events: eventsReq.data.data,
       programs: programsReq.data.data,
       programsMeta: programsReq.data,
       organization: organizationReq.data,
@@ -495,6 +507,7 @@ export default {
   },
   data() {
     return {
+      hideMessage: false,
       panel: 'home',
       previousPanelKey: 1,
       panelKey: 0,
@@ -683,6 +696,7 @@ export default {
       // } else {
       //   container.classList.remove('show')
       // }
+      this.hideMessage = true
       if (this.previousPanelKey < key) {
         this.animateIn = 'uk-animation-slide-right-medium uk-animation-fast'
         this.animateOut =
@@ -694,6 +708,22 @@ export default {
       }
       this.previousPanelKey = key
       this.panel = panel
+    },
+    changePanelTwo() {
+      this.hideMessage = true
+      if (this.panel === 'home') {
+        this.animateIn = 'uk-animation-slide-left-medium uk-animation-fast'
+        this.animateOut =
+          'uk-animation-slide-right-medium uk-animation-reverse uk-animation-fast'
+        this.panel = 'active'
+        this.previousPanelKey = 1
+      } else {
+        this.animateIn = 'uk-animation-slide-right-medium uk-animation-fast'
+        this.animateOut =
+          'uk-animation-slide-left-medium uk-animation-reverse uk-animation-fast'
+        this.panel = 'home'
+        this.previousPanelKey = 0
+      }
     },
   },
 }
