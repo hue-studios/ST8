@@ -186,7 +186,13 @@
           </div>
         </div>
       </transition>
-      <chevron-down-icon size="1.5x" class="absolute"></chevron-down-icon>
+      <div
+        class="absolute home-intro__scroll-icon"
+        data-section="#home__mission"
+        @click.prevent="smoothScroll('#home__mission')"
+      >
+        <chevron-down-icon size="1.5x"></chevron-down-icon>
+      </div>
     </div>
     <div
       id="home__mission"
@@ -671,6 +677,15 @@ export default {
       })
   },
   methods: {
+    smoothScroll(element) {
+      console.log(element)
+
+      const offsetTop = document.querySelector(element).offsetTop
+      scroll({
+        top: offsetTop,
+        behavior: 'smooth',
+      })
+    },
     animateValue(id, start, end, duration) {
       if (start === end) return
       const range = end - start

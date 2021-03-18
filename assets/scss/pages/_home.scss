@@ -25,16 +25,22 @@
       background-position: right -120px;
       background-size: 700px auto;
     }
-    .feather-chevron-down {
-      bottom: 50px;
-      left: calc(50% - 10px);
+    .home-intro__scroll-icon {
+      bottom: 30px;
+      left: calc(50% - 22px);
       color: $green;
       animation: moveUpDown 2s infinite;
+      background: rgba($grey, 0.15);
+      border-radius: 50%;
+      padding: 12px;
       @media (min-width: $breakpoint-medium) {
         bottom: 20px;
       }
       @media (min-width: $breakpoint-large) {
         bottom: 30px;
+      }
+
+      .feather-chevron-down {
       }
     }
     @keyframes moveUpDown {

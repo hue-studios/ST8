@@ -5,7 +5,7 @@
       class="flex flex-col flex-wrap justify-center items-center relative"
     >
       <h1
-        class="navy uppercase tracking-widest mb-2 w-5/6 sm:w-3/5 md:w-1/2 thin-font text-center"
+        class="navy uppercase tracking-widest mb-2 w-5/6 sm:w-3/5 md:w-1/2 thin-font text-center hidden"
       >
         News
       </h1>
@@ -67,7 +67,7 @@ export default {
   async asyncData({ params, $axios }) {
     const [newsReq] = await Promise.all([
       $axios.$get(
-        '/items/news?fields=id,title,article,url,cover_image.private_hash,tags,type,featured,date_published,initiatives.initiative_id.title,programs.*,related_resources.*&filter[status]=published&sort=-date_published'
+        '/items/news?fields=id,title,article,url,cover_image.private_hash,tags,type,featured,date_published,link,initiatives.initiative_id.title,programs.*,related_resources.*&filter[status]=published&sort=-date_published'
       ),
     ])
     return {

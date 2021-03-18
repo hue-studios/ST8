@@ -64,7 +64,7 @@
     </nuxt-link>
     <a
       v-if="item.type === 'External Article'"
-      :href="item.url"
+      :href="item.link"
       target="_blank"
       rel="noreferrer"
       class="flex items-center justify-center news-card__link"
