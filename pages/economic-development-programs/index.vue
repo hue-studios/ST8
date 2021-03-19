@@ -104,7 +104,31 @@ export default {
       programFilters: [],
     }
   },
-  head() {},
+  head() {
+    return {
+      title:
+        'Economic Development Programs for the Southern Tier Region of New York',
+      meta: [
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          content:
+            'Economic Development Programs for the Southern Tier Region of New York',
+        },
+        {
+          hid: 'description',
+          name: 'description',
+          content:
+            'Southern Tier 8 regional programs are designed to create innovative ideas, develop practical solutions, and align strategic partnerships to meet the challenges and advance economic growth in the Southern Tier 8 Region.',
+        },
+        {
+          hid: 'og:url',
+          property: 'og:url',
+          content: 'https://southerntier8.org/economic-development-programs/',
+        },
+      ],
+    }
+  },
   computed: {
     filteredPrograms() {
       const app = this

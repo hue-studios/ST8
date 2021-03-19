@@ -96,7 +96,8 @@ export default {
       if (str === null || str === '') return false
       else str = str.toString()
       const strOne = str.replace(/&nbsp;/gi, ' ')
-      return strOne.replace(/(<([^>]+)>)/gi, '')
+      const strTwo = strOne.replace(/&amp;/gi, '&')
+      return strTwo.replace(/(<([^>]+)>)/gi, '')
     },
     truncateString(str, num) {
       const newStr = this.removeTags(str)

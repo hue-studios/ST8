@@ -129,7 +129,59 @@ export default {
       coverImage: '',
     }
   },
-  head() {},
+  head() {
+    return {
+      title: this.article.title + ' - Southern Tier New York News - ST8',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.truncateString(this.article.article, 120),
+        },
+        {
+          hid: 'og:url',
+          property: 'og:url',
+          content:
+            'https://southerntier8.org/regional-news/' + this.article.url,
+        },
+        {
+          hid: 'og:image',
+          property: 'og:image',
+          content: this.coverImage,
+        },
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          content: this.article.title + ' - Southern Tier New York News - ST8',
+        },
+        {
+          hid: 'og:description',
+          property: 'og:description',
+          content: this.truncateString(this.article.article, 120),
+        },
+
+        {
+          hid: 'twitter:title',
+          name: 'twitter:title',
+          content: this.article.title + ' - Southern Tier New York News - ST8',
+        },
+        {
+          hid: 'twitter:description',
+          name: 'twitter:description',
+          content: this.truncateString(this.article.article, 120),
+        },
+        {
+          hid: 'twitter:image',
+          name: 'twitter:image',
+          content: this.coverImage,
+        },
+        {
+          hid: 'twitter:image:alt',
+          content: this.article.title,
+        },
+      ],
+    }
+  },
   created() {
     if (this.article.cover_image) {
       this.coverImage =
@@ -147,6 +199,19 @@ export default {
       const thirdEdit = secondEdit.replace('&hellip;', '...')
       const fourthEdit = thirdEdit.replace('&rsquo;', "'")
       return fourthEdit
+    },
+    removeTags(str) {
+      if (str === null || str === '') return false
+      else str = str.toString()
+      const strOne = str.replace(/&nbsp;/gi, ' ')
+      return strOne.replace(/(<([^>]+)>)/gi, '')
+    },
+    truncateString(str, num) {
+      const newStr = this.removeTags(str)
+      if (newStr.length <= num) {
+        return newStr
+      }
+      return newStr.slice(0, num) + '...'
     },
   },
 }

@@ -40,7 +40,27 @@ export default {
     return {}
   },
   head() {
-    return {}
+    return {
+      title: "Resources for the Southern Tier Region's Economy",
+      meta: [
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          content: "Resources for the Southern Tier Region's Economy",
+        },
+        {
+          hid: 'description',
+          name: 'description',
+          content:
+            'Resources focused on the economic development for the Southern Tier region of New York.',
+        },
+        {
+          hid: 'og:url',
+          property: 'og:url',
+          content: 'https://southerntier8.org/regional-events/resources',
+        },
+      ],
+    }
   },
   computed: {
     // project() {

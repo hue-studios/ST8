@@ -269,7 +269,29 @@ export default {
       },
     }
   },
-  head() {},
+  head() {
+    return {
+      title: 'Southern Tier Economic Development Partners',
+      meta: [
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          content: 'Southern Tier Economic Development Partners',
+        },
+        {
+          hid: 'description',
+          name: 'description',
+          content:
+            'The Southern Tier 8 organization collaborates with many partners across the region.',
+        },
+        {
+          hid: 'og:url',
+          property: 'og:url',
+          content: 'https://southerntier8.org/regional-partnerships/',
+        },
+      ],
+    }
+  },
   computed: {
     economicDevelopmentPartners() {
       const vm = this

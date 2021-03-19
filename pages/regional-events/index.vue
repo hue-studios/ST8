@@ -202,7 +202,27 @@ export default {
     }
   },
   head() {
-    return {}
+    return {
+      title: "Regional Events for the Southern Tier Region's Economy",
+      meta: [
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          content: "Regional Events for the Southern Tier Region's Economy",
+        },
+        {
+          hid: 'description',
+          name: 'description',
+          content:
+            'Regional events focused on the economic development for the Southern Tier region of New York.',
+        },
+        {
+          hid: 'og:url',
+          property: 'og:url',
+          content: 'https://southerntier8.org/regional-events/',
+        },
+      ],
+    }
   },
   computed: {
     attrs() {

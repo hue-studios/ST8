@@ -1,5 +1,5 @@
 <template>
-  <div id="home">
+  <div id="home" :class="{ index: $store.state.page === 'index' }">
     <div
       id="home__intro"
       class="flex flex-col justify-center items-center relative"
@@ -251,7 +251,7 @@
         <div slot="button-prev" class="swiper-button-prev"></div>
       </swiper>
       <nuxt-link
-        to="/economic-development-programs"
+        to="/regional-news"
         class="green w-full text-center pt-8 tracking-widest uppercase link-font"
         >View All {{ newsMeta.meta.status_count.published }} Articles
         <link-icon class="ml-2"></link-icon
@@ -378,7 +378,7 @@
       </h3>
 
       <nuxt-link
-        to="/partnerships"
+        to="/regional-partnerships"
         class="green w-full text-center pt-8 link-font"
         >LEARN MORE<span class="hidden sm:inline-block ml-2">
           ABOUT PARTNERSHIPS</span
@@ -557,7 +557,7 @@ export default {
       },
     }
   },
-  head() {},
+
   computed: {
     regionalPartners() {
       const vm = this

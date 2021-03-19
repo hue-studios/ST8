@@ -8,7 +8,7 @@
         <h1
           v-for="(county, index) in filteredCounties"
           :key="index"
-          class="uppercase grey block opacity-25 bold"
+          class="uppercase grey block md:opacity-25 bold"
         >
           {{ county.title }}
         </h1>
@@ -141,14 +141,10 @@
       class="w-full flex justify-center items-start flex-row flex-wrap py-20"
     >
       <h2
-        class="uppercase w-full text-center page-title tracking-widest thin-font white mb-0"
+        class="uppercase w-full text-center page-title tracking-widest thin-font white mb-6"
       >
         Board of Directors
       </h2>
-      <p class="w-full text-center white mb-6">
-        Our board is comprised of {{ board.length }} members, providing
-        leadership from across the region.
-      </p>
 
       <div class="text-center board-card">
         <h3 class="uppercase">Broome County</h3>
@@ -312,7 +308,31 @@ export default {
       imageLocation: process.env.imageUrl,
     }
   },
-  head() {},
+  head() {
+    return {
+      title:
+        'Regional Economic Development Organization for the Southern Tier of New York',
+      meta: [
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          content:
+            'Regional Economic Development Organization for the Southern Tier of New York',
+        },
+        {
+          hid: 'description',
+          name: 'description',
+          content:
+            "The Southern Tier 8 organization partner's with member counties to identify and address multi-county issues in order to improve the quality of life within the region.",
+        },
+        {
+          hid: 'og:url',
+          property: 'og:url',
+          content: 'https://southerntier8.org/regional-organization/',
+        },
+      ],
+    }
+  },
   computed: {
     staff() {
       return this.people.filter((person) => person.category === 'Staff')

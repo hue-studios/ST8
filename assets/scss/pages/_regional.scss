@@ -29,7 +29,7 @@
       z-index: 10;
       @media (min-width: $breakpoint-small) {
       }
-      @media (min-width: $breakpoint-medium) {
+      @media (min-width: $breakpoint-large) {
         left: calc(50% - 450px);
         width: 900px;
       }
@@ -77,29 +77,58 @@
     #regional-counties-image {
       width: 100%;
       max-width: 1400px;
-      height: 800px;
+      height: 300px;
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center;
       background-image: url('https://admin.steny.org/southern-tier-8/assets/makw0alar0gwgckk?key=large');
+      @media (min-width: $breakpoint-small) {
+        height: 500px;
+      }
+      @media (min-width: $breakpoint-medium) {
+        height: 650px;
+      }
+
+      @media (min-width: $breakpoint-large) {
+        height: 800px;
+      }
     }
   }
   #regional-map {
     #regional-map-image {
       width: 100%;
       max-width: 1000px;
-      height: 600px;
+      height: 200px;
       background-image: url('https://admin.steny.org/southern-tier-8/assets/22hxb68lcchwgssw?key=large');
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center;
+      @media (min-width: $breakpoint-small) {
+        height: 350px;
+      }
+      @media (min-width: $breakpoint-medium) {
+        height: 450px;
+      }
+      @media (min-width: $breakpoint-large) {
+        height: 600px;
+      }
     }
   }
   #regional-industry {
     #industry-chart {
       svg {
-        height: 600px;
+        height: 300px;
         width: auto;
+        @media (min-width: $breakpoint-small) {
+          height: 350px;
+        }
+        @media (min-width: $breakpoint-medium) {
+          height: 450px;
+        }
+
+        @media (min-width: $breakpoint-large) {
+          height: 600px;
+        }
       }
     }
   }

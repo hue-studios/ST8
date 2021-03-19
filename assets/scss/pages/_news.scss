@@ -3,9 +3,11 @@
   overflow: hidden;
   width: 100%;
   #news__intro {
+    margin-top: 70px;
     height: 200px;
     @media (min-width: $breakpoint-medium) {
       height: 250px;
+      margin-top: 0px;
     }
 
     h1 {
@@ -69,6 +71,48 @@
     .news__filters {
       input {
         max-width: 400px;
+      }
+    }
+    #start-btn {
+      position: absolute;
+      top: -70px;
+      left: calc(50% - 20px);
+      filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.25));
+      @media (min-width: $breakpoint-small) {
+      }
+      @media (min-width: $breakpoint-medium) {
+      }
+      @media (min-width: $breakpoint-large) {
+        top: -70px;
+        // left: calc(50% + 435px);
+      }
+      @media (min-width: $breakpoint-xlarge) {
+      }
+    }
+    #finish-btn {
+      position: absolute;
+      bottom: -25px;
+      left: calc(50% - 20px);
+      filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.25));
+      @media (min-width: $breakpoint-small) {
+      }
+      @media (min-width: $breakpoint-medium) {
+      }
+      @media (min-width: $breakpoint-large) {
+        // bottom: 42px;
+        left: calc(50% - 21px);
+      }
+      @media (min-width: $breakpoint-xlarge) {
+      }
+    }
+    #straightLineSVG {
+      position: absolute;
+      z-index: -1;
+      top: -50px;
+      left: calc(50% - 1px);
+      height: calc(100% + 50px);
+      width: 3px;
+      @media (min-width: $breakpoint-large) {
       }
     }
   }

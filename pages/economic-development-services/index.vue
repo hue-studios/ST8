@@ -157,8 +157,8 @@
           </nuxt-link>
 
           <nuxt-link
-            v-for="(article, index22) in service.news_programs"
-            :key="index22"
+            v-for="article in service.news_programs"
+            :key="article.id"
             :to="'/regional-news/' + article.news_id.url"
             class="flex flex-row items-center justify-start mb-6 shadow-lg services-section__program"
           >
@@ -280,7 +280,31 @@ export default {
   async fetch({ store, app }) {
     // await store.dispatch('getUser', app.$auth.user.email)
   },
-  head() {},
+  head() {
+    return {
+      title:
+        'Economic Development Services for the Southern Tier Region of New York',
+      meta: [
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          content:
+            'Economic Development Services for the Southern Tier Region of New York',
+        },
+        {
+          hid: 'description',
+          name: 'description',
+          content:
+            'Southern Tier 8 regional services are funding and project develoment, planning, networking, and reducing municipal cost.',
+        },
+        {
+          hid: 'og:url',
+          property: 'og:url',
+          content: 'https://southerntier8.org/economic-development-services/',
+        },
+      ],
+    }
+  },
   methods: {
     smoothScroll(event) {
       console.log(event.target.getAttribute('data-section'))

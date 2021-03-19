@@ -116,6 +116,12 @@
               stroke-width="1"
               class="inline-block"
             ></twitter-icon
+            ><instagram-icon
+              v-if="item.social_links_id.platform == 'Instagram'"
+              size="1x"
+              stroke-width="1"
+              class="instagram inline-block"
+            ></instagram-icon
           ></a>
         </div>
       </div>
@@ -158,12 +164,18 @@
   </div>
 </template>
 <script>
-import { LinkedinIcon, FacebookIcon, TwitterIcon } from 'vue-feather-icons'
+import {
+  LinkedinIcon,
+  FacebookIcon,
+  TwitterIcon,
+  InstagramIcon,
+} from 'vue-feather-icons'
 export default {
   components: {
     LinkedinIcon,
     FacebookIcon,
     TwitterIcon,
+    InstagramIcon,
   },
   data() {
     return {

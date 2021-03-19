@@ -62,11 +62,13 @@
         cursor: pointer;
         z-index: 5;
         svg {
-          color: $green !important;
           fill: $green !important;
           path {
             stroke: $green;
           }
+        }
+        svg.instagram {
+          fill: rgba($grey, 0.01) !important;
         }
       }
     }

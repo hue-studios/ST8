@@ -10,24 +10,156 @@ export default {
    ** Headers of the page
    */
   head: {
-    title: 'Southern Tier 8 | Regional Economic Development Organization',
+    title:
+      'Southern Tier 8 Economic Development Organization for the Southern Tier Region of New York',
     meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      {
+        charset: 'utf-8',
+      },
+      {
+        name: 'viewport',
+        content: 'width=device-width, initial-scale=1, maximum-scale=1',
+      },
       {
         hid: 'description',
         name: 'description',
-        content: process.env.npm_package_description || '',
+        content:
+          'Southern Tier 8 is a vibrant, multi-facet planning and development agency proudly serving eight counties in the Southern Tier region of Upstate New York. Our focus is to sustain and grow our region’s economy through collaborating with partners throughout our region.',
+      },
+      {
+        hid: 'og:url',
+        property: 'og:url',
+        content: 'https://southerntier8.org',
+      },
+      {
+        hid: 'fb:app_id',
+        name: 'fb:app_id',
+        content: '503626331013525',
+      },
+      {
+        hid: 'og:image',
+        property: 'og:image',
+        content: 'https://southerntier8.org/images/st8-social.png',
+      },
+      {
+        hid: 'twitter:summary_large_image',
+        name: 'twitter:summary_large_image',
+        content: 'summary',
+      },
+      {
+        hid: 'twitter:site',
+        name: 'twitter:site',
+        content: '@SouthernTier8',
+      },
+      {
+        hid: 'twitter:card',
+        name: 'twitter:card',
+        content: 'summary_large_image',
+      },
+      {
+        name: 'msapplication-TileColor',
+        content: '#ffffff',
+      },
+      {
+        name: 'msapplication-TileImage',
+        content: '/icons/ms-icon-144x144.png',
+      },
+      {
+        name: 'theme-color',
+        content: '#ffffff',
       },
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       {
         rel: 'preconnect',
         href: 'https://admin.steny.org',
         crossorigin: 'true',
       },
+      {
+        rel: 'preconnect',
+        href: 'https://fast.fonts.net/',
+        crossorigin: 'true',
+      },
+      {
+        rel: 'icon',
+        type: 'image/x-icon',
+        href: '/favicon.ico',
+      },
+      {
+        rel: 'apple-touch-icon',
+        sizes: '57x57',
+        href: '/icons/apple-icon-57x57.png',
+      },
+      {
+        rel: 'apple-touch-icon',
+        sizes: '60x60',
+        href: '/icons/apple-icon-60x60.png',
+      },
+      {
+        rel: 'apple-touch-icon',
+        sizes: '72x72',
+        href: '/icons/apple-icon-72x72.png',
+      },
+      {
+        rel: 'apple-touch-icon',
+        sizes: '76x76',
+        href: '/icons/apple-icon-76x76.png',
+      },
+      {
+        rel: 'apple-touch-icon',
+        sizes: '114x114',
+        href: '/icons/apple-icon-114x114.png',
+      },
+      {
+        rel: 'apple-touch-icon',
+        sizes: '120x120',
+        href: '/icons/apple-icon-120x120.png',
+      },
+      {
+        rel: 'apple-touch-icon',
+        sizes: '144x144',
+        href: '/icons/apple-icon-144x144.png',
+      },
+      {
+        rel: 'apple-touch-icon',
+        sizes: '152x152',
+        href: '/icons/apple-icon-152x152.png',
+      },
+      {
+        rel: 'apple-touch-icon',
+        sizes: '180x180',
+        href: '/icons/apple-icon-180x180.png',
+      },
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '192x192',
+        href: '/icons/android-icon-192x192.png',
+      },
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '32x32',
+        href: '/icons/favicon-32x32.png',
+      },
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '96x96',
+        href: '/icons/favicon-96x96.png',
+      },
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '16x16',
+        href: '/icons/favicon-16x16.png',
+      },
+      {
+        rel: 'manifest',
+        href: '/manifest.json',
+      },
     ],
+
     script: [
       {
         src:
@@ -55,7 +187,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [{ src: '~plugins/v-calendar.js', ssr: false }],
+  plugins: ['@/plugins/gtag', { src: '~plugins/v-calendar.js', ssr: false }],
   /*
    ** Nuxt.js dev-modules
    */
@@ -82,11 +214,8 @@ export default {
         lang: 'en',
       },
     ],
-    // '@nuxtjs/google-analytics'
   ],
-  // 'google-analytics': {
-  //   id: 'UA-106815130-1'
-  // },
+
   tailwindcss: {
     cssPath: '~/assets/css/tailwind.scss',
     configPath: 'tailwind.config.js',

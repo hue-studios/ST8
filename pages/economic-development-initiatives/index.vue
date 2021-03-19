@@ -174,7 +174,32 @@ export default {
       initiatives: initiativesReq.data,
     }
   },
-  head() {},
+  head() {
+    return {
+      title:
+        'Economic Development Initiatives for the Southern Tier Region of New York',
+      meta: [
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          content:
+            'Economic Development Initiatives for the Southern Tier Region of New York',
+        },
+        {
+          hid: 'description',
+          name: 'description',
+          content:
+            'Southern Tier 8 regional initiatives are goals based on the region’s needs to support, sustain, and advance the economic growth of the Southern Tier 8 region. ',
+        },
+        {
+          hid: 'og:url',
+          property: 'og:url',
+          content:
+            'https://southerntier8.org/economic-development-initiatives/',
+        },
+      ],
+    }
+  },
 
   computed: {
     firstThreeInitiatives() {

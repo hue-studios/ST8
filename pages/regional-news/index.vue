@@ -2,25 +2,42 @@
   <div id="news">
     <div
       id="news__intro"
-      class="flex flex-col flex-wrap justify-center items-center relative"
+      class="flex flex-col justify-center items-center relative"
     >
       <h1
-        class="navy uppercase tracking-widest mb-2 w-5/6 sm:w-3/5 md:w-1/2 thin-font text-center hidden"
+        class="navy uppercase tracking-widest mb-2 w-5/6 sm:w-3/5 md:w-1/2 thin-font text-center"
       >
         News
       </h1>
-      <p class="navy w-5/6 sm:w-3/5 md:w-1/2 text-center">
+      <p class="navy w-5/6 sm:w-3/5 md:w-1/2 mb-12 text-center">
         The latest economic and community development news from the Southern
         Tier 8 region.
       </p>
-      <div class="w-full absolute background text-right">
+      <!-- <div class="w-full absolute background text-right">
         <h3 class="uppercase bold"></h3>
-      </div>
+      </div> -->
     </div>
     <div
       id="news__news-cards"
-      class="w-full flex items-center justify-center flex-col pb-20"
+      class="relative w-full flex items-center justify-center flex-col pb-20"
     >
+      <pulse-icon icon-i-d="start-btn" class-name="button"></pulse-icon>
+      <!-- <svg
+        id="straightLineSVG"
+        data-name="Layer 1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 1 695.51"
+      >
+        <path
+          id="straight-line"
+          data-name="Path 6808"
+          class="cls-1"
+          fill="none"
+          stroke="#1accb8"
+          stroke-width="2"
+          d="M.5,0V695.51"
+        />
+      </svg> -->
       <!-- <div class="w-full text-center px-8 mb-4 news__filters">
         <input
           v-model="search"
@@ -54,14 +71,19 @@
           there were no results.
         </p>
       </transition>
+      <div class="">
+        <pulse-icon icon-i-d="finish-btn" class-name="button"></pulse-icon>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import pulseIcon from '~/components/universal/pulseIcon'
 import newsCard from '~/components/now/newsCard'
 export default {
   components: {
+    pulseIcon,
     newsCard,
   },
   async asyncData({ params, $axios }) {
@@ -79,7 +101,29 @@ export default {
       search: '',
     }
   },
-  head() {},
+  head() {
+    return {
+      title: "Regional News for the Southern Tier Region's Economy",
+      meta: [
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          content: "Regional News for the Southern Tier Region's Economy",
+        },
+        {
+          hid: 'description',
+          name: 'description',
+          content:
+            'Regional news focused on the economic development for the Southern Tier region of New York.',
+        },
+        {
+          hid: 'og:url',
+          property: 'og:url',
+          content: 'https://southerntier8.org/regional-news/',
+        },
+      ],
+    }
+  },
   computed: {
     filteredArticles() {
       const app = this
@@ -97,8 +141,36 @@ export default {
       }
     },
   },
+  // beforeDestroy() {
+  //   window.removeEventListener('scroll', this.lineFunction)
+  // },
+  // mounted() {
+  //   const straightLine = document.getElementById('straight-line')
+  //   const straightLength = straightLine.getTotalLength()
+  //   straightLine.style.strokeDasharray = straightLength
+  //   straightLine.style.strokeDashoffset = straightLength
+  //   // desktop line animation
+  //
+  //   window.addEventListener('scroll', this.lineFunction)
+  // },
   created() {},
   methods: {
+    // lineFunction() {
+    //   const straightLine = document.getElementById('straight-line')
+    //   const straightLength = straightLine.getTotalLength()
+    //
+    //   requestAnimationFrame(function () {
+    //     const svgContainer = document.getElementById('news__news-cards')
+    //     const svgContainerRect = svgContainer.getBoundingClientRect()
+    //     const svgDivHeight = svgContainerRect.height
+    //     const windowScroll = window.pageYOffset
+    //     const scrollPercent = (windowScroll / svgDivHeight) * 0.8
+    //     if (scrollPercent < 1) {
+    //       const drawStraight = straightLength * scrollPercent
+    //       straightLine.style.strokeDashoffset = straightLength - drawStraight
+    //     }
+    //   })
+    // },
     checkInitiative() {
       if (this.programFilters.includes('Workforce Development')) {
         console.log('Yes')

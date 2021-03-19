@@ -368,9 +368,67 @@ export default {
       },
       tooLongContent: false,
       tooLong: false,
+      coverImage: '',
     }
   },
-  head() {},
+  head() {
+    return {
+      title:
+        this.program.title +
+        ' - Regional Program for the Southern Tier of New York',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.truncateString(this.program.what_is_it, 120),
+        },
+        {
+          hid: 'og:url',
+          property: 'og:url',
+          content:
+            'https://southerntier8.org/economic-development-programs/' +
+            this.program.url,
+        },
+        {
+          hid: 'og:image',
+          property: 'og:image',
+          content: this.coverImage,
+        },
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          content:
+            this.program.title +
+            ' - Regional Program for the Southern Tier of New York',
+        },
+        {
+          hid: 'og:description',
+          property: 'og:description',
+          content: this.truncateString(this.program.what_is_it, 120),
+        },
+
+        {
+          hid: 'twitter:title',
+          name: 'twitter:title',
+          content:
+            this.program.title +
+            ' - Regional Program for the Southern Tier of New York',
+        },
+        {
+          hid: 'twitter:description',
+          name: 'twitter:description',
+          content: this.truncateString(this.program.what_is_it, 120),
+        },
+
+        {
+          hid: 'twitter:image:alt',
+          content:
+            this.program.title +
+            ' - Regional Program for the Southern Tier of New York',
+        },
+      ],
+    }
+  },
   beforeDestroy() {
     window.removeEventListener('scroll', this.lineFunction)
   },
@@ -402,6 +460,14 @@ export default {
       })
     this.countTitle(this.program.title)
     this.countContent(this.program.what_is_it)
+    if (this.program.images.length) {
+      this.coverImage =
+        process.env.imageUrl +
+        this.program.images[0].file_id.private_hash +
+        '?key=medium'
+    } else {
+      this.coverImage = 'https://southerntier8.org/images/st8-social.png'
+    }
   },
   methods: {
     lineFunction() {
@@ -436,6 +502,19 @@ export default {
       } else {
         this.tooLong = false
       }
+    },
+    removeTags(str) {
+      if (str === null || str === '') return false
+      else str = str.toString()
+      const strOne = str.replace(/&nbsp;/gi, ' ')
+      return strOne.replace(/(<([^>]+)>)/gi, '')
+    },
+    truncateString(str, num) {
+      const newStr = this.removeTags(str)
+      if (newStr.length <= num) {
+        return newStr
+      }
+      return newStr.slice(0, num) + '...'
     },
   },
 }

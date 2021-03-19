@@ -172,7 +172,60 @@ export default {
       },
     }
   },
-  head() {},
+  head() {
+    return {
+      title:
+        this.initiative.title +
+        ' - Regional Initiative for the Southern Tier of New York',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.truncateString(this.initiative.goal, 120),
+        },
+        {
+          hid: 'og:url',
+          property: 'og:url',
+          content:
+            'https://southerntier8.org/economic-development-initiatives/' +
+            this.initiative.url,
+        },
+
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          content:
+            this.initiative.title +
+            ' - Regional Initiative for the Southern Tier of New York',
+        },
+        {
+          hid: 'og:description',
+          property: 'og:description',
+          content: this.truncateString(this.initiative.goal, 120),
+        },
+
+        {
+          hid: 'twitter:title',
+          name: 'twitter:title',
+          content:
+            this.initiative.title +
+            ' - Regional Initiative for the Southern Tier of New York',
+        },
+        {
+          hid: 'twitter:description',
+          name: 'twitter:description',
+          content: this.truncateString(this.initiative.goal, 120),
+        },
+
+        {
+          hid: 'twitter:image:alt',
+          content:
+            this.initiative.title +
+            ' - Regional Initiative for the Southern Tier of New York',
+        },
+      ],
+    }
+  },
   beforeDestroy() {
     window.removeEventListener('scroll', this.lineFunction)
   },
@@ -208,6 +261,19 @@ export default {
           straightLine.style.strokeDashoffset = straightLength - drawStraight
         }
       })
+    },
+    removeTags(str) {
+      if (str === null || str === '') return false
+      else str = str.toString()
+      const strOne = str.replace(/&nbsp;/gi, ' ')
+      return strOne.replace(/(<([^>]+)>)/gi, '')
+    },
+    truncateString(str, num) {
+      const newStr = this.removeTags(str)
+      if (newStr.length <= num) {
+        return newStr
+      }
+      return newStr.slice(0, num) + '...'
     },
   },
 }

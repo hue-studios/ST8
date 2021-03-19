@@ -123,7 +123,31 @@ export default {
       },
     }
   },
-  head() {},
+  head() {
+    return {
+      title:
+        'Apply for Funding - Economic Development for the Southern Tier Region of New York',
+      meta: [
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          content:
+            'Apply for Funding - Economic Development for the Southern Tier Region of New York',
+        },
+        {
+          hid: 'description',
+          name: 'description',
+          content:
+            'How to apply for funding to further the economy of the Southern Tier of New York.',
+        },
+        {
+          hid: 'og:url',
+          property: 'og:url',
+          content: 'https://southerntier8.org/how-to-apply/',
+        },
+      ],
+    }
+  },
   beforeDestroy() {
     window.removeEventListener('scroll', this.lineFunction)
   },

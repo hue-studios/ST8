@@ -18,9 +18,11 @@
     </div>
     <div
       id="regional-info"
-      class="w-full flex flex-col justify-center items-center relative py-20"
+      class="w-full flex flex-col justify-center items-center relative py-20 px-4 text-justify"
     >
-      <h1 class="green uppercase page-title tracking-widest">The Region</h1>
+      <h1 class="green uppercase page-title tracking-widest mb-4">
+        The Region
+      </h1>
       <p class="mb-4 page-paragraph">
         The Southern Tier 8 Region is consists of 8 unique counties in rural
         Upstate New York: Broome, Tioga, Tompkins, Otsego, Cortland, Delaware,
@@ -36,9 +38,11 @@
     </div>
     <div
       id="regional-counties"
-      class="w-full flex flex-col items-center justify-center py-20"
+      class="w-full flex flex-col items-center justify-center py-20 px-4 text-justify"
     >
-      <h1 class="uppercase green page-title tracking-widest">Our Counties</h1>
+      <h1 class="uppercase green page-title tracking-widest mb-4">
+        Our Counties
+      </h1>
       <p class="mb-4 page-paragraph">
         All of our 8 counties are unique in many aspects offering the an array
         of lifestyles, career and work opportunities, culture, and more.
@@ -47,9 +51,9 @@
     </div>
     <div
       id="regional-map"
-      class="w-full flex flex-col items-center justify-center py-20"
+      class="w-full flex flex-col items-center justify-center py-20 px-4 text-justify"
     >
-      <h1 class="uppercase green page-title tracking-widest">
+      <h1 class="uppercase green page-title tracking-widest mb-4">
         Downtown / Urban Areas
       </h1>
       <p class="mb-4 page-paragraph">
@@ -61,9 +65,9 @@
     </div>
     <div
       id="regional-industry"
-      class="w-full flex flex-col justify-center items-center py-20"
+      class="w-full flex flex-col justify-center items-center py-20 px-4 text-justify"
     >
-      <h1 class="uppercase green page-title tracking-widest">Industry</h1>
+      <h1 class="uppercase green page-title tracking-widest mb-4">Industry</h1>
       <p class="mb-4 page-paragraph">
         The Southern Tier 8 region has been the home for strong industries such
         as Healthcare, Advanced Manufacturing, Education, and Engineering to
@@ -93,11 +97,30 @@ export default {
       imageLocation: process.env.imageUrl,
     }
   },
-  head() {},
-  computed: {},
-  created() {
-    console.log(this.people)
+  head() {
+    return {
+      title: 'Southern Tier of New York Regional and Economic Profile',
+      meta: [
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          content: 'Southern Tier of New York Regional and Economic Profile',
+        },
+        {
+          hid: 'description',
+          name: 'description',
+          content: "A comprehensive profile of the Southern Tier's economy.",
+        },
+        {
+          hid: 'og:url',
+          property: 'og:url',
+          content: 'https://southerntier8.org/regional-profile/',
+        },
+      ],
+    }
   },
+  computed: {},
+  created() {},
   mounted() {
     gsap.registerPlugin(ScrollTrigger)
     // gsap.to('#cropped-overlay', {
