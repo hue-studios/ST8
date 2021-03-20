@@ -87,7 +87,7 @@ export default {
         },
         {
           hid: 'description',
-          property: 'description',
+          name: 'description',
           content:
             'Regional news focused on the economic development for the Southern Tier region of New York.',
         },

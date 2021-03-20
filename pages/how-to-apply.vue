@@ -136,7 +136,7 @@ export default {
         },
         {
           hid: 'description',
-          property: 'description',
+          name: 'description',
           content:
             'How to apply for funding to further the economy of the Southern Tier of New York.',
         },

@@ -2,8 +2,8 @@ export default {
   // ssr: 'true',
   // static: 'false',
   server: {
-    port: 8080, // default: 3000
-    host: '0.0.0.0', // default: localhost
+    // port: 8080, // default: 3000
+    // host: '0.0.0.0', // default: localhost
   },
   modern: true,
   /*
@@ -22,7 +22,7 @@ export default {
       },
       {
         hid: 'description',
-        property: 'description',
+        name: 'description',
         content:
           'Southern Tier 8 is a vibrant, multi-facet planning and development agency proudly serving eight counties in the Southern Tier region of Upstate New York. Our focus is to sustain and grow our region’s economy through collaborating with partners throughout our region.',
       },
@@ -210,7 +210,7 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/pwa',
+    // '@nuxtjs/pwa',
     'nuxt-izitoast',
     'vue-social-sharing/nuxt',
     [
@@ -254,16 +254,16 @@ export default {
     overlayClose: true,
     overlayColor: 'rgba(0,0,0,0.7)',
   },
-  pwa: {
-    meta: {
-      mobileAppIOS: true,
-      appleStatusBarStyle: 'black-translucent',
-      theme_color: '#193658',
-      nativeUI: true,
-      short_name: 'ST8',
-      background_color: '#ffffff',
-    },
-  },
+  // pwa: {
+  //   meta: {
+  //     mobileAppIOS: true,
+  //     appleStatusBarStyle: 'black-translucent',
+  //     theme_color: '#193658',
+  //     nativeUI: true,
+  //     short_name: 'ST8',
+  //     background_color: '#ffffff',
+  //   },
+  // },
   env: {
     apiUrl: 'https://admin.steny.org/southern-tier-8',
     imageUrl: 'https://admin.steny.org/southern-tier-8/assets/',

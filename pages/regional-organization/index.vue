@@ -321,7 +321,7 @@ export default {
         },
         {
           hid: 'description',
-          property: 'description',
+          name: 'description',
           content:
             "The Southern Tier 8 organization partner's with member counties to identify and address multi-county issues in order to improve the quality of life within the region.",
         },

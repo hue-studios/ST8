@@ -180,7 +180,7 @@ export default {
       meta: [
         {
           hid: 'description',
-          property: 'description',
+          name: 'description',
           content: this.truncateString(this.initiative.goal, 120),
         },
         {

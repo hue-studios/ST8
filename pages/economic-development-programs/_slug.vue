@@ -379,7 +379,7 @@ export default {
       meta: [
         {
           hid: 'description',
-          property: 'description',
+          name: 'description',
           content: this.truncateString(this.program.what_is_it, 120),
         },
         {

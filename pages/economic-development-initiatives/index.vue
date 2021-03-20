@@ -187,7 +187,7 @@ export default {
         },
         {
           hid: 'description',
-          property: 'description',
+          name: 'description',
           content:
             'Southern Tier 8 regional initiatives are goals based on the region’s needs to support, sustain, and advance the economic growth of the Southern Tier 8 region. ',
         },

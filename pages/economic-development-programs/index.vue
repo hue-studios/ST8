@@ -117,7 +117,7 @@ export default {
         },
         {
           hid: 'description',
-          property: 'description',
+          name: 'description',
           content:
             'Southern Tier 8 regional programs are designed to create innovative ideas, develop practical solutions, and align strategic partnerships to meet the challenges and advance economic growth in the Southern Tier 8 Region.',
         },
