@@ -120,7 +120,7 @@
             :quote="item.title"
             :media="coverImage"
             network="linkedin"
-            hashtags="ST8,southernTier"
+            hashtags="southernTier"
             ><linkedin-icon size="1.15x" class="share-icon"></linkedin-icon>
           </ShareNetwork>
           <ShareNetwork
@@ -130,7 +130,7 @@
             :quote="item.title"
             :media="coverImage"
             network="twitter"
-            hashtags="ST8,southernTier"
+            hashtags="southernTier"
             ><twitter-icon size="1.15x" class="share-icon"></twitter-icon>
           </ShareNetwork>
           <ShareNetwork
@@ -140,7 +140,7 @@
             :quote="item.title"
             :media="coverImage"
             network="facebook"
-            hashtags="ST8,southernTier"
+            hashtags="southernTier"
             ><facebook-icon size="1.15x" class="share-icon"></facebook-icon>
           </ShareNetwork>
         </div>
@@ -207,7 +207,7 @@ export default {
         {
           hid: 'description',
           name: 'description',
-          content: this.truncateString(this.item.description, 120),
+          content: this.truncateString(this.item.description, 160),
         },
         {
           hid: 'og:url',

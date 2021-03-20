@@ -12,6 +12,9 @@ export default {
   head: {
     title:
       'Southern Tier 8 Economic Development Organization for the Southern Tier Region of New York',
+    htmlAttrs: {
+      lang: 'en', // it sets the language English
+    },
     meta: [
       {
         charset: 'utf-8',

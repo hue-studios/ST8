@@ -380,7 +380,7 @@ export default {
         {
           hid: 'description',
           name: 'description',
-          content: this.truncateString(this.program.what_is_it, 120),
+          content: this.truncateString(this.program.what_is_it, 160),
         },
         {
           hid: 'og:url',

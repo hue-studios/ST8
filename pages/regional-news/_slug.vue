@@ -74,7 +74,7 @@
             :quote="article.title"
             :media="coverImage"
             network="linkedin"
-            hashtags="ST8,southernTier"
+            hashtags="southernTier"
             ><linkedin-icon size="1.15x" class="share-icon"></linkedin-icon>
           </ShareNetwork>
           <ShareNetwork
@@ -84,7 +84,7 @@
             :quote="article.title"
             :media="coverImage"
             network="twitter"
-            hashtags="ST8,southernTier"
+            hashtags="southernTier"
             ><twitter-icon size="1.15x" class="share-icon"></twitter-icon>
           </ShareNetwork>
           <ShareNetwork
@@ -94,7 +94,7 @@
             :quote="article.title"
             :media="coverImage"
             network="facebook"
-            hashtags="ST8,southernTier"
+            hashtags="southernTier"
             ><facebook-icon size="1.15x" class="share-icon"></facebook-icon>
           </ShareNetwork>
         </div>
@@ -131,7 +131,7 @@ export default {
   },
   head() {
     return {
-      title: this.article.title + ' - Southern Tier New York News - ST8',
+      title: this.article.title + ' - Southern Tier New York News',
       meta: [
         {
           hid: 'description',
@@ -152,7 +152,7 @@ export default {
         {
           hid: 'og:title',
           property: 'og:title',
-          content: this.article.title + ' - Southern Tier New York News - ST8',
+          content: this.article.title + ' - Southern Tier New York News',
         },
         {
           hid: 'og:description',
@@ -163,12 +163,12 @@ export default {
         {
           hid: 'twitter:title',
           property: 'twitter:title',
-          content: this.article.title + ' - Southern Tier New York News - ST8',
+          content: this.article.title + ' - Southern Tier New York News',
         },
         {
           hid: 'twitter:description',
           property: 'twitter:description',
-          content: this.truncateString(this.article.article, 120),
+          content: this.truncateString(this.article.article, 160),
         },
         {
           hid: 'twitter:image',
