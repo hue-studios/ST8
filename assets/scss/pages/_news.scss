@@ -1,13 +1,13 @@
 #news {
-  height: auto !important;
-  overflow: hidden;
-  width: 100%;
   #news__intro {
-    margin-top: 70px;
     height: 200px;
-    @media (min-width: $breakpoint-medium) {
+    @media (min-width: $breakpoint-small) {
       height: 250px;
-      margin-top: 0px;
+    }
+    @media (min-width: $breakpoint-medium) {
+    }
+    @media (min-width: $breakpoint-large) {
+      height: 200px;
     }
 
     h1 {
@@ -18,7 +18,7 @@
       @media (min-width: $breakpoint-small) {
         font-size: 62px;
       }
-      @media (min-width: $breakpoint-medium) {
+      @media (min-width: $breakpoint-large) {
         margin-top: 0px;
       }
     }
@@ -39,32 +39,7 @@
     }
     p {
       font-size: 14px;
-    }
-    .background {
-      right: 0px;
-      margin-top: 70px;
-      @media (min-width: $breakpoint-medium) {
-        margin-top: 0px;
-      }
-      h3 {
-        color: $grey;
-        opacity: 0.2;
-        font-size: 32px;
-        line-height: 0.8em;
-        font-weight: 400;
-        @media (min-width: $breakpoint-small) {
-          font-size: 48px;
-        }
-        @media (min-width: $breakpoint-medium) {
-          font-size: 56px;
-        }
-        @media (min-width: $breakpoint-large) {
-          font-size: 62px;
-        }
-        @media (min-width: $breakpoint-xlarge) {
-          font-size: 72px;
-        }
-      }
+      line-height: 1.2em;
     }
   }
   #news__news-cards {

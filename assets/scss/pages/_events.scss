@@ -1,8 +1,12 @@
 #events {
   #events__intro {
-    height: 200px;
-    @media (min-width: $breakpoint-medium) {
+    @media (min-width: $breakpoint-small) {
       height: 250px;
+    }
+    @media (min-width: $breakpoint-medium) {
+    }
+    @media (min-width: $breakpoint-large) {
+      height: 200px;
     }
     h1 {
       font-size: 42px;
@@ -66,10 +70,13 @@
       letter-spacing: 0.35em;
     }
     .swiper-slide {
-      height: 200px;
+      height: 140px;
       display: flex;
       align-items: center;
       justify-content: center;
+      @media (min-width: $breakpoint-medium) {
+        height: 200px;
+      }
     }
     .events__event {
       width: 96%;

@@ -50,7 +50,7 @@ export default {
         },
         {
           hid: 'description',
-          name: 'description',
+          property: 'description',
           content:
             'Resources focused on the economic development for the Southern Tier region of New York.',
         },

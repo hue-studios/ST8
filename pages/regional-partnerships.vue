@@ -280,7 +280,7 @@ export default {
         },
         {
           hid: 'description',
-          name: 'description',
+          property: 'description',
           content:
             'The Southern Tier 8 organization collaborates with many partners across the region.',
         },

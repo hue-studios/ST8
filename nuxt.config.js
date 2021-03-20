@@ -22,9 +22,14 @@ export default {
       },
       {
         hid: 'description',
-        name: 'description',
+        property: 'description',
         content:
           'Southern Tier 8 is a vibrant, multi-facet planning and development agency proudly serving eight counties in the Southern Tier region of Upstate New York. Our focus is to sustain and grow our region’s economy through collaborating with partners throughout our region.',
+      },
+      {
+        hid: 'og:type',
+        property: 'og:type',
+        content: 'website',
       },
       {
         hid: 'og:url',
@@ -33,7 +38,7 @@ export default {
       },
       {
         hid: 'fb:app_id',
-        name: 'fb:app_id',
+        property: 'fb:app_id',
         content: '503626331013525',
       },
       {
@@ -43,17 +48,17 @@ export default {
       },
       {
         hid: 'twitter:summary_large_image',
-        name: 'twitter:summary_large_image',
+        property: 'twitter:summary_large_image',
         content: 'summary',
       },
       {
         hid: 'twitter:site',
-        name: 'twitter:site',
+        property: 'twitter:site',
         content: '@SouthernTier8',
       },
       {
         hid: 'twitter:card',
-        name: 'twitter:card',
+        property: 'twitter:card',
         content: 'summary_large_image',
       },
       {

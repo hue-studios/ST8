@@ -27,7 +27,7 @@
     }
     .services-intro__link {
       display: inline-block;
-      font-size: 14px;
+      font-size: 12px;
       line-height: 16px;
       height: 16px;
 
@@ -37,6 +37,8 @@
       letter-spacing: 0.2em;
       cursor: pointer;
       @media (min-width: $breakpoint-small) {
+        font-size: 14px;
+        line-height: 16px;
       }
       @media (min-width: $breakpoint-medium) {
         border-left: none;
@@ -209,7 +211,7 @@
     h2 {
       font-size: 32px;
       line-height: 28px;
-      padding-left: 25px;
+      padding-left: 15px;
       @media (min-width: $breakpoint-medium) {
         padding-left: 20px;
         padding-top: 20px;
@@ -241,7 +243,7 @@
         line-height: 15px;
         height: 15px;
         // border-left: 5px solid $green;
-        padding-left: 25px;
+        padding-left: 15px;
         margin-bottom: 10px;
         font-weight: 100;
         @media (min-width: $breakpoint-medium) {
@@ -250,8 +252,8 @@
       }
       p,
       ul {
-        padding-left: 25px;
-        padding-right: 25px;
+        padding-left: 15px;
+        padding-right: 15px;
         font-size: 14px;
         font-weight: 100;
         margin-bottom: 10px;
@@ -287,7 +289,7 @@
       // border: thin solid rgba($green, 1);
 
       background: $white;
-      width: calc(100% - 50px);
+      width: calc(100% - 30px);
       @media (min-width: $breakpoint-medium) {
         width: calc(100% - 30px);
       }
@@ -327,7 +329,10 @@
           font-size: 9px;
           h5 {
             font-weight: 400;
-            letter-spacing: 0.2em;
+            letter-spacing: 0.1em;
+            @media (min-width: $breakpoint-small) {
+              letter-spacing: 0.2em;
+            }
           }
         }
       }

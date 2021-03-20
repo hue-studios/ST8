@@ -180,7 +180,7 @@ export default {
       meta: [
         {
           hid: 'description',
-          name: 'description',
+          property: 'description',
           content: this.truncateString(this.initiative.goal, 120),
         },
         {
@@ -206,14 +206,14 @@ export default {
 
         {
           hid: 'twitter:title',
-          name: 'twitter:title',
+          property: 'twitter:title',
           content:
             this.initiative.title +
             ' - Regional Initiative for the Southern Tier of New York',
         },
         {
           hid: 'twitter:description',
-          name: 'twitter:description',
+          property: 'twitter:description',
           content: this.truncateString(this.initiative.goal, 120),
         },
 

@@ -212,7 +212,7 @@ export default {
         },
         {
           hid: 'description',
-          name: 'description',
+          property: 'description',
           content:
             'Regional events focused on the economic development for the Southern Tier region of New York.',
         },

@@ -293,7 +293,7 @@ export default {
         },
         {
           hid: 'description',
-          name: 'description',
+          property: 'description',
           content:
             'Southern Tier 8 regional services are funding and project develoment, planning, networking, and reducing municipal cost.',
         },

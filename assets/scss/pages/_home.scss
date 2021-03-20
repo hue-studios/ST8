@@ -493,8 +493,8 @@
     }
   }
   #home__programs {
-    background: $navy;
-    box-shadow: inset 0px -2px 30px rgba($black, 0.9);
+    background: rgba($grey, 0.1);
+    box-shadow: inset 0px -2px 30px rgba($black, 0.25);
   }
   #home__data {
     #industry-chart {

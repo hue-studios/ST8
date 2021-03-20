@@ -1,43 +1,23 @@
 <template>
-  <div id="news">
+  <div id="news" class="flex flex-col items-center justify-center pb-32">
     <div
       id="news__intro"
-      class="flex flex-col justify-center items-center relative"
+      class="flex flex-col flex-wrap justify-center items-center relative w-full"
     >
       <h1
-        class="navy uppercase tracking-widest mb-2 w-5/6 sm:w-3/5 md:w-1/2 thin-font text-center"
+        class="navy uppercase tracking-wider sm:tracking-widest text-center mb-2 w-5/6 sm:w-3/5 md:w-1/2 thin-font"
       >
         News
       </h1>
-      <p class="navy w-5/6 sm:w-3/5 md:w-1/2 mb-12 text-center">
+      <p class="navy text-center w-5/6 sm:w-3/5 md:w-3/5">
         The latest economic and community development news from the Southern
         Tier 8 region.
       </p>
-      <!-- <div class="w-full absolute background text-right">
-        <h3 class="uppercase bold"></h3>
-      </div> -->
     </div>
     <div
       id="news__news-cards"
       class="relative w-full flex items-center justify-center flex-col pb-20"
     >
-      <pulse-icon icon-i-d="start-btn" class-name="button"></pulse-icon>
-      <!-- <svg
-        id="straightLineSVG"
-        data-name="Layer 1"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 1 695.51"
-      >
-        <path
-          id="straight-line"
-          data-name="Path 6808"
-          class="cls-1"
-          fill="none"
-          stroke="#1accb8"
-          stroke-width="2"
-          d="M.5,0V695.51"
-        />
-      </svg> -->
       <!-- <div class="w-full text-center px-8 mb-4 news__filters">
         <input
           v-model="search"
@@ -71,19 +51,14 @@
           there were no results.
         </p>
       </transition>
-      <div class="">
-        <pulse-icon icon-i-d="finish-btn" class-name="button"></pulse-icon>
-      </div>
     </div>
   </div>
 </template>
 
 <script>
-import pulseIcon from '~/components/universal/pulseIcon'
 import newsCard from '~/components/now/newsCard'
 export default {
   components: {
-    pulseIcon,
     newsCard,
   },
   async asyncData({ params, $axios }) {
@@ -112,7 +87,7 @@ export default {
         },
         {
           hid: 'description',
-          name: 'description',
+          property: 'description',
           content:
             'Regional news focused on the economic development for the Southern Tier region of New York.',
         },

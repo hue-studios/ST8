@@ -401,7 +401,7 @@
         >Programs
       </h2>
       <div class="w-full pl-3 pr-3 lg:pl-5 lg:pr-5 mb-8 home__subtitle">
-        <p class="white">
+        <p class="">
           Our programs are designed to help grow our region. Select a program
           below to learn the what it is, who we partnered with, and what it
           accomplishes.

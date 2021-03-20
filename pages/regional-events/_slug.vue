@@ -206,7 +206,7 @@ export default {
       meta: [
         {
           hid: 'description',
-          name: 'description',
+          property: 'description',
           content: this.truncateString(this.item.description, 120),
         },
         {
@@ -232,17 +232,17 @@ export default {
 
         {
           hid: 'twitter:title',
-          name: 'twitter:title',
+          property: 'twitter:title',
           content: this.item.title + ' - Featured Southern Tier Event',
         },
         {
           hid: 'twitter:description',
-          name: 'twitter:description',
+          property: 'twitter:description',
           content: this.truncateString(this.item.description, 120),
         },
         {
           hid: 'twitter:image',
-          name: 'twitter:image',
+          property: 'twitter:image',
           content: this.coverImage,
         },
         {

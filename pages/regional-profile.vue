@@ -108,7 +108,7 @@ export default {
         },
         {
           hid: 'description',
-          name: 'description',
+          property: 'description',
           content: "A comprehensive profile of the Southern Tier's economy.",
         },
         {

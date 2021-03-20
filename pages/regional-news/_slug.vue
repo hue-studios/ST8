@@ -135,7 +135,7 @@ export default {
       meta: [
         {
           hid: 'description',
-          name: 'description',
+          property: 'description',
           content: this.truncateString(this.article.article, 120),
         },
         {
@@ -162,17 +162,17 @@ export default {
 
         {
           hid: 'twitter:title',
-          name: 'twitter:title',
+          property: 'twitter:title',
           content: this.article.title + ' - Southern Tier New York News - ST8',
         },
         {
           hid: 'twitter:description',
-          name: 'twitter:description',
+          property: 'twitter:description',
           content: this.truncateString(this.article.article, 120),
         },
         {
           hid: 'twitter:image',
-          name: 'twitter:image',
+          property: 'twitter:image',
           content: this.coverImage,
         },
         {
