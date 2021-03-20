@@ -1,5 +1,6 @@
 #resources {
   #resources__intro {
+    height: 200px;
     @media (min-width: $breakpoint-small) {
       height: 250px;
     }

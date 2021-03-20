@@ -45,7 +45,7 @@
     </div>
     <div
       v-if="article.tags.length > 0"
-      class="w-full flex flex-row items-center justify-center text-xs px-4 md:px-12 py-6 article__tags"
+      class="w-full flex flex-row flex-wrap items-center justify-center text-xs px-4 md:px-12 py-6 article__tags"
     >
       <span class="mr-1 uppercase bold grey tracking-wider mb-2">Tags:</span>
       <h5
