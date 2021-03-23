@@ -94,7 +94,7 @@ export default {
   },
   async asyncData({ $axios }) {
     const applyReq = await $axios.get(
-      process.env.apiUrl + '/items/how_to_apply?fields=*.*.*&single=1'
+      process.env.apiUrl + '/items/how_to_apply?fields=*.*.*.*&single=1'
     )
     return {
       apply: applyReq.data.data,
