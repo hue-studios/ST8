@@ -72,7 +72,10 @@
         <div v-html="service.who_it_is_for"></div>
       </div>
       <div
-        v-if="service.example_programs.length > 0"
+        v-if="
+          service.example_programs.length > 0 ||
+          service.news_programs.length > 0
+        "
         class="md:w-1/2 services-section__content"
       >
         <h3 class="w-full uppercase text-xs green text-left bold">
@@ -155,7 +158,6 @@
               <link-icon></link-icon>
             </div>
           </nuxt-link>
-
           <nuxt-link
             v-for="article in service.news_programs"
             :key="article.id"
@@ -266,7 +268,7 @@ export default {
   async asyncData({ params, $axios }) {
     const servicesReq = await $axios.get(
       process.env.apiUrl +
-        '/items/services?fields=id,title,url,purpose,how_we_help,who_it_is_for,activity,example_programs.program_id.*,example_programs.program_id.images.file_id.private_hash,resources.resources_id.*,news_programs.news_id.*,news_programs.news_id.cover_image.private_hash,&filter[status]=published'
+        '/items/services?fields=id,title,url,purpose,how_we_help,who_it_is_for,activity,example_programs.program_id.*,example_programs.program_id.images.file_id.private_hash,resources.resources_id.*.*,news_programs.news_id.*.*,news_programs.news_id.cover_image.private_hash,&filter[status]=published'
     )
     return {
       services: servicesReq.data.data,
