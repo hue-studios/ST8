@@ -102,11 +102,13 @@ export default {
       return strFour.replace(/(<([^>]+)>)/gi, '')
     },
     truncateString(str, num) {
-      const newStr = this.removeTags(str)
-      if (newStr.length <= num) {
-        return newStr
+      if (str) {
+        const newStr = this.removeTags(str)
+        if (newStr.length <= num) {
+          return newStr
+        }
+        return newStr.slice(0, num) + '...'
       }
-      return newStr.slice(0, num) + '...'
     },
   },
 }

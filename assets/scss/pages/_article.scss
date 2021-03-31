@@ -129,6 +129,35 @@
       width: auto;
     }
   }
+  #article__resouces {
+    margin-bottom: 60px;
+    @media (min-width: $breakpoint-large) {
+      margin-top: -100px;
+    }
+    .article__title {
+      font-size: 22px;
+      line-height: 24px;
+      letter-spacing: 0.1em;
+      padding-top: 40px;
+      padding-bottom: 20px;
+      @media (min-width: $breakpoint-small) {
+        font-size: 22px;
+        line-height: 24px;
+        padding-top: 60px;
+      }
+      @media (min-width: $breakpoint-medium) {
+        font-size: 26px;
+        line-height: 28px;
+        padding-top: 80px;
+      }
+      @media (min-width: $breakpoint-large) {
+        font-size: 42px;
+        line-height: 40px;
+        letter-spacing: 0.2em;
+        padding-top: 100px;
+      }
+    }
+  }
   .article__share-section {
     max-width: 960px;
     h5 {

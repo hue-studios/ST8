@@ -51,9 +51,9 @@
     >
       {{ $moment(item.modified_on).format('dddd MMMM Do, YYYY') }}
     </h5>
-    <p class="w-full mb-4 px-4 navy hidden news-card-vertical__description">
+    <!-- <p class="w-full mb-4 px-4 navy hidden news-card-vertical__description">
       {{ truncateString(item.article, 120) }}
-    </p>
+    </p> -->
 
     <nuxt-link
       v-if="item.type === 'ST8 Article'"
@@ -99,11 +99,13 @@ export default {
       return strOne.replace(/(<([^>]+)>)/gi, '')
     },
     truncateString(str, num) {
-      const newStr = this.removeTags(str)
-      if (newStr.length <= num) {
-        return newStr
+      if (str) {
+        const newStr = this.removeTags(str)
+        if (newStr.length <= num) {
+          return newStr
+        }
+        return newStr.slice(0, num) + '...'
       }
-      return newStr.slice(0, num) + '...'
     },
   },
 }
