@@ -269,19 +269,20 @@
       <div
         class="flex flex-row flex-wrap items-center justify-center max-w-3xl"
       >
-        <a
-          v-for="(county, index) in filteredCounties"
-          :key="index"
-          :href="imageLocation + county.roi.private_hash"
-          target="_blank"
-          rel="noreferrer"
-          class="flex items-center justify-center flex-col relative py-12 mx-2 mb-4 roi-card"
-        >
-          <h5 class="absolute uppercase thin-font">ROI</h5>
-          <h3 class="green uppercase tracking-widest bold">
-            {{ county.title }}
-          </h3>
-        </a>
+        <div v-for="(county, index) in filteredCounties" :key="index">
+          <a
+            v-if="county.roi"
+            :href="imageLocation + county.roi.private_hash"
+            target="_blank"
+            rel="noreferrer"
+            class="flex items-center justify-center flex-col relative py-12 mx-2 mb-4 roi-card"
+          >
+            <h5 class="absolute uppercase thin-font">ROI</h5>
+            <h3 class="green uppercase tracking-widest bold">
+              {{ county.title }}
+            </h3>
+          </a>
+        </div>
       </div>
     </div>
   </div>
