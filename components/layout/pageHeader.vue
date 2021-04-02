@@ -1,7 +1,6 @@
 <template>
   <div id="page-header" :class="{ hide: !showHeader }" class="">
     <nuxt-link to="/">
-      <logo-name />
       <logo />
     </nuxt-link>
     <div id="page-nav" class="flex flex-row">
@@ -76,12 +75,10 @@
 <script>
 import logo from '~/components/layout/logo.vue'
 import newYorkState from '~/components/layout/newYorkState.vue'
-import logoName from '~/components/layout/logoName.vue'
 export default {
   components: {
     logo,
     newYorkState,
-    logoName,
   },
   data() {
     return {
