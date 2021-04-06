@@ -40,13 +40,15 @@
       .initiative__title {
         font-size: 28px;
         line-height: 26px;
-        letter-spacing: 0.25em;
-        padding-left: 20px;
+        letter-spacing: 0.17em;
+        padding-left: 10px;
         font-family: $bold-font;
         @media (min-width: $breakpoint-small) {
           font-size: 56px;
+          padding-left: 20px;
           line-height: 50px;
           font-family: $body-font;
+          letter-spacing: 0.25em;
         }
         @media (min-width: $breakpoint-medium) {
         }
