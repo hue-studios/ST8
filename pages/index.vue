@@ -7,6 +7,7 @@
     >
       <a id="home-intro__logo" @click.prevent="changePanelTwo()">
         <logo-name></logo-name>
+        <h5 class="uppercase absolute">Regional Board</h5>
         <pulse-icon icon-i-d="" class-name="block button"></pulse-icon>
       </a>
 

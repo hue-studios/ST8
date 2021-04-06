@@ -25,3 +25,8 @@ $body-font: 'Proxima Nova W01 Light', -apple-system, Roboto, 'Helvetica Neue',
   Helvetica, Arial, sans-serif;
 $bold-font: 'Proxima Nova W01 Regular', -apple-system, Roboto, 'Helvetica Neue',
   Helvetica, Arial, sans-serif;
+$whiteRadialGradient: radial-gradient(
+  circle,
+  rgba(255, 255, 255, 1) 70%,
+  rgba(255, 255, 255, 0) 100%
+);

@@ -222,8 +222,11 @@ export default {
         lang: 'en',
       },
     ],
+    '@nuxtjs/google-analytics',
   ],
-
+  'google-analytics': {
+    id: 'UA-193966942-1',
+  },
   tailwindcss: {
     cssPath: '~/assets/css/tailwind.scss',
     configPath: 'tailwind.config.js',
