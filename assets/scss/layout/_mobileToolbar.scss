@@ -4,7 +4,7 @@
   left: 0;
   width: calc(100%);
   padding-right: 33.3333%;
-  height: 55px;
+  height: 50px;
   display: flex;
   flex-direction: row;
   align-content: flex-start;
@@ -17,6 +17,9 @@
   // @media (min-width: $breakpoint-small) {
   //   padding-right: 25%;
   // }
+  @media only screen and (-webkit-device-pixel-ratio: 3) {
+    height: 60px;
+  }
   @media (min-width: $breakpoint-large) {
     bottom: auto;
     top: 0;
@@ -24,8 +27,8 @@
   }
 
   a {
-    height: 45px;
-    line-height: 45px;
+    height: 50px;
+    line-height: 50px;
     vertical-align: middle;
     color: rgba($darkBlue, 0.99);
     width: 50%;
@@ -38,6 +41,10 @@
     letter-spacing: 0.2em;
 
     border-right: thin solid rgba($darkBlue, 0.15);
+    @media only screen and (-webkit-device-pixel-ratio: 3) {
+      height: 60px;
+      line-height: 60px;
+    }
     @media (min-width: $breakpoint-small) {
       // width: 25%;
     }

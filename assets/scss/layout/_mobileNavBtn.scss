@@ -29,6 +29,9 @@
     margin: 5px auto;
     transform: rotate(0deg);
     cursor: pointer;
+    @media only screen and (-webkit-device-pixel-ratio: 3) {
+      margin: 10px auto;
+    }
     @media (min-width: $breakpoint-large) {
       margin: 20px auto;
       width: 50px;

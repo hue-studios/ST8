@@ -169,7 +169,7 @@ export default {
       $axios.$get(
         '/items/events?filter[url][eq]=' +
           params.slug +
-          '&fields=*.*.*&single=1'
+          '&fields=*.*.*.*&single=1'
       ),
     ])
     return {

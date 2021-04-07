@@ -76,7 +76,7 @@
           service.example_programs.length > 0 ||
           service.news_programs.length > 0
         "
-        class="md:w-1/2 services-section__content"
+        class="w-full md:w-1/2 services-section__content"
       >
         <h3 class="w-full uppercase text-xs green text-left bold">
           Recent Investment
@@ -210,7 +210,7 @@
       </div>
       <div
         v-if="service.resources.length > 0"
-        class="md:w-1/2 services-section__content"
+        class="w-full md:w-1/2 services-section__content"
       >
         <h3 class="w-full uppercase text-xs green text-left bold">Resources</h3>
         <div class="w-full flex flex-col items-center justify-start mt-4">
