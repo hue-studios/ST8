@@ -218,6 +218,12 @@
       ></nuxt-link>
       <div id="cropped-overlay" class="absolute"></div>
     </div>
+    <iframe
+      src="https://betterconnection.org/banner"
+      height="350"
+      width="100%"
+      border="0"
+    ></iframe>
     <div
       v-if="news.length"
       id="home__news"
