@@ -54,8 +54,15 @@
                     <h3 class="uppercase tracking-wider bold mb-2">
                       {{ truncateString(item.title, 100) }}
                     </h3>
-                    <h4 class="uppercase tracking-wider bold mb-2">
-                      {{ $moment(item.date).format('MMMM Do YYYY') }}
+                    <h4 class="uppercase tracking-wider bold">
+                      <span class="opacity-50">Date: </span
+                      >{{ $moment(item.date).format('MMMM Do YYYY') }}
+                    </h4>
+                    <h4
+                      v-if="item.time"
+                      class="uppercase tracking-wider bold mb-2"
+                    >
+                      <span class="opacity-50">Time: </span> {{ item.time }}
                     </h4>
                     <p
                       class="w-full hidden md:inline-block"

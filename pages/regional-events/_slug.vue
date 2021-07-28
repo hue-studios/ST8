@@ -33,7 +33,14 @@
             <h3
               class="w-full pl-4 mt-4 tracking-widest bold uppercase event__date"
             >
-              {{ $moment(item.date).format('MMMM Do YYYY') }}
+              <span class="opacity-50">Date: </span
+              >{{ $moment(item.date).format('MMMM Do YYYY') }}
+            </h3>
+            <h3
+              v-if="item.time"
+              class="w-full pl-4 tracking-widest bold uppercase event__date"
+            >
+              <span class="opacity-50">Time: </span>{{ item.time }}
             </h3>
           </div>
         </div>
