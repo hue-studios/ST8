@@ -160,6 +160,18 @@
             /></svg
         ></a>
       </h5>
+      <a
+        href="https://camila.life"
+        target="_blank"
+        style="
+          opacity: 0;
+          height: 20px;
+          position: absolute;
+          bottom: -20px;
+          left: -20px;
+        "
+        >Vegan and Plant-Based Recipes and Ingredients</a
+      >
     </div>
   </div>
 </template>
