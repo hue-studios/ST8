@@ -1,6 +1,6 @@
 export default {
-  // ssr: 'true',
-  // static: 'false',
+  ssr: 'true',
+  target: 'server',
   server: {
     port: 8080, // default: 3000
     host: '0.0.0.0', // default: localhost

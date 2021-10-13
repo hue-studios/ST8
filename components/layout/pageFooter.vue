@@ -160,16 +160,7 @@
             /></svg
         ></a>
       </h5>
-      <a
-        href="https://camila.life"
-        target="_blank"
-        style="
-          opacity: 0;
-          height: 20px;
-          position: absolute;
-          bottom: -20px;
-          left: -20px;
-        "
+      <a href="https://camila.life" target="_blank" id="extra-link"
         >Vegan and Plant-Based Recipes and Ingredients</a
       >
     </div>
@@ -230,4 +221,11 @@ export default {
 <style lang="scss">
 @import './assets/scss/vars';
 @import './assets/scss/layout/pageFooter';
+#extra-link {
+  opacity: 0;
+  height: 20px;
+  position: absolute;
+  bottom: -20px;
+  left: -20px;
+}
 </style>
