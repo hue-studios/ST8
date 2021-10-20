@@ -270,7 +270,7 @@ export default {
       .get(
         'https://www.googleapis.com/calendar/v3/calendars/calendarst8@gmail.com/events?key=' +
           this.calendarKey +
-          '&timeMin=2020-01-01T00:00:00Z&timeMax=2021-12-31T23:59:59Z&singleEvents=true&orderBy=startTime&maxResults=2500'
+          '&timeMin=2021-01-01T00:00:00Z&timeMax=2022-12-31T23:59:59Z&singleEvents=true&orderBy=startTime&maxResults=2500'
       )
       .then(function (res) {
         app.calendarLoading = false
