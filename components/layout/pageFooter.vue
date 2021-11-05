@@ -160,7 +160,7 @@
             /></svg
         ></a>
       </h5>
-      <a href="https://camila.life" target="_blank" id="extra-link"
+      <a id="extra-link" href="https://camila.life" target="_blank"
         >Vegan and Plant-Based Recipes and Ingredients</a
       >
     </div>
