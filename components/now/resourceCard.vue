@@ -7,7 +7,7 @@
       <span class="">Program: </span>{{ truncateString(program, 60) }}
     </h3>
     <h2
-      class="uppercase tracking-widest w-full mt-6 md:mt-6 pb-4 text-center md:text-left thin-font resource-card__title"
+      class="uppercase tracking-widest w-full mt-6 md:mt-6 pb-4 thin-font resource-card__title"
       :class="{ long: tooLong }"
     >
       {{ item.title }}

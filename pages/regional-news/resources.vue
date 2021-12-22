@@ -17,7 +17,7 @@
       class="w-full flex items-center lg:items-start justify-center flex-col"
     >
       <h2
-        class="uppercase tracking-widest relative mt-12 md:mt-20 resources__title"
+        class="uppercase tracking-widest relative mt-12 md:mt-20 text-center md:text-left resources__title"
       >
         Community Plans &amp; Strategies
         <span class="flex items-center justify-center badge">{{
@@ -42,7 +42,7 @@
       class="w-full flex items-center lg:items-start justify-center flex-col"
     >
       <h2
-        class="uppercase tracking-widest relative mt-12 md:mt-20 resources__title"
+        class="uppercase tracking-widest relative mt-12 md:mt-20 text-center md:text-left resources__title"
       >
         Grant Writing
         <span class="flex items-center justify-center badge">{{
@@ -67,7 +67,7 @@
       class="w-full flex items-center lg:items-start justify-center flex-col"
     >
       <h2
-        class="uppercase tracking-widest relative mt-12 md:mt-20 resources__title"
+        class="uppercase tracking-widest relative mt-12 md:mt-20 text-center md:text-left resources__title"
       >
         Health &amp; Wellness
         <span class="flex items-center justify-center badge">{{
@@ -92,7 +92,7 @@
       class="w-full flex items-center lg:items-start justify-center flex-col"
     >
       <h2
-        class="uppercase tracking-widest relative mt-12 md:mt-20 resources__title"
+        class="uppercase tracking-widest relative mt-12 md:mt-20 text-center md:text-left resources__title"
       >
         Investment &amp; Development
         <span class="flex items-center justify-center badge">{{
@@ -117,7 +117,7 @@
       class="w-full flex items-center lg:items-start justify-center flex-col"
     >
       <h2
-        class="uppercase tracking-widest relative mt-12 md:mt-20 resources__title"
+        class="uppercase tracking-widest relative mt-12 md:mt-20 text-center md:text-left resources__title"
       >
         Infrastructure
         <span class="flex items-center justify-center badge">{{
@@ -142,7 +142,7 @@
       class="w-full flex items-center lg:items-start justify-center flex-col"
     >
       <h2
-        class="uppercase tracking-widest relative mt-12 md:mt-20 resources__title"
+        class="uppercase tracking-widest relative mt-12 md:mt-20 text-center md:text-left resources__title"
       >
         Environmental
         <span class="flex items-center justify-center badge">{{
