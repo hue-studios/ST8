@@ -6,6 +6,7 @@ export default {
     host: '0.0.0.0', // default: localhost
   },
   modern: true,
+  components: true,
   /*
    ** Headers of the page
    */

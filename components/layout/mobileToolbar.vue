@@ -25,8 +25,8 @@ export default {
       element.classList.remove('in-left')
       element2.classList.remove('open')
       element3.classList.remove('open')
-    }
-  }
+    },
+  },
 }
 </script>
 

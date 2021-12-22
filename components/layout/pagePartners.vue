@@ -1,7 +1,7 @@
 <template>
   <div
     id="page-partners"
-    class="flex justify-center items-center flex-col  relative"
+    class="flex justify-center items-center flex-col relative"
   >
     <svg
       id="chevron-one"
@@ -75,12 +75,12 @@ export default {
   props: {
     imageLocation: {
       type: String,
-      default: null
-    }
+      default: null,
+    },
   },
   data() {
     return {
-      partners: []
+      partners: [],
     }
   },
   mounted() {
@@ -90,19 +90,19 @@ export default {
         trigger: '#page-partners', // this is the element that will trigger the animation
         start: 'top bottom-=100px', // this string defines the trigger and scroller start
         end: '+=100%', // this string defines the trigger and scroller end
-        scrub: true // this tells GSAP to link animation progress to scroll progress
+        scrub: true, // this tells GSAP to link animation progress to scroll progress
       },
       x: '-70px',
-      y: '20px'
+      y: '20px',
     })
     gsap.to('#chevron-three', {
       scrollTrigger: {
         trigger: '#page-partners', // this is the element that will trigger the animation
         start: 'top bottom-=100px', // this string defines the trigger and scroller start
         end: '+=100%', // this string defines the trigger and scroller end
-        scrub: true // this tells GSAP to link animation progress to scroll progress
+        scrub: true, // this tells GSAP to link animation progress to scroll progress
       },
-      x: '50px'
+      x: '50px',
     })
   },
   created() {
@@ -115,11 +115,11 @@ export default {
         .then((response) => {
           this.partners = response.data
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log(error)
         })
-    }
-  }
+    },
+  },
 }
 </script>
 <style lang="scss">

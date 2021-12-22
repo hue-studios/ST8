@@ -13,20 +13,165 @@
         This is a collection of resources.
       </p>
     </div>
-    <resource-card
-      v-for="(item, index) in resources"
-      :key="index"
-      :item="item"
-      class="mb-6 mx-6"
-    ></resource-card>
+    <div
+      class="w-full flex items-center lg:items-start justify-center flex-col"
+    >
+      <h2
+        class="uppercase tracking-widest relative mt-12 md:mt-20 resources__title"
+      >
+        Community Plans &amp; Strategies
+        <span class="flex items-center justify-center badge">{{
+          plans.length
+        }}</span>
+      </h2>
+      <swiper
+        :options="resourceSwiperOption"
+        class="swiper w-full flex flex-row pt-4 pb-4"
+      >
+        <swiper-slide
+          v-for="(resource, index) in plans"
+          :key="index"
+          class="flex flex-col items-center justify-center pt-4 pb-8"
+        >
+          <now-resource-card :item="resource" class="mb-6 blue" />
+        </swiper-slide>
+        <div slot="pagination" class="swiper-pagination"></div>
+      </swiper>
+    </div>
+    <div
+      class="w-full flex items-center lg:items-start justify-center flex-col"
+    >
+      <h2
+        class="uppercase tracking-widest relative mt-12 md:mt-20 resources__title"
+      >
+        Grant Writing
+        <span class="flex items-center justify-center badge">{{
+          grants.length
+        }}</span>
+      </h2>
+      <swiper
+        :options="resourceSwiperOption"
+        class="swiper w-full flex flex-row pt-4 pb-4"
+      >
+        <swiper-slide
+          v-for="(resource, index) in grants"
+          :key="index"
+          class="flex flex-col items-center justify-center pt-4 pb-8"
+        >
+          <resource-card :item="resource" class="mb-6"></resource-card>
+        </swiper-slide>
+        <div slot="pagination" class="swiper-pagination"></div>
+      </swiper>
+    </div>
+    <div
+      class="w-full flex items-center lg:items-start justify-center flex-col"
+    >
+      <h2
+        class="uppercase tracking-widest relative mt-12 md:mt-20 resources__title"
+      >
+        Health &amp; Wellness
+        <span class="flex items-center justify-center badge">{{
+          health.length
+        }}</span>
+      </h2>
+      <swiper
+        :options="resourceSwiperOption"
+        class="swiper w-full flex flex-row pt-4 pb-4"
+      >
+        <swiper-slide
+          v-for="(resource, index) in health"
+          :key="index"
+          class="flex flex-col items-center justify-center pt-4 pb-8"
+        >
+          <resource-card :item="resource" class="blue mb-6"></resource-card>
+        </swiper-slide>
+        <div slot="pagination" class="swiper-pagination"></div>
+      </swiper>
+    </div>
+    <div
+      class="w-full flex items-center lg:items-start justify-center flex-col"
+    >
+      <h2
+        class="uppercase tracking-widest relative mt-12 md:mt-20 resources__title"
+      >
+        Investment &amp; Development
+        <span class="flex items-center justify-center badge">{{
+          investment.length
+        }}</span>
+      </h2>
+      <swiper
+        :options="resourceSwiperOption"
+        class="swiper w-full flex flex-row pt-4 pb-4"
+      >
+        <swiper-slide
+          v-for="(resource, index) in investment"
+          :key="index"
+          class="flex flex-col items-center justify-center pt-4 pb-8"
+        >
+          <resource-card :item="resource" class="mb-6"></resource-card>
+        </swiper-slide>
+        <div slot="pagination" class="swiper-pagination"></div>
+      </swiper>
+    </div>
+    <div
+      class="w-full flex items-center lg:items-start justify-center flex-col"
+    >
+      <h2
+        class="uppercase tracking-widest relative mt-12 md:mt-20 resources__title"
+      >
+        Infrastructure
+        <span class="flex items-center justify-center badge">{{
+          infrastructure.length
+        }}</span>
+      </h2>
+      <swiper
+        :options="resourceSwiperOption"
+        class="swiper w-full flex flex-row pt-4 pb-4"
+      >
+        <swiper-slide
+          v-for="(resource, index) in infrastructure"
+          :key="index"
+          class="flex flex-col items-center justify-center pt-4 pb-8"
+        >
+          <resource-card :item="resource" class="blue mb-6"></resource-card>
+        </swiper-slide>
+        <div slot="pagination" class="swiper-pagination"></div>
+      </swiper>
+    </div>
+    <div
+      class="w-full flex items-center lg:items-start justify-center flex-col"
+    >
+      <h2
+        class="uppercase tracking-widest relative mt-12 md:mt-20 resources__title"
+      >
+        Environmental
+        <span class="flex items-center justify-center badge">{{
+          environmental.length
+        }}</span>
+      </h2>
+      <swiper
+        :options="resourceSwiperOption"
+        class="swiper w-full flex flex-row pt-4 pb-4"
+      >
+        <swiper-slide
+          v-for="(resource, index) in environmental"
+          :key="index"
+          class="flex flex-col items-center justify-center pt-4 pb-8"
+        >
+          <resource-card :item="resource" class="mb-6"></resource-card>
+        </swiper-slide>
+        <div slot="pagination" class="swiper-pagination"></div>
+      </swiper>
+    </div>
   </div>
 </template>
 
 <script>
 import moment from 'moment'
+import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 import resourceCard from '~/components/now/resourceCard'
 export default {
-  components: { resourceCard },
+  components: { resourceCard, Swiper, SwiperSlide },
   async asyncData({ params, $axios }) {
     const resourcesReq = await $axios.get(
       process.env.apiUrl +
@@ -37,7 +182,25 @@ export default {
     }
   },
   data() {
-    return {}
+    return {
+      resourceSwiperOption: {
+        slidesPerView: 'auto',
+        slidesOffsetBefore: 15,
+        slidesOffsetAfter: 15,
+        spaceBetween: 30,
+        centeredSlides: false,
+        centerInsufficientSlides: true,
+        loop: false,
+        pagination: {
+          el: '.swiper-pagination',
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+          hideOnClick: true,
+        },
+      },
+    }
   },
   head() {
     return {
@@ -63,6 +226,42 @@ export default {
     }
   },
   computed: {
+    plans() {
+      const vm = this
+      return vm.resources.filter(function (resource) {
+        return resource.category === 'Community Plans & Strategies'
+      })
+    },
+    environmental() {
+      const vm = this
+      return vm.resources.filter(function (resource) {
+        return resource.category === 'Environmental & Geospatial'
+      })
+    },
+    grants() {
+      const vm = this
+      return vm.resources.filter(function (resource) {
+        return resource.category === 'Grant Writing'
+      })
+    },
+    health() {
+      const vm = this
+      return vm.resources.filter(function (resource) {
+        return resource.category === 'Health & Wellness'
+      })
+    },
+    infrastructure() {
+      const vm = this
+      return vm.resources.filter(function (resource) {
+        return resource.category === 'Infrastructure'
+      })
+    },
+    investment() {
+      const vm = this
+      return vm.resources.filter(function (resource) {
+        return resource.category === 'Investment & Development'
+      })
+    },
     // project() {
     //   const vm = this
     //   return vm.resources.programs.map(function (item) {
@@ -139,7 +338,46 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import './assets/scss/vars';
+@import './assets/scss/layout/swiper';
 @import './assets/scss/pages/resources';
+.swiper-slide {
+  max-width: 500px;
+  width: 300px;
+
+  @media (min-width: $breakpoint-small) {
+    width: 400px;
+  }
+  @media (min-width: $breakpoint-medium) {
+    width: 500px;
+  }
+}
+.resources__title {
+  font-size: 22px;
+  line-height: 20px;
+  padding-left: 15px;
+  padding-right: 15px;
+  @media (min-width: $breakpoint-small) {
+  }
+  @media (min-width: $breakpoint-medium) {
+    font-size: 46px;
+    line-height: 44px;
+  }
+
+  .badge {
+    position: absolute;
+    right: -0px;
+    top: -15px;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    background: $navy;
+    color: $green;
+    font-size: 10px;
+    font-family: $bold-font;
+    border-radius: 50%;
+    letter-spacing: normal;
+  }
+}
 </style>

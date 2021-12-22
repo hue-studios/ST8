@@ -1,9 +1,7 @@
 <template>
   <nav id="nav-bar" @click.prevent="closeSideMenu()">
     <logo-name> </logo-name>
-    <p class="mobile-nav-title">
-      Active
-    </p>
+    <p class="mobile-nav-title">Active</p>
     <p>
       <nuxt-link to="/economic-development-initiatives/" class="mobile-nav-link"
         >Initiatives</nuxt-link
@@ -24,9 +22,7 @@
       Regional
     </nuxt-link>
 
-    <p class="mobile-nav-title">
-      Now
-    </p>
+    <p class="mobile-nav-title">Now</p>
     <p>
       <nuxt-link to="/regional-news/" class="mobile-nav-link">News</nuxt-link>
     </p>
@@ -66,7 +62,7 @@
 import logoName from '~/components/layout/logoName.vue'
 export default {
   components: {
-    logoName
+    logoName,
   },
   methods: {
     sideMenuToggle() {
@@ -84,8 +80,8 @@ export default {
       element.classList.remove('in-left')
       element2.classList.remove('open')
       element3.classList.remove('open')
-    }
-  }
+    },
+  },
 }
 </script>
 

@@ -16,10 +16,11 @@
       position: relative;
       margin-top: 70px;
       @media (min-width: $breakpoint-small) {
-        font-size: 62px;
+        font-size: 54px;
       }
       @media (min-width: $breakpoint-large) {
         margin-top: 0px;
+        font-size: 62px;
       }
     }
     h1:after {

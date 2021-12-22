@@ -4,9 +4,15 @@
   backdrop-filter: blur(2px);
   color: $navy;
   border-radius: 3px;
-  max-width: 840px;
-  width: 90%;
+  max-width: 500px;
+  width: 100%;
+  height: 300px;
   position: relative;
+  @media (min-width: $breakpoint-small) {
+  }
+  @media (min-width: $breakpoint-medium) {
+    height: 250px;
+  }
   .resource-card__program {
     left: 1rem;
     top: 1rem;
@@ -31,7 +37,8 @@
   .resource-card__title {
     font-size: 16px;
     line-height: 18px;
-    border-bottom: thin solid $navy;
+
+    font-family: $bold-font;
     @media (min-width: $breakpoint-small) {
     }
     @media (min-width: $breakpoint-medium) {
@@ -42,26 +49,41 @@
       line-height: 22px;
     }
   }
-  .resource-card__title.text-xs {
-    // font-size: 12px;
-    // line-height: 16px;
-
+  .resource-card__title.long {
+    font-size: 12px;
+    line-height: 16px;
+    @apply mb-2 pb-2;
     @media (min-width: $breakpoint-small) {
     }
     @media (min-width: $breakpoint-medium) {
     }
     @media (min-width: $breakpoint-large) {
-      // font-size: 16px;
+      font-size: 14px;
     }
   }
   .resource-card__description {
-    font-size: 13px;
-    @media (min-width: $breakpoint-small) {
+    @apply flex-1 overflow-scroll;
+    p {
+      font-size: 13px;
+      @media (min-width: $breakpoint-small) {
+      }
+      @media (min-width: $breakpoint-medium) {
+      }
     }
-    @media (min-width: $breakpoint-medium) {
-    }
+  }
+  .resource-card__description.addBorder {
+    border-top: thin solid $navy;
   }
   a {
     font-size: 10px;
+  }
+}
+
+.resource-card.blue {
+  border: thin solid rgba($grey, 0.2);
+  background: $navy;
+  color: $white;
+  .resource-card__description.addBorder {
+    border-top: thin solid $white;
   }
 }

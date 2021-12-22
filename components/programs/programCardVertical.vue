@@ -9,9 +9,9 @@
       class="progam-card-vertical__image"
       :style="
         'background-image: url(' +
-          imageLocation +
-          program.images[0].file_id.private_hash +
-          '?key=small)'
+        imageLocation +
+        program.images[0].file_id.private_hash +
+        '?key=small)'
       "
     ></div>
     <div v-else class="progam-card-vertical__image" style=""></div>
@@ -34,18 +34,18 @@
 import { ArrowRightIcon } from 'vue-feather-icons'
 export default {
   components: {
-    ArrowRightIcon
+    ArrowRightIcon,
   },
   props: {
     program: {
       type: Object,
-      default: null
-    }
+      default: null,
+    },
   },
   data() {
     return {
       programInitiatives: [],
-      imageLocation: process.env.imageUrl
+      imageLocation: process.env.imageUrl,
     }
   },
   created() {
@@ -70,8 +70,8 @@ export default {
         return newStr
       }
       return newStr.slice(0, num) + '...'
-    }
-  }
+    },
+  },
 }
 </script>
 

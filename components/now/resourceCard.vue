@@ -1,20 +1,23 @@
 <template>
   <div
     :id="'resource-card-' + item.id"
-    class="flex items-center justify-center flex-col px-4 md:px-6 py-6 shadow-lg resource-card"
+    class="flex items-center justify-center flex-col px-4 md:px-6 py-6 shadow-lg h-full resource-card"
   >
     <h3 v-if="program" class="uppercase absolute resource-card__program">
       <span class="">Program: </span>{{ truncateString(program, 60) }}
     </h3>
     <h2
-      class="uppercase tracking-widest w-full mt-4 md:mt-6 mb-4 pb-4 thin-font resource-card__title"
-      :class="{ 'text-xs': tooLong }"
+      class="uppercase tracking-widest w-full mt-6 md:mt-6 pb-4 text-center md:text-left thin-font resource-card__title"
+      :class="{ long: tooLong }"
     >
       {{ item.title }}
     </h2>
-    <p v-if="item.description" class="w-full mb-4 resource-card__description">
-      {{ item.description }}
-    </p>
+    <div
+      class="w-full pt-4 resource-card__description"
+      :class="{ addBorder: item.description }"
+    >
+      <p>{{ item.description }}</p>
+    </div>
 
     <a
       v-if="item.type === 'Internal File / PDF' && item.file"
@@ -80,7 +83,7 @@ export default {
       }
     },
     countTitle(title) {
-      if (title.length > 30) {
+      if (title.length > 30 && this.item.description) {
         this.tooLong = true
       } else {
         this.tooLong = false

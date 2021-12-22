@@ -7,7 +7,7 @@
       x="0px"
       y="0px"
       viewBox="0 0 1023.4 864.6"
-      style="enable-background:new 0 0 1023.4 864.6;"
+      style="enable-background: new 0 0 1023.4 864.6"
       xml:space="preserve"
     >
       <path
@@ -463,7 +463,7 @@
             <rect id="SVGID_1_" width="1023.4" height="864.6" />
           </defs>
           <clipPath id="SVGID_2_">
-            <use xlink:href="#SVGID_1_" style="overflow:visible;" />
+            <use xlink:href="#SVGID_1_" style="overflow: visible" />
           </clipPath>
           <g id="Group_4619" class="st8">
             <path
@@ -517,7 +517,7 @@
             <rect id="SVGID_3_" y="0" width="1023.4" height="582.5" />
           </defs>
           <clipPath id="SVGID_4_">
-            <use xlink:href="#SVGID_3_" style="overflow:visible;" />
+            <use xlink:href="#SVGID_3_" style="overflow: visible" />
           </clipPath>
           <g id="Group_4621" class="st10">
             <path
@@ -591,7 +591,7 @@
             <rect id="SVGID_5_" width="1023.4" height="864.6" />
           </defs>
           <clipPath id="SVGID_6_">
-            <use xlink:href="#SVGID_5_" style="overflow:visible;" />
+            <use xlink:href="#SVGID_5_" style="overflow: visible" />
           </clipPath>
           <g id="Group_4623" class="st12">
             <path
@@ -624,7 +624,7 @@
             <rect id="SVGID_7_" y="0" width="1023.4" height="582.5" />
           </defs>
           <clipPath id="SVGID_8_">
-            <use xlink:href="#SVGID_7_" style="overflow:visible;" />
+            <use xlink:href="#SVGID_7_" style="overflow: visible" />
           </clipPath>
           <g id="Group_4625" class="st14">
             <path
@@ -1009,7 +1009,7 @@
             <rect id="SVGID_9_" width="1023.4" height="864.6" />
           </defs>
           <clipPath id="SVGID_10_">
-            <use xlink:href="#SVGID_9_" style="overflow:visible;" />
+            <use xlink:href="#SVGID_9_" style="overflow: visible" />
           </clipPath>
           <g id="Group_4627" class="st19">
             <path

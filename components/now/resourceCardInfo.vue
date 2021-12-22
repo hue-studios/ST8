@@ -174,7 +174,7 @@
 
 <script>
 import moment from 'moment'
-
+import axios from 'axios'
 export default {
   props: [
     {
@@ -186,7 +186,7 @@ export default {
   ],
   data() {
     return {
-      imageLocation: imageUrl,
+      imageLocation: process.env.imageUrl,
       name: '',
       email: '',
       company: '',
@@ -200,20 +200,20 @@ export default {
     }
   },
   computed: {
-    first_name() {
-      const app = this
-      const firstWords = []
-      for (let i = 0; i < app.name.length; i++) {
-        const codeLine = app.name[i]
-        const firstWord = app.name.substr(0, app.name.indexOf(' '))
-        firstWords.push(firstWord)
-        if (firstWord.length > 1) {
-          return firstWord
-        } else {
-          return app.name
-        }
-      }
-    },
+    // first_name() {
+    //   const app = this
+    //   const firstWords = []
+    //   for (let i = 0; i < app.name.length; i++) {
+    //     const codeLine = app.name[i]
+    //     const firstWord = app.name.substr(0, app.name.indexOf(' '))
+    //     firstWords.push(firstWord)
+    //     if (firstWord.length > 1) {
+    //       return firstWord
+    //     } else {
+    //       return app.name
+    //     }
+    //   }
+    // },
   },
 
   created() {
@@ -252,7 +252,7 @@ export default {
           app.loading = true
           axios({
             method: 'post',
-            url: apiUrl + '/items/product_downloads',
+            url: process.env.apiUrl + '/items/product_downloads',
             data: {
               ip_address: app.ip_address,
               name: app.name,
@@ -286,7 +286,7 @@ export default {
       const app = this
       axios
         .post(
-          emailUrl +
+          process.env.emailUrl +
             'productDownload.php?product=' +
             app.title +
             '&email=' +
@@ -313,5 +313,5 @@ export default {
 }
 </script>
 <style lang="scss">
-@import '../../sass/components/productCard';
+// @import '../../sass/components/productCard';
 </style>
