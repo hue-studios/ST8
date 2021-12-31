@@ -101,43 +101,43 @@
   }
   .blue-fill:nth-of-type(3) {
     transition-delay: 0.02s;
-    animation-delay: 0.1s;
+    animation-delay: 0.15s;
   }
   .blue-fill:nth-of-type(4) {
     transition-delay: 0.03s;
-    animation-delay: 0.15s;
+    animation-delay: 0.25s;
   }
   .blue-fill:nth-of-type(5) {
     transition-delay: 0.04s;
-    animation-delay: 0.2s;
+    animation-delay: 0.35s;
   }
   .blue-fill:nth-of-type(6) {
     transition-delay: 0.05s;
-    animation-delay: 0.25s;
+    animation-delay: 0.45s;
   }
   .blue-fill:nth-of-type(7) {
     transition-delay: 0.06s;
-    animation-delay: 0.3s;
+    animation-delay: 0.55s;
   }
   .blue-fill:nth-of-type(8) {
     transition-delay: 0.07s;
-    animation-delay: 0.35s;
+    animation-delay: 0.65s;
   }
   .blue-fill:nth-of-type(9) {
     transition-delay: 0.08s;
-    animation-delay: 0.4s;
+    animation-delay: 0.75s;
   }
   .blue-fill:nth-of-type(10) {
     transition-delay: 0.09s;
-    animation-delay: 0.45s;
+    animation-delay: 0.85s;
   }
   .blue-fill:nth-of-type(11) {
     transition-delay: 0.1s;
-    animation-delay: 0.5s;
+    animation-delay: 0.95s;
   }
   .blue-fill:nth-of-type(12) {
     transition-delay: 0.11s;
-    animation-delay: 0.55s;
+    animation-delay: 1.05s;
   }
 }
 </style>

@@ -39,7 +39,7 @@
         :class="{ hide: hideMessage }"
         class="bold navy uppercase tracking-widest absolute home-intro__intro"
       >
-        Welcome to our new digital experience.
+        Welcome to our digital experience.
       </h4>
       <transition
         :enter-active-class="animateIn"

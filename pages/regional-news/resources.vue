@@ -1,5 +1,8 @@
 <template>
-  <div id="resources" class="flex flex-col items-center justify-center pb-32">
+  <div
+    id="resources"
+    class="flex flex-col items-center justify-center pb-32 w-full overflow-hidden"
+  >
     <div
       id="resources__intro"
       class="flex flex-col flex-wrap justify-center items-center relative w-full"
@@ -13,165 +16,135 @@
         This is a collection of resources.
       </p>
     </div>
-    <div
-      class="w-full flex items-center lg:items-start justify-center flex-col"
-    >
-      <h2
-        class="uppercase tracking-widest relative mt-12 md:mt-20 text-center md:text-left resources__title"
+    <div class="w-full flex items-center justify-center flex-col">
+      <div
+        class="w-full flex items-start justify-center flex-col resources__title-container"
       >
-        Community Plans &amp; Strategies
-        <span class="flex items-center justify-center badge">{{
-          plans.length
-        }}</span>
-      </h2>
-      <swiper
-        :options="resourceSwiperOption"
-        class="swiper w-full flex flex-row pt-4 pb-4"
-      >
-        <swiper-slide
-          v-for="(resource, index) in plans"
-          :key="index"
-          class="flex flex-col items-center justify-center pt-4 pb-8"
+        <h2
+          class="uppercase font-bold relative mt-8 mb-4 md:mb-8 tracking-wider resources__title"
         >
-          <now-resource-card :item="resource" class="mb-6 blue" />
-        </swiper-slide>
-        <div slot="pagination" class="swiper-pagination"></div>
-      </swiper>
+          Community Plans &amp; Strategies
+          <span class="flex items-center justify-center badge">{{
+            plans.length
+          }}</span>
+        </h2>
+      </div>
+      <div class="w-full resources__title-border"></div>
+      <now-resource-card-data
+        v-for="(resource, index) in plans"
+        :key="index"
+        :item="resource"
+        class=""
+      />
     </div>
-    <div
-      class="w-full flex items-center lg:items-start justify-center flex-col"
-    >
-      <h2
-        class="uppercase tracking-widest relative mt-12 md:mt-20 text-center md:text-left resources__title"
+    <div class="w-full flex items-center justify-center flex-col">
+      <div
+        class="w-full flex items-start justify-center flex-col resources__title-container"
       >
-        Grant Writing
-        <span class="flex items-center justify-center badge">{{
-          grants.length
-        }}</span>
-      </h2>
-      <swiper
-        :options="resourceSwiperOption"
-        class="swiper w-full flex flex-row pt-4 pb-4"
-      >
-        <swiper-slide
-          v-for="(resource, index) in grants"
-          :key="index"
-          class="flex flex-col items-center justify-center pt-4 pb-8"
+        <h2
+          class="uppercase font-bold relative mt-20 md:mt-28 mb-4 md:mb-8 tracking-wider resources__title"
         >
-          <resource-card :item="resource" class="mb-6"></resource-card>
-        </swiper-slide>
-        <div slot="pagination" class="swiper-pagination"></div>
-      </swiper>
+          Grant Writing
+          <span class="flex items-center justify-center badge">{{
+            grants.length
+          }}</span>
+        </h2>
+      </div>
+      <div class="w-full resources__title-border"></div>
+      <now-resource-card-data
+        v-for="(resource, index) in grants"
+        :key="index"
+        :item="resource"
+        class=""
+      />
     </div>
-    <div
-      class="w-full flex items-center lg:items-start justify-center flex-col"
-    >
-      <h2
-        class="uppercase tracking-widest relative mt-12 md:mt-20 text-center md:text-left resources__title"
+    <div class="w-full flex items-center justify-center flex-col">
+      <div
+        class="w-full flex items-start justify-center flex-col resources__title-container"
       >
-        Health &amp; Wellness
-        <span class="flex items-center justify-center badge">{{
-          health.length
-        }}</span>
-      </h2>
-      <swiper
-        :options="resourceSwiperOption"
-        class="swiper w-full flex flex-row pt-4 pb-4"
-      >
-        <swiper-slide
-          v-for="(resource, index) in health"
-          :key="index"
-          class="flex flex-col items-center justify-center pt-4 pb-8"
+        <h2
+          class="uppercase font-bold relative mt-20 md:mt-28 mb-4 md:mb-8 tracking-wider resources__title"
         >
-          <resource-card :item="resource" class="blue mb-6"></resource-card>
-        </swiper-slide>
-        <div slot="pagination" class="swiper-pagination"></div>
-      </swiper>
+          Health &amp; Wellness
+          <span class="flex items-center justify-center badge">{{
+            health.length
+          }}</span>
+        </h2>
+      </div>
+      <div class="w-full resources__title-border"></div>
+      <now-resource-card-data
+        v-for="(resource, index) in health"
+        :key="index"
+        :item="resource"
+        class=""
+      />
     </div>
-    <div
-      class="w-full flex items-center lg:items-start justify-center flex-col"
-    >
+    <div class="w-full flex items-center justify-center flex-col">
       <h2
-        class="uppercase tracking-widest relative mt-12 md:mt-20 text-center md:text-left resources__title"
+        class="uppercase font-bold relative mt-20 md:mt-28 mb-4 md:mb-8 tracking-wider resources__title"
       >
         Investment &amp; Development
         <span class="flex items-center justify-center badge">{{
           investment.length
         }}</span>
       </h2>
-      <swiper
-        :options="resourceSwiperOption"
-        class="swiper w-full flex flex-row pt-4 pb-4"
-      >
-        <swiper-slide
-          v-for="(resource, index) in investment"
-          :key="index"
-          class="flex flex-col items-center justify-center pt-4 pb-8"
-        >
-          <resource-card :item="resource" class="mb-6"></resource-card>
-        </swiper-slide>
-        <div slot="pagination" class="swiper-pagination"></div>
-      </swiper>
+      <div class="w-full resources__title-border"></div>
+      <now-resource-card-data
+        v-for="(resource, index) in investment"
+        :key="index"
+        :item="resource"
+        class=""
+      />
     </div>
-    <div
-      class="w-full flex items-center lg:items-start justify-center flex-col"
-    >
-      <h2
-        class="uppercase tracking-widest relative mt-12 md:mt-20 text-center md:text-left resources__title"
+    <div class="w-full flex items-center justify-center flex-col">
+      <div
+        class="w-full flex items-start justify-center flex-col resources__title-container"
       >
-        Infrastructure
-        <span class="flex items-center justify-center badge">{{
-          infrastructure.length
-        }}</span>
-      </h2>
-      <swiper
-        :options="resourceSwiperOption"
-        class="swiper w-full flex flex-row pt-4 pb-4"
-      >
-        <swiper-slide
-          v-for="(resource, index) in infrastructure"
-          :key="index"
-          class="flex flex-col items-center justify-center pt-4 pb-8"
+        <h2
+          class="uppercase font-bold relative mt-20 md:mt-28 mb-4 md:mb-8 tracking-wider resources__title"
         >
-          <resource-card :item="resource" class="blue mb-6"></resource-card>
-        </swiper-slide>
-        <div slot="pagination" class="swiper-pagination"></div>
-      </swiper>
+          Infrastructure
+          <span class="flex items-center justify-center badge">{{
+            infrastructure.length
+          }}</span>
+        </h2>
+      </div>
+      <div class="w-full resources__title-border"></div>
+      <now-resource-card-data
+        v-for="(resource, index) in infrastructure"
+        :key="index"
+        :item="resource"
+        class=""
+      />
     </div>
-    <div
-      class="w-full flex items-center lg:items-start justify-center flex-col"
-    >
-      <h2
-        class="uppercase tracking-widest relative mt-12 md:mt-20 text-center md:text-left resources__title"
+    <div class="w-full flex items-center justify-center flex-col">
+      <div
+        class="w-full flex items-start justify-center flex-col resources__title-container"
       >
-        Environmental
-        <span class="flex items-center justify-center badge">{{
-          environmental.length
-        }}</span>
-      </h2>
-      <swiper
-        :options="resourceSwiperOption"
-        class="swiper w-full flex flex-row pt-4 pb-4"
-      >
-        <swiper-slide
-          v-for="(resource, index) in environmental"
-          :key="index"
-          class="flex flex-col items-center justify-center pt-4 pb-8"
+        <h2
+          class="uppercase font-bold relative mt-20 md:mt-28 mb-4 md:mb-8 tracking-wider resources__title"
         >
-          <resource-card :item="resource" class="mb-6"></resource-card>
-        </swiper-slide>
-        <div slot="pagination" class="swiper-pagination"></div>
-      </swiper>
+          Environmental
+          <span class="flex items-center justify-center badge">{{
+            environmental.length
+          }}</span>
+        </h2>
+      </div>
+      <div class="w-full resources__title-border"></div>
+      <now-resource-card-data
+        v-for="(resource, index) in environmental"
+        :key="index"
+        :item="resource"
+        class=""
+      />
     </div>
   </div>
 </template>
 
 <script>
 import moment from 'moment'
-import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
-import resourceCard from '~/components/now/resourceCard'
+
 export default {
-  components: { resourceCard, Swiper, SwiperSlide },
   async asyncData({ params, $axios }) {
     const resourcesReq = await $axios.get(
       process.env.apiUrl +
@@ -182,25 +155,7 @@ export default {
     }
   },
   data() {
-    return {
-      resourceSwiperOption: {
-        slidesPerView: 'auto',
-        slidesOffsetBefore: 15,
-        slidesOffsetAfter: 15,
-        spaceBetween: 30,
-        centeredSlides: false,
-        centerInsufficientSlides: true,
-        loop: false,
-        pagination: {
-          el: '.swiper-pagination',
-        },
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-          hideOnClick: true,
-        },
-      },
-    }
+    return {}
   },
   head() {
     return {
@@ -340,34 +295,28 @@ export default {
 
 <style lang="scss" scoped>
 @import './assets/scss/vars';
-@import './assets/scss/layout/swiper';
 @import './assets/scss/pages/resources';
-.swiper-slide {
-  max-width: 500px;
-  width: 300px;
-
-  @media (min-width: $breakpoint-small) {
-    width: 400px;
-  }
-  @media (min-width: $breakpoint-medium) {
-    width: 500px;
-  }
+.resources__title-container {
+  max-width: 800px;
 }
 .resources__title {
-  font-size: 22px;
-  line-height: 20px;
-  padding-left: 15px;
+  font-size: 28px;
+  line-height: 24px;
+  padding-left: 5px;
   padding-right: 15px;
+  border-left: 10px solid $navy;
+
   @media (min-width: $breakpoint-small) {
   }
   @media (min-width: $breakpoint-medium) {
     font-size: 46px;
-    line-height: 44px;
+    line-height: 36px;
+    border-left: 15px solid $navy;
   }
 
   .badge {
     position: absolute;
-    right: -0px;
+    right: -10px;
     top: -15px;
     width: 20px;
     height: 20px;
@@ -379,5 +328,12 @@ export default {
     border-radius: 50%;
     letter-spacing: normal;
   }
+}
+.resources__title-border {
+  height: 0px;
+  background: rgba($grey, 0.5);
+}
+.resource-card-data:nth-of-type(even) {
+  background: #eeeeee;
 }
 </style>
