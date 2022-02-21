@@ -7,11 +7,7 @@
         :id="'product-card-description-' + id"
         class="product-card-description"
       >
-        <img
-          :data-src="imageLocation + image + '?key=small'"
-          :alt="title"
-          uk-img
-        />
+        <img :data-src="imageLocation + image + '?key=small'" :alt="title" />
         <h3 class="uk-text-center condensed uk-text-uppercase">{{ title }}</h3>
         <p class="uk-text-center">{{ description }}</p>
       </div>

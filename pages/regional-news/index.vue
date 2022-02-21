@@ -18,14 +18,14 @@
       id="news__news-cards"
       class="relative w-full flex items-center justify-center flex-col pb-20"
     >
-      <!-- <div class="w-full text-center px-8 mb-4 news__filters">
+      <div class="w-full text-center px-8 mb-4 news__filters">
         <input
           v-model="search"
           class="condensed uppercase shadow appearance-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline search-input"
           type="text"
           placeholder="Search."
         />
-      </div> -->
+      </div>
 
       <transition-group
         name="list"
@@ -64,7 +64,7 @@ export default {
   async asyncData({ params, $axios }) {
     const [newsReq] = await Promise.all([
       $axios.$get(
-        '/items/news?fields=id,title,article,url,cover_image.private_hash,tags,type,featured,date_published,link,initiatives.initiative_id.title,programs.*,related_resources.*&filter[status]=published&sort=-date_published'
+        '/items/news?fields=id,title,article,url,cover_image.private_hash,tags,type,featured,date_published,link,initiatives.initiative_id.title,programs.*,related_resources.*&filter[status]=published&sort=-date_published,sort'
       ),
     ])
     return {
@@ -109,8 +109,7 @@ export default {
         return app.news.filter(function (item) {
           return (
             search === '' ||
-            item.tags.includes(app.search.toLowerCase()) ||
-            item.title.includes(app.search.toLowerCase())
+            item.title.toLowerCase().includes(search.toLowerCase())
           )
         })
       }
@@ -177,4 +176,19 @@ export default {
 <style lang="scss">
 @import './assets/scss/vars';
 @import './assets/scss/pages/news';
+.list {
+  transition: all 0.3s var(--curve);
+}
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.25s var(--curve);
+}
+.list-leave-to {
+  opacity: 0;
+  transform: translateY(15px);
+}
+.list-enter {
+  opacity: 0;
+  transform: translateY(15px);
+}
 </style>
