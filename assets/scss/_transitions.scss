@@ -23,3 +23,19 @@
 .fade-leave-to {
   opacity: 0;
 }
+
+.list {
+  transition: all 0.3s var(--curve);
+}
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.3s var(--curve);
+}
+.list-leave-to {
+  opacity: 0;
+  transform: translateY(15px);
+}
+.list-enter {
+  opacity: 0;
+  transform: translateY(15px);
+}

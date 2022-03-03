@@ -56,6 +56,9 @@
       <nuxt-link to="/how-to-apply" class="uppercase w-full footer-link"
         >How to Apply</nuxt-link
       >
+      <nuxt-link to="/reporting" class="uppercase w-full footer-link"
+        >Reporting</nuxt-link
+      >
     </div>
     <div
       class="flex flex-col items-start justify-start w-full md:w-1/3 pr-8 pl-8 mt-8 md:mt-0 text-center md:text-left footer-col"
