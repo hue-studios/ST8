@@ -295,7 +295,7 @@ export default {
   async asyncData({ $axios }) {
     const [organizationReq, peopleReq, countiesReq] = await Promise.all([
       $axios.$get('/items/organization?single=1&fields=*.*.*'),
-      $axios.$get('/items/people?fields=*.*.*'),
+      $axios.$get('/items/people?fields=*.*.*&filter[status]=published'),
       $axios.$get('/items/counties?fields=*.*'),
     ])
     return {
