@@ -169,13 +169,7 @@ export default {
       },
     ],
 
-    script: [
-      {
-        src:
-          'https://fast.fonts.net/jsapi/21a0c137-b931-4f95-8773-dabd5b0c50f7.js',
-        rel: 'dns-prefetch',
-      },
-    ],
+    script: [],
   },
   /*
    ** Customize the progress-bar color

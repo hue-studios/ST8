@@ -4,6 +4,22 @@
 @import 'layout/layout';
 @import 'uikit/animation';
 @import 'transitions';
+@import url('http://fast.fonts.net/t/1.css?apiType=css&projectid=21a0c137-b931-4f95-8773-dabd5b0c50f7');
+@font-face {
+  font-family: 'Proxima Nova W01 Light';
+  src: url('Fonts/122f8a1b-fa6b-4246-8d37-911edb4ac556.woff2') format('woff2'),
+    url('Fonts/0f51d8b8-bda2-4557-9b56-0a4e94ab63d9.woff') format('woff');
+}
+@font-face {
+  font-family: 'Proxima Nova W01 Thin';
+  src: url('Fonts/ad4a2691-471a-4c43-b88f-0d144d680661.woff2') format('woff2'),
+    url('Fonts/1da53474-ed78-41a6-872b-7397556eceee.woff') format('woff');
+}
+@font-face {
+  font-family: 'Proxima Nova W01 Regular';
+  src: url('Fonts/b38b8bd9-d96f-4bf9-add1-adbd2b08b802.woff2') format('woff2'),
+    url('Fonts/52ed7b2d-8a31-4b18-a1d5-8685608b0889.woff') format('woff');
+}
 html {
   scroll-behavior: smooth;
 }
