@@ -153,6 +153,10 @@
     }
     #event__description {
       max-width: 840px;
+      ul {
+        margin-left: 20px;
+        list-style-type: disc;
+      }
     }
   }
   #event__resources {

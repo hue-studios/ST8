@@ -75,16 +75,20 @@
       <div
         id="event__description"
         class="w-5/6 lg:w-full"
-        v-text="item.description"
+        v-html="item.description"
       ></div>
     </div>
     <div
       v-if="item.link"
       class="w-full mt-8 mb-8 px-4 md:px-12 flex items-center justify-center event__links"
     >
-      <a :href="item.link" target="_blank" rel="noreferrer"
-        ><span class="mr-1 uppercase grey tracking-wider">Link:</span>
-        {{ item.link }} <link-icon></link-icon
+      <a :href="item.link" target="_blank" rel="noreferrer">
+        <!-- <span class="mr-1 uppercase grey tracking-wider">Link:</span> -->
+        <span v-if="item.link_title" class="mr-1 uppercase tracking-wider">{{
+          item.link_title
+        }}</span
+        ><span v-else class="mr-1 uppercase tracking-wider">Event Link</span>
+        <link-icon></link-icon
       ></a>
     </div>
     <div
