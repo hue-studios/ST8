@@ -209,7 +209,7 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     // '@nuxtjs/pwa',
-    '@nuxt/image',
+    // '@nuxt/image',
     'nuxt-izitoast',
     'vue-social-sharing/nuxt',
     [
@@ -235,9 +235,9 @@ export default {
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  image: {
-    domains: ['admin.steny.org', 'admin.southerntier8.org'],
-  },
+  // image: {
+  //   domains: ['admin.steny.org', 'admin.southerntier8.org'],
+  // },
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
     baseURL: 'https://admin.steny.org/southern-tier-8',
