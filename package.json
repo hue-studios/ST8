@@ -2,6 +2,10 @@
   "name": "southerntier.org",
   "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": "14.19.2",
+    "npm": "6.14.17"
+  },
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
