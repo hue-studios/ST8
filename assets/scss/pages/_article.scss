@@ -167,13 +167,22 @@
       margin-left: 5px;
       margin-right: 5px;
       // box-shadow: 0px 2px 10px rgba($black, 0.05);
-      background: rgba($grey, 0.25);
+      // background: rgba($grey, 0.25);
       border-radius: 50%;
-      padding: 10px;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       border: thin solid rgba($grey, 0.5);
       .share-icon {
         fill: $navy;
         stroke: $navy;
+        width: 22px;
+        height: auto;
+      }
+      .share-icon.linkedin {
+        width: 35px;
       }
     }
   }

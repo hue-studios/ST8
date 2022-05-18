@@ -8,12 +8,12 @@ module.exports = {
   darkMode: 'class',
   future: {
     removeDeprecatedGapUtilities: true,
-    purgeLayersByDefault: true
+    purgeLayersByDefault: true,
   },
   theme: {
     fontFamily: {
       sans: 'Proxima Nova W01 Thin, sans-serif',
-      body: 'Proxima Nova W01 Thin, sans-serif'
+      body: 'Proxima Nova W01 Thin, sans-serif',
     },
     screens: {
       xs: '450px',
@@ -28,10 +28,10 @@ module.exports = {
 
       xl: '1280px',
       // => @media (min-width: 1280px) { ... }
-      '2xl': '1536px'
+      '2xl': '1536px',
     },
     container: {
-      center: true
+      center: true,
     },
     colors: {
       transparent: 'transparent',
@@ -49,13 +49,13 @@ module.exports = {
         600: '#718096',
         700: '#4a5568',
         800: '#2d3748',
-        900: '#1a202c'
+        900: '#1a202c',
       },
       blue: '#00bfff',
       red: '#e32020',
       pink: '#fb00da',
       green: '#00ff1b',
-      yellow: '#fff500'
+      yellow: '#fff500',
     },
     letterSpacing: {
       tightest: '-.075em',
@@ -64,10 +64,10 @@ module.exports = {
       normal: '0',
       wide: '.05em',
       wider: '.1em',
-      widest: '.2em'
+      widest: '.2em',
     },
 
-    extend: {}
+    extend: {},
   },
   variants: {},
   plugins: [],
@@ -79,7 +79,7 @@ module.exports = {
       'layouts/**/*.vue',
       'pages/**/*.vue',
       'plugins/**/*.js',
-      'nuxt.config.js'
-    ]
-  }
+      'nuxt.config.js',
+    ],
+  },
 }

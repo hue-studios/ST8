@@ -44,12 +44,7 @@ export default {
   components: {
     linkIcon,
   },
-  props: {
-    item: {
-      type: Object,
-      default: null,
-    },
-  },
+  props: ['item'],
   data() {
     return {
       imageLocation: process.env.imageUrl,

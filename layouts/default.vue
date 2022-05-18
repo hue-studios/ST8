@@ -77,6 +77,14 @@
       <nuxt-link to="/regional-news/">News</nuxt-link>
       <nuxt-link to="/economic-development-initiatives/">Initiatives</nuxt-link>
     </div>
+    <transition name="fade">
+      <layout-resource-info
+        v-if="$store.state.resourceInfo"
+        :title="$store.state.resource.title"
+        :link="$store.state.resource.link"
+        :resource="$store.state.resource.resource"
+      />
+    </transition>
   </div>
 </template>
 <script>

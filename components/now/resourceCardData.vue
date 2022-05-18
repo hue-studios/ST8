@@ -1,10 +1,8 @@
 <template>
   <a
     :id="'resource-card-data-' + item.id"
-    :href="link"
-    target="_blank"
-    rel="noreferrer"
-    class="flex items-center justify-center flex-col px-4 resource-card-data"
+    class="flex items-center justify-center flex-col px-4 cursor-pointer resource-card-data"
+    @click.prevent="resourceAction"
   >
     <div
       class="flex items-center justify-center flex-col resource-card-data__container"
@@ -28,7 +26,7 @@
         class="w-full uppercase text-xs green bold tracking-widest resource-card-data__link"
       >
         <span v-if="item.type === 'Internal File / PDF' && item.file"
-          >View File</span
+          >View Document</span
         ><span v-else-if="item.type === 'External Link'">Go to Resource</span>
         <link-icon></link-icon>
       </h5>
@@ -58,12 +56,7 @@ export default {
   components: {
     linkIcon,
   },
-  props: {
-    item: {
-      type: Object,
-      default: null,
-    },
-  },
+  props: ['item'],
   data() {
     return {
       imageLocation: process.env.imageUrl,
@@ -85,17 +78,31 @@ export default {
     // },
   },
   created() {
-    if (this.item.type === 'Internal File / PDF' && this.item.file) {
-      this.link = process.env.imageUrl + this.item.file.private_hash
-    } else if (this.item.type === 'External Link') {
-      this.link = this.item.link
-    }
     this.countTitle(this.item.title)
     if (this.item.programs) {
       this.programName(this.item.programs)
     }
   },
   methods: {
+    resourceAction() {
+      if (this.item.type === 'Internal File / PDF' && this.item.file) {
+        if (this.item.require_info) {
+          this.$store.commit('UPDATE_RESOURCE', {
+            title: this.item.title,
+            link: process.env.imageUrl + this.item.file.private_hash,
+            resource: this.item.id,
+          })
+          this.$store.commit('UPDATE_RESOURCE_INFO', true)
+        } else {
+          window.open(
+            process.env.imageUrl + this.item.file.private_hash,
+            '_blank'
+          )
+        }
+      } else if (this.item.type === 'External Link') {
+        window.open(this.item.link, '_blank')
+      }
+    },
     programName(programs) {
       if (programs.length) {
         // console.log(programs[0].programs_id.title)
@@ -168,7 +175,7 @@ export default {
   .resource-card-data__title {
     font-size: 16px;
     line-height: 20px;
-
+    transition: all 0.25s $curve 0s;
     font-family: $bold-font;
     @media (min-width: $breakpoint-small) {
     }
@@ -180,8 +187,12 @@ export default {
       line-height: 22px;
     }
   }
-
+  .resource-card-data__program {
+    transition: all 0.25s $curve 0.01s;
+  }
   .resource-card-data__description {
+    transition: all 0.25s $curve 0.02s;
+
     p {
       font-size: 13px;
       @media (min-width: $breakpoint-small) {
@@ -192,7 +203,7 @@ export default {
   }
   .resource-card-data__link {
     min-height: 30px;
-    transition: all 0.25s $curve;
+    transition: all 0.25s $curve 0.03s;
     .link-icon {
       background: none;
       color: $green;
@@ -211,11 +222,21 @@ export default {
   z-index: 10;
 
   @media (min-width: $breakpoint-medium) {
-    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.25);
-    transform: scale(1.05);
+    // box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.15);
+    // transform: scale(1.05);
   }
+  .resource-card-data__title {
+    transform: translateX(10px);
+  }
+  .resource-card-data__program {
+    transform: translateX(13px);
+  }
+  .resource-card-data__description {
+    transform: translateX(16px);
+  }
+
   .resource-card-data__link {
-    transform: translateX(20px);
+    transform: translateX(19px);
   }
 }
 // .resource-card.blue {
