@@ -160,7 +160,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: '2022 Year in Review',
+      default: '',
     },
     link: {
       type: String,

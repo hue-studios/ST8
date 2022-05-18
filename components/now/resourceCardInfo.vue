@@ -172,14 +172,12 @@
 import moment from 'moment'
 import axios from 'axios'
 export default {
-  props: [
-    {
-      item: {
-        type: Object,
-        default: null,
-      },
+  props: {
+    item: {
+      type: Object,
+      default: null,
     },
-  ],
+  },
   data() {
     return {
       imageLocation: process.env.imageUrl,
