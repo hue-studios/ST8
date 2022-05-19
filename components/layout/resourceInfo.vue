@@ -222,11 +222,11 @@ export default {
               app.complete = true
               axios
                 .post(
-                  'https://southerntier8.org/email/resourceRequest.php?name=' +
+                  'https://admin.steny.org/email/requestConfirmation.php?first_name=' +
                     app.first_name +
                     '&email=' +
                     app.email +
-                    '&title=' +
+                    '&resource=' +
                     app.title
                 )
                 .catch(function (error) {
