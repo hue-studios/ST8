@@ -145,7 +145,7 @@
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 98.44 48.62"
           >
-            <title>hue Creative Marketing - Binghamton, NY</title>
+            <title>hue Creative Marketing - New York / Miami</title>
             <path
               class="h"
               d="M347.41,282.12h6.28v19.35c2-3.5,6.14-5.48,10.77-5.48,3.5,0,8.52,1.25,10.44,5.28.66,1.32,1.12,2.91,1.12,7.73v20.74h-3.56c-5.61,0-2.78-19.62-2.78-19.62,0-3,0-9.38-7.13-9.38a8.57,8.57,0,0,0-7.79,4.43c-1.06,1.85-1.06,5-1.06,7v17.57h-6.28Z"
@@ -163,9 +163,6 @@
             /></svg
         ></a>
       </h5>
-      <a id="extra-link" href="https://camila.life" target="_blank"
-        >Vegan and Plant-Based Recipes and Ingredients</a
-      >
     </div>
   </div>
 </template>
