@@ -505,7 +505,9 @@
       border: none;
       // -webkit-clip-path: polygon(0 0, 0 0px, 800px 600px, 600px 0);
       // clip-path: polygon(0 0, 100% 0, 100% 100%, 70% 100%);
-      background-image: url('https://admin.steny.org/southern-tier-8/assets/ojt65p84t5w048cc?key=medium');
+      // background-image: url('https://admin.steny.org/southern-tier-8/assets/ojt65p84t5w048cc?key=medium');
+      background-image: url('https://admin.steny.org/southern-tier-8/assets/ng936whftwggs0ww?key=medium');
+
       background-position: left center;
       background-repeat: no-repeat;
       background-size: cover;
@@ -521,7 +523,7 @@
       }
       @media (min-width: $breakpoint-medium) {
         width: 80%;
-        background-image: url('https://admin.steny.org/southern-tier-8/assets/ojt65p84t5w048cc?key=large');
+        background-image: url('https://admin.steny.org/southern-tier-8/assets/ng936whftwggs0ww?key=large');
       }
       @media (min-width: $breakpoint-large) {
         right: 0px;
