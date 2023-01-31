@@ -117,9 +117,9 @@
             imageLocation +
             'io8iw0uluxsk8kcs?key=small)'
           "
-          class="bg-cover bg-center bg-no-repeat people-card__image"
+          class="bg-center bg-no-repeat people-card__image"
+          style="background-size: 100% auto"
         ></div>
-        io8iw0uluxsk8kcs
         <div class="people-card__info">
           <div
             class="flex flex-row justify-between items-center tracking-widest bold people-card__name"
