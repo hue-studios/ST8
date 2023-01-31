@@ -101,6 +101,7 @@
         class="flex flex-row justify-between items-center w-full md:w-5/6 people-card"
       >
         <div
+          v-if="person.image"
           :style="
             'background-image: url(' +
             imageLocation +
@@ -109,6 +110,16 @@
           "
           class="bg-cover bg-center bg-no-repeat people-card__image"
         ></div>
+        <div
+          v-else
+          :style="
+            'background-image: url(' +
+            imageLocation +
+            'io8iw0uluxsk8kcs?key=small)'
+          "
+          class="bg-cover bg-center bg-no-repeat people-card__image"
+        ></div>
+        io8iw0uluxsk8kcs
         <div class="people-card__info">
           <div
             class="flex flex-row justify-between items-center tracking-widest bold people-card__name"
