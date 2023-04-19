@@ -77,12 +77,19 @@
       </p>
       <industry-chart class="flex items-center justify-center"></industry-chart>
     </div>
-    <iframe
-      src="https://ceds.southerntier8.org/"
-      scrolling="no"
-      style="min-height: 100vh; height: 4400px; overflow: hidden"
-      class="w-full h-full overflow-hidden"
-    ></iframe>
+    <div
+      class="w-full flex flex-col justify-center items-center py-20 px-4 text-justify"
+    >
+      <h1 class="uppercase green page-title tracking-widest mb-4">
+        Population Data
+      </h1>
+      <iframe
+        src="https://ceds.southerntier8.org/"
+        scrolling="no"
+        style="height: 4200px; overflow: hidden"
+        class="w-full h-full overflow-hidden"
+      ></iframe>
+    </div>
   </div>
 </template>
 
