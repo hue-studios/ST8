@@ -77,6 +77,12 @@
       </p>
       <industry-chart class="flex items-center justify-center"></industry-chart>
     </div>
+    <iframe
+      src="https://ceds.southerntier8.org/"
+      scrolling="no"
+      style="min-height: 100vh; height: 4400px; overflow: hidden"
+      class="w-full h-full overflow-hidden"
+    ></iframe>
   </div>
 </template>
 
@@ -145,4 +151,11 @@ export default {
 @import './assets/scss/vars';
 @import './assets/scss/pageStyles';
 @import './assets/scss/pages/regional';
+iframe {
+  height: 2000px;
+  @apply min-h-screen;
+  body {
+    overflow: hidden;
+  }
+}
 </style>

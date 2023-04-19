@@ -7,7 +7,7 @@
   }
   #regional-intro {
     height: 600px;
-    background-image: url('https://admin.steny.org/southern-tier-8/assets/7lck4gu6lq804wcc?key=large');
+    background-image: url('https://admin.steny.org/southern-tier-8/assets/7lck4gu6lq804wcc?key=small');
     background-size: 350px auto;
     background-repeat: no-repeat;
     background-position: center;
@@ -16,6 +16,7 @@
     @media (min-width: $breakpoint-small) {
       background-size: 600px auto;
       height: 600px;
+      background-image: url('https://admin.steny.org/southern-tier-8/assets/7lck4gu6lq804wcc?key=medium');
     }
     @media (min-width: $breakpoint-medium) {
       // background-size: 700px auto;
