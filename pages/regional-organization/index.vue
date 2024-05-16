@@ -257,7 +257,7 @@
         Return on Investment
       </h2>
       <a
-        :href="imageLocation + 'b602bcfus7ww8o4o'"
+        :href="imageLocation + regionalData[0].roi.private_hash"
         target="_blank"
         rel="noreferrer"
         class="flex items-center justify-center flex-col relative py-12 mb-8 roi-card"

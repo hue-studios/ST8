@@ -84,6 +84,7 @@
         Population Data
       </h1>
       <iframe
+        id="ceds-iframe"
         src="https://ceds.southerntier8.org/"
         scrolling="no"
         style="height: 4200px; overflow: hidden"
@@ -158,7 +159,7 @@ export default {
 @import './assets/scss/vars';
 @import './assets/scss/pageStyles';
 @import './assets/scss/pages/regional';
-iframe {
+iframe#ceds-iframe {
   height: 2000px;
   @apply min-h-screen;
   body {
