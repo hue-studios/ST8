@@ -73,7 +73,7 @@
         <p
           class="w-full text-center mb-20 py-4 tracking-widest uppercase bold text-xs"
         >
-          View our 5 year plan 2018-2022:
+          View our 5 year plan 2023-2028:
         </p>
         <div class="w-full text-center bg-transparent">
           <a
