@@ -78,7 +78,7 @@
         <div class="w-full text-center bg-transparent">
           <a
             class="inline-block px-12 py-6 uppercase green bold tracking-widest font-medium"
-            href="https://admin.steny.org/southern-tier-8/assets/hhkme9ofs0g80cw4"
+            href="https://admin.steny.org/southern-tier-8/assets/d4unietbto8wg84w"
             target="_blank"
             rel="noreferrer"
             >CEDS</a
