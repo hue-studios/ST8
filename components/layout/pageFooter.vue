@@ -54,7 +54,7 @@
         >Organization</nuxt-link
       >
       <nuxt-link to="/how-to-apply" class="uppercase w-full footer-link"
-        >How to Apply</nuxt-link
+        >ARC Opportunities</nuxt-link
       >
       <nuxt-link to="/reporting" class="uppercase w-full footer-link"
         >Reporting</nuxt-link
