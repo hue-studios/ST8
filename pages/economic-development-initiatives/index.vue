@@ -104,7 +104,7 @@
 
       <div id="where-description" class="relative p-6 initiatives__description">
         <p>
-          Our 5 regional initiatives are designed to target the area’s
+          Our regional initiatives are designed to target the area’s
           challenges with a holistic approach. Our process involves developing
           innovative ideas, aligning the right partnerships, and developing
           feasible and smart solutions to meet the region’s current and future
@@ -125,15 +125,13 @@
       </h3>
       <div id="how-description" class="relative p-6 initiatives__description">
         <p>
-          In 2018, the Southern Tier 8 Regional Board re-structured the region’s
-          Comprehensive Economic Development Strategy (CEDS) process. The CEDS
-          is designed to serve as our organization’s guiding document to be used
-          in directing and evaluating regional community and economic
-          development progress over the next five years. Due to the COVID-19
-          pandemic in 2020, we’ve focused on our resiliency goals to meet the
-          current and pressing needs of our area. But, the CEDS still serves as
-          a strong foundation to evaluate and access our regional needs,
-          challenges and opportunities.
+          In 2023, the Southern Tier 8 Regional Board and community partners 
+          and stakeholders drafted the region’s Comprehensive Economic Development 
+          Strategy (CEDS). The CEDS is designed to serve as our organization’s guiding 
+          document to be used in directing and evaluating regional community and 
+          economic development progress over the next five years. The CEDS serves 
+          as a strong foundation to evaluate and access our regional needs, challenges 
+          and opportunities.
         </p>
       </div>
       <pulse-icon icon-i-d="finish-btn" class-name="button"></pulse-icon>
