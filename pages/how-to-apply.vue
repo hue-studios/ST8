@@ -34,7 +34,7 @@
       </svg>
       <div id="apply-info__container" class="flex flex-col items-start px-8">
         <h2
-          class="w-full page-title uppercase tracking-widest mb-4 pt-2 pb-1 thin-font mb-10 relative text-center"
+          class="w-full page-title uppercase tracking-widest mb-4 pt-2 pb-1 thin-font mb-10 relative text-center hidden"
         >
           Steps
         </h2>
