@@ -530,7 +530,7 @@ export default {
           '/items/programs?fields=title,what_is_it,url,featured,counties.county_id.title,images.file_id.private_hash,initiatives.initiative_id.title,partners.partner_id.title&filter[featured]=1&meta=*'
       ),
       $axios.$get('/items/organization?single=1&fields=mission_statement'),
-      $axios.$get('/items/resources/68?fields=*.*'),
+      $axios.$get('/items/resources/80?fields=*.*'),
     ])
     return {
       partners: partnersReq.data.data,
