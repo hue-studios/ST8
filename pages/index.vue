@@ -303,7 +303,7 @@
         </p>
       </div>
       <nuxt-link to="how-to-apply" class="mt-4 sm:mt-8 uppercase py-4 px-12"
-        >How to Apply<link-icon class="ml-2"></link-icon
+        >ARC Opportunities<link-icon class="ml-2"></link-icon
       ></nuxt-link>
     </div>
 
