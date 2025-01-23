@@ -7,7 +7,7 @@
       <h1
         class="uppercase navy pb-3 md:pb-0 md:mb-6 relative thin-font tracking-widest"
       >
-        How to Apply
+        ARC Opportunities
       </h1>
       <p v-if="apply.introduction">{{ apply.introduction }}</p>
     </div>
