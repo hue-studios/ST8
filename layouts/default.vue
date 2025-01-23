@@ -61,7 +61,7 @@
       </p>
       <p>
         <nuxt-link to="/how-to-apply" class="mobile-nav-link">
-          How To Apply
+          ARC Opportunities
         </nuxt-link>
       </p>
       <div class="absolute tagline">
