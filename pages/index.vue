@@ -36,6 +36,14 @@
         >
       </div>
       <h4
+        v-if="home.introduction"
+        :class="{ hide: hideMessage }"
+        class="bold navy uppercase tracking-widest absolute home-intro__intro"
+      >
+        {{ home.introduction }}
+      </h4>
+        <h4
+        v-else
         :class="{ hide: hideMessage }"
         class="bold navy uppercase tracking-widest absolute home-intro__intro"
       >
@@ -518,6 +526,7 @@ export default {
       programsReq,
       organizationReq,
       resourceReq,
+      homeReq,
     ] = await Promise.all([
       $axios.get(process.env.apiUrl + '/items/partners?fields=title,category'),
       $axios.get(
@@ -531,6 +540,7 @@ export default {
       ),
       $axios.$get('/items/organization?single=1&fields=mission_statement'),
       $axios.$get('/items/resources/80?fields=*.*'),
+      $axios.$get('/items/home?fields=introduction'),
     ])
     return {
       partners: partnersReq.data.data,
@@ -541,6 +551,7 @@ export default {
       programsMeta: programsReq.data,
       organization: organizationReq.data,
       resource: resourceReq.data,
+      home: homeReq.data,
     }
   },
   data() {
