@@ -49,6 +49,7 @@
       >
         Welcome to our digital experience.
       </h4>
+    
       <transition
         :enter-active-class="animateIn"
         :leave-active-class="animateOut"
@@ -632,6 +633,7 @@ export default {
   //   ScrollTrigger.disable()
   // },
   mounted() {
+    console.log(home);
     gsap.registerPlugin(ScrollTrigger)
     // ScrollTrigger.create({
     //   trigger: '#home__partners',
