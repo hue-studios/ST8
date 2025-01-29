@@ -541,7 +541,7 @@ export default {
       ),
       $axios.$get('/items/organization?single=1&fields=mission_statement'),
       $axios.$get('/items/resources/80?fields=*.*'),
-      $axios.$get('/items/home?fields=introduction'),
+      $axios.$get('/items/home?fields=introduction&single=1'),
     ])
     return {
       partners: partnersReq.data.data,
