@@ -783,6 +783,7 @@ export default {
           'uk-animation-slide-left-medium uk-animation-reverse uk-animation-fast'
         this.panel = 'home'
         this.previousPanelKey = 0
+        this.hideMessage = false
       }
     },
   },
