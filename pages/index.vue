@@ -36,11 +36,11 @@
         >
       </div>
       <h4
-        v-if="home.introduction"
+        v-if="homeData.introduction"
         :class="{ hide: hideMessage }"
         class="bold navy uppercase tracking-widest absolute home-intro__intro"
       >
-        {{ home.introduction }}
+        {{ homeData.introduction }}
       </h4>
         <h4
         v-else
@@ -552,7 +552,7 @@ export default {
       programsMeta: programsReq.data,
       organization: organizationReq.data,
       resource: resourceReq.data,
-      home: homeReq.data,
+      homeData: homeReq.data,
     }
   },
   data() {
@@ -633,7 +633,7 @@ export default {
   //   ScrollTrigger.disable()
   // },
   mounted() {
-    console.log(home);
+    console.log(this.homeData);
     gsap.registerPlugin(ScrollTrigger)
     // ScrollTrigger.create({
     //   trigger: '#home__partners',
