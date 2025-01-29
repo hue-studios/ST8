@@ -38,7 +38,7 @@
       <h4
         v-if="homeData.introduction"
         :class="{ hide: hideMessage }"
-        class="bold navy uppercase tracking-widest absolute home-intro__intro"
+        class="bold navy tracking-wider absolute home-intro__intro"
       >
         {{ homeData.introduction }}
       </h4>
