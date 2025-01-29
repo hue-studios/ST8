@@ -58,6 +58,9 @@
     .home-intro__intro {
       margin-top: 220px;
       font-size: 12px;
+      max-width: 600px;
+      padding-left: 10px;
+      padding-right: 10px;
       transition: all 0.4s $curve;
       @media (min-width: $breakpoint-small) {
         margin-top: 320px;
