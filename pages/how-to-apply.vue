@@ -39,7 +39,7 @@
           Steps
         </h2>
         <div
-          class="whitespace-pre-wrap mb-0 pb-4 text-center"
+          class="whitespace-pre-wrap mb-0 pb-4 text-justify"
           v-html="apply.steps"
         ></div>
 
@@ -49,7 +49,7 @@
           What is ARC?
         </h2>
         <div
-          class="whitespace-pre-wrap mb-10 pb-4 text-center"
+          class="whitespace-pre-wrap mb-10 pb-4 text-justify"
           v-html="apply.arc_info"
         ></div>
       </div>
