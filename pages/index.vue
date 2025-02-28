@@ -228,7 +228,6 @@
       <div id="cropped-overlay" class="absolute"></div>
     </div>
     <div
-      v-if="homeData.featured_resource"
       id="home__resource"
       class="w-full flex relative justify-center items-center flex-row flex-wrap relative shadow-lg home__section"
     >
@@ -242,7 +241,7 @@
       <!-- <div class="w-full pl-3 pr-3 mb-2 lg:pl-5 lg:pr-5 home__subtitle">
 
       </div> -->
-      <now-resource-card-data :item="homeData.featured_resource" class="" />
+      <now-resource-card-data :item="resource" class="" />
       <!-- <nuxt-link
         to="/regional-news"
         class="green w-full text-center pt-8 tracking-widest uppercase link-font"
@@ -541,7 +540,8 @@ export default {
           '/items/programs?fields=title,what_is_it,url,featured,counties.county_id.title,images.file_id.private_hash,initiatives.initiative_id.title,partners.partner_id.title&filter[featured]=1&meta=*'
       ),
       $axios.$get('/items/organization?single=1&fields=mission_statement'),
-      $axios.$get('/items/home?fields=introduction,featured_resource.*&single=1'),
+      $axios.$get('/items/resources/80?fields=*.*'),
+      $axios.$get('/items/home?fields=introduction&single=1'),
     ])
     return {
       partners: partnersReq.data.data,
@@ -551,6 +551,7 @@ export default {
       programs: programsReq.data.data,
       programsMeta: programsReq.data,
       organization: organizationReq.data,
+      resource: resourceReq.data,
       homeData: homeReq.data,
     }
   },
