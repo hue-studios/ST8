@@ -228,6 +228,7 @@
       <div id="cropped-overlay" class="absolute"></div>
     </div>
     <div
+      v-if="homeData.featured_resource"
       id="home__resource"
       class="w-full flex relative justify-center items-center flex-row flex-wrap relative shadow-lg home__section"
     >
@@ -241,7 +242,7 @@
       <!-- <div class="w-full pl-3 pr-3 mb-2 lg:pl-5 lg:pr-5 home__subtitle">
 
       </div> -->
-      <now-resource-card-data :item="home.featured_resource" class="" />
+      <now-resource-card-data :item="homeData.featured_resource" class="" />
       <!-- <nuxt-link
         to="/regional-news"
         class="green w-full text-center pt-8 tracking-widest uppercase link-font"
