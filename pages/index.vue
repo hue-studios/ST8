@@ -42,14 +42,14 @@
       >
         {{ homeData.introduction }}
       </h4>
-        <h4
+      <h4
         v-else
         :class="{ hide: hideMessage }"
         class="bold navy uppercase tracking-widest absolute home-intro__intro"
       >
         Welcome to our digital experience.
       </h4>
-    
+
       <transition
         :enter-active-class="animateIn"
         :leave-active-class="animateOut"
@@ -229,7 +229,7 @@
     </div>
     <div
       id="home__resource"
-      class="w-full flex relative justify-center items-center flex-row flex-wrap relative shadow-lg home__section"
+      class="w-full flex justify-center items-center flex-row flex-wrap relative shadow-lg home__section"
     >
       <h2
         class="uppercase green relative thin-font grey w-full mb-2 pl-2 home__title"
@@ -242,6 +242,7 @@
 
       </div> -->
       <now-resource-card-data :item="resource" class="" />
+      {{ homeData.featured_resource }}
       <!-- <nuxt-link
         to="/regional-news"
         class="green w-full text-center pt-8 tracking-widest uppercase link-font"
@@ -541,7 +542,9 @@ export default {
       ),
       $axios.$get('/items/organization?single=1&fields=mission_statement'),
       $axios.$get('/items/resources/80?fields=*.*'),
-      $axios.$get('/items/home?fields=introduction&single=1'),
+      $axios.$get(
+        '/items/home?fields=introduction,featured_resource.*&single=1'
+      ),
     ])
     return {
       partners: partnersReq.data.data,
@@ -633,7 +636,7 @@ export default {
   //   ScrollTrigger.disable()
   // },
   mounted() {
-    console.log(this.homeData);
+    console.log(this.homeData)
     gsap.registerPlugin(ScrollTrigger)
     // ScrollTrigger.create({
     //   trigger: '#home__partners',
