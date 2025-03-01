@@ -241,8 +241,9 @@
       <!-- <div class="w-full pl-3 pr-3 mb-2 lg:pl-5 lg:pr-5 home__subtitle">
 
       </div> -->
-      <now-resource-card-data :item="resource" class="" />
-      {{ homeData.featured_resource }}
+      <!-- <now-resource-card-data :item="resource" class="" /> -->
+
+      <now-resource-card-data :item="homeData.featured_resource" class="" />
       <!-- <nuxt-link
         to="/regional-news"
         class="green w-full text-center pt-8 tracking-widest uppercase link-font"
