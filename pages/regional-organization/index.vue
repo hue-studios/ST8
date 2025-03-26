@@ -48,7 +48,7 @@
         >
           Our Vision
         </h2>
-        <div class="whitespace-pre-wrap mb-20 pb-4 text-justify">
+        <div class="mb-20 pb-4 text-justify">
           {{ organization.who_we_are }}
         </div>
 
@@ -57,7 +57,7 @@
         >
           Our Approach
         </h2>
-        <div class="whitespace-pre-wrap mb-20 pb-4 text-justify">
+        <div class="mb-20 pb-4 text-justify">
           {{ organization.our_role }}
         </div>
 
@@ -66,7 +66,7 @@
         >
           Our History
         </h2>
-        <div class="whitespace-pre-wrap mb-20 pb-4 text-justify">
+        <div class="mb-20 pb-4 text-justify">
           {{ organization.our_history }}
         </div>
 
