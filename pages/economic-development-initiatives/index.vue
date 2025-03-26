@@ -91,7 +91,7 @@
       <div id="what-description" class="relative p-6 initiatives__description">
         <p>
           Southern Tier 8 regional goals. As an Eight County Regional Economic
-          Development Organization, we’ve analyzed the region’s needs and
+          Development Organization, we've analyzed the region's needs and
           strategically outlined goals of core importance to support, sustain,
           and advance the economic growth of the Southern Tier 8 region. We
           refer to these goals as initiatives.
@@ -104,15 +104,14 @@
 
       <div id="where-description" class="relative p-6 initiatives__description">
         <p>
-          Our regional initiatives are designed to target the area’s
-          challenges with a holistic approach. Our process involves developing
-          innovative ideas, aligning the right partnerships, and developing
-          feasible and smart solutions to meet the region’s current and future
-          needs. Within these initiatives, we develop programs, assist with
-          funding and grant writing, support projects from other organizations
-          that further these goals, and continuously adapt our initiatives to
-          meet the demands of the ever-changing economic forecast and growth of
-          our region.
+          Our regional initiatives are designed to target the area's challenges
+          with a holistic approach. Our process involves developing innovative
+          ideas, aligning the right partnerships, and developing feasible and
+          smart solutions to meet the region's current and future needs. Within
+          these initiatives, we develop programs, assist with funding and grant
+          writing, support projects from other organizations that further these
+          goals, and continuously adapt our initiatives to meet the demands of
+          the ever-changing economic forecast and growth of our region.
         </p>
         <nuxt-link
           to="/economic-development-programs"
@@ -125,13 +124,13 @@
       </h3>
       <div id="how-description" class="relative p-6 initiatives__description">
         <p>
-          In 2023, the Southern Tier 8 Regional Board and community partners 
-          and stakeholders drafted the region’s Comprehensive Economic Development 
-          Strategy (CEDS). The CEDS is designed to serve as our organization’s guiding 
-          document to be used in directing and evaluating regional community and 
-          economic development progress over the next five years. The CEDS serves 
-          as a strong foundation to evaluate and access our regional needs, challenges 
-          and opportunities.
+          In 2023, the Southern Tier 8 Regional Board and community partners and
+          stakeholders drafted the region's Comprehensive Economic Development
+          Strategy (CEDS). The CEDS is designed to serve as our organization's
+          guiding document to be used in directing and evaluating regional
+          community and economic development progress over the next five years.
+          The CEDS serves as a strong foundation to evaluate and access our
+          regional needs, challenges and opportunities.
         </p>
       </div>
       <pulse-icon icon-i-d="finish-btn" class-name="button"></pulse-icon>
@@ -187,7 +186,7 @@ export default {
           hid: 'description',
           name: 'description',
           content:
-            'Southern Tier 8 regional initiatives are goals based on the region’s needs to support, sustain, and advance the economic growth of the Southern Tier 8 region. ',
+            "Southern Tier 8 regional initiatives are goals based on the region's needs to support, sustain, and advance the economic growth of the Southern Tier 8 region. ",
         },
         {
           hid: 'og:url',

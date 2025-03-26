@@ -44,29 +44,29 @@
         class="flex flex-col items-start px-8"
       >
         <h2
-          class="w-full page-title uppercase tracking-widest mb-4 pt-2 pb-1 thin-font mb-20 relative text-center"
+          class="w-full page-title uppercase tracking-widest pt-2 pb-1 thin-font mb-20 relative text-center"
         >
           Our Vision
         </h2>
-        <div class="whitespace-pre-wrap mb-20 pb-4 text-center">
+        <div class="whitespace-pre-wrap mb-20 pb-4 text-justify">
           {{ organization.who_we_are }}
         </div>
 
         <h2
-          class="w-full page-title uppercase tracking-widest mt-8 mb-4 thin-font pt-2 pb-1 mb-20 text-center relative"
+          class="w-full page-title uppercase tracking-widest mt-8 thin-font pt-2 pb-1 mb-20 text-center relative"
         >
           Our Approach
         </h2>
-        <div class="whitespace-pre-wrap mb-20 pb-4 text-center">
+        <div class="whitespace-pre-wrap mb-20 pb-4 text-justify">
           {{ organization.our_role }}
         </div>
 
         <h2
-          class="w-full page-title uppercase text-center tracking-widest thin-font mt-8 mb-4 pt-2 pb-1 mb-20 relative"
+          class="w-full page-title uppercase text-center tracking-widest thin-font mt-8 pt-2 pb-1 mb-20 relative"
         >
           Our History
         </h2>
-        <div class="whitespace-pre-wrap mb-20 pb-4 text-center">
+        <div class="whitespace-pre-wrap mb-20 pb-4 text-justify">
           {{ organization.our_history }}
         </div>
 
