@@ -164,14 +164,17 @@ import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 import linkIcon from '~/components/universal/linkIcon'
 export default {
   components: { Swiper, SwiperSlide, linkIcon },
+
   async asyncData({ params, $axios }) {
+    const oneYearAgo = new Date()
+    oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1)
+    const oneYearAgoString = oneYearAgo.toISOString().split('T')[0]
     const eventsReq = await $axios.get(
       process.env.apiUrl +
-        '/items/events?fields=*.*.*&filter[status]=published&sort=date'
+        `/items/events?fields=*.*.*&filter[status]=published&filter[date][gte]=${oneYearAgoString}&sort=date`
     )
     return {
-      directusEvents: eventsReq.data.data,
-      featuredEvents: eventsReq.data.data, // Maintain backwards compatibility
+      featuredEvents: eventsReq.data.data,
     }
   },
   data() {
@@ -179,8 +182,7 @@ export default {
       calendarLoading: true,
       calendarKey: 'AIzaSyAWRNx_1aSXBJxQcJPJg3QSpjx9R9jGRSk',
       selectedDay: null,
-      googleEvents: [], // Renamed from 'events' to be more explicit
-      combinedEvents: [], // New array to hold all events
+      events: [],
       themeStyles: {
         wrapper: {
           background: 'linear-gradient(to bottom right, #ff5050, #ff66b3)',
@@ -200,115 +202,131 @@ export default {
         pagination: {
           el: '.swiper-pagination',
           clickable: true,
+          // dynamicBullets: true,
         },
+        // navigation: {
+        //   nextEl: '.swiper-button-next',
+        //   prevEl: '.swiper-button-prev',
+        //   hideOnClick: true,
+        // },
       },
+    }
+  },
+  head() {
+    return {
+      title: "Regional Events for the Southern Tier Region's Economy",
+      meta: [
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          content: "Regional Events for the Southern Tier Region's Economy",
+        },
+        {
+          hid: 'description',
+          property: 'description',
+          content:
+            'Regional events focused on the economic development for the Southern Tier region of New York.',
+        },
+        {
+          hid: 'og:url',
+          property: 'og:url',
+          content: 'https://southerntier8.org/regional-events/',
+        },
+      ],
     }
   },
   computed: {
     attrs() {
       const app = this
-      // Use combinedEvents instead of just Google Calendar events
-      return this.combinedEvents.map((event) => {
-        // Check if this is a Google Calendar event (has start.dateTime) or Directus event (has date)
-        if (event.source === 'google') {
-          return {
-            key: `event.${event.id}`,
-            dates: event.start.dateTime,
-            highlight: {
-              style: {
-                backgroundColor: '#eeeeee',
-              },
-            },
-            dot: {
-              style: {
-                backgroundColor: '#1effbc',
-              },
-            },
-            popover: {
-              label:
-                event.summary + ' @ ' + app.formatTime(event.start.dateTime),
-              labelClass: 'testClass',
-            },
-            customData: event,
-          }
-        } else {
-          // Handle Directus events
-          const eventDate = new Date(event.date)
-          // Create an event time if available
-          let eventDateTime = null
-          if (event.time) {
-            // Parse time string (assuming format like "7:00 PM")
-            const timeParts = event.time.match(/(\d+):(\d+)\s*([AP]M)?/i)
-            if (timeParts) {
-              const hours = parseInt(timeParts[1])
-              const minutes = parseInt(timeParts[2])
-              const isPM = timeParts[3] && timeParts[3].toUpperCase() === 'PM'
+      const googleEvents = this.events.map((t) => ({
+        key: `google-event.${t.id}`,
+        dates: t.start.dateTime,
+        highlight: {
+          style: {
+            backgroundColor: '#eeeeee',
+          },
+        },
+        dot: {
+          style: {
+            backgroundColor: '#1effbc',
+          },
+        },
+        popover: {
+          label: t.summary + ' @ ' + app.formatTime(t.start.dateTime),
+          labelClass: 'testClass',
+        },
+        customData: t,
+      }))
 
-              // Create a new date with the time components
-              eventDateTime = new Date(eventDate)
-              eventDateTime.setHours(
-                isPM && hours < 12
-                  ? hours + 12
-                  : hours === 12 && !isPM
-                  ? 0
-                  : hours,
-                minutes
-              )
-            }
-          }
+      // Featured events from API
+      const featuredEvents = this.featuredEvents.map((event) => {
+        // Fix the one day offset issue by adjusting the date
+        // Create a new Date object from the date string and add one day
+        const eventDate = new Date(event.date)
+        eventDate.setDate(eventDate.getDate() + 1)
+        const adjustedDate = eventDate.toISOString().split('T')[0] // Format as YYYY-MM-DD
 
-          // If no valid time could be parsed, set the time to midnight
-          if (!eventDateTime) {
-            eventDateTime = new Date(eventDate)
-            eventDateTime.setHours(0, 0, 0, 0)
-          }
-
-          return {
-            key: `directus.${event.id}`,
-            dates: eventDateTime,
-            highlight: {
-              style: {
-                backgroundColor: '#e6f7f2',
-              },
+        return {
+          key: `featured-event.${event.id}`,
+          dates: adjustedDate,
+          highlight: {
+            style: {
+              backgroundColor: '#f7f7f7', // slightly different highlight to distinguish
             },
-            dot: {
-              style: {
-                backgroundColor: '#ff6b6b', // Different color for Directus events
-              },
+          },
+          dot: {
+            style: {
+              backgroundColor: '#ff5050', // different color dot for featured events
             },
-            popover: {
-              label: event.title + (event.time ? ' @ ' + event.time : ''),
-              labelClass: 'testClass',
-            },
-            customData: {
-              ...event,
-              summary: event.title,
-              start: { dateTime: eventDateTime },
-              end: { dateTime: eventDateTime }, // If no end time is specified, use the same time
-              source: 'directus',
-            },
-          }
+          },
+          popover: {
+            label: event.title + (event.time ? ' @ ' + event.time : ''),
+            labelClass: 'featuredEventClass',
+          },
+          customData: {
+            ...event,
+            summary: event.title,
+            start: { dateTime: adjustedDate },
+            end: { dateTime: adjustedDate },
+            location: event.location || '',
+            isFeatured: true,
+          },
         }
       })
-    },
 
-    // Get events that are scheduled for today
-    todaysEvents() {
-      const today = moment().format('YYYY-MM-DD')
-      return this.attrs.filter((attr) => {
-        const eventDate = moment(attr.dates).format('YYYY-MM-DD')
-        return eventDate === today
-      })
+      console.log(featuredEvents)
+
+      return [...googleEvents, ...featuredEvents]
     },
   },
   created() {
-    this.fetchGoogleCalendarEvents()
-  },
-  mounted() {
-    // Set a timeout to initially select today's events after the component is mounted
-    setTimeout(() => {
-      this.dayClicked()
-    }, 1000)
+    const app = this
+    console.log(this.featuredEvents)
+
+    const oneYearAgo = new Date()
+    oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1)
+    const oneYearAgoString = oneYearAgo.toISOString().split('T')[0]
+
+    // Create a date for one year ahead
+    const oneYearAhead = new Date()
+    oneYearAhead.setFullYear(oneYearAhead.getFullYear() + 1)
+    const oneYearAheadString = oneYearAhead.toISOString().split('T')[0]
+    axios
+      .get(
+        'https://www.googleapis.com/calendar/v3/calendars/calendarst8@gmail.com/events?key=' +
+          this.calendarKey +
+          '&timeMin=' +
+          oneYearAgoString +
+          'T00:00:00Z&timeMax=' +
+          oneYearAheadString +
+          'T23:59:59Z&singleEvents=true&orderBy=startTime&maxResults=2500'
+      )
+      .then(function (res) {
+        app.calendarLoading = false
+        app.events = res.data.items
+        console.log(app.events)
+        // app.dayClicked()
+      })
   },
   methods: {
     formatTime(time) {
@@ -330,6 +348,7 @@ export default {
       return newStr.slice(0, num) + '...'
     },
     dayClicked(day) {
+      console.log('today ' + moment().format('YYYY-MM-DD'))
       let date
       if (!day) {
         date = {
@@ -340,8 +359,10 @@ export default {
         }
       } else {
         date = day
+        console.log(day)
       }
 
+      console.log(date)
       this.selectedDay = date
     },
     checkDates(start, end) {
@@ -355,121 +376,6 @@ export default {
         }
       }
       return dates
-    },
-
-    // New method to fetch Google Calendar events
-    fetchGoogleCalendarEvents() {
-      const app = this
-      axios
-        .get(
-          'https://www.googleapis.com/calendar/v3/calendars/calendarst8@gmail.com/events?key=' +
-            this.calendarKey +
-            '&timeMin=2024-01-01T00:00:00Z&timeMax=2026-12-31T23:59:59Z&singleEvents=true&orderBy=startTime&maxResults=2500'
-        )
-        .then(function (res) {
-          app.calendarLoading = false
-
-          // Store original Google events
-          const googleEvents = res.data.items.map((event) => ({
-            ...event,
-            source: 'google',
-          }))
-          app.googleEvents = googleEvents
-
-          // Process Directus events to have the same structure as Google events for combining
-          const directusEvents = app.directusEvents.map((event) => {
-            // Create a date object from the event date
-            const eventDate = new Date(event.date)
-
-            // Parse the time if available (assuming format like "7:00 PM")
-            let eventDateTime = new Date(eventDate)
-            if (event.time) {
-              const timeParts = event.time.match(/(\d+):(\d+)\s*([AP]M)?/i)
-              if (timeParts) {
-                const hours = parseInt(timeParts[1])
-                const minutes = parseInt(timeParts[2])
-                const isPM = timeParts[3] && timeParts[3].toUpperCase() === 'PM'
-
-                eventDateTime.setHours(
-                  isPM && hours < 12
-                    ? hours + 12
-                    : hours === 12 && !isPM
-                    ? 0
-                    : hours,
-                  minutes
-                )
-              }
-            } else {
-              // Default to midnight if no time specified
-              eventDateTime.setHours(0, 0, 0, 0)
-            }
-
-            return {
-              id: `directus-${event.id}`,
-              summary: event.title,
-              description: event.description,
-              location: event.location || '',
-              start: { dateTime: eventDateTime },
-              end: { dateTime: eventDateTime }, // If no end time, use the same
-              source: 'directus',
-              directusData: event, // Keep original data for reference
-            }
-          })
-
-          // Combine and sort all events
-          app.combinedEvents = [...googleEvents, ...directusEvents].sort(
-            (a, b) => {
-              const dateA = new Date(a.start.dateTime)
-              const dateB = new Date(b.start.dateTime)
-              return dateA - dateB
-            }
-          )
-        })
-        .catch(function (error) {
-          console.error('Error fetching Google Calendar events:', error)
-          app.calendarLoading = false
-
-          // Even if Google Calendar fails, we can still show Directus events
-          const directusEvents = app.directusEvents.map((event) => {
-            const eventDate = new Date(event.date)
-            let eventDateTime = new Date(eventDate)
-
-            if (event.time) {
-              const timeParts = event.time.match(/(\d+):(\d+)\s*([AP]M)?/i)
-              if (timeParts) {
-                const hours = parseInt(timeParts[1])
-                const minutes = parseInt(timeParts[2])
-                const isPM = timeParts[3] && timeParts[3].toUpperCase() === 'PM'
-
-                eventDateTime.setHours(
-                  isPM && hours < 12
-                    ? hours + 12
-                    : hours === 12 && !isPM
-                    ? 0
-                    : hours,
-                  minutes
-                )
-              }
-            }
-
-            return {
-              id: `directus-${event.id}`,
-              summary: event.title,
-              description: event.description,
-              location: event.location || '',
-              start: { dateTime: eventDateTime },
-              end: { dateTime: eventDateTime },
-              source: 'directus',
-              directusData: event,
-            }
-          })
-
-          app.combinedEvents = directusEvents.sort((a, b) => {
-            const dateA = new Date(a.start.dateTime)
-            const dateB = new Date(b.start.dateTime)
-            return dateA - dateB
-          })
-        })
     },
   },
 }
