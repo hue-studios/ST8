@@ -209,7 +209,7 @@
       <div
         v-if="resources.length"
         id="program__resources"
-        class="w-full flex relative justify-center items-center flex-row flex-wrap relative"
+        class="w-full flex justify-center items-center flex-row flex-wrap relative"
       >
         <h2 class="uppercase green relative program__title">Resources</h2>
         <swiper
@@ -231,7 +231,7 @@
       <div
         v-if="news.length"
         id="program__news"
-        class="w-full flex relative justify-center items-center flex-row flex-wrap relative program__section"
+        class="w-full flex justify-center items-center flex-row flex-wrap relative program__section"
       >
         <h2 class="uppercase green relative program__title">Related News</h2>
         <swiper
@@ -252,7 +252,7 @@
       </div>
       <div
         id="program__programs"
-        class="w-full flex relative justify-center items-center flex-row flex-wrap relative program__section"
+        class="w-full flex justify-center items-center flex-row flex-wrap relative program__section"
       >
         <h2 class="uppercase green relative program__title">
           Explore Our Programs

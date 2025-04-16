@@ -497,6 +497,7 @@ import linkIcon from '~/components/universal/linkIcon'
 import logoName from '~/components/layout/logoName'
 import programCard from '~/components/programs/programCard'
 import newsCardVertical from '~/components/now/newsCardVertical'
+import nowResourceCardData from '~/components/now/resourceCardData'
 import industryChart from '~/components/industryChart'
 
 export default {
@@ -510,6 +511,7 @@ export default {
     newsCardVertical,
     linkIcon,
     observer,
+    nowResourceCardData,
     industryChart,
   },
   async asyncData({ app, $axios }) {

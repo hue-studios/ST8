@@ -8,6 +8,7 @@
       class="flex items-center justify-center flex-col resource-card-data__container"
     >
       <h2
+        v-if="item.title"
         class="uppercase tracking-wider w-full thin-font resource-card-data__title"
       >
         {{ item.title }}
@@ -23,6 +24,7 @@
         <p>{{ item.description }}</p>
       </div>
       <h5
+        v-if="item.type"
         class="w-full uppercase text-xs green bold tracking-widest resource-card-data__link"
       >
         <span v-if="item.type === 'Internal File / PDF' && item.file"
