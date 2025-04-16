@@ -239,7 +239,7 @@
           >Featured </span
         >Resource
       </h2>
-
+      {{ homeData }}
       <now-resource-card-data :item="homeData.featured_resource" class="" />
     </div>
     <iframe
@@ -311,7 +311,7 @@
 
     <div
       id="home__partners"
-      class="w-full flex relative justify-center items-center md:items-end flex-col flex-wrap relative shadow-lg home__section"
+      class="w-full flex justify-center items-center md:items-end flex-col flex-wrap relative shadow-lg home__section"
     >
       <h2
         class="uppercase thin-font grey w-full relative mb-2 pl-2 home__title"
@@ -537,7 +537,7 @@ export default {
       $axios.$get('/items/organization?single=1&fields=mission_statement'),
       // $axios.$get('/items/resources/80?fields=*.*'),
       $axios.$get(
-        '/items/home?fields=introduction,featured_resource.*,featured_resource.file.private_hash&single=1'
+        '/items/home?fields=introduction,featured_resource.*,featured_resource.programs.programs_id.*,featured_resource.file.private_hash&single=1'
       ),
     ])
     return {

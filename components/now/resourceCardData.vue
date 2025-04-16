@@ -112,7 +112,8 @@ export default {
     },
     programName(programs) {
       if (programs.length) {
-        // console.log(programs[0].programs_id.title)
+        console.log(programs)
+        console.log(programs[0].programs_id.title)
         this.program = programs[0].programs_id.title
       }
     },
