@@ -239,7 +239,6 @@
           >Featured </span
         >Resource
       </h2>
-      {{ homeData }}
       <now-resource-card-data
         :item="homeData.featured_resource"
         class="inline-block"
