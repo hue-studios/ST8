@@ -80,7 +80,7 @@
 </template>
 
 <style lang="scss">
-@import './assets/scss/vars';
+@use '~/assets/scss/vars.scss' as *;
 .logo-name {
   .blue-fill {
     fill: $darkBlue;

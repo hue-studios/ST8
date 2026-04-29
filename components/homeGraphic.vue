@@ -1715,7 +1715,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import './assets/scss/vars';
+@use '~/assets/scss/vars.scss' as *;
 
 .cls-1,
 .cls-19 {

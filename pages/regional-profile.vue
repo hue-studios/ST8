@@ -156,7 +156,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import './assets/scss/vars';
+@use '~/assets/scss/vars.scss' as *;
 @import './assets/scss/pageStyles';
 @import './assets/scss/pages/regional';
 iframe#ceds-iframe {

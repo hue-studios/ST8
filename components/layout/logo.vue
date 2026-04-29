@@ -145,7 +145,7 @@
 </template>
 
 <style lang="scss">
-@import './assets/scss/vars';
+@use '~/assets/scss/vars.scss' as *;
 .logo {
   .cls-1 {
     fill: $darkBlue;

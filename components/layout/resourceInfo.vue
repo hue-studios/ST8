@@ -264,7 +264,7 @@ export default {
 }
 </script>
 <style lang="scss">
-@import './assets/scss/vars';
+@use '~/assets/scss/vars.scss' as *;
 @import './assets/scss/layout/pageFooter';
 .resource-info {
   background: rgba($white, 0.75);

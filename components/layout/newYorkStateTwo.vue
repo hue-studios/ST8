@@ -1069,7 +1069,7 @@
 </template>
 
 <style lang="scss">
-@import './assets/scss/vars';
+@use '~/assets/scss/vars.scss' as *;
 .new-york-state {
   .st0 {
     fill: #ffffff;

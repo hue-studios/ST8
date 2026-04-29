@@ -382,7 +382,7 @@
 </template>
 
 <style lang="scss">
-@import './assets/scss/vars';
+@use '~/assets/scss/vars.scss' as *;
 .new-york-state {
   .nys-bg {
     // fill: #001a38;
