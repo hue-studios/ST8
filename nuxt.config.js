@@ -1,11 +1,15 @@
-export default {
-  ssr: 'true',
-  target: 'server',
-  server: {
-    port: 8080, // default: 3000
-    host: '0.0.0.0', // default: localhost
+import { defineNuxtConfig } from '@nuxt/bridge'
+
+export default defineNuxtConfig({
+  // Enable Bridge features
+  bridge: {
+    nitro: true, // Crucial for Node 20+ compatibility
+    vite: false, // Keep false for now to avoid breaking Webpack-specific modules
+    meta: true, // Enables Nuxt 3-style useHead/Meta
   },
-  modern: true,
+
+  ssr: true, // Note: removed quotes from 'true'
+  target: 'server',
   components: true,
   /*
    ** Headers of the page
@@ -290,19 +294,5 @@ export default {
       plugins: ['@babel/plugin-transform-spread'],
     },
     transpile: ['gsap', 'vue-feather-icons', 'v-calendar'],
-    extend(config, ctx) {
-      // Run ESLint on save
-      if (ctx.isDev && ctx.isClient) {
-        config.module.rules.push({
-          enforce: 'pre',
-          test: /\.(js|vue)$/,
-          loader: 'eslint-loader',
-          exclude: /(node_modules)/,
-          options: {
-            fix: true,
-          },
-        })
-      }
-    },
   },
-}
+})
