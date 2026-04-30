@@ -1,3 +1,5 @@
+@use '../vars' as *;
+
 #regional {
   #regional__page-title {
     @media (min-width: $breakpoint-small) {

@@ -76,6 +76,5 @@ export default {
 </script>
 
 <style lang="scss">
-@use '~/assets/scss/vars.scss' as *;
-@import './assets/scss/components/programCardVertical';
+@use '~/assets/scss/components/programCardVertical';
 </style>

@@ -109,6 +109,5 @@ export default {
 </script>
 
 <style lang="scss">
-@use '~/assets/scss/vars.scss' as *;
-@import './assets/scss/components/programCard';
+@use '~/assets/scss/components/programCard';
 </style>

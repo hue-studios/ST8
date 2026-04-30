@@ -1,3 +1,5 @@
+@use '../vars' as *;
+
 .news-card {
   height: auto !important;
   border: thin solid rgba($grey, 0.2);

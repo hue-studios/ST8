@@ -142,7 +142,8 @@ export default {
 </script>
 
 <style lang="scss">
-@use '~/assets/scss/vars.scss' as *;
+@use '~/assets/scss/vars' as *;
+
 
 .resource-card-data {
   color: $navy;

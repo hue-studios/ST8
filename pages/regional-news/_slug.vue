@@ -282,6 +282,5 @@ export default {
 </script>
 
 <style lang="scss">
-@use '~/assets/scss/vars.scss' as *;
-@import './assets/scss/pages/article';
+@use '~/assets/scss/pages/article';
 </style>

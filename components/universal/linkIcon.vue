@@ -29,7 +29,8 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@use '~/assets/scss/vars.scss' as *;
+@use '~/assets/scss/vars' as *;
+
 .link-icon {
   background: $green;
   border-radius: 50%;

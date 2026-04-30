@@ -405,7 +405,6 @@ export default {
 </script>
 
 <style lang="scss">
-@use '~/assets/scss/vars.scss' as *;
-@import './assets/scss/pageStyles';
-@import './assets/scss/pages/organization';
+@use '~/assets/scss/pageStyles';
+@use '~/assets/scss/pages/organization';
 </style>

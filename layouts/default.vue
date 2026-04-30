@@ -126,8 +126,7 @@ export default {
 }
 </script>
 <style lang="scss">
-@use '~/assets/scss/vars.scss' as *;
-@import './assets/scss/layout/mobileNav';
-@import './assets/scss/layout/mobileNavBtn';
-@import './assets/scss/layout/mobileToolbar';
+@use '~/assets/scss/layout/mobileNav';
+@use '~/assets/scss/layout/mobileNavBtn';
+@use '~/assets/scss/layout/mobileToolbar';
 </style>

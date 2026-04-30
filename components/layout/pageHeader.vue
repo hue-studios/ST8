@@ -123,7 +123,6 @@ export default {
 }
 </script>
 <style lang="scss">
-@use '~/assets/scss/vars.scss' as *;
-@import './assets/scss/layout/pageHeader';
-@import './assets/scss/layout/pageNav';
+@use '~/assets/scss/layout/pageHeader';
+@use '~/assets/scss/layout/pageNav';
 </style>

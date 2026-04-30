@@ -294,8 +294,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@use '~/assets/scss/vars.scss' as *;
-@import './assets/scss/pages/resources';
+@use '~/assets/scss/vars' as *;
+
+@use '~/assets/scss/pages/resources';
 .resources__title-container {
   max-width: 800px;
 }

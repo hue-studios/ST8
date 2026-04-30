@@ -1,3 +1,5 @@
+@use '../vars' as *;
+
 #page-nav {
   display: none;
   @media (min-width: $breakpoint-large) {

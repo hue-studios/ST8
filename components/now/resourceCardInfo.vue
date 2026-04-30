@@ -307,5 +307,4 @@ export default {
 }
 </script>
 <style lang="scss">
-// @import '../../sass/components/productCard';
 </style>

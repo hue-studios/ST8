@@ -294,5 +294,12 @@ export default defineNuxtConfig({
       plugins: ['@babel/plugin-transform-spread'],
     },
     transpile: ['gsap', 'vue-feather-icons', 'v-calendar'],
+    loaders: {
+      scss: {
+        sassOptions: {
+          quietDeps: true, // Silences warnings from node_modules
+        },
+      },
+    },
   },
 })

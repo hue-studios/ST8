@@ -174,8 +174,7 @@ export default {
 </script>
 
 <style lang="scss">
-@use '~/assets/scss/vars.scss' as *;
-@import './assets/scss/pages/news';
+@use '~/assets/scss/pages/news';
 .list {
   transition: all 0.3s var(--curve);
 }

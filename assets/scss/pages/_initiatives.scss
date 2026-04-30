@@ -1,3 +1,5 @@
+@use '../vars' as *;
+
 #initiatives {
   #initiatives__intro {
     min-height: calc(100vh - 70px);

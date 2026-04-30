@@ -1,48 +1,51 @@
-/* Scss Document */
-@import 'vars';
-@import 'classes';
-@import 'layout/layout';
-@import 'uikit/animation';
-@import 'transitions';
+@use 'vars' as *;
+@use 'classes';
+@use 'transitions';
+@use 'layout/layout';
+@use 'uikit/animation';
+
+// 3. Keep @import for external CSS URLs (this is still valid in modern Sass)
 @import url('http://fast.fonts.net/t/1.css?apiType=css&projectid=21a0c137-b931-4f95-8773-dabd5b0c50f7');
+
 @font-face {
   font-family: 'Proxima Nova W01 Light';
   src: url('Fonts/122f8a1b-fa6b-4246-8d37-911edb4ac556.woff2') format('woff2'),
     url('Fonts/0f51d8b8-bda2-4557-9b56-0a4e94ab63d9.woff') format('woff');
 }
+
 @font-face {
   font-family: 'Proxima Nova W01 Thin';
   src: url('Fonts/ad4a2691-471a-4c43-b88f-0d144d680661.woff2') format('woff2'),
     url('Fonts/1da53474-ed78-41a6-872b-7397556eceee.woff') format('woff');
 }
+
 @font-face {
   font-family: 'Proxima Nova W01 Regular';
   src: url('Fonts/b38b8bd9-d96f-4bf9-add1-adbd2b08b802.woff2') format('woff2'),
     url('Fonts/52ed7b2d-8a31-4b18-a1d5-8685608b0889.woff') format('woff');
 }
+
 html {
   scroll-behavior: smooth;
 }
+
 body {
   background: $white;
   font-family: $body-font;
   color: $navy;
   font-size: 14px;
 }
+
 .container {
   width: 100%;
-  // overflow: hidden;
-  // overflow-x: hidden;
-  // overflow-y: auto;
-  // height: 100vh;
   max-width: none !important;
 }
 
 ::-webkit-scrollbar {
-  width: 0px; /* Remove scrollbar space */
-  background: transparent; /* Optional: just make scrollbar invisible */
+  width: 0px; 
+  background: transparent; 
 }
-/* Optional: show position indicator in red */
+
 ::-webkit-scrollbar-thumb {
   background: $green;
 }
@@ -60,7 +63,6 @@ body {
   .loader {
     border-radius: 50%;
     padding: 0;
-
     width: 40px;
     height: 40px;
     line-height: 40px;
@@ -69,6 +71,7 @@ body {
     top: calc(50% - 20px);
     left: calc(50% - 20px);
     transition: all 0.35s ease-out;
+
     @media (min-width: $breakpoint-small) {
       width: 50px;
       height: 50px;
@@ -76,6 +79,7 @@ body {
       top: calc(50% - 25px);
       left: calc(50% - 25px);
     }
+
     .lds-ring {
       display: block;
       position: relative;
@@ -83,13 +87,14 @@ body {
       border-radius: 50%;
       height: 40px;
       width: 40px;
-
       transition: all 0.35s ease-out;
+
       @media (min-width: $breakpoint-small) {
         width: 50px;
         height: 50px;
       }
     }
+
     .lds-ring div {
       box-sizing: border-box;
       display: block;
@@ -101,11 +106,13 @@ body {
       border-radius: 50%;
       animation: lds-ring 0.95s cubic-bezier(0.5, 0.3, 0.5, 1) infinite;
       border-color: rgba($green, 1) transparent transparent transparent;
+
       @media (min-width: $breakpoint-small) {
         width: 51px;
         height: 51px;
       }
     }
+
     .lds-ring div:nth-child(1) {
       animation-delay: -0.35s;
     }
@@ -115,6 +122,7 @@ body {
     .lds-ring div:nth-child(3) {
       animation-delay: -0.1s;
     }
+
     @keyframes lds-ring {
       0% {
         transform: rotate(0deg);

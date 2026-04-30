@@ -280,9 +280,8 @@ export default {
 </script>
 
 <style lang="scss">
-@use '~/assets/scss/vars.scss' as *;
-@import './assets/scss/layout/swiper';
-@import './assets/scss/pages/initiative';
+@use '~/assets/scss/layout/swiper';
+@use '~/assets/scss/pages/initiative';
 #opportunity-description {
 }
 </style>

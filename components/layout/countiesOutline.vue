@@ -18,7 +18,7 @@
 </template>
 
 <style lang="scss" scoped>
-@use '~/assets/scss/vars.scss' as *;
+
 .counties-outline {
   .cls-1 {
     fill: none;

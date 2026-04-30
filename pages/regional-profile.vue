@@ -156,9 +156,8 @@ export default {
 </script>
 
 <style lang="scss">
-@use '~/assets/scss/vars.scss' as *;
-@import './assets/scss/pageStyles';
-@import './assets/scss/pages/regional';
+@use '~/assets/scss/pageStyles';
+@use '~/assets/scss/pages/regional';
 iframe#ceds-iframe {
   height: 2000px;
   @apply min-h-screen;

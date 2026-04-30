@@ -1,3 +1,5 @@
+@use '../vars' as *;
+
 #home {
   @media (min-width: $breakpoint-small) {
   }

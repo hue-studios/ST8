@@ -382,8 +382,8 @@ export default {
 </script>
 
 <style lang="scss">
-@use '~/assets/scss/vars.scss' as *;
-@import './assets/scss/pages/events';
+@use '~/assets/scss/vars' as *;
+@use '~/assets/scss/pages/events';
 #events {
   .vc-container {
     max-width: 700px;

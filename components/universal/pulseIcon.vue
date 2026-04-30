@@ -26,7 +26,8 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@use '~/assets/scss/vars.scss' as *;
+@use '~/assets/scss/vars' as *;
+
 circle {
   stroke: $green;
   stroke-width: 2px;

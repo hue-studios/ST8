@@ -1,3 +1,5 @@
+@use '../vars' as *;
+
 .resource-card-vertical {
   height: 220px;
   border: thin solid rgba($grey, 0.2);

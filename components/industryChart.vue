@@ -1759,7 +1759,7 @@
 </template>
 
 <style scoped lang="scss">
-@use '~/assets/scss/vars.scss' as *;
+
 #industry-chart {
   width: 100%;
   max-width: 800px;

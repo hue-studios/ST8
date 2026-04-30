@@ -121,8 +121,8 @@ export default {
 </script>
 
 <style lang="scss">
-@use '~/assets/scss/vars.scss' as *;
-@import './assets/scss/pageStyles';
+@use '~/assets/scss/vars' as *;
+@use '~/assets/scss/pageStyles';
 #reporting {
   #reporting__intro {
     height: 200px;

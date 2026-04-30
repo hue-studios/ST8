@@ -1,3 +1,5 @@
+@use '../vars' as *;
+
 .resource-card {
   border: thin solid rgba($grey, 0.2);
   background: rgba($grey, 0.05);

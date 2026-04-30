@@ -31,6 +31,5 @@ export default {
 </script>
 
 <style lang="scss">
-@use '~/assets/scss/vars.scss' as *;
-@import './assets/scss/layout/mobileToolbar';
+@use '~/assets/scss/layout/mobileToolbar';
 </style>

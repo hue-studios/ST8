@@ -1,3 +1,5 @@
+@use '../vars' as *;
+
 #events {
   #events__intro {
     @media (min-width: $breakpoint-small) {

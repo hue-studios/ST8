@@ -790,7 +790,6 @@ export default {
 </script>
 
 <style lang="scss">
-@use '~/assets/scss/vars.scss' as *;
-@import './assets/scss/layout/swiper';
-@import './assets/scss/pages/home';
+@use '~/assets/scss/layout/swiper';
+@use '~/assets/scss/pages/home';
 </style>

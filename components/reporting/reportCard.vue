@@ -57,7 +57,8 @@ export default {
 </script>
 
 <style lang="scss">
-@use '~/assets/scss/vars.scss' as *;
+@use '~/assets/scss/vars' as *;
+
 .report-card {
   border: thin solid rgba($grey, 0.2);
   background: rgba($grey, 0.05);

@@ -1444,7 +1444,7 @@
 </template>
 
 <style lang="scss" scoped>
-@use '~/assets/scss/vars.scss' as *;
+
 .counties-colored-named {
   .st0 {
     fill: #ffffff;
