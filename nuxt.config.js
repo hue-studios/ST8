@@ -182,12 +182,7 @@ export default defineNuxtConfig({
   /*
    ** Global CSS
    */
-  css: [
-    {
-      src: '~/assets/scss/main.scss',
-      lang: 'scss',
-    },
-  ],
+  css: ['~/assets/scss/main.scss'],
   router: {
     middleware: 'pages',
   },
