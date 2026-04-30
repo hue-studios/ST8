@@ -211,12 +211,7 @@ export default defineNuxtConfig({
     // '@nuxt/image',
     'nuxt-izitoast',
     'vue-social-sharing/nuxt',
-    [
-      'nuxt-validate',
-      {
-        lang: 'en',
-      },
-    ],
+    'nuxt-validate',
     '@nuxtjs/google-analytics',
   ],
   'google-analytics': {

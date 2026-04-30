@@ -33,6 +33,9 @@
     "vue-gtag": "^1.11.0",
     "vue-social-sharing": "^3.0.2"
   },
+  "overrides": {
+    "rollup-plugin-visualizer": "^6.0.11"
+  },
   "devDependencies": {
     "@babel/core": "^7.13.10",
     "@babel/plugin-transform-spread": "^7.13.0",
