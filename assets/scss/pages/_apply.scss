@@ -5,6 +5,7 @@
     // height: calc(100vh - 70px);
     min-height: 450px;
     overflow: hidden;
+    @apply px-8 mx-auto;
     @media (min-width: $breakpoint-large) {
       // margin-bottom: 100px;
       height: calc(100vh - 120px);
