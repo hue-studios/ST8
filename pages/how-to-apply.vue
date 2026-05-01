@@ -13,7 +13,7 @@
     </div>
     <div
       id="apply-info"
-      class="w-full flex items-center flex-col justify-center pt-20 relative px-8"
+      class="w-full flex items-center flex-col justify-center pt-20 relative px-8 mx-auto"
     >
       <pulse-icon icon-i-d="start-btn" class-name="button"></pulse-icon>
       <svg
