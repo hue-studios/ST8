@@ -294,14 +294,11 @@ export default {
         }
       })
 
-      console.log(featuredEvents)
-
       return [...googleEvents, ...featuredEvents]
     },
   },
   created() {
     const app = this
-    console.log(this.featuredEvents)
 
     const oneYearAgo = new Date()
     oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1)
@@ -324,8 +321,10 @@ export default {
       .then(function (res) {
         app.calendarLoading = false
         app.events = res.data.items
-        console.log(app.events)
         // app.dayClicked()
+      })
+      .catch(function () {
+        app.calendarLoading = false
       })
   },
   methods: {
@@ -334,8 +333,8 @@ export default {
       return moment(newTime).format('h:mm a')
     },
     removeTags(str) {
-      if (str === null || str === '') return false
-      else str = str.toString()
+      if (str === null || str === undefined || str === '') return ''
+      str = str.toString()
       const strOne = str.replace(/&nbsp;/gi, ' ')
       const strTwo = strOne.replace(/&amp;/gi, '&')
       return strTwo.replace(/(<([^>]+)>)/gi, '')
@@ -348,7 +347,6 @@ export default {
       return newStr.slice(0, num) + '...'
     },
     dayClicked(day) {
-      console.log('today ' + moment().format('YYYY-MM-DD'))
       let date
       if (!day) {
         date = {
@@ -359,10 +357,8 @@ export default {
         }
       } else {
         date = day
-        console.log(day)
       }
 
-      console.log(date)
       this.selectedDay = date
     },
     checkDates(start, end) {
