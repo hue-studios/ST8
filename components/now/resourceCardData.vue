@@ -34,7 +34,7 @@
       </h5>
       <!-- <h5
         v-if="item.type === 'Internal File / PDF' && item.file"
-        :href="imageLocation + item.file.private_hash"
+        :href="imageLocation + item.file.id"
         class="w-full uppercase text-xs green bold tracking-widest resource-card-data__link"
         target="_blank"
         >View File
@@ -96,15 +96,12 @@ export default {
         if (this.item.require_info) {
           this.$store.commit('UPDATE_RESOURCE', {
             title: this.item.title,
-            link: process.env.imageUrl + this.item.file.private_hash,
+            link: process.env.imageUrl + this.item.file.id,
             resource: this.item.id,
           })
           this.$store.commit('UPDATE_RESOURCE_INFO', true)
         } else {
-          window.open(
-            process.env.imageUrl + this.item.file.private_hash,
-            '_blank'
-          )
+          window.open(process.env.imageUrl + this.item.file.id, '_blank')
         }
       } else if (this.item.type === 'External Link') {
         window.open(this.item.link, '_blank')
@@ -143,7 +140,6 @@ export default {
 
 <style lang="scss">
 @use '~/assets/scss/vars' as *;
-
 
 .resource-card-data {
   color: $navy;

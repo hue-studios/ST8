@@ -165,7 +165,7 @@ export default {
   },
   async asyncData({ params, $axios }) {
     const initiativesReq = await $axios.$get(
-      '/items/initiatives?fields=*.*.*&filter[status]=published'
+      '/items/initiatives?fields=id,title,url,sort,goal&filter[status][_eq]=published&sort=sort'
     )
     return {
       initiatives: initiativesReq.data,

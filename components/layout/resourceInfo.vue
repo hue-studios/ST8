@@ -217,21 +217,11 @@ export default {
               resource: app.resource,
             },
           })
-            .then(function (response) {
+            .then(function () {
+              // The confirmation email is sent by a Directus Flow on requests.create
+              // (replaces the old admin.steny.org/email/requestConfirmation.php script).
               app.loading = false
               app.complete = true
-              axios
-                .post(
-                  'https://admin.steny.org/email/requestConfirmation.php?first_name=' +
-                    app.first_name +
-                    '&email=' +
-                    app.email +
-                    '&resource=' +
-                    app.title
-                )
-                .catch(function (error) {
-                  console.log(error)
-                })
             })
             .catch(function (error) {
               console.log(error)
@@ -247,18 +237,6 @@ export default {
           })
         }
       })
-    },
-    getOrganizationInfo() {
-      this.$axios
-        .$get('/items/organization?fields=*.*.*&single=1')
-        .then((response) => {
-          this.organization = response.data
-          this.social_links = response.data.social_links
-          this.locations = response.data.locations
-        })
-        .catch(function (error) {
-          console.log(error)
-        })
     },
   },
 }

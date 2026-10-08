@@ -89,13 +89,11 @@
 </template>
 <script>
 import pageHeader from '~/components/layout/pageHeader'
-// import pagePartners from '~/components/layout/pagePartners'
 import pageFooter from '~/components/layout/pageFooter'
 import logoName from '~/components/layout/logoName.vue'
 export default {
   components: {
     pageHeader,
-    // pagePartners,
     pageFooter,
     logoName,
   },

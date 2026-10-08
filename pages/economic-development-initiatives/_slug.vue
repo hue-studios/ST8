@@ -121,28 +121,26 @@ export default {
     SwiperSlide,
     programCard,
   },
-  async asyncData({ params, $axios }) {
-    const [initiativeReq, programsReq, newsReq] = await Promise.all([
+  async asyncData({ params, $axios, error }) {
+    const slug = encodeURIComponent(params.slug)
+    const [initiativeReq, programsReq] = await Promise.all([
       $axios.$get(
-        '/items/initiatives?filter[url][eq]=' +
-          params.slug +
-          '&fields=*.*.*&single=1'
+        '/items/initiatives?filter[url][_eq]=' +
+          slug +
+          '&fields=id,title,url,sort,goal,opportunity&limit=1'
       ),
       $axios.$get(
-        '/items/programs?filter[initiatives.initiative_id.url][eq]=' +
-          params.slug +
-          '&fields=*.*.*&limit=5'
-      ),
-      $axios.$get(
-        '/items/news?filter[initiatives.initiative_id.url][eq]=' +
-          params.slug +
-          '&fields=*.*.*&limit=5'
+        '/items/programs?filter[initiatives][initiatives_id][url][_eq]=' +
+          slug +
+          '&filter[status][_eq]=published&fields=id,title,url,what_is_it,images.directus_files_id.id,counties.counties_id.title,initiatives.initiatives_id.title,partners.partners_id.title,sort&limit=5'
       ),
     ])
+    if (!initiativeReq.data.length) {
+      return error({ statusCode: 404, message: 'Initiative not found' })
+    }
     return {
-      initiative: initiativeReq.data,
+      initiative: initiativeReq.data[0],
       programs: programsReq.data,
-      news: newsReq.data,
     }
   },
   data() {

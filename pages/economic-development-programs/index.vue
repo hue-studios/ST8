@@ -90,9 +90,11 @@ export default {
   async asyncData({ params, $axios }) {
     const [programsReq, initiativesReq] = await Promise.all([
       $axios.$get(
-        '/items/programs?fields=id,title,what_is_it,url,collaboration,what_it_accomplishes,website,url,activity.activity_id.*,counties.county_id.title,images.file_id.private_hash,initiatives.initiative_id.title,initiatives.initiative_id.url,partners.partner_id.title,resources.resources_id.*&filter[status]=published'
+        '/items/programs?fields=id,title,what_is_it,url,collaboration,what_it_accomplishes,website,url,counties.counties_id.title,images.directus_files_id.id,initiatives.initiatives_id.title,initiatives.initiatives_id.url,partners.partners_id.title,resources.resources_id.*&filter[status][_eq]=published'
       ),
-      $axios.$get('/items/initiatives?fields=*.*.*&filter[status]=published'),
+      $axios.$get(
+        '/items/initiatives?fields=id,title,url&filter[status][_eq]=published&sort=sort'
+      ),
     ])
     return {
       programs: programsReq.data,
@@ -138,10 +140,10 @@ export default {
       } else {
         return app.programs.filter((item) => {
           return item.initiatives.forEach(function (initiative, index) {
-            return app.programFilters.includes(initiative.intiative_id.title)
+            return app.programFilters.includes(initiative.initiatives_id.title)
           })
           // return app.programFilters.includes(
-          //   item.initiatives.initiative_id.title
+          //   item.initiatives.initiatives_id.title
           // )
         })
       }
@@ -183,7 +185,7 @@ export default {
     returnInitiativesTitle(initiatives) {
       console.log(initiatives)
       initiatives.map((initiative) => {
-        return initiative.initiative_id.title
+        return initiative.initiatives_id.title
       })
     },
     checkInitiative() {

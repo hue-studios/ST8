@@ -20,13 +20,17 @@
         v-else
         class="w-full uppercase navy tracking-widest report-card__date"
       >
-        {{ $moment(item.modified_on).format('dddd MMMM Do, YYYY') }}
+        {{
+          $moment(item.date_updated || item.date_created).format(
+            'dddd MMMM Do, YYYY'
+          )
+        }}
       </h5>
     </div>
 
     <a
       v-if="item.file"
-      :href="imageLocation + item.file.private_hash"
+      :href="imageLocation + item.file.id"
       target="_blank"
       rel="noreferrer"
       class="flex items-center justify-center flex-row uppercase report-card__link"

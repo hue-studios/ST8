@@ -93,11 +93,11 @@ export default {
     // linkIcon,
   },
   async asyncData({ $axios }) {
-    const applyReq = await $axios.get(
-      process.env.apiUrl + '/items/how_to_apply?fields=*.*.*.*&single=1'
+    const applyReq = await $axios.$get(
+      '/items/how_to_apply?fields=introduction,steps,arc_info,resources.resources_id.id,resources.resources_id.title,resources.resources_id.type,resources.resources_id.link,resources.resources_id.file.id'
     )
     return {
-      apply: applyReq.data.data,
+      apply: applyReq.data,
     }
   },
   data() {

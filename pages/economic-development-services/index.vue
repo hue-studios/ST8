@@ -72,10 +72,7 @@
         <div v-html="service.who_it_is_for"></div>
       </div>
       <div
-        v-if="
-          service.example_programs.length > 0 ||
-          service.news_programs.length > 0
-        "
+        v-if="service.example_programs.length > 0 || service.news.length > 0"
         class="w-full md:w-1/2 services-section__content"
       >
         <h3 class="w-full uppercase text-xs green text-left bold">
@@ -85,67 +82,67 @@
           <nuxt-link
             v-for="(program, index2) in service.example_programs"
             :key="index2"
-            :to="'/economic-development-programs/' + program.program_id.url"
+            :to="'/economic-development-programs/' + program.programs_id.url"
             class="flex flex-row items-center justify-start mb-6 shadow-lg services-section__program"
           >
             <div
-              v-if="program.program_id.images.length > 0"
+              v-if="program.programs_id.images.length > 0"
               class="services-section__program-image"
               :style="
                 'background-image: url(' +
                 imageLocation +
-                program.program_id.images[0].file_id.private_hash +
+                program.programs_id.images[0].directus_files_id.id +
                 ')'
               "
             ></div>
             <div class="flex flex-col services-section__program-content">
-              <h4 class="uppercase mb-2">{{ program.program_id.title }}</h4>
+              <h4 class="uppercase mb-2">{{ program.programs_id.title }}</h4>
               <div
                 class="w-full flex flex-row items-start justify-start text-xs services-section__program-tags"
               >
                 <h5
-                  v-if="program.program_id.initiatives.length > 0"
+                  v-if="program.programs_id.initiatives.length > 0"
                   class="uppercase navy bold"
                 >
-                  {{ program.program_id.initiatives.length }}
+                  {{ program.programs_id.initiatives.length }}
                   <span class="green"
                     >Initiative<span
-                      v-if="program.program_id.initiatives.length > 1"
+                      v-if="program.programs_id.initiatives.length > 1"
                       >s</span
                     >
                   </span>
                 </h5>
                 <span
-                  v-if="program.program_id.counties.length > 0"
+                  v-if="program.programs_id.counties.length > 0"
                   class="ml-1 mr-1"
                   >/</span
                 >
                 <h5
-                  v-if="program.program_id.counties.length > 0"
+                  v-if="program.programs_id.counties.length > 0"
                   class="uppercase navy bold"
                 >
-                  {{ program.program_id.counties.length }}
+                  {{ program.programs_id.counties.length }}
                   <span class="green"
-                    >Count<span v-if="program.program_id.counties.length > 1"
+                    >Count<span v-if="program.programs_id.counties.length > 1"
                       >ies</span
                     ><span v-else>y</span>
                   </span>
                 </h5>
                 <span
                   v-if="
-                    program.program_id.counties.length > 0 &&
-                    program.program_id.partners.length > 0
+                    program.programs_id.counties.length > 0 &&
+                    program.programs_id.partners.length > 0
                   "
                   class="ml-1 mr-1"
                   >/</span
                 >
                 <h5
-                  v-if="program.program_id.partners.length > 0"
+                  v-if="program.programs_id.partners.length > 0"
                   class="uppercase navy bold"
                 >
-                  {{ program.program_id.partners.length }}
+                  {{ program.programs_id.partners.length }}
                   <span class="green"
-                    >Partner<span v-if="program.program_id.partners.length > 1"
+                    >Partner<span v-if="program.programs_id.partners.length > 1"
                       >s</span
                     >
                   </span>
@@ -159,7 +156,7 @@
             </div>
           </nuxt-link>
           <nuxt-link
-            v-for="article in service.news_programs"
+            v-for="article in service.news"
             :key="article.id"
             :to="'/regional-news/' + article.news_id.url"
             class="flex flex-row items-center justify-start mb-6 shadow-lg services-section__program"
@@ -170,7 +167,7 @@
               :style="
                 'background-image: url(' +
                 imageLocation +
-                article.news_id.cover_image.private_hash +
+                article.news_id.cover_image.id +
                 ')'
               "
             ></div>
@@ -193,9 +190,10 @@
                 <h5 v-else class="uppercase navy bold">
                   <span class="green">Published </span>
                   {{
-                    $moment(article.news_id.modified_on).format(
-                      'dddd MMMM Do, YYYY'
-                    )
+                    $moment(
+                      article.news_id.date_updated ||
+                        article.news_id.date_created
+                    ).format('dddd MMMM Do, YYYY')
                   }}
                 </h5>
               </div>
@@ -235,7 +233,7 @@
                 resource.resources_id.type === 'Internal File / PDF' &&
                 resource.resources_id.file
               "
-              :href="imageLocation + resource.resources_id.file.private_hash"
+              :href="imageLocation + resource.resources_id.file.id"
               class="w-full uppercase text-xs green bold tracking-widest text-right services-section__resource-card-link"
               target="_blank"
               >View File
@@ -266,12 +264,11 @@ export default {
     linkIcon,
   },
   async asyncData({ params, $axios }) {
-    const servicesReq = await $axios.get(
-      process.env.apiUrl +
-        '/items/services?fields=id,title,url,purpose,how_we_help,who_it_is_for,activity,example_programs.program_id.*,example_programs.program_id.images.file_id.private_hash,resources.resources_id.*.*,news_programs.news_id.*.*,news_programs.news_id.cover_image.private_hash,&filter[status]=published'
+    const servicesReq = await $axios.$get(
+      '/items/services?fields=id,title,url,purpose,how_we_help,who_it_is_for,example_programs.programs_id.id,example_programs.programs_id.title,example_programs.programs_id.url,example_programs.programs_id.images.directus_files_id.id,example_programs.programs_id.counties.counties_id.title,example_programs.programs_id.initiatives.initiatives_id.title,example_programs.programs_id.partners.partners_id.title,resources.resources_id.*,resources.resources_id.file.id,news.id,news.news_id.id,news.news_id.title,news.news_id.url,news.news_id.date_published,news.news_id.date_created,news.news_id.date_updated,news.news_id.cover_image.id&filter[status][_eq]=published&sort=sort'
     )
     return {
-      services: servicesReq.data.data,
+      services: servicesReq.data,
     }
   },
   data() {

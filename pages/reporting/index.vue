@@ -59,7 +59,9 @@
 export default {
   async asyncData({ $axios }) {
     const [reportingReq] = await Promise.all([
-      $axios.$get('/items/reporting?fields=*.*.*'),
+      $axios.$get(
+        '/items/reporting?fields=id,title,date,date_created,date_updated,file.id&filter[status][_eq]=published&sort=-date'
+      ),
     ])
     return {
       reports: reportingReq.data,

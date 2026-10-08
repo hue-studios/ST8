@@ -77,10 +77,7 @@
                 target="_blank"
                 class="shadow-lg border-gray-100 rounded-full bg-cover bg-no-repeat mx-4"
                 :style="
-                  'background-image: url(' +
-                  imageLocation +
-                  item.logo.private_hash +
-                  ')'
+                  'background-image: url(' + imageLocation + item.logo.id + ')'
                 "
               ></a>
             </swiper-slide>
@@ -122,10 +119,7 @@
                 target="_blank"
                 class="shadow-lg border-gray-100 rounded-full bg-cover bg-no-repeat mx-4"
                 :style="
-                  'background-image: url(' +
-                  imageLocation +
-                  item.logo.private_hash +
-                  ')'
+                  'background-image: url(' + imageLocation + item.logo.id + ')'
                 "
               ></a>
             </swiper-slide>
@@ -160,10 +154,7 @@
                 target="_blank"
                 class="shadow-lg border-gray-100 rounded-full bg-no-repeat mx-4"
                 :style="
-                  'background-image: url(' +
-                  imageLocation +
-                  item.logo.private_hash +
-                  ')'
+                  'background-image: url(' + imageLocation + item.logo.id + ')'
                 "
               ></a>
             </swiper-slide>
@@ -198,10 +189,7 @@
                 target="_blank"
                 class="shadow-lg border-gray-100 rounded-full bg-cover bg-no-repeat mx-4"
                 :style="
-                  'background-image: url(' +
-                  imageLocation +
-                  item.logo.private_hash +
-                  ')'
+                  'background-image: url(' + imageLocation + item.logo.id + ')'
                 "
               ></a>
             </swiper-slide>
@@ -239,7 +227,7 @@ export default {
   async asyncData({ params, $axios }) {
     const partnersReq = await $axios.get(
       process.env.apiUrl +
-        '/items/partners?fields=id,title,website,category,logo.private_hash,programs.program_id.initiatives.initiative_id.title'
+        '/items/partners?fields=id,title,website,category,logo.id,programs.programs_id.initiatives.initiatives_id.title'
     )
     return {
       partners: partnersReq.data.data,
@@ -296,7 +284,7 @@ export default {
     economicDevelopmentPartners() {
       const vm = this
       return vm.partners.filter(function (item) {
-        return item.programs.program_id.initiatives.initiative_id.title.includes(
+        return item.programs.programs_id.initiatives.initiatives_id.title.includes(
           'Economic Development'
         )
       })

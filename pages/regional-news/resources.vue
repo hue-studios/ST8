@@ -146,12 +146,11 @@ import moment from 'moment'
 
 export default {
   async asyncData({ params, $axios }) {
-    const resourcesReq = await $axios.get(
-      process.env.apiUrl +
-        '/items/resources?fields=*.*.*&filter[status]=published'
+    const resourcesReq = await $axios.$get(
+      '/items/resources?fields=*,file.id,cover_image.id,programs.programs_id.id,programs.programs_id.title&filter[status][_eq]=published&sort=sort'
     )
     return {
-      resources: resourcesReq.data.data,
+      resources: resourcesReq.data,
     }
   },
   data() {

@@ -1,5 +1,10 @@
 import { defineNuxtConfig } from '@nuxt/bridge'
 
+// Directus 12 CMS. Set DIRECTUS_URL per environment in Vercel (Production / Preview); read at build time.
+const DIRECTUS_URL = (
+  process.env.DIRECTUS_URL || 'https://manage.southerntier8.org'
+).replace(/\/$/, '')
+
 export default defineNuxtConfig({
   // Enable Bridge features
   bridge: {
@@ -85,7 +90,7 @@ export default defineNuxtConfig({
     link: [
       {
         rel: 'preconnect',
-        href: 'https://admin.steny.org',
+        href: DIRECTUS_URL,
         crossorigin: 'true',
       },
       {
@@ -189,7 +194,11 @@ export default defineNuxtConfig({
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['@/plugins/gtag', { src: '~plugins/v-calendar.js', ssr: false }],
+  plugins: [
+    '@/plugins/directus',
+    '@/plugins/gtag',
+    { src: '~plugins/v-calendar.js', ssr: false },
+  ],
   /*
    ** Nuxt.js dev-modules
    */
@@ -229,12 +238,9 @@ export default defineNuxtConfig({
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  // image: {
-  //   domains: ['admin.steny.org', 'admin.southerntier8.org'],
-  // },
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-    baseURL: 'https://admin.steny.org/southern-tier-8',
+    baseURL: DIRECTUS_URL,
   },
   izitoast: {
     timeout: 3000,
@@ -264,8 +270,8 @@ export default defineNuxtConfig({
   //   },
   // },
   env: {
-    apiUrl: 'https://admin.steny.org/southern-tier-8',
-    imageUrl: 'https://admin.steny.org/southern-tier-8/assets/',
+    apiUrl: DIRECTUS_URL,
+    imageUrl: DIRECTUS_URL + '/assets/',
   },
 
   render: {
