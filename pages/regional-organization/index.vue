@@ -78,7 +78,7 @@
         <div class="w-full text-center bg-transparent">
           <a
             class="inline-block px-12 py-6 uppercase green bold tracking-widest font-medium"
-            href="https://admin.steny.org/southern-tier-8/assets/4720le5zbgo400s0"
+            :href="$store.getters.orgAsset('ceds_document')"
             target="_blank"
             rel="noreferrer"
             >CEDS</a
@@ -105,7 +105,7 @@
           :style="
             'background-image: url(' +
             imageLocation +
-            person.image.private_hash +
+            person.image.id +
             '?key=small)'
           "
           class="bg-cover bg-center bg-no-repeat people-card__image"
@@ -114,8 +114,8 @@
           v-else
           :style="
             'background-image: url(' +
-            imageLocation +
-            'io8iw0uluxsk8kcs?key=small)'
+            $store.getters.orgAsset('default_person_image', 'small') +
+            ')'
           "
           class="bg-center bg-no-repeat people-card__image"
           style="background-size: 100% auto"
@@ -257,7 +257,7 @@
         Return on Investment
       </h2>
       <a
-        :href="imageLocation + regionalData[0].roi.private_hash"
+        :href="imageLocation + regionalData[0].roi.id"
         target="_blank"
         rel="noreferrer"
         class="flex items-center justify-center flex-col relative py-12 mb-8 roi-card"
@@ -283,7 +283,7 @@
         <div v-for="(county, index) in filteredCounties" :key="index">
           <a
             v-if="county.roi"
-            :href="imageLocation + county.roi.private_hash"
+            :href="imageLocation + county.roi.id"
             target="_blank"
             rel="noreferrer"
             class="flex items-center justify-center flex-col relative py-12 mx-2 mb-4 roi-card"
@@ -305,9 +305,13 @@ export default {
   components: { pulseIcon },
   async asyncData({ $axios }) {
     const [organizationReq, peopleReq, countiesReq] = await Promise.all([
-      $axios.$get('/items/organization?single=1&fields=*.*.*'),
-      $axios.$get('/items/people?fields=*.*.*&filter[status]=published'),
-      $axios.$get('/items/counties?fields=*.*'),
+      $axios.$get('/items/organization?fields=*'),
+      $axios.$get(
+        '/items/people?fields=id,name,title,phone,email,category,sort,image.id,county.title&filter[status][_eq]=published&sort=sort'
+      ),
+      $axios.$get(
+        '/items/counties?fields=id,title,sort,roi.id&filter[status][_eq]=published&sort=sort'
+      ),
     ])
     return {
       organization: organizationReq.data,

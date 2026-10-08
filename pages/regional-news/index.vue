@@ -64,7 +64,7 @@ export default {
   async asyncData({ params, $axios }) {
     const [newsReq] = await Promise.all([
       $axios.$get(
-        '/items/news?fields=id,title,article,url,cover_image.private_hash,tags,type,featured,date_published,link,initiatives.initiative_id.title,programs.*,related_resources.*&filter[status]=published&sort=-date_published,sort'
+        '/items/news?fields=id,title,article,url,cover_image.id,tags,type,featured,date_published,date_created,date_updated,link,initiatives.initiatives_id.title,programs.*,related_resources.*&filter[status][_eq]=published&sort=-date_published,sort'
       ),
     ])
     return {

@@ -9,7 +9,7 @@
       :style="
         'background-image: url(' +
         imageLocation +
-        item.cover_image.private_hash +
+        item.cover_image.id +
         '?key=medium)'
       "
     ></div>
@@ -18,8 +18,8 @@
       class="w-full mb-4 news-card-vertical__image"
       :style="
         'background-image: url(' +
-        imageLocation +
-        '1avcl3u0gukko40g?key=medium)'
+        $store.getters.orgAsset('default_cover_image', 'medium') +
+        ')'
       "
     ></div>
 
@@ -49,7 +49,11 @@
       v-else
       class="w-full uppercase navy tracking-widest mb-4 px-4 news-card-vertical__date"
     >
-      {{ $moment(item.modified_on).format('dddd MMMM Do, YYYY') }}
+      {{
+        $moment(item.date_updated || item.date_created).format(
+          'dddd MMMM Do, YYYY'
+        )
+      }}
     </h5>
     <!-- <p class="w-full mb-4 px-4 navy hidden news-card-vertical__description">
       {{ truncateString(item.article, 120) }}

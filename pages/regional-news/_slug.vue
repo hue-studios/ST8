@@ -20,7 +20,11 @@
         class="w-full uppercase px-4 md:px-12 mt-2 white tracking-wider"
       >
         <span class="mr-1">Published on:</span>
-        {{ $moment(article.modified_on).format('dddd MMMM Do, YYYY') }}
+        {{
+          $moment(article.date_updated || article.date_created).format(
+            'dddd MMMM Do, YYYY'
+          )
+        }}
       </h5>
     </div>
     <div
@@ -74,7 +78,7 @@
           :key="index"
           class="flex flex-col items-center justify-center px-3 sm:px-8 pt-4 pb-8"
         >
-          <resource-card :item="item.resource_id"></resource-card>
+          <resource-card :item="item.resources_id"></resource-card>
         </swiper-slide>
         <div slot="pagination" class="swiper-pagination"></div>
         <div slot="button-next" class="swiper-button-next"></div>
@@ -143,16 +147,17 @@ export default {
     Swiper,
     SwiperSlide,
   },
-  async asyncData({ params, $axios }) {
-    const [newsReq] = await Promise.all([
-      $axios.$get(
-        '/items/news?filter[url][eq]=' +
-          params.slug +
-          '&fields=id,status,article,cover_image.private_hash,date_published,created_on,example_project,featured,link,tags,title,type,url,related_resources.resource_id.*,related_resources.resource_id.file.private_hash&single=1'
-      ),
-    ])
+  async asyncData({ params, $axios, error }) {
+    const newsReq = await $axios.$get(
+      '/items/news?filter[url][_eq]=' +
+        encodeURIComponent(params.slug) +
+        '&fields=id,status,article,cover_image.id,date_published,date_created,date_updated,example_project,featured,link,tags,title,type,url,related_resources.resources_id.*,related_resources.resources_id.file.id&limit=1'
+    )
+    if (!newsReq.data.length) {
+      return error({ statusCode: 404, message: 'Article not found' })
+    }
     return {
-      article: newsReq.data,
+      article: newsReq.data[0],
     }
   },
   data() {
@@ -245,11 +250,12 @@ export default {
   created() {
     if (this.article.cover_image) {
       this.coverImage =
-        process.env.imageUrl +
-        this.article.cover_image.private_hash +
-        '?key=large'
+        process.env.imageUrl + this.article.cover_image.id + '?key=large'
     } else {
-      this.coverImage = process.env.imageUrl + '1avcl3u0gukko40g?key=large'
+      this.coverImage = this.$store.getters.orgAsset(
+        'default_cover_image',
+        'large'
+      )
     }
   },
   methods: {

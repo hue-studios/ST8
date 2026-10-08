@@ -9,14 +9,18 @@
       :style="
         'background-image: url(' +
         imageLocation +
-        item.cover_image.private_hash +
+        item.cover_image.id +
         '?key=medium)'
       "
     ></div>
     <div
       v-else
       class="w-full news-card__image"
-      :style="'background-image: url(' + imageLocation + '1avcl3u0gukko40g)'"
+      :style="
+        'background-image: url(' +
+        $store.getters.orgAsset('default_cover_image', 'medium') +
+        ')'
+      "
     ></div>
     <div
       class="w-full flex flex-col items-start justify-center news-card__content"
@@ -35,7 +39,11 @@
         v-else
         class="w-full uppercase navy tracking-widest mb-2 news-card__date"
       >
-        {{ $moment(item.modified_on).format('dddd MMMM Do, YYYY') }}
+        {{
+          $moment(item.date_updated || item.date_created).format(
+            'dddd MMMM Do, YYYY'
+          )
+        }}
       </h5>
       <!-- <div
         v-if="item.tags.length > 0"

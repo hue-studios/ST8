@@ -10,7 +10,7 @@
       :style="
         'background-image: url(' +
         imageLocation +
-        program.images[0].file_id.private_hash +
+        program.images[0].directus_files_id.id +
         '?key=small)'
       "
     ></div>
@@ -53,7 +53,7 @@ export default {
     if (this.program.initiatives.length > 0) {
       console.log(this.program.initiatives)
       this.program.initiatives.map((initiative) => {
-        return app.programInitiatives.push(initiative.initiative_id.title)
+        return app.programInitiatives.push(initiative.initiatives_id.title)
       })
     }
   },

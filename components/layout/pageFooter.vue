@@ -75,18 +75,18 @@
         </p>
         <p class="w-full uppercase">
           <span class="label">Email:</span>
-          <a href="mailto:organization.email" target="_blank">{{
+          <a :href="'mailto:' + organization.email" target="_blank">{{
             organization.email
           }}</a>
         </p>
       </div>
       <div
         v-for="item in locations"
-        :key="item.id"
+        :key="item.title"
         class="flex flex-col items-start justify-start w-full footer-col__contact-section location"
       >
-        <h5 class="w-full uppercase">{{ item.locations_id.title }}</h5>
-        <p class="w-full uppercase">{{ item.locations_id.address }}</p>
+        <h5 class="w-full uppercase">{{ item.title }}</h5>
+        <p class="w-full uppercase">{{ item.address }}</p>
       </div>
       <div
         class="flex flex-row flex-wrap items-center justify-center md:justify-start w-full footer-col__contact-section social"
@@ -97,30 +97,30 @@
           class="text-center"
         >
           <a
-            :href="item.social_links_id.link"
+            :href="item.link"
             target="_blank"
             rel="noopener"
             class="rounded-full w-10 h-10 flex justify-center items-center mr-1 ml-1 md:mr-2 md:ml-0"
             ><linkedin-icon
-              v-if="item.social_links_id.platform == 'Linkedin'"
+              v-if="item.platform == 'Linkedin'"
               size="1x"
               stroke-width="1"
               class="inline-block"
             ></linkedin-icon
             ><facebook-icon
-              v-if="item.social_links_id.platform == 'Facebook'"
+              v-if="item.platform == 'Facebook'"
               size="1x"
               stroke-width="1"
               class="inline-block"
             ></facebook-icon
             ><twitter-icon
-              v-if="item.social_links_id.platform == 'Twitter'"
+              v-if="item.platform == 'Twitter'"
               size="1x"
               stroke-width="1"
               class="inline-block"
             ></twitter-icon
             ><instagram-icon
-              v-if="item.social_links_id.platform == 'Instagram'"
+              v-if="item.platform == 'Instagram'"
               size="1x"
               stroke-width="1"
               class="instagram inline-block"
@@ -180,40 +180,19 @@ export default {
     TwitterIcon,
     InstagramIcon,
   },
-  data() {
-    return {
-      initiatives: [],
-      organization: {},
-      social_links: [],
-      locations: [],
-    }
-  },
-  created() {
-    this.getInitiatives()
-    this.getOrganizationInfo()
-  },
-  methods: {
-    getOrganizationInfo() {
-      this.$axios
-        .$get('/items/organization?fields=*.*.*&single=1')
-        .then((response) => {
-          this.organization = response.data
-          this.social_links = response.data.social_links
-          this.locations = response.data.locations
-        })
-        .catch(function (error) {
-          console.log(error)
-        })
+  computed: {
+    // Loaded once per request in store/index.js (nuxtServerInit)
+    organization() {
+      return this.$store.state.organization
     },
-    getInitiatives() {
-      this.$axios
-        .$get('/items/initiatives?fields=*.*.*&filter[status]=published')
-        .then((response) => {
-          this.initiatives = response.data
-        })
-        .catch(function (error) {
-          console.log(error)
-        })
+    initiatives() {
+      return this.$store.state.footerInitiatives
+    },
+    social_links() {
+      return this.organization.social_links || []
+    },
+    locations() {
+      return this.organization.locations || []
     },
   },
 }

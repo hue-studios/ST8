@@ -19,7 +19,7 @@
               class=""
               :src="
                 imageLocation +
-                program.images[0].file_id.private_hash +
+                program.images[0].directus_files_id.id +
                 '?key=medium'
               "
               :alt="program.title"
@@ -51,7 +51,7 @@
               :key="index"
               class="uppercase mr-1 mb-1"
             >
-              {{ county.county_id.title }}
+              {{ county.counties_id.title }}
               <span v-if="index + 1 < program.counties.length" class="green">
                 /</span
               >
@@ -77,7 +77,7 @@
               :key="index"
               class="uppercase mr-1 mb-1"
             >
-              {{ initiative.initiative_id.title }}
+              {{ initiative.initiatives_id.title }}
               <span v-if="index + 1 < program.initiatives.length" class="green">
                 /</span
               >
@@ -149,21 +149,24 @@
           :class="{ tooLong: tooLongContent }"
           v-html="program.what_it_accomplishes"
         ></div>
-        <div v-if="program.accomplishes_link.length" class="mt-2">
+        <div
+          v-if="program.accomplishes_links && program.accomplishes_links.length"
+          class="mt-2"
+        >
           <nuxt-link
-            v-if="!program.accomplishes_link[0].external"
-            :to="program.accomplishes_link[0].link"
+            v-if="!program.accomplishes_links[0].external"
+            :to="program.accomplishes_links[0].link"
             class="w-full absolute uppercase tracking-wider green bold text-center lg:text-left lg:px-0"
-            >{{ program.accomplishes_link[0].title }}
+            >{{ program.accomplishes_links[0].title }}
             <link-icon class="ml-2"></link-icon
           ></nuxt-link>
           <a
-            v-else-if="program.accomplishes_link[0].external"
-            :href="program.accomplishes_link[0].link"
+            v-else-if="program.accomplishes_links[0].external"
+            :href="program.accomplishes_links[0].link"
             target="_blank"
             rel="noreferrer"
             class="w-full absolute uppercase tracking-wider green bold text-center lg:text-left lg:px-0"
-            >{{ program.accomplishes_link[0].title }}
+            >{{ program.accomplishes_links[0].title }}
             <link-icon class="ml-2"></link-icon
           ></a>
         </div>
@@ -194,15 +197,13 @@
           class="rounded-full flex items-center justify-center partners-badge"
         >
           <img
-            v-if="partner.partner_id"
+            v-if="partner.partners_id"
             :src="
-              imageLocation +
-              partner.partner_id.logo.private_hash +
-              '?key=thumbnail'
+              imageLocation + partner.partners_id.logo.id + '?key=thumbnail'
             "
-            :alt="partner.partner_id.title"
-            :width="partner.partner_id.logo.width"
-            :height="partner.partner_id.logo.height"
+            :alt="partner.partners_id.title"
+            :width="partner.partners_id.logo.width"
+            :height="partner.partners_id.logo.height"
           />
         </div>
       </div>
@@ -295,18 +296,23 @@ export default {
     resourceCard,
     linkIcon,
   },
-  async asyncData({ params, $axios }) {
+  async asyncData({ params, $axios, error }) {
     const [programReq] = await Promise.all([
       $axios.$get(
-        '/items/programs?filter[url][eq]=' +
-          params.slug +
-          '&fields=id,title,what_is_it,what_it_accomplishes,accomplishes_link.external,accomplishes_link.title,accomplishes_link.link,url,counties.county_id.title,initiatives.initiative_id.title,images.file_id.private_hash,partners.partner_id.title,partners.partner_id.logo.private_hash,resources.resources_id.title,resources.resources_id.type,resources.resources_id.link,resources.resources_id.file.private_hash,news.news_id.title,news.news_id.article,news.news_id.link,news.news_id.type,news.news_id.tags,news.news_id.date_published,news.news_id.url,news.news_id.link,url,news.news_id.cover_image.private_hash&single=1'
+        '/items/programs?filter[url][_eq]=' +
+          encodeURIComponent(params.slug) +
+          '&fields=id,title,what_is_it,what_it_accomplishes,accomplishes_links,url,counties.counties_id.title,initiatives.initiatives_id.title,images.directus_files_id.id,partners.partners_id.title,partners.partners_id.logo.id,partners.partners_id.logo.width,partners.partners_id.logo.height,resources.resources_id.title,resources.resources_id.type,resources.resources_id.link,resources.resources_id.file.id,news.news_id.title,news.news_id.article,news.news_id.link,news.news_id.type,news.news_id.tags,news.news_id.date_published,news.news_id.date_created,news.news_id.date_updated,news.news_id.url,news.news_id.cover_image.id&limit=1'
       ),
     ])
+    const program = programReq.data[0]
+    if (!program) {
+      return error({ statusCode: 404, message: 'Program not found' })
+    }
     return {
-      program: programReq.data,
-      news: programReq.data.news,
-      resources: programReq.data.resources,
+      program,
+      // Related items may include drafts; only show published ones.
+      news: program.news.filter((n) => n.news_id),
+      resources: program.resources.filter((r) => r.resources_id),
     }
   },
   data(app) {
@@ -448,9 +454,9 @@ export default {
   created() {
     this.$axios
       .$get(
-        '/items/programs?filter[id][neq]=' +
+        '/items/programs?filter[id][_neq]=' +
           this.program.id +
-          '&fields=id,title,what_is_it,url,counties.county_id.title,initiatives.initiative_id.title,images.file_id.private_hash,partners.partner_id.title'
+          '&fields=id,title,what_is_it,url,counties.counties_id.title,initiatives.initiatives_id.title,images.directus_files_id.id,partners.partners_id.title&filter[status][_eq]=published'
       )
       .then((response) => {
         this.programs = response.data
@@ -463,7 +469,7 @@ export default {
     if (this.program.images.length) {
       this.coverImage =
         process.env.imageUrl +
-        this.program.images[0].file_id.private_hash +
+        this.program.images[0].directus_files_id.id +
         '?key=medium'
     } else {
       this.coverImage = 'https://southerntier8.org/images/st8-social.png'

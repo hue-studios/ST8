@@ -18,7 +18,7 @@
             <img
               v-if="item.image"
               class=""
-              :src="imageLocation + item.image.private_hash + '?key=medium'"
+              :src="imageLocation + item.image.id + '?key=medium'"
               :alt="item.title"
             />
           </div>
@@ -175,16 +175,17 @@ export default {
     LinkedinIcon,
     resourceCard,
   },
-  async asyncData({ params, $axios }) {
-    const [eventsReq] = await Promise.all([
-      $axios.$get(
-        '/items/events?filter[url][eq]=' +
-          params.slug +
-          '&fields=*.*.*.*&single=1'
-      ),
-    ])
+  async asyncData({ params, $axios, error }) {
+    const eventsReq = await $axios.$get(
+      '/items/events?filter[url][_eq]=' +
+        encodeURIComponent(params.slug) +
+        '&fields=id,title,url,date,time,description,link,link_title,image.id,initiatives.initiatives_id.title,resources.resources_id.id,resources.resources_id.title,resources.resources_id.type,resources.resources_id.link,resources.resources_id.description,resources.resources_id.require_info,resources.resources_id.file.id,resources.resources_id.programs.programs_id.title&limit=1'
+    )
+    if (!eventsReq.data.length) {
+      return error({ statusCode: 404, message: 'Event not found' })
+    }
     return {
-      item: eventsReq.data,
+      item: eventsReq.data[0],
     }
   },
   data() {
@@ -266,10 +267,12 @@ export default {
   created() {
     this.countTitle(this.item.title)
     if (this.item.image) {
-      this.coverImage =
-        process.env.imageUrl + this.item.image.private_hash + '?key=large'
+      this.coverImage = process.env.imageUrl + this.item.image.id + '?key=large'
     } else {
-      this.coverImage = process.env.imageUrl + '1avcl3u0gukko40g?key=large'
+      this.coverImage = this.$store.getters.orgAsset(
+        'default_cover_image',
+        'large'
+      )
     }
   },
   methods: {

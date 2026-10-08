@@ -42,7 +42,7 @@
                     :style="
                       'background-image: url(' +
                       imageLocation +
-                      item.image.private_hash +
+                      item.image.id +
                       '?key=small)'
                     "
                   ></div>
@@ -169,12 +169,11 @@ export default {
     const oneYearAgo = new Date()
     oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1)
     const oneYearAgoString = oneYearAgo.toISOString().split('T')[0]
-    const eventsReq = await $axios.get(
-      process.env.apiUrl +
-        `/items/events?fields=*.*.*&filter[status]=published&filter[date][gte]=${oneYearAgoString}&sort=date`
+    const eventsReq = await $axios.$get(
+      `/items/events?fields=id,title,url,date,time,description,image.id&filter[status][_eq]=published&filter[date][_gte]=${oneYearAgoString}&sort=date`
     )
     return {
-      featuredEvents: eventsReq.data.data,
+      featuredEvents: eventsReq.data,
     }
   },
   data() {

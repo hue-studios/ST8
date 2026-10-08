@@ -286,8 +286,7 @@
       <nuxt-link
         to="/regional-news"
         class="green w-full text-center pt-8 tracking-widest uppercase link-font"
-        >View All {{ newsMeta.meta.status_count.published }} Articles
-        <link-icon class="ml-2"></link-icon
+        >View All {{ newsCount }} Articles <link-icon class="ml-2"></link-icon
       ></nuxt-link>
     </div>
     <div
@@ -458,7 +457,7 @@
       <nuxt-link
         to="/economic-development-programs"
         class="green w-full text-center pt-8 tracking-widest uppercase link-font"
-        >View All {{ programsMeta.meta.status_count.published }} Programs
+        >View All {{ programsCount }} Programs
         <link-icon class="ml-2"></link-icon
       ></nuxt-link>
     </div>
@@ -516,41 +515,41 @@ export default {
     nowResourceCardData,
     industryChart,
   },
-  async asyncData({ app, $axios }) {
+  async asyncData({ $axios, store }) {
+    const count = (collection) =>
+      $axios
+        .$get(
+          `/items/${collection}?aggregate[count]=id&filter[status][_eq]=published`
+        )
+        .then((res) => Number(res.data[0].count.id))
     const [
       partnersReq,
       newsReq,
-      // eventsReq,
       programsReq,
-      organizationReq,
-      // resourceReq,
       homeReq,
+      newsCount,
+      programsCount,
     ] = await Promise.all([
-      $axios.get(process.env.apiUrl + '/items/partners?fields=title,category'),
-      $axios.get(
-        process.env.apiUrl +
-          '/items/news?fields=title,article,url,cover_image.private_hash,featured,date_published,type,link,tags&filter[featured]=1&meta=*&filter[status]=published&sort=-date_published'
-      ),
-      // $axios.get(process.env.apiUrl + '/items/events?fields=*.*.*'),
-      $axios.get(
-        process.env.apiUrl +
-          '/items/programs?fields=title,what_is_it,url,featured,counties.county_id.title,images.file_id.private_hash,initiatives.initiative_id.title,partners.partner_id.title&filter[featured]=1&meta=*'
-      ),
-      $axios.$get('/items/organization?single=1&fields=mission_statement'),
-      // $axios.$get('/items/resources/80?fields=*.*'),
+      $axios.$get('/items/partners?fields=title,category'),
       $axios.$get(
-        '/items/home?fields=introduction,featured_resource.*,featured_resource.programs.programs_id.*,featured_resource.file.private_hash&single=1'
+        '/items/news?fields=title,article,url,cover_image.id,featured,date_published,date_created,date_updated,type,link,tags&filter[featured][_eq]=true&filter[status][_eq]=published&sort=-date_published'
       ),
+      $axios.$get(
+        '/items/programs?fields=title,what_is_it,url,featured,counties.counties_id.title,images.directus_files_id.id,initiatives.initiatives_id.title,partners.partners_id.title&filter[featured][_eq]=true&filter[status][_eq]=published'
+      ),
+      $axios.$get(
+        '/items/home?fields=introduction,featured_resource.*,featured_resource.programs.programs_id.*,featured_resource.file.id'
+      ),
+      count('news'),
+      count('programs'),
     ])
     return {
-      partners: partnersReq.data.data,
-      news: newsReq.data.data,
-      newsMeta: newsReq.data,
-      // events: eventsReq.data.data,
-      programs: programsReq.data.data,
-      programsMeta: programsReq.data,
-      organization: organizationReq.data,
-      // resource: resourceReq.data,
+      partners: partnersReq.data,
+      news: newsReq.data,
+      newsCount,
+      programs: programsReq.data,
+      programsCount,
+      organization: store.state.organization,
       homeData: homeReq.data,
     }
   },
@@ -567,7 +566,6 @@ export default {
         rootMargin: '0px',
         threshold: 1.0,
       },
-      jotForm: '',
       newsSwiperOption: {
         slidesPerView: 'auto',
         slidesOffsetBefore: 15,
@@ -709,16 +707,6 @@ export default {
         })
       },
     })
-  },
-  created() {
-    this.$axios
-      .$get('/items/resources?single=1&fields=*&filter[title][contains]=Pre')
-      .then((response) => {
-        this.jotForm = response.data
-      })
-      .catch(function (error) {
-        console.log(error)
-      })
   },
   methods: {
     smoothScroll(element) {

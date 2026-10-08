@@ -13,7 +13,7 @@
 
     <a
       v-if="item.type === 'Internal File / PDF' && item.file"
-      :href="imageLocation + item.file.private_hash"
+      :href="imageLocation + item.file.id"
       class="w-full uppercase text-xs green bold tracking-widest px-4 md:px-6 resource-card__link"
       target="_blank"
       >View File
