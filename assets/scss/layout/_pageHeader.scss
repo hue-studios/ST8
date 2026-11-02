@@ -247,5 +247,15 @@
   }
 }
 
-// No padding to stand in for the bar: pages run under it, which is the point of the blur —
-// there is something behind it to frost. Each page clears it with its own top spacing.
+// The bar used to sit in the flow at this width and take up its own 100px. Fixed, it no longer
+// does, so the page gets that space back as padding and every hero keeps the position it was
+// designed around — several listing pages have intros only 200–250px tall whose titles ended up
+// behind the bar without it.
+//
+// This does not cost the blur anything: it sets where the page rests at the top, and content
+// still travels under the bar as soon as you scroll, which is when the frosting is visible.
+.page-container {
+  @media (min-width: $breakpoint-large) {
+    padding-top: 100px;
+  }
+}

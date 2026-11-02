@@ -25,10 +25,9 @@ $toc-rail-width: 2px;
   #housing-forecast__intro {
     // Padding rather than a fixed height: the title, the standfirst and the program link each
     // gain lines as the screen narrows, and a fixed height clipped them on phones and tablets.
-    // The top value also has to clear the fixed header, which the page now runs under.
     padding: 110px 0 48px;
     @media (min-width: $breakpoint-large) {
-      padding: 150px 0 56px;
+      padding: 40px 0 56px;
     }
 
     h1 {
