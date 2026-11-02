@@ -10,7 +10,7 @@ export default defineNuxtConfig({
   bridge: {
     nitro: true, // Crucial for Node 20+ compatibility
     vite: false, // Keep false for now to avoid breaking Webpack-specific modules
-    meta: true, // Enables Nuxt 3-style useHead/Meta
+    meta: false, // vue-meta: the Options API head() below is what every page uses
   },
 
   ssr: true, // Note: removed quotes from 'true'

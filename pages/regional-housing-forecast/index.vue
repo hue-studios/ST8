@@ -101,7 +101,7 @@ export default {
     const [program, counties] = await Promise.all([
       $axios
         .$get(
-          '/items/programs?fields=id,title,url&filter[url][_eq]=' +
+          '/items/programs?fields=id,title,url,images.directus_files_id.id&filter[url][_eq]=' +
             encodeURIComponent(PROGRAM_SLUG) +
             '&filter[status][_eq]=published&limit=1'
         )
@@ -152,6 +152,11 @@ export default {
           content: description,
         },
         {
+          hid: 'og:image',
+          property: 'og:image',
+          content: this.shareImage,
+        },
+        {
           hid: 'twitter:title',
           property: 'twitter:title',
           content: 'Housing Forecast - Southern Tier 8 Region',
@@ -160,6 +165,10 @@ export default {
           hid: 'twitter:description',
           property: 'twitter:description',
           content: description,
+        },
+        {
+          hid: 'twitter:image:alt',
+          content: 'Housing Forecast - Southern Tier 8 Region',
         },
       ],
       link: [
@@ -172,14 +181,17 @@ export default {
     }
   },
   computed: {
-    railBox() {
-      if (!this.railReady) return { opacity: 0 }
-      return { top: this.railTop + 'px', height: this.railHeight + 'px' }
-    },
-    railStyle() {
-      // Hidden until the first measurement, so it does not flash at the top of the rail.
-      if (!this.railReady) return { opacity: 0 }
-      return { ...this.railBox, '--rail-y': this.railY + 'px' }
+    // The housing program's own image, so a shared link shows something about housing rather
+    // than the site-wide card. Falls back to that card if the program has no image.
+    shareImage() {
+      const image =
+        this.program &&
+        this.program.images &&
+        this.program.images.length &&
+        this.program.images[0].directus_files_id
+      return image
+        ? process.env.imageUrl + image.id + '?key=medium'
+        : 'https://southerntier8.org/images/st8-social.png'
     },
   },
 }
