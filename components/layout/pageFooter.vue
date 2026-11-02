@@ -37,6 +37,11 @@
       <nuxt-link to="/regional-profile" class="uppercase w-full footer-link"
         >Regional Profile</nuxt-link
       >
+      <nuxt-link
+        to="/regional-housing-forecast"
+        class="uppercase w-full footer-link"
+        >Housing Forecast</nuxt-link
+      >
       <nuxt-link to="/regional-news" class="uppercase w-full footer-link"
         >News</nuxt-link
       >

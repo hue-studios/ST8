@@ -92,6 +92,22 @@
       }
       .program__stats {
         border-top: thin solid rgba($grey, 1);
+        .program__forecast-link {
+          align-self: flex-start;
+          font-size: 9px;
+          line-height: 1em;
+          border-bottom: 1px solid rgba($green, 0.5);
+          transition: border-color 0.25s $curve;
+          &:hover {
+            border-bottom-color: $green;
+          }
+          @media (min-width: $breakpoint-small) {
+            font-size: 10px;
+          }
+          @media (min-width: $breakpoint-large) {
+            font-size: 12px;
+          }
+        }
         h4 {
           letter-spacing: 0.2em;
           font-weight: 400;

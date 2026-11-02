@@ -41,6 +41,9 @@
           <nuxt-link to="/regional-profile" class="uppercase"
             >Profile</nuxt-link
           >
+          <nuxt-link to="/regional-housing-forecast" class="uppercase"
+            >Housing</nuxt-link
+          >
         </div>
       </div>
       <div

@@ -1,0 +1,676 @@
+@use '../vars' as *;
+
+// Shared by the side-nav beads and the rail they sit on, so the two stay concentric.
+$toc-bead-size: 7px;
+$toc-rail-width: 2px;
+
+// Shared text column, so the intro, the county map, the sections and the sources all line up.
+.housing-forecast__measure {
+  width: 83.333%;
+  max-width: 1024px;
+  @media (min-width: $breakpoint-medium) {
+    width: 80%;
+  }
+}
+
+#housing-forecast {
+  // The intro and the map are one box so New York can run up behind the title and still be
+  // cropped before the first chart. Cropping `#counties` alone put the edge between the two.
+  #housing-forecast__top {
+    overflow: hidden;
+    // Runs the full width of the page, closing off the hero where New York is cropped.
+    border-bottom: 1px solid rgba($navy, 0.07);
+  }
+
+  #housing-forecast__intro {
+    // Padding rather than a fixed height: the title, the standfirst and the program link each
+    // gain lines as the screen narrows, and a fixed height clipped them on phones and tablets.
+    padding: 90px 0 48px;
+    @media (min-width: $breakpoint-large) {
+      padding: 40px 0 56px;
+    }
+
+    h1 {
+      font-size: 34px;
+      line-height: 1.15em;
+      position: relative;
+      @media (min-width: $xsmall) {
+        font-size: 42px;
+      }
+      @media (min-width: $breakpoint-small) {
+        font-size: 56px;
+      }
+      @media (min-width: $breakpoint-medium) {
+        font-size: 62px;
+      }
+    }
+    h1:after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0px;
+      width: 100%;
+      height: 1px;
+      background: $navy;
+      @media (min-width: $breakpoint-small) {
+        width: 120%;
+        left: -10%;
+      }
+    }
+    p {
+      font-size: 14px;
+      line-height: 1.45em;
+    }
+    .housing-forecast__program-link {
+      display: inline-block;
+      max-width: 90%;
+      line-height: 1.4em;
+      border-bottom: 1px solid rgba($green, 0.5);
+      transition: border-color 0.25s $curve;
+      &:hover {
+        border-bottom-color: $green;
+      }
+    }
+  }
+
+  .housing-forecast__contents {
+    a {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      line-height: 1.4em;
+      border-bottom: 1px solid transparent;
+      transition: color 0.25s $curve, border-color 0.25s $curve;
+      &:hover {
+        color: $green;
+        border-bottom-color: $green;
+      }
+    }
+  }
+
+  // Below xl the charts run full width and the contents list sits above them; from xl there is
+  // room for the side nav to ride alongside, as it does on CommunityScale's own dashboard.
+  .housing-forecast__body {
+    width: 83.333%;
+    max-width: 1024px;
+    // Open space between the map and the first chart, so the two do not read as one block.
+    margin-top: 32px;
+    @media (min-width: $breakpoint-medium) {
+      margin-top: 72px;
+    }
+    @media (min-width: $breakpoint-medium) {
+      width: 80%;
+    }
+    @media (min-width: $breakpoint-xlarge) {
+      width: 90%;
+      max-width: 1360px;
+      display: flex;
+      // Not flex-start: the aside has to stretch to the full height of the charts column,
+      // otherwise its sticky inner has no room to travel and scrolls away with the first
+      // section.
+      align-items: stretch;
+      justify-content: center;
+    }
+  }
+
+  .housing-forecast__main {
+    width: 100%;
+    @media (min-width: $breakpoint-xlarge) {
+      flex: 1 1 auto;
+      min-width: 0;
+      max-width: 1024px;
+    }
+  }
+
+  .housing-forecast__toc {
+    @media (min-width: $breakpoint-xlarge) {
+      flex: 0 0 240px;
+      width: 240px;
+      margin-left: 48px;
+    }
+
+    .housing-forecast__toc-inner {
+      position: sticky;
+      // Clears the site header, which hides on scroll down and returns on scroll up.
+      top: 110px;
+      max-height: calc(100vh - 140px);
+      overflow-y: auto;
+    }
+
+    .housing-forecast__toc-list {
+      position: relative;
+    }
+
+    // The rail the beads sit on. Its left edge is derived from the bead size rather than typed
+    // in, so the hairline stays centred on the beads if either changes; its top and height come
+    // from the measured bead centres, so it starts at the first bead and stops at the last.
+    .housing-forecast__toc-rail,
+    .housing-forecast__toc-rail-lit {
+      position: absolute;
+      left: calc(#{$toc-bead-size} / 2 - #{$toc-rail-width} / 2);
+      width: $toc-rail-width;
+      border-radius: calc(#{$toc-rail-width} / 2);
+    }
+
+    .housing-forecast__toc-rail {
+      background: rgba($navy, 0.18);
+    }
+
+    // The travelling band. `--rail-y` is set from the scroll position, and the gradient fades
+    // the teal out into transparency at either end so it reads as a glow on the grey rail
+    // rather than a hard segment. The transition smooths the gap between rAF updates.
+    .housing-forecast__toc-rail-lit {
+      --rail-y: 0px;
+      background: linear-gradient(
+        to bottom,
+        rgba($green, 0) calc(var(--rail-y) - 64px),
+        rgba($green, 0.55) calc(var(--rail-y) - 26px),
+        $green calc(var(--rail-y) - 7px),
+        $green calc(var(--rail-y) + 7px),
+        rgba($green, 0.55) calc(var(--rail-y) + 26px),
+        rgba($green, 0) calc(var(--rail-y) + 64px)
+      );
+      transition: opacity 0.3s $curve;
+    }
+
+    li {
+      margin-bottom: 14px;
+    }
+
+    .housing-forecast__toc-link {
+      position: relative;
+      z-index: 1;
+      display: block;
+      padding-left: 18px;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      line-height: 1.4em;
+      text-transform: uppercase;
+      color: rgba($navy, 0.6);
+      transition: color 0.25s $curve;
+
+      &:hover {
+        color: $navy;
+        .housing-forecast__toc-bead {
+          border-color: $green;
+        }
+      }
+
+      &.is-active {
+        color: $navy;
+        font-family: $bold-font;
+        .housing-forecast__toc-bead {
+          background: $green;
+          border-color: $green;
+        }
+      }
+    }
+
+    // A real element rather than a pseudo-element, so its centre can be measured and the rail
+    // lined up on it exactly.
+    .housing-forecast__toc-bead {
+      position: absolute;
+      z-index: 1;
+      left: 0;
+      // Sits on the midline of the label's first line rather than a guessed offset.
+      top: calc(0.7em - #{$toc-bead-size} / 2);
+      width: $toc-bead-size;
+      height: $toc-bead-size;
+      border-radius: 50%;
+      border: 1px solid rgba($navy, 0.35);
+      background: transparent;
+      transition: background 0.25s $curve, border-color 0.25s $curve;
+    }
+  }
+
+
+  .housing-forecast__back {
+    display: inline-block;
+    border-bottom: 1px solid rgba($green, 0.5);
+    transition: border-color 0.25s $curve;
+    &:hover {
+      border-bottom-color: $green;
+    }
+  }
+
+  // Programs from the CMS, in the slot the regional page gives to its headline figures.
+  .county-programs {
+    width: 100%;
+    margin-top: 32px;
+    @media (min-width: $breakpoint-large) {
+      flex: 0 0 300px;
+      width: 300px;
+      margin-top: 0;
+    }
+  }
+
+  .housing-forecast__supply-rows {
+    > div {
+      display: flex;
+      align-items: baseline;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba($navy, 0.12);
+      &:first-child {
+        border-top: 1px solid rgba($navy, 0.12);
+      }
+    }
+    dt {
+      flex: 0 0 auto;
+      min-width: 88px;
+      margin-right: 16px;
+      font-family: $bold-font;
+      font-size: 19px;
+      line-height: 1.2em;
+      color: $navy;
+      text-align: right;
+    }
+    dd {
+      font-size: 13px;
+      line-height: 1.45em;
+      color: $navy;
+    }
+    .housing-forecast__supply-detail {
+      display: block;
+      color: rgba($navy, 0.55);
+    }
+    .housing-forecast__supply-total {
+      border-bottom: 0;
+      dt {
+        color: $green;
+      }
+      dd {
+        font-family: $bold-font;
+      }
+    }
+  }
+
+  .housing-forecast__section {
+    scroll-margin-top: 90px;
+    padding-bottom: 40px;
+
+    h2 {
+      font-size: 22px;
+      line-height: 1.2em;
+      @media (min-width: $breakpoint-small) {
+        font-size: 28px;
+      }
+      @media (min-width: $breakpoint-medium) {
+        font-size: 32px;
+      }
+    }
+    > p {
+      font-size: 14px;
+      line-height: 1.5em;
+    }
+  }
+
+  #counties {
+    scroll-margin-top: 90px;
+    // The section's box is also the crop, so this padding is what decides how much of New York
+    // shows above and below the counties.
+    padding: 56px 0 88px;
+    @media (min-width: $breakpoint-medium) {
+      padding: 88px 0 128px;
+    }
+    // Cropped by #housing-forecast__top, not here. The charts below are iframes whose own
+    // documents paint a white background, and they are cross-origin, so there is no making
+    // them transparent and letting the state show through — it has to stop above them.
+  }
+
+  // Map and headline figures side by side once there is room, stacked below it when there is
+  // not, the way CommunityScale's own dashboard arranges them.
+  .housing-forecast__hero {
+    display: flex;
+    flex-direction: column;
+    @media (min-width: $breakpoint-large) {
+      flex-direction: row;
+      align-items: center;
+      gap: 48px;
+    }
+  }
+
+  .housing-forecast__hero-map {
+    width: 100%;
+    @media (min-width: $breakpoint-large) {
+      flex: 1 1 auto;
+      min-width: 0;
+      // Give the counties more room now that the state is not sharing the box with them.
+      margin-right: -40px;
+    }
+  }
+
+  .housing-forecast__hero-caption {
+    margin-top: 10px;
+    font-size: 12px;
+    line-height: 1.5em;
+    color: rgba($navy, 0.7);
+  }
+
+  .housing-forecast__stats {
+    width: 100%;
+    margin-top: 32px;
+    border-top: 1px solid rgba($navy, 0.12);
+
+    @media (min-width: $breakpoint-large) {
+      flex: 0 0 300px;
+      width: 300px;
+      margin-top: 0;
+    }
+
+    > div {
+      display: flex;
+      align-items: baseline;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba($navy, 0.12);
+    }
+
+    dt {
+      flex: 0 0 auto;
+      min-width: 92px;
+      margin-right: 14px;
+      font-family: $bold-font;
+      font-size: 17px;
+      line-height: 1.2em;
+      color: $navy;
+      text-align: right;
+      @media (min-width: $breakpoint-large) {
+        min-width: 104px;
+        font-size: 19px;
+      }
+    }
+
+    dd {
+      font-size: 12px;
+      line-height: 1.4em;
+      color: $navy;
+    }
+
+    .housing-forecast__stat-source {
+      display: block;
+      color: rgba($navy, 0.55);
+    }
+  }
+
+  #housing-forecast__sources {
+    // Sits well clear of the last chart: this is a footnote about the page, not another
+    // section of it, so it is separated by space rather than by a rule.
+    margin-top: 72px;
+    @media (min-width: $breakpoint-medium) {
+      margin-top: 112px;
+    }
+    p {
+      font-size: 13px;
+      line-height: 1.5em;
+    }
+    a {
+      border-bottom: 1px solid rgba($green, 0.5);
+      &:hover {
+        border-bottom-color: $green;
+      }
+    }
+  }
+}
+
+.county-map {
+  width: 100%;
+
+  svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    // New York is drawn well outside the viewBox on purpose; let it through.
+    overflow: visible;
+  }
+
+  .county-map__county {
+    cursor: pointer;
+  }
+
+  .county-map__shape {
+    fill: rgba($grey, 0.25);
+    stroke: $navy;
+    stroke-width: 2;
+    stroke-linejoin: round;
+    // The shapes are outlines, so without this only the stroke itself would be clickable.
+    pointer-events: all;
+    transition: fill 0.25s $curve;
+  }
+
+  .county-map__label {
+    font-family: $bold-font;
+    // Sized so the longest name, Schoharie, still sits inside its county at any page width.
+    font-size: 20px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    fill: $navy;
+    pointer-events: none;
+    transition: fill 0.25s $curve;
+  }
+
+  .county-map__county.is-current {
+    .county-map__shape {
+      fill: rgba($green, 0.35);
+      stroke-width: 3;
+    }
+  }
+
+  .county-map__county:hover,
+  .county-map__county:focus-visible {
+    .county-map__shape {
+      fill: $green;
+    }
+    .county-map__label {
+      fill: $white;
+    }
+  }
+}
+
+.community-scale-card {
+  // The tooltip is sent up from inside the iframe and has to be able to spill past it.
+  overflow: visible;
+  // The charts draw right up to the edge of their own document and we cannot style inside a
+  // cross-origin frame, so the breathing room goes on this side of the boundary instead of a
+  // border drawn tight around the plot.
+  padding: 4px 0;
+
+  .community-scale-card__frame {
+    display: block;
+    width: 100%;
+    border: 0;
+    background: $white;
+    transition: opacity 0.35s $curve;
+    opacity: 0;
+  }
+
+  &.is-loaded .community-scale-card__frame {
+    opacity: 1;
+  }
+
+  // Sits over the frame's footprint until the frame has drawn itself, so the page does not
+  // jump as each chart arrives.
+  .community-scale-card__placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 4px;
+    background: rgba($grey, 0.12);
+  }
+
+  .community-scale-card__tooltip {
+    position: absolute;
+    z-index: 20;
+    pointer-events: none;
+    max-width: 280px;
+    padding: 8px 10px;
+    border-radius: 3px;
+    background: rgba($navy, 0.95);
+    color: $white;
+    font-size: 12px;
+    line-height: 1.35em;
+    box-shadow: 0 2px 8px rgba($black, 0.25);
+  }
+}
+
+// The follow-up questions under each section's lead chart. Closed by default, and the chart
+// inside is not mounted until one is opened.
+.chart-accordion {
+  border-top: 1px solid rgba($navy, 0.12);
+
+  &:last-child {
+    border-bottom: 1px solid rgba($navy, 0.12);
+  }
+
+  .chart-accordion__toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 14px 2px;
+    text-align: left;
+    cursor: pointer;
+    color: $navy;
+    transition: color 0.25s $curve;
+
+    &:hover {
+      color: $green;
+    }
+    &:focus-visible {
+      outline: 2px solid $green;
+      outline-offset: 2px;
+    }
+  }
+
+  .chart-accordion__question {
+    font-family: $bold-font;
+    font-size: 13px;
+    line-height: 1.35em;
+    padding-right: 16px;
+  }
+
+  .chart-accordion__chevron {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    transition: transform 0.25s $curve;
+
+    svg {
+      width: 11px;
+      height: auto;
+      display: block;
+      path {
+        fill: currentColor;
+      }
+    }
+  }
+
+  &.is-open .chart-accordion__chevron {
+    transform: rotate(180deg);
+  }
+
+  .chart-accordion__panel {
+    padding-bottom: 18px;
+  }
+}
+
+// The programs list: a capped column where there is width for one, and a horizontal swipe of
+// cards where there is not. Scroll-snap rather than a carousel library — there is nothing here
+// to page through, just cards to flick along, and this keeps native touch momentum.
+.county-programs {
+  .county-programs__list {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scroll-padding-left: 2px;
+    padding: 2px;
+
+    // The site zeroes the width of scrollbars but not their height, so a horizontal one still
+    // shows up here — and with the global teal thumb it reads as a stray block under the
+    // cards. The half-visible next card is the affordance instead.
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+      display: none;
+    }
+
+    @media (min-width: $breakpoint-large) {
+      display: block;
+      overflow: visible;
+      padding: 0;
+    }
+  }
+
+  .county-programs__item {
+    flex: 0 0 72%;
+    scroll-snap-align: start;
+    padding: 14px;
+    border: 1px solid rgba($navy, 0.12);
+    border-radius: 4px;
+    background: $white;
+    font-size: 12px;
+    line-height: 1.45em;
+
+    @media (min-width: $xsmall) {
+      flex-basis: 56%;
+    }
+    @media (min-width: $breakpoint-small) {
+      flex-basis: 38%;
+    }
+
+    // Back to a plain ruled column once it sits beside the map.
+    @media (min-width: $breakpoint-large) {
+      padding: 9px 0;
+      border: 0;
+      border-bottom: 1px solid rgba($navy, 0.12);
+      border-radius: 0;
+      background: none;
+      &:first-child {
+        border-top: 1px solid rgba($navy, 0.12);
+      }
+    }
+
+    a {
+      display: block;
+      color: $navy;
+      transition: color 0.25s $curve;
+      &:hover {
+        color: $green;
+      }
+    }
+  }
+
+  .county-programs__more {
+    display: none;
+    margin-top: 12px;
+    font-size: 10px;
+    color: $green;
+    border-bottom: 1px solid rgba($green, 0.5);
+    cursor: pointer;
+    transition: border-color 0.25s $curve;
+    &:hover {
+      border-bottom-color: $green;
+    }
+    // The carousel scrolls to everything, so the toggle is only needed in the column.
+    @media (min-width: $breakpoint-large) {
+      display: inline-block;
+    }
+  }
+}
+
+.county-map {
+  // New York behind the region: a silhouette rather than an outline, faint enough to read as
+  // context and not compete with the counties sitting on it.
+  .county-map__state {
+    fill: rgba($grey, 0.09);
+    stroke: rgba($navy, 0.25);
+    // The shape is scaled about 14x into these coordinates, so without this the hairline
+    // would come out 14px thick.
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+    pointer-events: none;
+  }
+}
