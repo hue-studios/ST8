@@ -1,5 +1,9 @@
 <template>
-  <div id="page-header" :class="{ hide: !showHeader }" class="">
+  <div
+    id="page-header"
+    :class="{ hide: !showHeader, scrolled: isScrolled }"
+    class=""
+  >
     <nuxt-link to="/">
       <logo />
     </nuxt-link>
@@ -86,13 +90,15 @@ export default {
   data() {
     return {
       showHeader: true,
+      isScrolled: false,
       lastScrollPosition: 0,
       scrollValue: 0,
     }
   },
   beforeMount() {
     this.lastScrollPosition = window.pageYOffset
-    window.addEventListener('scroll', this.toggleHeader)
+    this.isScrolled = window.pageYOffset > 80
+    window.addEventListener('scroll', this.toggleHeader, { passive: true })
   },
   beforeDestroy() {
     window.removeEventListener('scroll', this.toggleHeader)
@@ -105,6 +111,9 @@ export default {
       if (currentScrollPosition < 0) {
         return
       }
+      // Set before the threshold below bails out, otherwise a slow scroll past the top never
+      // registers. On the home page this is what brings the bar out of its hero treatment.
+      this.isScrolled = currentScrollPosition > 80
       if (Math.abs(currentScrollPosition - this.lastScrollPosition) < 20) {
         return
       }
