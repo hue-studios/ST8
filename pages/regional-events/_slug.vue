@@ -165,6 +165,7 @@ import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 import { FacebookIcon, TwitterIcon, LinkedinIcon } from 'vue-feather-icons'
 import resourceCard from '~/components/now/resourceCardVertical'
 import linkIcon from '~/components/universal/linkIcon'
+import { shareMeta, cardText, directusCard, DEFAULT_CARD } from '~/config/share'
 export default {
   components: {
     Swiper,
@@ -179,7 +180,7 @@ export default {
     const eventsReq = await $axios.$get(
       '/items/events?filter[url][_eq]=' +
         encodeURIComponent(params.slug) +
-        '&fields=id,title,url,date,time,description,link,link_title,image.id,initiatives.initiatives_id.title,resources.resources_id.id,resources.resources_id.title,resources.resources_id.type,resources.resources_id.link,resources.resources_id.description,resources.resources_id.require_info,resources.resources_id.file.id,resources.resources_id.programs.programs_id.title&limit=1'
+        '&fields=id,title,url,date,time,date_created,date_updated,description,link,link_title,image.id,initiatives.initiatives_id.title,resources.resources_id.id,resources.resources_id.title,resources.resources_id.type,resources.resources_id.link,resources.resources_id.description,resources.resources_id.require_info,resources.resources_id.file.id,resources.resources_id.programs.programs_id.title&limit=1'
     )
     if (!eventsReq.data.length) {
       return error({ statusCode: 404, message: 'Event not found' })
@@ -213,66 +214,34 @@ export default {
     }
   },
   head() {
+    const title = this.item.title + ' - Featured Southern Tier Event'
     return {
-      title: this.item.title + ' - Featured Southern Tier Event',
-      meta: [
-        {
-          hid: 'description',
-          name: 'description',
-          content: this.truncateString(this.item.description, 160),
-        },
-        {
-          hid: 'og:url',
-          property: 'og:url',
-          content: 'https://southerntier8.org/regional-events/' + this.item.url,
-        },
-        {
-          hid: 'og:image',
-          property: 'og:image',
-          content: this.coverImage,
-        },
-        {
-          hid: 'og:title',
-          property: 'og:title',
-          content: this.item.title + ' - Featured Southern Tier Event',
-        },
-        {
-          hid: 'og:description',
-          property: 'og:description',
-          content: this.truncateString(this.item.description, 120),
-        },
-
-        {
-          hid: 'twitter:title',
-          property: 'twitter:title',
-          content: this.item.title + ' - Featured Southern Tier Event',
-        },
-        {
-          hid: 'twitter:description',
-          property: 'twitter:description',
-          content: this.truncateString(this.item.description, 120),
-        },
-        {
-          hid: 'twitter:image',
-          property: 'twitter:image',
-          content: this.coverImage,
-        },
-        {
-          hid: 'twitter:image:alt',
-          content: this.item.title,
-        },
-      ],
+      title,
+      meta: shareMeta({
+        title,
+        description:
+          cardText(this.item.description, 160) ||
+          'A featured event in the Southern Tier 8 Region of New York.',
+        path: '/regional-events/' + this.item.url,
+        image: this.coverImage,
+        imageAlt: this.item.title,
+        type: 'article',
+        // When the listing went up, not when the event happens — article:published_time is
+        // about the page, and an event's own date is often still in the future.
+        published: this.item.date_created,
+        modified: this.item.date_updated,
+      }),
     }
   },
   created() {
     this.countTitle(this.item.title)
+    // Assigned here rather than in mounted() or a computed on client-only state: head() runs
+    // on the server, and anything unresolved by then ships as an empty tag no crawler sees.
     if (this.item.image) {
-      this.coverImage = process.env.imageUrl + this.item.image.id + '?key=large'
+      this.coverImage = directusCard(this.item.image.id)
     } else {
-      this.coverImage = this.$store.getters.orgAsset(
-        'default_cover_image',
-        'large'
-      )
+      this.coverImage =
+        this.$store.getters.orgCard('default_cover_image') || DEFAULT_CARD
     }
   },
   methods: {
@@ -289,19 +258,6 @@ export default {
       const thirdEdit = secondEdit.replace('&hellip;', '...')
       const fourthEdit = thirdEdit.replace('&rsquo;', "'")
       return fourthEdit
-    },
-    removeTags(str) {
-      if (str === null || str === '') return false
-      else str = str.toString()
-      const strOne = str.replace(/&nbsp;/gi, ' ')
-      return strOne.replace(/(<([^>]+)>)/gi, '')
-    },
-    truncateString(str, num) {
-      const newStr = this.removeTags(str)
-      if (newStr.length <= num) {
-        return newStr
-      }
-      return newStr.slice(0, num) + '...'
     },
   },
 }

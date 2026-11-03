@@ -1,3 +1,5 @@
+import { directusCard } from '~/config/share'
+
 export const state = () => ({
   loading: {
     status: false,
@@ -25,6 +27,10 @@ export const getters = {
         state.organization[field] +
         (key ? '?key=' + key : '')
       : '',
+  // The same file rendered at Open Graph card size. orgAsset's presets are all square, which
+  // is the wrong shape for a share card.
+  orgCard: (state) => (field) =>
+    state.organization[field] ? directusCard(state.organization[field]) : '',
 }
 
 export const mutations = {

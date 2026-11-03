@@ -80,6 +80,7 @@
   </div>
 </template>
 <script>
+import { shareMeta, staticCard } from '~/config/share'
 import programCard from '~/components/programs/programCard'
 import pulseIcon from '~/components/universal/pulseIcon'
 export default {
@@ -107,28 +108,21 @@ export default {
     }
   },
   head() {
+    const title =
+      'Economic Development Programs for the Southern Tier Region of New York'
+    const description =
+      'Southern Tier 8 regional programs are designed to create innovative ideas, develop practical solutions, and align strategic partnerships to meet the challenges and advance economic growth in the Southern Tier 8 Region.'
     return {
-      title:
-        'Economic Development Programs for the Southern Tier Region of New York',
-      meta: [
-        {
-          hid: 'og:title',
-          property: 'og:title',
-          content:
-            'Economic Development Programs for the Southern Tier Region of New York',
-        },
-        {
-          hid: 'description',
-          name: 'description',
-          content:
-            'Southern Tier 8 regional programs are designed to create innovative ideas, develop practical solutions, and align strategic partnerships to meet the challenges and advance economic growth in the Southern Tier 8 Region.',
-        },
-        {
-          hid: 'og:url',
-          property: 'og:url',
-          content: 'https://southerntier8.org/economic-development-programs/',
-        },
-      ],
+      title,
+      meta: shareMeta({
+        title,
+        description,
+        // The trailing slash is what has always been shared, and Facebook keys a URL's share
+        // history off og:url.
+        path: '/economic-development-programs/',
+        image: staticCard('economic-development-programs.png'),
+        imageAlt: 'Economic Development Programs - Southern Tier 8 Region',
+      }),
     }
   },
   computed: {

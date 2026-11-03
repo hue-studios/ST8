@@ -56,6 +56,7 @@
 </template>
 
 <script>
+import { shareMeta, staticCard } from '~/config/share'
 import newsCard from '~/components/now/newsCard'
 export default {
   components: {
@@ -77,26 +78,19 @@ export default {
     }
   },
   head() {
+    const title = "Regional News for the Southern Tier Region's Economy"
+    const description =
+      'Regional news focused on the economic development for the Southern Tier region of New York.'
     return {
-      title: "Regional News for the Southern Tier Region's Economy",
-      meta: [
-        {
-          hid: 'og:title',
-          property: 'og:title',
-          content: "Regional News for the Southern Tier Region's Economy",
-        },
-        {
-          hid: 'description',
-          name: 'description',
-          content:
-            'Regional news focused on the economic development for the Southern Tier region of New York.',
-        },
-        {
-          hid: 'og:url',
-          property: 'og:url',
-          content: 'https://southerntier8.org/regional-news/',
-        },
-      ],
+      title,
+      meta: shareMeta({
+        title,
+        description,
+        // Trailing slash kept: it is the og:url everything already shared was keyed on.
+        path: '/regional-news/',
+        image: staticCard('regional-news.png'),
+        imageAlt: 'Regional News - Southern Tier 8 Region',
+      }),
     }
   },
   computed: {

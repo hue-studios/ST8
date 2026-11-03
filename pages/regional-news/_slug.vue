@@ -137,6 +137,7 @@ import { FacebookIcon, TwitterIcon, LinkedinIcon } from 'vue-feather-icons'
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 import linkIcon from '~/components/universal/linkIcon'
 import resourceCard from '~/components/now/resourceCardVertical'
+import { shareMeta, cardText, directusCard, DEFAULT_CARD } from '~/config/share'
 export default {
   components: {
     linkIcon,
@@ -195,67 +196,33 @@ export default {
     }
   },
   head() {
+    const title = this.article.title + ' - Southern Tier New York News'
     return {
-      title: this.article.title + ' - Southern Tier New York News',
-      meta: [
-        {
-          hid: 'description',
-          name: 'description',
-          content: this.truncateString(this.article.article, 120),
-        },
-        {
-          hid: 'og:url',
-          property: 'og:url',
-          content:
-            'https://southerntier8.org/regional-news/' + this.article.url,
-        },
-        {
-          hid: 'og:image',
-          property: 'og:image',
-          content: this.coverImage,
-        },
-        {
-          hid: 'og:title',
-          property: 'og:title',
-          content: this.article.title + ' - Southern Tier New York News',
-        },
-        {
-          hid: 'og:description',
-          property: 'og:description',
-          content: this.truncateString(this.article.article, 120),
-        },
-
-        {
-          hid: 'twitter:title',
-          property: 'twitter:title',
-          content: this.article.title + ' - Southern Tier New York News',
-        },
-        {
-          hid: 'twitter:description',
-          property: 'twitter:description',
-          content: this.truncateString(this.article.article, 160),
-        },
-        {
-          hid: 'twitter:image',
-          property: 'twitter:image',
-          content: this.coverImage,
-        },
-        {
-          hid: 'twitter:image:alt',
-          content: this.article.title,
-        },
-      ],
+      title,
+      meta: shareMeta({
+        title,
+        // An external-article item carries only a link, with no body of its own, so the card
+        // would otherwise go out with no text under the headline.
+        description:
+          cardText(this.article.article, 160) ||
+          'Regional news on the economy of the Southern Tier 8 Region of New York.',
+        path: '/regional-news/' + this.article.url,
+        image: this.coverImage,
+        imageAlt: this.article.title,
+        type: 'article',
+        published: this.article.date_published || this.article.date_created,
+        modified: this.article.date_updated,
+      }),
     }
   },
   created() {
+    // Assigned here rather than in mounted() or a computed on client-only state: head() runs
+    // on the server, and anything unresolved by then ships as an empty tag no crawler sees.
     if (this.article.cover_image) {
-      this.coverImage =
-        process.env.imageUrl + this.article.cover_image.id + '?key=large'
+      this.coverImage = directusCard(this.article.cover_image.id)
     } else {
-      this.coverImage = this.$store.getters.orgAsset(
-        'default_cover_image',
-        'large'
-      )
+      this.coverImage =
+        this.$store.getters.orgCard('default_cover_image') || DEFAULT_CARD
     }
   },
   methods: {
@@ -266,21 +233,6 @@ export default {
         const thirdEdit = secondEdit.replace('&hellip;', '...')
         const fourthEdit = thirdEdit.replace('&rsquo;', "'")
         return fourthEdit
-      }
-    },
-    removeTags(str) {
-      if (str === null || str === '') return false
-      else str = str.toString()
-      const strOne = str.replace(/&nbsp;/gi, ' ')
-      return strOne.replace(/(<([^>]+)>)/gi, '')
-    },
-    truncateString(str, num) {
-      if (str) {
-        const newStr = this.removeTags(str)
-        if (newStr.length <= num) {
-          return newStr
-        }
-        return newStr.slice(0, num) + '...'
       }
     },
   },

@@ -87,6 +87,7 @@ import {
   HERO_STATS,
   SUPPLY_NEED,
 } from '~/config/housingForecast'
+import { shareMeta, staticCard } from '~/config/share'
 import housingCountyMap from '~/components/housing/countyMap'
 import housingForecastSections from '~/components/housing/forecastSections'
 
@@ -101,7 +102,7 @@ export default {
     const [program, counties] = await Promise.all([
       $axios
         .$get(
-          '/items/programs?fields=id,title,url,images.directus_files_id.id&filter[url][_eq]=' +
+          '/items/programs?fields=id,title,url&filter[url][_eq]=' +
             encodeURIComponent(PROGRAM_SLUG) +
             '&filter[status][_eq]=published&limit=1'
         )
@@ -129,48 +130,20 @@ export default {
     }
   },
   head() {
+    const title = 'Housing Forecast - Southern Tier 8 Region'
     const description =
       'Housing affordability, population, jobs and housing supply data for the eight counties of the Southern Tier 8 Region of New York.'
     return {
       title:
         'Housing Forecast - Housing Data for the Southern Tier Region of New York',
-      meta: [
-        { hid: 'description', name: 'description', content: description },
-        {
-          hid: 'og:url',
-          property: 'og:url',
-          content: 'https://southerntier8.org/regional-housing-forecast',
-        },
-        {
-          hid: 'og:title',
-          property: 'og:title',
-          content: 'Housing Forecast - Southern Tier 8 Region',
-        },
-        {
-          hid: 'og:description',
-          property: 'og:description',
-          content: description,
-        },
-        {
-          hid: 'og:image',
-          property: 'og:image',
-          content: this.shareImage,
-        },
-        {
-          hid: 'twitter:title',
-          property: 'twitter:title',
-          content: 'Housing Forecast - Southern Tier 8 Region',
-        },
-        {
-          hid: 'twitter:description',
-          property: 'twitter:description',
-          content: description,
-        },
-        {
-          hid: 'twitter:image:alt',
-          content: 'Housing Forecast - Southern Tier 8 Region',
-        },
-      ],
+      meta: shareMeta({
+        title,
+        description,
+        path: '/regional-housing-forecast',
+        image: staticCard('housing-forecast.png'),
+        imageAlt:
+          'The eight counties of the Southern Tier 8 Region, and the 4,271 new homes the region needs by 2031',
+      }),
       link: [
         { rel: 'preconnect', href: CS_ORIGIN, crossorigin: 'true' },
         {
@@ -179,20 +152,6 @@ export default {
         },
       ],
     }
-  },
-  computed: {
-    // The housing program's own image, so a shared link shows something about housing rather
-    // than the site-wide card. Falls back to that card if the program has no image.
-    shareImage() {
-      const image =
-        this.program &&
-        this.program.images &&
-        this.program.images.length &&
-        this.program.images[0].directus_files_id
-      return image
-        ? process.env.imageUrl + image.id + '?key=medium'
-        : 'https://southerntier8.org/images/st8-social.png'
-    },
   },
 }
 </script>

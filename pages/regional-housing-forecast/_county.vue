@@ -77,6 +77,8 @@
 
 <script>
 import { SECTIONS, CS_ORIGIN, CS_CITATION } from '~/config/housingForecast'
+import { COUNTY_SHAPES } from '~/config/counties'
+import { shareMeta, staticCard } from '~/config/share'
 import housingCountyMap from '~/components/housing/countyMap'
 import housingCountyPrograms from '~/components/housing/countyPrograms'
 import housingForecastSections from '~/components/housing/forecastSections'
@@ -124,6 +126,7 @@ export default {
   },
   head() {
     const name = this.county.title
+    const title = name + ' County Housing Forecast'
     const description =
       'Housing affordability, population, jobs and housing stock data for ' +
       name +
@@ -131,36 +134,14 @@ export default {
     return {
       title:
         name + ' County Housing Forecast - Southern Tier Region of New York',
-      meta: [
-        { hid: 'description', name: 'description', content: description },
-        {
-          hid: 'og:url',
-          property: 'og:url',
-          content:
-            'https://southerntier8.org/regional-housing-forecast/' +
-            this.county.url,
-        },
-        {
-          hid: 'og:title',
-          property: 'og:title',
-          content: name + ' County Housing Forecast',
-        },
-        {
-          hid: 'og:description',
-          property: 'og:description',
-          content: description,
-        },
-        {
-          hid: 'twitter:title',
-          property: 'twitter:title',
-          content: name + ' County Housing Forecast',
-        },
-        {
-          hid: 'twitter:description',
-          property: 'twitter:description',
-          content: description,
-        },
-      ],
+      meta: shareMeta({
+        title,
+        description,
+        path: '/regional-housing-forecast/' + this.county.url,
+        image: this.shareImage,
+        imageAlt:
+          name + ' County picked out of the eight Southern Tier 8 counties',
+      }),
       link: [
         { rel: 'preconnect', href: CS_ORIGIN, crossorigin: 'true' },
         {
@@ -176,6 +157,17 @@ export default {
     // CommunityScale serves every card scoped to a county under this prefix.
     scope() {
       return '/county/' + this.county.geoid
+    },
+    // One share card per county, with that county picked out of the eight. Keyed on the FIPS
+    // code rather than the CMS slug, so renaming a county's URL cannot point this at a file
+    // that was never drawn; a county with no card of its own falls back to the regional one.
+    shareImage() {
+      const shape = COUNTY_SHAPES.find((c) => c.geoid === this.county.geoid)
+      return staticCard(
+        shape
+          ? 'housing-forecast-' + shape.name.toLowerCase() + '.png'
+          : 'housing-forecast.png'
+      )
     },
   },
 }
