@@ -200,6 +200,13 @@ export default defineNuxtConfig({
     { src: '~plugins/v-calendar.js', ssr: false },
   ],
   /*
+   ** Server routes
+   */
+  serverMiddleware: [
+    // Share cards are proxied from the CMS through this host so crawlers can fetch them.
+    { path: '/share-image/**', handler: '~/server/shareImage.js' },
+  ],
+  /*
    ** Nuxt.js dev-modules
    */
   buildModules: [

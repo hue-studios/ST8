@@ -129,7 +129,7 @@
             :title="item.title"
             :description="removeHTML(item.description)"
             :quote="item.title"
-            :media="coverImage"
+            :media="shareImage"
             network="linkedin"
             hashtags="southernTier"
             ><linkedin-icon size="1.15x" class="share-icon"></linkedin-icon>
@@ -139,7 +139,7 @@
             :title="item.title"
             :description="removeHTML(item.description)"
             :quote="item.title"
-            :media="coverImage"
+            :media="shareImage"
             network="twitter"
             hashtags="southernTier"
             ><twitter-icon size="1.15x" class="share-icon"></twitter-icon>
@@ -149,7 +149,7 @@
             :title="item.title"
             :description="removeHTML(item.description)"
             :quote="item.title"
-            :media="coverImage"
+            :media="shareImage"
             network="facebook"
             hashtags="southernTier"
             ><facebook-icon size="1.15x" class="share-icon"></facebook-icon>
@@ -165,7 +165,7 @@ import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 import { FacebookIcon, TwitterIcon, LinkedinIcon } from 'vue-feather-icons'
 import resourceCard from '~/components/now/resourceCardVertical'
 import linkIcon from '~/components/universal/linkIcon'
-import { shareMeta, cardText, directusCard, DEFAULT_CARD } from '~/config/share'
+import { shareMeta, cardText, shareCard, DEFAULT_CARD } from '~/config/share'
 export default {
   components: {
     Swiper,
@@ -192,7 +192,7 @@ export default {
   data() {
     return {
       imageLocation: process.env.imageUrl,
-      coverImage: '',
+      shareImage: '',
       tooLong: false,
       resourcesSwiperOption: {
         slidesPerView: 'auto',
@@ -223,7 +223,7 @@ export default {
           cardText(this.item.description, 160) ||
           'A featured event in the Southern Tier 8 Region of New York.',
         path: '/regional-events/' + this.item.url,
-        image: this.coverImage,
+        image: this.shareImage,
         imageAlt: this.item.title,
         type: 'article',
         // When the listing went up, not when the event happens — article:published_time is
@@ -237,12 +237,10 @@ export default {
     this.countTitle(this.item.title)
     // Assigned here rather than in mounted() or a computed on client-only state: head() runs
     // on the server, and anything unresolved by then ships as an empty tag no crawler sees.
-    if (this.item.image) {
-      this.coverImage = directusCard(this.item.image.id)
-    } else {
-      this.coverImage =
-        this.$store.getters.orgCard('default_cover_image') || DEFAULT_CARD
-    }
+    const imageId =
+      (this.item.image && this.item.image.id) ||
+      this.$store.getters.orgFileId('default_cover_image')
+    this.shareImage = imageId ? shareCard(imageId) : DEFAULT_CARD
   },
   methods: {
     countTitle(title) {

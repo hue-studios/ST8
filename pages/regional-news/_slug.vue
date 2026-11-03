@@ -101,7 +101,7 @@
             :title="article.title"
             :description="removeHTML(article.article)"
             :quote="article.title"
-            :media="coverImage"
+            :media="shareImage"
             network="linkedin"
             hashtags="southernTier"
             ><linkedin-icon size="1.15x" class="share-icon"></linkedin-icon>
@@ -111,7 +111,7 @@
             :title="article.title"
             :description="removeHTML(article.article)"
             :quote="article.title"
-            :media="coverImage"
+            :media="shareImage"
             network="twitter"
             hashtags="southernTier"
             ><twitter-icon size="1.15x" class="share-icon"></twitter-icon>
@@ -121,7 +121,7 @@
             :title="article.title"
             :description="removeHTML(article.article)"
             :quote="article.title"
-            :media="coverImage"
+            :media="shareImage"
             network="facebook"
             hashtags="southernTier"
             ><facebook-icon size="1.15x" class="share-icon"></facebook-icon>
@@ -137,7 +137,13 @@ import { FacebookIcon, TwitterIcon, LinkedinIcon } from 'vue-feather-icons'
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 import linkIcon from '~/components/universal/linkIcon'
 import resourceCard from '~/components/now/resourceCardVertical'
-import { shareMeta, cardText, directusCard, DEFAULT_CARD } from '~/config/share'
+import {
+  shareMeta,
+  cardText,
+  directusCard,
+  shareCard,
+  DEFAULT_CARD,
+} from '~/config/share'
 export default {
   components: {
     linkIcon,
@@ -165,6 +171,7 @@ export default {
     return {
       imageLocation: process.env.imageUrl,
       coverImage: '',
+      shareImage: '',
       resourcesSwiperOption: {
         slidesPerView: 'auto',
         slidesOffsetBefore: 15,
@@ -207,7 +214,7 @@ export default {
           cardText(this.article.article, 160) ||
           'Regional news on the economy of the Southern Tier 8 Region of New York.',
         path: '/regional-news/' + this.article.url,
-        image: this.coverImage,
+        image: this.shareImage,
         imageAlt: this.article.title,
         type: 'article',
         published: this.article.date_published || this.article.date_created,
@@ -218,12 +225,13 @@ export default {
   created() {
     // Assigned here rather than in mounted() or a computed on client-only state: head() runs
     // on the server, and anything unresolved by then ships as an empty tag no crawler sees.
-    if (this.article.cover_image) {
-      this.coverImage = directusCard(this.article.cover_image.id)
-    } else {
-      this.coverImage =
-        this.$store.getters.orgCard('default_cover_image') || DEFAULT_CARD
-    }
+    const imageId =
+      (this.article.cover_image && this.article.cover_image.id) ||
+      this.$store.getters.orgFileId('default_cover_image')
+    // The header displays the CMS render directly; the share tags need a URL on this host, which
+    // is the only one a crawler will fetch.
+    this.coverImage = imageId ? directusCard(imageId) : DEFAULT_CARD
+    this.shareImage = imageId ? shareCard(imageId) : DEFAULT_CARD
   },
   methods: {
     removeHTML(str) {

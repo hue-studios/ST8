@@ -18,7 +18,8 @@ export const OG_WIDTH = 1200
 export const OG_HEIGHT = 630
 
 // Directus renders on request, so ask it for the card size instead of a square preset. `fit=cover`
-// crops to fill rather than letterboxing, which is what a cover photo wants.
+// crops to fill rather than letterboxing, which is what a cover photo wants. This is the direct CMS
+// URL, for an image the page displays; crawlers get shareCard below instead.
 export function directusCard(id) {
   return (
     process.env.imageUrl +
@@ -29,6 +30,14 @@ export function directusCard(id) {
     OG_HEIGHT +
     '&fit=cover&format=jpg&quality=80'
   )
+}
+
+// The same render, but served from this host by server/shareImage.js. The CMS answers robots.txt
+// with `Disallow: /`, and Facebook's crawler reads robots.txt before downloading an og:image, so a
+// card linked straight to the CMS is never fetched and the share goes out with no picture. Use this
+// for og:image and twitter:image; use directusCard for an image the page itself displays.
+export function shareCard(id) {
+  return SITE_URL + '/share-image/' + id + '.jpg'
 }
 
 // A card that ships with the site, under /static/images/social.

@@ -298,7 +298,7 @@ import resourceCard from '~/components/now/resourceCardVertical'
 import pulseIcon from '~/components/universal/pulseIcon'
 import linkIcon from '~/components/universal/linkIcon'
 import { PROGRAM_SLUG as HOUSING_FORECAST_PROGRAM_SLUG } from '~/config/housingForecast'
-import { shareMeta, cardText, directusCard, DEFAULT_CARD } from '~/config/share'
+import { shareMeta, cardText, shareCard, DEFAULT_CARD } from '~/config/share'
 export default {
   components: {
     pulseIcon,
@@ -387,7 +387,7 @@ export default {
       },
       tooLongContent: false,
       tooLong: false,
-      coverImage: '',
+      shareImage: '',
     }
   },
   head() {
@@ -400,7 +400,7 @@ export default {
         title,
         description: cardText(this.program.what_is_it, 160),
         path: '/economic-development-programs/' + this.program.url,
-        image: this.coverImage,
+        image: this.shareImage,
         imageAlt: title,
       }),
     }
@@ -444,13 +444,10 @@ export default {
     this.countContent(this.program.what_is_it)
     // Assigned here rather than in mounted() or a computed on client-only state: head() runs
     // on the server, and anything unresolved by then ships as an empty tag no crawler sees.
-    if (this.program.images.length) {
-      this.coverImage = directusCard(
-        this.program.images[0].directus_files_id.id
-      )
-    } else {
-      this.coverImage = DEFAULT_CARD
-    }
+    const imageId = this.program.images.length
+      ? this.program.images[0].directus_files_id.id
+      : ''
+    this.shareImage = imageId ? shareCard(imageId) : DEFAULT_CARD
   },
   methods: {
     lineFunction() {
