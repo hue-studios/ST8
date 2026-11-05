@@ -87,6 +87,10 @@ The whole banner links to the Housing page.
 
 The Housing page also shows partners, resources, related news, counties served, and the "What it is" and "What it accomplishes" text. Those aren't edited here: they come from the program record under **Website → Programs** (the program whose URL is "housing", currently titled "Southern Tier's Capital Stack for Workforce Housing"). Edit them there as you would for any program. Don't change that program's URL field, because the Housing page and its short address depend on it.
 
+## The other Site Pages
+
+**Home**, **Organization** and **How to Apply** sit beside Housing under **Site Pages**. Each field there has a note saying where it shows on the site, and the labels match the headings on the pages (for example, **Our Vision** and **Our Approach** on the Organization page). **How to Apply** is the page called **ARC Opportunities** on the site. The **Preview** button on each one opens that page.
+
 ## Before the summit (11/18)
 
 - [ ] **Introduction:** replace the stand-in text with Beth's page copy.
