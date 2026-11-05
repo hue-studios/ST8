@@ -92,3 +92,6 @@ sw.*
 
 # Directus setup-script backups (schema snapshots, content)
 scripts/directus/backups/
+
+# Local dev-server launch config (Claude preview)
+.claude/launch.json
