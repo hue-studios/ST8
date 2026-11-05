@@ -45,6 +45,11 @@
           <nuxt-link to="/regional-profile" class="uppercase"
             >Profile</nuxt-link
           >
+          <nuxt-link
+            to="/economic-development-programs/housing"
+            class="uppercase"
+            >Housing</nuxt-link
+          >
         </div>
       </div>
       <div

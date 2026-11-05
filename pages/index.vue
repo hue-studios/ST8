@@ -204,6 +204,7 @@
         <chevron-down-icon size="1.5x"></chevron-down-icon>
       </div>
     </div>
+    <home-housing-banner :banner="housingBanner" />
 
     <div
       id="home__mission"
@@ -493,6 +494,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 import { ChevronDownIcon } from 'vue-feather-icons'
+import homeHousingBanner from '~/components/home/housingBanner'
 import observer from '~/components/utilities/observer'
 import pulseIcon from '~/components/universal/pulseIcon'
 import linkIcon from '~/components/universal/linkIcon'
@@ -502,8 +504,27 @@ import newsCardVertical from '~/components/now/newsCardVertical'
 import nowResourceCardData from '~/components/now/resourceCardData'
 import industryChart from '~/components/industryChart'
 
+// The housing_page fields the home-page banner shows (Directus: Housing Page → 4. Home Page
+// Banner), or null when it is switched off. The image falls back to the page image, then the
+// program's first photo, so the banner never goes out bare while its own image is still to come.
+function bannerFrom(page) {
+  if (!page || page.banner_show === false) return null
+  const clean = (value) => (typeof value === 'string' ? value.trim() : '')
+  const images = (page.program && page.program.images) || []
+  const programImage =
+    images.length && images[0].directus_files_id
+      ? images[0].directus_files_id.id
+      : null
+  return {
+    image: page.banner_image || page.page_image || programImage,
+    title: clean(page.banner_title) || clean(page.title) || 'Housing',
+    text: clean(page.banner_text),
+  }
+}
+
 export default {
   components: {
+    homeHousingBanner,
     ChevronDownIcon,
     pulseIcon,
     logoName,
@@ -530,6 +551,7 @@ export default {
       homeReq,
       newsCount,
       programsCount,
+      housingBanner,
     ] = await Promise.all([
       $axios.$get('/items/partners?fields=title,category'),
       $axios.$get(
@@ -543,8 +565,16 @@ export default {
       ),
       count('news'),
       count('programs'),
+      // The banner is an extra, so a CMS hiccup just leaves it off.
+      $axios
+        .$get(
+          '/items/housing_page?fields=banner_show,banner_image,banner_title,banner_text,title,page_image,program.images.directus_files_id.id'
+        )
+        .then((res) => bannerFrom(res.data))
+        .catch(() => null),
     ])
     return {
+      housingBanner,
       partners: partnersReq.data,
       news: newsReq.data,
       newsCount,
