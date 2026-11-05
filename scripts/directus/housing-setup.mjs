@@ -25,7 +25,7 @@
 
 import { mkdir, writeFile } from 'node:fs/promises'
 import { dirname, join } from 'node:path'
-import { fileURLToPath } from 'node:url'
+import { fileURLToPath, pathToFileURL } from 'node:url'
 import { isDeepStrictEqual } from 'node:util'
 
 // config/housingForecast.js is an ES module in a package without "type": "module". Node reads it
@@ -188,6 +188,70 @@ function imageField(name, title, groupName, sort, note) {
   })
 }
 
+// A list of plain links (title, optional description, URL), for Final Documents and
+// Opportunities. Each opens in a new tab on the site.
+function linkList(name, title, groupName, sort, note) {
+  return field(name, 'json', {
+    interface: 'list',
+    special: ['cast-json'],
+    options: {
+      template: '{{title}}',
+      addLabel: 'Add a link',
+      fields: [
+        {
+          field: 'title',
+          name: 'Title',
+          type: 'string',
+          meta: {
+            field: 'title',
+            type: 'string',
+            interface: 'input',
+            width: 'half',
+            required: true,
+            note: 'The link text.',
+            options: { trim: true },
+          },
+        },
+        {
+          field: 'url',
+          name: 'Link (URL)',
+          type: 'string',
+          meta: {
+            field: 'url',
+            type: 'string',
+            interface: 'input',
+            width: 'half',
+            required: true,
+            note: 'The full web address, starting with https://. Opens in a new tab.',
+            options: { trim: true, iconLeft: 'link' },
+            validation: { _and: [{ url: { _regex: '^https://' } }] },
+            validation_message:
+              'The link has to be a full web address starting with https:// — copy it from the address bar.',
+          },
+        },
+        {
+          field: 'description',
+          name: 'Description',
+          type: 'string',
+          meta: {
+            field: 'description',
+            type: 'string',
+            interface: 'input',
+            width: 'full',
+            note: 'Optional. One short line after the link.',
+            options: { trim: true },
+          },
+        },
+      ],
+    },
+    translations: label(title),
+    note,
+    group: groupName,
+    sort,
+    width: 'full',
+  })
+}
+
 const RICH_TEXT_OPTIONS = {
   // Bold, italic, link, bullet list, heading: the cut-down toolbar from the plan.
   toolbar: ['h3', 'bold', 'italic', 'bullist', 'customLink', 'removeformat'],
@@ -199,8 +263,7 @@ const RICH_TEXT_OPTIONS = {
     paste_webkit_styles: 'none',
     paste_remove_styles_if_webkit: true,
   },
-  placeholder:
-    'A short introduction to the Southern Tier Workforce Housing Investment Framework.',
+  placeholder: 'A short paragraph of text.',
 }
 
 function fieldDefinitions() {
@@ -222,9 +285,12 @@ function fieldDefinitions() {
       {
         interface: 'input',
         required: true,
-        options: { placeholder: 'Housing', trim: true },
+        options: {
+          placeholder: 'Regional Workforce Housing Investment Framework',
+          trim: true,
+        },
         translations: label('Page title'),
-        note: "The big heading at the top of the page, e.g. 'Housing'.",
+        note: "The big heading at the top of the page, after 'Program:'.",
         group: 'tab_page',
         sort: 1,
         width: 'half',
@@ -236,32 +302,20 @@ function fieldDefinitions() {
       'string',
       {
         interface: 'input',
-        options: {
-          placeholder: 'Southern Tier Workforce Housing Investment Framework',
-          trim: true,
-        },
+        options: { trim: true },
         translations: label('Subtitle'),
-        note: 'The line under the heading. Usually the framework’s full name.',
+        note: 'Optional. A short line under the heading; leave empty for none.',
         group: 'tab_page',
         sort: 2,
         width: 'half',
       },
       { max_length: 150 }
     ),
-    field('intro', 'text', {
-      interface: 'input-rich-text-html',
-      options: RICH_TEXT_OPTIONS,
-      translations: label('Introduction'),
-      note: 'The opening paragraphs. Pasting from Word is fine: formatting is cleaned down to bold, italic, links, lists and headings. Links to other websites open in a new tab.',
-      group: 'tab_page',
-      sort: 3,
-      width: 'full',
-    }),
     imageField(
       'page_image',
       'Page image',
       'tab_page',
-      4,
+      3,
       'The large photo at the top of the page. Landscape, at least 1600 px wide. Leave empty to use the program’s first photo.'
     ),
     field(
@@ -278,14 +332,23 @@ function fieldDefinitions() {
         translations: label('Share description'),
         note: 'Shown under the title when someone shares the page on social media or in a text message. 160 characters at most.',
         group: 'tab_page',
-        sort: 5,
+        sort: 4,
         width: 'half',
       },
       { max_length: 160 }
     ),
 
-    // 2. Framework Links
-    group('tab_links', '2. Framework Links', 3, 'open', 'link'),
+    // 2. Framework Tools: the "Explore the Framework Tools" section, an intro and its cards.
+    group('tab_links', '2. Framework Tools', 3, 'open', 'link'),
+    field('intro', 'text', {
+      interface: 'input-rich-text-html',
+      options: RICH_TEXT_OPTIONS,
+      translations: label('Intro above the cards'),
+      note: 'The text under "Explore the Framework Tools", above the cards. Pasting from Word is fine: formatting is cleaned down to bold, italic, links, lists and headings. Links to other websites open in a new tab.',
+      group: 'tab_links',
+      sort: 1,
+      width: 'full',
+    }),
     field('framework_links', 'json', {
       interface: 'list',
       special: ['cast-json'],
@@ -319,10 +382,12 @@ function fieldDefinitions() {
               note: 'Sets the icon on the card.',
               options: {
                 choices: [
+                  { text: 'Overview', value: 'overview' },
                   { text: 'Dashboard', value: 'dashboard' },
                   { text: 'Map', value: 'map' },
                   { text: 'Library', value: 'library' },
                   { text: 'Report', value: 'report' },
+                  { text: 'Get involved (a form)', value: 'involved' },
                   { text: 'Other', value: 'other' },
                 ],
               },
@@ -389,7 +454,7 @@ function fieldDefinitions() {
       translations: label('Framework links'),
       note: 'One card per link, in this order on the page. Drag the handle to reorder. A link with no title or URL is left off the page.',
       group: 'tab_links',
-      sort: 1,
+      sort: 2,
       width: 'full',
     }),
 
@@ -579,6 +644,48 @@ function fieldDefinitions() {
       { max_length: 160 }
     ),
 
+    // 6. Documents & Opportunities: the Final Documents and Opportunities to be Involved
+    // sections, each a short text and a list of links staff fill in as the project goes on.
+    group(
+      'tab_documents',
+      '6. Documents & Opportunities',
+      7,
+      'closed',
+      'description'
+    ),
+    field('final_documents_intro', 'text', {
+      interface: 'input-rich-text-html',
+      options: RICH_TEXT_OPTIONS,
+      translations: label('Final Documents: text'),
+      note: 'Under the "Final Documents" heading. The section shows whenever this or the links below have something in them.',
+      group: 'tab_documents',
+      sort: 1,
+      width: 'full',
+    }),
+    linkList(
+      'final_documents',
+      'Final Documents: links',
+      'tab_documents',
+      2,
+      'One row per document, listed in this order under the text. For a PDF, upload it to the file library, open it and copy its address.'
+    ),
+    field('opportunities_intro', 'text', {
+      interface: 'input-rich-text-html',
+      options: RICH_TEXT_OPTIONS,
+      translations: label('Opportunities to be Involved: text'),
+      note: 'Under the "Opportunities to be Involved" heading. Leave this and the links below empty to hide the section.',
+      group: 'tab_documents',
+      sort: 3,
+      width: 'full',
+    }),
+    linkList(
+      'opportunities',
+      'Opportunities to be Involved: links',
+      'tab_documents',
+      4,
+      'One row per opportunity (an RFP, a form, a notice), listed in this order under the text.'
+    ),
+
     // 5. Partners, Resources & News: the program record that supplies them, shown in place so
     // staff can edit it from here. The data stays on the program, so the Programs listing and
     // this page can't drift apart. Locked to its program: no picking another or creating one.
@@ -645,21 +752,60 @@ const COLLECTION_META = {
   ],
 }
 
+// --- Beth's copy --------------------------------------------------------------------------------
+// Also used by the one-off content update that replaced the stand-ins on the live page.
+
+export const TOOLS_INTRO =
+  '<p>Explore the data, maps, and reports behind the framework. The Framework Overview walks through the challenge, the framework, the partners, and the roadmap. The Housing Dashboard and Suitability Map show regional data, county views, and where development is best suited, and the Resource Library holds the project’s reports as each phase is finished.</p>'
+
+export const FRAMEWORK_LINKS = [
+  {
+    title: 'Framework Overview',
+    type: 'overview',
+    description: 'The challenge, the framework, partners, and roadmap.',
+    url: 'https://snap.communityscale.io/southern-tier/',
+    button_text: 'Read the overview',
+  },
+  {
+    title: 'Housing Dashboard',
+    type: 'dashboard',
+    description:
+      'Regional data and county views on affordability, population, jobs, households, housing stock, and supply needs.',
+    url: CS + '/',
+    button_text: 'Open the dashboard',
+  },
+  {
+    title: 'Housing Site Readiness Map',
+    type: 'map',
+    description: 'Where development is best suited across the region.',
+    url: 'https://snap.communityscale.io/southern-tier-hex-explorer/',
+    button_text: 'Open the map',
+  },
+  {
+    title: 'Resource Library',
+    type: 'library',
+    description:
+      'Data, maps, and reports from the project, with reports added as each phase is finished.',
+    url: 'https://snap.communityscale.io/southern-tier/#library',
+    button_text: 'Browse the library',
+  },
+]
+
 // --- Seed content -------------------------------------------------------------------------------
 // Only written into empty fields. `placeholder` marks what is waiting on Beth.
 
 function seedContent() {
   return [
-    { field: 'title', value: 'Housing' },
+    // Copy from Beth's "Housing Program Page: Content and Edits" draft (November 2026).
     {
-      field: 'subtitle',
-      value: 'Southern Tier Workforce Housing Investment Framework',
+      field: 'title',
+      value: 'Regional Workforce Housing Investment Framework',
     },
     {
       field: 'intro',
-      value:
-        '<p>The Southern Tier Workforce Housing Investment Framework brings together the data, maps and resources the eight counties of the Southern Tier 8 Region need to plan and invest in workforce housing. Start with the tools below.</p>',
-      placeholder: 'Stand-in intro until Beth sends the page copy.',
+      value: TOOLS_INTRO,
+      placeholder:
+        'Beth’s tools intro, minus its last sentence ("Organizations that want to take part can nominate a partner or pledge support…"), which waits for the Nominate and Pledge forms.',
     },
     {
       field: 'page_image',
@@ -670,38 +816,18 @@ function seedContent() {
     {
       field: 'share_description',
       value:
-        'Data, maps and resources for planning and investing in workforce housing across the eight counties of the Southern Tier 8 Region.',
+        'The Regional Workforce Housing Investment Framework: data, maps and reports for workforce housing across the Southern Tier.',
     },
     {
       field: 'framework_links',
-      value: [
-        {
-          title: 'Housing Dashboard',
-          type: 'dashboard',
-          description:
-            'Housing need, population, jobs and affordability for the Southern Tier 8 Region, with forecasts to 2031.',
-          url: DASHBOARD,
-          button_text: 'Open the dashboard',
-        },
-        {
-          title: 'Suitability Map',
-          type: 'map',
-          description:
-            'An interactive map of where new housing is best suited across the eight counties.',
-          url: CS + '/map',
-          button_text: 'Open the map',
-        },
-        {
-          title: 'Resource Library',
-          type: 'library',
-          description:
-            'Reports, guides and data behind the framework, gathered in one place.',
-          url: CS + '/',
-          button_text: 'Browse the library',
-        },
-      ],
+      value: FRAMEWORK_LINKS,
       placeholder:
-        'Links waiting on Beth’s exact URLs. Dashboard (/dashboard) and map (/map, "Suitability Explorer") are live CommunityScale pages; the Resource Library has no URL yet and points at the project home.',
+        'Nominate a Partner and Pledge Support are left off until their CommunityScale forms are live (engage.communityscale.io/southern-tier and /southern-tier-sign-on answer 404). The Site Readiness Map description is ours; Beth’s draft had none.',
+    },
+    {
+      field: 'final_documents_intro',
+      value:
+        '<p>The Framework Roadmap and final framework documents will be posted here for review as available.</p>',
     },
     { field: 'figures_as_of', value: forecast.HERO_STATS_AS_OF },
     {
@@ -729,9 +855,7 @@ function seedContent() {
     },
     {
       field: 'banner_text',
-      value:
-        'Explore the Southern Tier Workforce Housing Investment Framework.',
-      placeholder: 'Stand-in banner text.',
+      value: 'Explore the Regional Workforce Housing Investment Framework.',
     },
     { field: 'program', value: () => state.programId },
   ]
@@ -1158,7 +1282,7 @@ async function main() {
 
   if (placeholders.length) {
     console.log('')
-    console.log('Placeholders to replace when Beth sends the content:')
+    console.log('Still to come from Beth or CommunityScale:')
     for (const p of placeholders) console.log('  ! ' + p)
   }
 
@@ -1187,4 +1311,5 @@ async function main() {
   )
 }
 
-await main()
+// Run only when called directly; housing-content-2026-11.mjs imports Beth's copy from here.
+if (import.meta.url === pathToFileURL(process.argv[1]).href) await main()

@@ -58,14 +58,130 @@
             </h5>
           </div>
         </div>
+        <div
+          v-if="program.initiatives.length > 0"
+          class="w-5/6 lg:w-full flex flex-col items-center justify-center pt-6 mt-4 program__stats"
+        >
+          <div
+            class="w-full flex flex-row flex-wrap items-center justify-start"
+          >
+            <h4 class="uppercase green mr-2 mb-1 bold">
+              {{ program.initiatives.length }} Initiative<span
+                v-if="program.initiatives.length > 1"
+                >s</span
+              >
+              Served:
+            </h4>
+            <h5
+              v-for="(initiative, index) in program.initiatives"
+              :key="index"
+              class="uppercase mr-1 mb-1"
+            >
+              {{ initiative.initiatives_id.title }}
+              <span v-if="index + 1 < program.initiatives.length" class="green">
+                /</span
+              >
+            </h5>
+          </div>
+        </div>
       </div>
     </div>
 
+    <div
+      id="program__story"
+      class="flex flex-col justify-start items-center relative program__story"
+    >
+      <pulse-icon icon-i-d="start-btn" class-name="button"></pulse-icon>
+      <svg
+        id="straightLineSVG"
+        data-name="Layer 1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 1 695.51"
+      >
+        <path
+          id="straight-line"
+          data-name="Path 6808"
+          class="cls-1"
+          fill="none"
+          stroke="#1accb8"
+          stroke-width="2"
+          d="M.5,0V695.51"
+        />
+      </svg>
+      <svg
+        id="lineSVG"
+        data-name="Layer 1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 963 1479.58"
+      >
+        <path
+          id="program-line"
+          class="cls-1"
+          fill="none"
+          stroke="#1accb8"
+          stroke-width="2"
+          d="M961.5,0V155.37H1.5V456.1h960V753.44H481.12v300.23H1.5v298.51H481.12v127.4"
+        />
+      </svg>
+
+      <h3 id="purpose-title" class="uppercase green relative program__title">
+        About the Program
+      </h3>
+
+      <div
+        id="purpose-description"
+        class="relative p-6 program__description"
+        :class="{ tooLong: tooLongContent }"
+        v-html="whatItIs"
+      ></div>
+
+      <h3
+        id="accomplishes-title"
+        class="uppercase green relative program__title"
+      >
+        What the Framework Delivers
+      </h3>
+
+      <div
+        id="accomplishes-description"
+        class="relative p-6 program__description"
+      >
+        <div
+          :class="{ tooLong: tooLongContent }"
+          v-html="whatItAccomplishes"
+        ></div>
+        <div
+          v-if="program.accomplishes_links && program.accomplishes_links.length"
+          class="mt-2"
+        >
+          <nuxt-link
+            v-if="!program.accomplishes_links[0].external"
+            :to="program.accomplishes_links[0].link"
+            class="w-full absolute uppercase tracking-wider green bold text-center lg:text-left lg:px-0"
+            >{{ program.accomplishes_links[0].title }}
+            <link-icon class="ml-2"></link-icon
+          ></nuxt-link>
+          <a
+            v-else
+            :href="program.accomplishes_links[0].link"
+            target="_blank"
+            rel="noopener"
+            class="w-full absolute uppercase tracking-wider green bold text-center lg:text-left lg:px-0"
+            >{{ program.accomplishes_links[0].title }}
+            <link-icon class="ml-2"></link-icon
+          ></a>
+        </div>
+      </div>
+      <pulse-icon icon-i-d="finish-btn" class-name="button"></pulse-icon>
+    </div>
     <section
       v-if="intro || frameworkLinks.length"
       id="housing__framework"
       class="w-full flex flex-col items-center housing__framework"
     >
+      <h2 class="uppercase green relative program__title">
+        Explore the Framework Tools
+      </h2>
       <div
         v-if="intro"
         class="navy housing__intro housing__rich-text"
@@ -106,93 +222,36 @@
       </ul>
     </section>
 
-    <div
-      id="program__story"
-      class="flex flex-col justify-start items-center relative program__story"
+    <section
+      v-if="finalDocumentsIntro || finalDocuments.length"
+      id="housing__final-documents"
+      class="w-full flex flex-col items-center housing__section"
     >
-      <pulse-icon icon-i-d="start-btn" class-name="button"></pulse-icon>
-      <svg
-        id="straightLineSVG"
-        data-name="Layer 1"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 1 695.51"
-      >
-        <path
-          id="straight-line"
-          data-name="Path 6808"
-          class="cls-1"
-          fill="none"
-          stroke="#1accb8"
-          stroke-width="2"
-          d="M.5,0V695.51"
-        />
-      </svg>
-      <svg
-        id="lineSVG"
-        data-name="Layer 1"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 963 1479.58"
-      >
-        <path
-          id="program-line"
-          class="cls-1"
-          fill="none"
-          stroke="#1accb8"
-          stroke-width="2"
-          d="M961.5,0V155.37H1.5V456.1h960V753.44H481.12v300.23H1.5v298.51H481.12v127.4"
-        />
-      </svg>
-
-      <h3 id="purpose-title" class="uppercase green relative program__title">
-        What it is.
-      </h3>
-
+      <h2 class="uppercase green relative program__title">Final Documents</h2>
       <div
-        id="purpose-description"
-        class="relative p-6 program__description"
-        :class="{ tooLong: tooLongContent }"
-        v-html="whatItIs"
+        v-if="finalDocumentsIntro"
+        class="navy housing__intro housing__rich-text"
+        v-html="finalDocumentsIntro"
       ></div>
+      <housing-link-list :links="finalDocuments" />
+    </section>
 
-      <h3
-        id="accomplishes-title"
-        class="uppercase green relative program__title"
-      >
-        What it accomplishes.
-      </h3>
-
+    <section
+      v-if="opportunitiesIntro || opportunities.length"
+      id="housing__opportunities"
+      class="w-full flex flex-col items-center housing__section"
+    >
+      <h2 class="uppercase green relative program__title">
+        Opportunities to be Involved
+      </h2>
       <div
-        id="accomplishes-description"
-        class="relative p-6 program__description"
-      >
-        <div
-          :class="{ tooLong: tooLongContent }"
-          v-html="whatItAccomplishes"
-        ></div>
-        <div
-          v-if="program.accomplishes_links && program.accomplishes_links.length"
-          class="mt-2"
-        >
-          <nuxt-link
-            v-if="!program.accomplishes_links[0].external"
-            :to="program.accomplishes_links[0].link"
-            class="w-full absolute uppercase tracking-wider green bold text-center lg:text-left lg:px-0"
-            >{{ program.accomplishes_links[0].title }}
-            <link-icon class="ml-2"></link-icon
-          ></nuxt-link>
-          <a
-            v-else
-            :href="program.accomplishes_links[0].link"
-            target="_blank"
-            rel="noopener"
-            class="w-full absolute uppercase tracking-wider green bold text-center lg:text-left lg:px-0"
-            >{{ program.accomplishes_links[0].title }}
-            <link-icon class="ml-2"></link-icon
-          ></a>
-        </div>
-      </div>
-      <pulse-icon icon-i-d="finish-btn" class-name="button"></pulse-icon>
-    </div>
+        v-if="opportunitiesIntro"
+        class="navy housing__intro housing__rich-text"
+        v-html="opportunitiesIntro"
+      ></div>
+      <housing-link-list :links="opportunities" />
+    </section>
+
     <div
       class="flex flex-col justify-center items-center relative program__related"
     >
@@ -234,7 +293,9 @@
         id="program__resources"
         class="w-full flex justify-center items-center flex-row flex-wrap relative"
       >
-        <h2 class="uppercase green relative program__title">Resources</h2>
+        <h2 class="uppercase green relative program__title">
+          Related Resources
+        </h2>
         <swiper
           :options="resourcesSwiperOption"
           class="swiper w-full flex flex-row items-center justify-center pt-4 pb-4"
@@ -317,9 +378,12 @@ import {
   MapIcon,
   BookOpenIcon,
   FileTextIcon,
+  CompassIcon,
+  UsersIcon,
   ExternalLinkIcon,
 } from 'vue-feather-icons'
 import programPage from './_slug.vue'
+import housingLinkList from '~/components/housing/linkList'
 import { PROGRAM_FIELDS } from '~/config/programs'
 import {
   shareMeta,
@@ -342,16 +406,22 @@ const PAGE_FIELDS = [
   'page_image',
   'share_description',
   'framework_links',
+  'final_documents_intro',
+  'final_documents',
+  'opportunities_intro',
+  'opportunities',
   'program',
 ].join(',')
 
 // Card icon for each link type; anything else gets the generic external-link icon. Names, not
 // components, because asyncData's result is serialised into the page for the browser.
 const ICONS = {
+  overview: 'compass-icon',
   dashboard: 'bar-chart2-icon',
   map: 'map-icon',
   library: 'book-open-icon',
   report: 'file-text-icon',
+  involved: 'users-icon',
 }
 
 const clean = (value) => (typeof value === 'string' ? value.trim() : '')
@@ -369,13 +439,27 @@ function frameworkLinks(rows) {
     }))
 }
 
+// The Final Documents and Opportunities lists: title, URL and an optional line of description.
+function plainLinks(rows) {
+  return (Array.isArray(rows) ? rows : [])
+    .filter((row) => row && clean(row.title) && /^https?:\/\//i.test(row.url))
+    .map((row) => ({
+      title: clean(row.title),
+      url: clean(row.url),
+      description: clean(row.description),
+    }))
+}
+
 export default {
   components: {
     BarChart2Icon,
     MapIcon,
     BookOpenIcon,
     FileTextIcon,
+    CompassIcon,
+    UsersIcon,
     ExternalLinkIcon,
+    housingLinkList,
   },
   extends: programPage,
   async asyncData({ $axios, error }) {
@@ -412,6 +496,12 @@ export default {
       subtitle: clean(page.subtitle),
       intro: openExternalLinksInNewTab(page.intro),
       frameworkLinks: frameworkLinks(page.framework_links),
+      finalDocumentsIntro: openExternalLinksInNewTab(
+        page.final_documents_intro
+      ),
+      finalDocuments: plainLinks(page.final_documents),
+      opportunitiesIntro: openExternalLinksInNewTab(page.opportunities_intro),
+      opportunities: plainLinks(page.opportunities),
       heroImage: page.page_image || programImage,
       shareDescription:
         clean(page.share_description) ||

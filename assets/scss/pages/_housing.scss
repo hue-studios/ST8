@@ -4,8 +4,8 @@
 // shares everything else with.
 
 #program.housing {
-  // The program hero fills the screen; here the framework links are the point of the page, so
-  // the hero shrinks to its content and the links start above the fold.
+  // The program hero fills the screen; here it shrinks to its content, so About the Program
+  // starts above the fold.
   #program__intro.housing__hero {
     height: auto;
     min-height: 0;
@@ -26,10 +26,56 @@
     }
   }
 
-  .housing__framework {
+  // Explore the Framework Tools, Final Documents and Opportunities, between the program story
+  // and Partners.
+  .housing__framework,
+  .housing__section {
     padding: 8px 0 64px;
     @media (min-width: $breakpoint-medium) {
       padding: 16px 0 88px;
+    }
+    // Sized like the Partners and Related Resources headings below (_program.scss scopes those
+    // to .program__related), with less space above since each follows another section.
+    .program__title {
+      font-size: 22px;
+      line-height: 24px;
+      letter-spacing: 0.1em;
+      text-align: center;
+      padding-top: 40px;
+      margin-bottom: 28px;
+      @media (min-width: $breakpoint-medium) {
+        font-size: 26px;
+        line-height: 28px;
+        padding-top: 56px;
+      }
+      @media (min-width: $breakpoint-large) {
+        font-size: 42px;
+        line-height: 40px;
+        letter-spacing: 0.2em;
+        padding-top: 72px;
+        margin-bottom: 40px;
+      }
+    }
+  }
+
+  .housing__link-list {
+    width: 83.333%;
+    max-width: 720px;
+    font-size: 15px;
+    line-height: 1.5em;
+    li {
+      padding: 12px 0;
+      border-top: 1px solid rgba($navy, 0.1);
+      &:last-child {
+        border-bottom: 1px solid rgba($navy, 0.1);
+      }
+    }
+    a {
+      display: inline-flex;
+      align-items: center;
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 
