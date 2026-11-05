@@ -84,17 +84,6 @@
             </h5>
           </div>
         </div>
-        <div
-          v-if="hasHousingForecast"
-          class="w-5/6 lg:w-full flex flex-col items-center justify-center pt-6 mt-4 program__stats"
-        >
-          <nuxt-link
-            to="/regional-housing-forecast"
-            class="uppercase green bold tracking-widest program__forecast-link"
-          >
-            View the regional housing forecast &rarr;
-          </nuxt-link>
-        </div>
       </div>
     </div>
     <div
@@ -297,7 +286,6 @@ import newsCardVertical from '~/components/now/newsCardVertical'
 import resourceCard from '~/components/now/resourceCardVertical'
 import pulseIcon from '~/components/universal/pulseIcon'
 import linkIcon from '~/components/universal/linkIcon'
-import { PROGRAM_SLUG as HOUSING_FORECAST_PROGRAM_SLUG } from '~/config/housingForecast'
 import { shareMeta, cardText, shareCard, DEFAULT_CARD } from '~/config/share'
 export default {
   components: {
@@ -404,12 +392,6 @@ export default {
         imageAlt: title,
       }),
     }
-  },
-  computed: {
-    // One program has a data dashboard of its own; link across to it from its page.
-    hasHousingForecast() {
-      return this.program.url === HOUSING_FORECAST_PROGRAM_SLUG
-    },
   },
   beforeDestroy() {
     window.removeEventListener('scroll', this.lineFunction)

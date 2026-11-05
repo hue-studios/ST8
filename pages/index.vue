@@ -204,7 +204,6 @@
         <chevron-down-icon size="1.5x"></chevron-down-icon>
       </div>
     </div>
-    <home-housing-forecast-callout :counties="counties" />
 
     <div
       id="home__mission"
@@ -494,7 +493,6 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 import { ChevronDownIcon } from 'vue-feather-icons'
-import homeHousingForecastCallout from '~/components/home/housingForecastCallout'
 import observer from '~/components/utilities/observer'
 import pulseIcon from '~/components/universal/pulseIcon'
 import linkIcon from '~/components/universal/linkIcon'
@@ -506,7 +504,6 @@ import industryChart from '~/components/industryChart'
 
 export default {
   components: {
-    homeHousingForecastCallout,
     ChevronDownIcon,
     pulseIcon,
     logoName,
@@ -547,17 +544,7 @@ export default {
       count('news'),
       count('programs'),
     ])
-
-    // Labels and routes for the housing-forecast callout's map; it is decorative enough that a
-    // CMS hiccup should just leave the map unlabelled rather than break the home page.
-    const counties = await $axios
-      .$get(
-        '/items/counties?sort=sort&filter[status][_eq]=published&fields=title,url,geoid'
-      )
-      .then((res) => res.data.filter((c) => c.geoid))
-      .catch(() => [])
     return {
-      counties,
       partners: partnersReq.data,
       news: newsReq.data,
       newsCount,
