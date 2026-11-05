@@ -698,7 +698,7 @@ function seedContent() {
       field: 'banner_image',
       value: null,
       placeholder:
-        'No banner image yet; the banner uses the page image (then the program’s photo) until one is uploaded.',
+        'No banner image yet; the banner uses the page image, or a plain navy band if there is none, until one is uploaded.',
     },
     {
       field: 'banner_title',

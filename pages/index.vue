@@ -505,18 +505,14 @@ import nowResourceCardData from '~/components/now/resourceCardData'
 import industryChart from '~/components/industryChart'
 
 // The housing_page fields the home-page banner shows (Directus: Housing Page → 4. Home Page
-// Banner), or null when it is switched off. The image falls back to the page image, then the
-// program's first photo, so the banner never goes out bare while its own image is still to come.
+// Banner), or null when it is switched off. With no banner image it uses the page image, and with
+// neither it is a plain navy band. It deliberately skips the program's own image: that is a
+// graphic with lettering of its own, which fights the banner's text.
 function bannerFrom(page) {
   if (!page || page.banner_show === false) return null
   const clean = (value) => (typeof value === 'string' ? value.trim() : '')
-  const images = (page.program && page.program.images) || []
-  const programImage =
-    images.length && images[0].directus_files_id
-      ? images[0].directus_files_id.id
-      : null
   return {
-    image: page.banner_image || page.page_image || programImage,
+    image: page.banner_image || page.page_image || null,
     title: clean(page.banner_title) || clean(page.title) || 'Housing',
     text: clean(page.banner_text),
   }
@@ -568,7 +564,7 @@ export default {
       // The banner is an extra, so a CMS hiccup just leaves it off.
       $axios
         .$get(
-          '/items/housing_page?fields=banner_show,banner_image,banner_title,banner_text,title,page_image,program.images.directus_files_id.id'
+          '/items/housing_page?fields=banner_show,banner_image,banner_title,banner_text,title,page_image'
         )
         .then((res) => bannerFrom(res.data))
         .catch(() => null),
