@@ -89,3 +89,6 @@ sw.*
 
 # Vim swap files
 *.swp
+
+# Directus setup-script backups (schema snapshots, content)
+scripts/directus/backups/
