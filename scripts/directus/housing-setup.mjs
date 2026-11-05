@@ -605,20 +605,21 @@ const COLLECTION_META = {
   note: 'The Housing program page and the housing banner on the home page.',
   singleton: true,
   hidden: false,
-  display_template: 'Housing Page',
+  display_template: 'Housing',
   accountability: 'all',
-  // Top of the sidebar: the other top-level entries (Website, Site Pages, Submissions) are 1–3.
-  group: null,
-  sort: 0,
+  // Shown as "Housing" in the Site Pages group, after Home (1), Organization (2) and How to
+  // Apply (3). Only the label changes; the collection is still housing_page in the API.
+  group: 'site_pages',
+  sort: 4,
   collapse: 'open',
   // The Preview button opens the live page.
   preview_url: SITE_URL + PAGE_PATH,
   translations: [
     {
       language: 'en-US',
-      translation: 'Housing Page',
-      singular: 'Housing Page',
-      plural: 'Housing Page',
+      translation: 'Housing',
+      singular: 'Housing',
+      plural: 'Housing',
     },
   ],
 }
@@ -820,7 +821,7 @@ async function planSetup() {
   if (!collection) {
     change(
       '+',
-      `create collection ${COLLECTION} (singleton, top of sidebar, preview → ${SITE_URL}${PAGE_PATH})`,
+      `create collection ${COLLECTION} (singleton, Site Pages group, preview → ${SITE_URL}${PAGE_PATH})`,
       () =>
         api('POST', '/collections', {
           collection: COLLECTION,

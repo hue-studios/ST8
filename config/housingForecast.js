@@ -35,7 +35,7 @@ export const PROGRAM_SLUG = 'housing'
 // The four headline figures beside the map, mirroring the summary CommunityScale puts at the top
 // of its own dashboard.
 //
-// Staff keep these in Directus under Housing Page → 3. Forecast Figures, so a new vintage needs no
+// Staff keep these in Directus under Site Pages → Housing → 3. Forecast Figures, so a new vintage needs no
 // deploy; the values below are only the fallback for a field left blank or a CMS that does not
 // answer (see forecastFigures). CommunityScale renders the figures into its dashboard page and
 // offers no public endpoint for them — the per-card JSON its charts use is disallowed in their
@@ -230,7 +230,7 @@ export const SECTIONS = [
 
 // The figure the rest of the page builds towards. CommunityScale renders this one inline on its
 // dashboard rather than as a card — there is no /cards/ page for it to embed — so, like the hero
-// stats, staff keep the three numbers in Directus (Housing Page → 3. Forecast Figures) and the
+// stats, staff keep the three numbers in Directus (Site Pages → Housing → 3. Forecast Figures) and the
 // values here are the fallback. Heading, labels and details stay in code. It is a regional total,
 // so the county pages leave it out. `intro` is built from the total in forecastFigures, so it is
 // not repeated here.

@@ -31,7 +31,7 @@
 
 <script>
 // The Housing banner on the home page. Everything on it (image, title, text, and whether it shows
-// at all) is edited in Directus under Housing Page → 4. Home Page Banner; the home page fetches it
+// at all) is edited in Directus under Site Pages → Housing → 4. Home Page Banner; the home page fetches it
 // and passes it in, or passes null to leave the banner off.
 import linkIcon from '~/components/universal/linkIcon'
 

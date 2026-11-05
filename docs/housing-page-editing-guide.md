@@ -1,15 +1,15 @@
 # How to edit the Housing page
 
-**In short:** In Directus, open **Housing Page** at the top of the left sidebar. Make your changes, then click the checkmark at the top right to save. Click the **Preview** button (the eye icon at the top) to see the live page.
+**In short:** In Directus, open **Site Pages → Housing** in the left sidebar. Make your changes, then click **Save** at the top right. Click the **Preview** button (the eye icon at the top) to see the live page.
 
 ## Before you start
 
 - Log in at https://manage.southerntier8.org with your own login.
-- You need the **Content Editor** role. If you can't see **Housing Page**, ask Peter.
+- You need the **Content Editor** role. If you can't see **Housing** under **Site Pages**, ask Peter.
 
 ## Open the page
 
-1. Click **Housing Page** at the top of the left sidebar.
+1. In the left sidebar, under **Site Pages**, click **Housing**.
 2. It opens straight away. There is only one page, so there's no list.
 3. You'll see four sections. Click a section's heading to open or close it.
    - **1. Page**
@@ -17,11 +17,11 @@
    - **3. Forecast Figures**
    - **4. Home Page Banner**
 
-![Housing Page open in Directus, with the Save button top right and the Preview eye icon beside it](images/housing-guide/01-page.jpg)
+![Site Pages → Housing open in Directus, with the Save button top right and the Preview eye icon beside it](images/housing-guide/01-page.jpg)
 
 ## Save and preview
 
-1. Click the checkmark at the top right to save.
+1. Click **Save** at the top right.
 2. Click **Preview** to open the live page at https://southerntier8.org/economic-development-programs/housing
 3. Changes show on the next page load. You don't need a developer.
 

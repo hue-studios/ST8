@@ -504,7 +504,7 @@ import newsCardVertical from '~/components/now/newsCardVertical'
 import nowResourceCardData from '~/components/now/resourceCardData'
 import industryChart from '~/components/industryChart'
 
-// The housing_page fields the home-page banner shows (Directus: Housing Page → 4. Home Page
+// The housing_page fields the home-page banner shows (Directus: Site Pages → Housing → 4. Home Page
 // Banner), or null when it is switched off. With no banner image it uses the page image, and with
 // neither it is a plain navy band. It deliberately skips the program's own image: that is a
 // graphic with lettering of its own, which fights the banner's text.
