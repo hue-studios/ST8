@@ -1,0 +1,152 @@
+@use '../vars' as *;
+
+// The Housing program page. Layered over the program page's styles (_program.scss), which it
+// shares everything else with.
+
+#program.housing {
+  // The program hero fills the screen; here the framework links are the point of the page, so
+  // the hero shrinks to its content and the links start above the fold.
+  #program__intro.housing__hero {
+    height: auto;
+    min-height: 0;
+    padding: 110px 0 48px;
+    @media (min-width: $breakpoint-large) {
+      height: auto;
+      padding: 56px 0 56px;
+    }
+  }
+
+  .housing__subtitle {
+    margin-top: 12px;
+    font-size: 13px;
+    line-height: 1.4em;
+    letter-spacing: 0.04em;
+    @media (min-width: $breakpoint-medium) {
+      font-size: 16px;
+    }
+  }
+
+  .housing__framework {
+    padding: 8px 0 64px;
+    @media (min-width: $breakpoint-medium) {
+      padding: 16px 0 88px;
+    }
+  }
+
+  .housing__intro {
+    width: 83.333%;
+    max-width: 720px;
+    margin-bottom: 40px;
+    font-size: 15px;
+    line-height: 1.6em;
+    @media (min-width: $breakpoint-medium) {
+      font-size: 16px;
+      margin-bottom: 56px;
+    }
+  }
+
+  // Rich text from the CMS, kept to the handful of tags its toolbar allows.
+  .housing__rich-text {
+    p,
+    ul,
+    ol {
+      margin-bottom: 1em;
+    }
+    ul {
+      list-style: disc;
+      padding-left: 1.25em;
+    }
+    ol {
+      list-style: decimal;
+      padding-left: 1.25em;
+    }
+    h2,
+    h3,
+    h4 {
+      font-family: $bold-font;
+      color: $navy;
+      margin: 1.25em 0 0.5em;
+    }
+    strong {
+      font-family: $bold-font;
+    }
+    a {
+      color: $green;
+      border-bottom: 1px solid rgba($green, 0.5);
+      &:hover {
+        border-bottom-color: $green;
+      }
+    }
+    > :last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .housing__links {
+    width: 83.333%;
+    max-width: 1100px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    @media (min-width: $breakpoint-medium) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+    @media (min-width: $breakpoint-large) {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+  }
+
+  .housing__link-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 28px 24px 24px;
+    background: $white;
+    border: 1px solid rgba($navy, 0.09);
+    border-top: 3px solid $green;
+    border-radius: 3px;
+    box-shadow: 0 6px 18px -8px rgba($navy, 0.18);
+  }
+
+  .housing__link-icon {
+    width: 28px;
+    height: 28px;
+    margin-bottom: 16px;
+  }
+
+  .housing__link-title {
+    font-size: 15px;
+    line-height: 1.25em;
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+    @media (min-width: $breakpoint-medium) {
+      font-size: 17px;
+    }
+  }
+
+  .housing__link-description {
+    font-size: 14px;
+    line-height: 1.5em;
+    margin-bottom: 20px;
+  }
+
+  // Pinned to the bottom of the card, so buttons line up across a row whatever the copy length.
+  .housing__link-button {
+    margin-top: auto;
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 18px;
+    font-size: 11px;
+    line-height: 1em;
+    color: $white;
+    background: $navy;
+    border-radius: 2px;
+    transition: background-color 0.25s $curve;
+    &:hover,
+    &:focus-visible {
+      background: $green;
+    }
+  }
+}

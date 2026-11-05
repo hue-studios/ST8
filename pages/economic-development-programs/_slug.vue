@@ -287,6 +287,7 @@ import resourceCard from '~/components/now/resourceCardVertical'
 import pulseIcon from '~/components/universal/pulseIcon'
 import linkIcon from '~/components/universal/linkIcon'
 import { shareMeta, cardText, shareCard, DEFAULT_CARD } from '~/config/share'
+import { PROGRAM_FIELDS } from '~/config/programs'
 export default {
   components: {
     pulseIcon,
@@ -302,7 +303,9 @@ export default {
       $axios.$get(
         '/items/programs?filter[url][_eq]=' +
           encodeURIComponent(params.slug) +
-          '&fields=id,title,what_is_it,what_it_accomplishes,accomplishes_links,url,counties.counties_id.title,initiatives.initiatives_id.title,images.directus_files_id.id,partners.partners_id.title,partners.partners_id.logo.id,partners.partners_id.logo.width,partners.partners_id.logo.height,resources.resources_id.title,resources.resources_id.type,resources.resources_id.link,resources.resources_id.file.id,news.news_id.title,news.news_id.article,news.news_id.link,news.news_id.type,news.news_id.tags,news.news_id.date_published,news.news_id.date_created,news.news_id.date_updated,news.news_id.url,news.news_id.cover_image.id&limit=1'
+          '&fields=' +
+          PROGRAM_FIELDS +
+          '&limit=1'
       ),
     ])
     const program = programReq.data[0]

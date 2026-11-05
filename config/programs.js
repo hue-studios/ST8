@@ -1,0 +1,32 @@
+// The fields a program page reads from Directus, shared by the generic program page
+// (pages/economic-development-programs/_slug.vue) and the Housing page, which shows the same
+// counties, partners, resources and news from its program record.
+export const PROGRAM_FIELDS = [
+  'id',
+  'title',
+  'what_is_it',
+  'what_it_accomplishes',
+  'accomplishes_links',
+  'url',
+  'counties.counties_id.title',
+  'initiatives.initiatives_id.title',
+  'images.directus_files_id.id',
+  'partners.partners_id.title',
+  'partners.partners_id.logo.id',
+  'partners.partners_id.logo.width',
+  'partners.partners_id.logo.height',
+  'resources.resources_id.title',
+  'resources.resources_id.type',
+  'resources.resources_id.link',
+  'resources.resources_id.file.id',
+  'news.news_id.title',
+  'news.news_id.article',
+  'news.news_id.link',
+  'news.news_id.type',
+  'news.news_id.tags',
+  'news.news_id.date_published',
+  'news.news_id.date_created',
+  'news.news_id.date_updated',
+  'news.news_id.url',
+  'news.news_id.cover_image.id',
+].join(',')

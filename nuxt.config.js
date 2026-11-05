@@ -5,6 +5,17 @@ const DIRECTUS_URL = (
   process.env.DIRECTUS_URL || 'https://manage.southerntier8.org'
 ).replace(/\/$/, '')
 
+// Permanent (301) redirects, matched with and without a trailing slash.
+function redirects(map) {
+  const rules = {}
+  for (const [from, to] of Object.entries(map)) {
+    const rule = { redirect: { to, statusCode: 301 } }
+    rules[from] = rule
+    rules[from + '/'] = rule
+  }
+  return rules
+}
+
 export default defineNuxtConfig({
   // Enable Bridge features
   bridge: {
@@ -202,6 +213,19 @@ export default defineNuxtConfig({
   /*
    ** Server routes
    */
+  /*
+   ** Redirects. In code rather than the CMS so a content edit can't break the printed URLs:
+   ** /programs/housing is on the summit QR codes, slides and handouts.
+   */
+  nitro: {
+    routeRules: redirects({
+      '/programs': '/economic-development-programs',
+      '/programs/housing': '/economic-development-programs/housing',
+      // The Housing program's slug before it moved to /housing.
+      '/economic-development-programs/southern-tier-s-capital-stack-for-workforce-housing':
+        '/economic-development-programs/housing',
+    }),
+  },
   serverMiddleware: [
     // Share cards are proxied from the CMS through this host so crawlers can fetch them.
     { path: '/share-image/**', handler: '~/server/shareImage.js' },
