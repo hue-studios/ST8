@@ -43,7 +43,9 @@ const DASHBOARD = CS + '/dashboard'
 const FOLDER_NAME = 'Housing'
 const PUBLIC_POLICY = 'abf8a154-5b1c-4a46-ac9c-7300570f4f17'
 
-const OLD_SLUG = forecast.PROGRAM_SLUG // southern-tier-s-capital-stack-for-workforce-housing
+// The program record's url before this script; --remove puts it back. Written out rather than
+// read from config/housingForecast.js, whose PROGRAM_SLUG now follows the record to 'housing'.
+const OLD_SLUG = 'southern-tier-s-capital-stack-for-workforce-housing'
 const NEW_SLUG = 'housing'
 const ORIGINAL_TITLE = "Southern Tier's Capital Stack for Workforce Housing"
 
