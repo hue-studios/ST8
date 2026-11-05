@@ -9,7 +9,11 @@
       >
         ARC Opportunities
       </h1>
-      <p v-if="apply.introduction">{{ apply.introduction }}</p>
+      <p
+        v-if="apply.introduction"
+        class="whitespace-pre-line"
+        v-text="apply.introduction.trim()"
+      ></p>
     </div>
     <div
       id="apply-info"

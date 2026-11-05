@@ -15,7 +15,11 @@
       </div>
       <div class="flex flex-col justify-center items-start statement">
         <h2 class="uppercase green tracking-widest thin-font">Mission</h2>
-        <p class="navy">{{ organization.mission_statement }}</p>
+        <!-- Plain text from the CMS: keep staff's line breaks (see the whitespace-pre-line below). -->
+        <p
+          class="navy whitespace-pre-line"
+          v-text="(organization.mission_statement || '').trim()"
+        ></p>
       </div>
     </div>
     <div
@@ -48,27 +52,30 @@
         >
           Our Vision
         </h2>
-        <div class="mb-20 pb-4 text-justify">
-          {{ organization.who_we_are }}
-        </div>
+        <div
+          class="mb-20 pb-4 text-justify whitespace-pre-line"
+          v-text="(organization.who_we_are || '').trim()"
+        ></div>
 
         <h2
           class="w-full page-title uppercase tracking-widest mt-8 thin-font pt-2 pb-1 mb-20 text-center relative"
         >
           Our Approach
         </h2>
-        <div class="mb-20 pb-4 text-justify">
-          {{ organization.our_role }}
-        </div>
+        <div
+          class="mb-20 pb-4 text-justify whitespace-pre-line"
+          v-text="(organization.our_role || '').trim()"
+        ></div>
 
         <h2
           class="w-full page-title uppercase text-center tracking-widest thin-font mt-8 pt-2 pb-1 mb-20 relative"
         >
           Our History
         </h2>
-        <div class="mb-20 pb-4 text-justify">
-          {{ organization.our_history }}
-        </div>
+        <div
+          class="mb-20 pb-4 text-justify whitespace-pre-line"
+          v-text="(organization.our_history || '').trim()"
+        ></div>
 
         <p
           class="w-full text-center mb-20 py-4 tracking-widest uppercase bold text-xs"

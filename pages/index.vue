@@ -35,13 +35,16 @@
           >Now</a
         >
       </div>
+      <!-- Plain text from the CMS, run together as one paragraph. Unlike the other plain-text
+           fields this one ignores line breaks: it is pinned to the bottom of the intro panel and
+           grows upward, and the current text already reaches the Active / Regional / Now row on
+           a phone, so every extra line would push it over them. -->
       <h4
         v-if="homeData.introduction"
         :class="{ hide: hideMessage }"
         class="bold navy tracking-wider absolute home-intro__intro"
-      >
-        {{ homeData.introduction }}
-      </h4>
+        v-text="homeData.introduction.trim()"
+      ></h4>
       <h4
         v-else
         :class="{ hide: hideMessage }"
@@ -217,7 +220,12 @@
         <h2 class="uppercase white tracking-wider thin-font mb-2 lg:mb-0">
           Mission Statement
         </h2>
-        <p class="white xl:ml-2">{{ organization.mission_statement }}</p>
+        <!-- Plain text from the CMS: keep staff's line breaks, trimmed so a trailing one leaves no
+             gap. v-text, not {{ }}, so the template's own indentation stays out of it. -->
+        <p
+          class="white whitespace-pre-line xl:ml-2"
+          v-text="(organization.mission_statement || '').trim()"
+        ></p>
       </div>
       <nuxt-link
         to="/regional-organization"

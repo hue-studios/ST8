@@ -97,9 +97,9 @@ function notice(field, sort, text, group = null) {
   }
 }
 
-// These fields are printed as plain text, and the page runs line breaks together.
+// These fields are printed as plain text with the line breaks kept.
 const PLAIN_TEXT =
-  'Plain text only. Line breaks don’t show on the page: it all runs as one paragraph.'
+  'Plain text only. Line breaks show on the page as typed: leave a blank line between paragraphs.'
 
 // Per collection: the collection's own settings, new display-only fields (section headers and
 // notices), and label/note/layout changes to existing fields. Existing fields are only patched
@@ -123,9 +123,7 @@ const COLLECTIONS = [
       introduction: {
         sort: 3,
         translations: label('Welcome text'),
-        note:
-          'The short text over the photo at the top of the home page. Two or three sentences. If it is empty the page says "Welcome to our digital experience." ' +
-          PLAIN_TEXT,
+        note: 'The short text over the photo at the top of the home page. If it is empty the page says "Welcome to our digital experience." Plain text only. Line breaks don’t show here: it runs as one paragraph. Keep it short: on a phone the current text only just fits under the Active / Regional / Now buttons.',
       },
       featured_resource: {
         sort: 4,
