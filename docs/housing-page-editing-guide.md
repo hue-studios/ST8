@@ -2,8 +2,6 @@
 
 **In short:** In Directus, open **Housing Page** at the top of the left sidebar. Make your changes, then click the checkmark at the top right to save. Click the **Preview** button (the eye icon at the top) to see the live page.
 
-<!-- Screenshot: the Housing Page entry at the top of the left sidebar -->
-
 ## Before you start
 
 - Log in at https://manage.southerntier8.org with your own login.
@@ -19,7 +17,7 @@
    - **3. Forecast Figures**
    - **4. Home Page Banner**
 
-<!-- Screenshot: the Housing Page with the four sections -->
+![Housing Page open in Directus, with the Save button top right and the Preview eye icon beside it](images/housing-guide/01-page.jpg)
 
 ## Save and preview
 
@@ -41,24 +39,30 @@ The short address **southerntier8.org/programs/housing** (the one on QR codes an
 
 Each row is one card on the page. Cards show in list order.
 
+![The Framework Links list: one row per card, with a drag handle on the left and a trash icon on the right](images/housing-guide/02-framework-links.jpg)
+
 - **Add a link:** adds a new row.
-- **Click a row** to open it and edit it.
-- **Drag the handle** to change the order.
-- **Delete** a row with its x or trash icon.
+- **Click a row** to open it and edit it. When you're done, click **Save** at the top of that panel, then save the whole page with the main **Save** button.
+- **Drag the handle** (the two lines on the left) to change the order.
+- **Delete** a row with its trash icon.
 
 Each row has these fields:
+
+![One link open for editing: Title, Type, Description, Link (url) and Button Text](images/housing-guide/03-link-row.jpg)
 
 - **Title** (required): the card's heading.
 - **Type**: Dashboard, Map, Library, Report or Other. This sets the card's icon.
 - **Description**: 200 characters at most.
-- **Link (URL)** (required): must start with https://. Copy it from the browser's address bar.
-- **Button text**: e.g. "Open the dashboard". Left empty, the button says "Open".
+- **Link (url)** (required): must start with https://. Copy it from the browser's address bar.
+- **Button Text**: e.g. "Open the dashboard". Left empty, the button says "Open".
 
 Card buttons open in a new tab. A row with no title or link is left off the page, so it never shows as a broken card.
 
 ## 3. Forecast Figures
 
 These numbers appear only on the Housing Forecast pages (southerntier8.org/regional-housing-forecast). They are not on the Housing page, and those pages are no longer linked from the menus.
+
+![The Forecast Figures section: Figures as of, the four headline figures, and the five-year need numbers below](images/housing-guide/04-forecast-figures.jpg)
 
 When CommunityScale posts new numbers, copy them from the dashboard at https://southerntierny.communityscale.io/dashboard:
 
@@ -70,7 +74,9 @@ If a box is left empty, the site shows the last figures built in, so the page ne
 
 ## 4. Home Page Banner
 
-- **Show on home page:** switch off to hide the banner. Nothing is deleted, so you can switch it back on at any time.
+![The Home Page Banner section: the Show on home page tick box, Banner image, Banner title and Banner text](images/housing-guide/05-home-banner.jpg)
+
+- **Show on home page:** untick the box (and save) to hide the banner. Nothing is deleted, so you can tick it again at any time.
 - **Banner image:** a wide photo, ideally 1600 × 600 pixels. Uploads go to the "Housing" folder in the file library. Left empty, the banner uses the page image, or shows a plain navy band if there is none.
 - **Banner title:** a few words, shown large.
 - **Banner text:** one short line, about 140 characters at most.
@@ -89,4 +95,16 @@ The Housing page also shows partners, resources, related news, counties served, 
 - [ ] **Banner title and banner text:** replace the stand-ins.
 - [ ] **Dashboard and Suitability Map links:** check they're the addresses Beth wants (they point at CommunityScale's /dashboard and /map pages).
 - [ ] **Resource Library link:** it points at the CommunityScale project home for now. Replace it with the real address when CommunityScale sends it.
-- [ ] **After the summit:** switch off **Show on home page**.
+- [ ] **After the summit:** untick **Show on home page**.
+
+## When the page is shared on Facebook
+
+Facebook keeps its own copy of a page's title, description and image, and doesn't notice when they change. After you change the **Page image**, **Page title**, **Subtitle** or **Share description**, refresh Facebook's copy:
+
+1. Go to https://developers.facebook.com/tools/debug/ (log in with your Facebook account).
+2. Paste the address, click **Debug**, then click **Scrape Again**.
+3. Do it for each of these:
+   - https://southerntier8.org/economic-development-programs/housing
+   - https://southerntier8.org/programs/housing
+
+LinkedIn has the same tool at https://www.linkedin.com/post-inspector/.
