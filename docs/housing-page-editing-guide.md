@@ -11,11 +11,12 @@
 
 1. In the left sidebar, under **Site Pages**, click **Housing**.
 2. It opens straight away. There is only one page, so there's no list.
-3. You'll see four sections. Click a section's heading to open or close it.
+3. You'll see five sections. Click a section's heading to open or close it.
    - **1. Page**
    - **2. Framework Links**
    - **3. Forecast Figures**
    - **4. Home Page Banner**
+   - **5. Partners, Resources & News**
 
 ![Site Pages → Housing open in Directus, with the Save button top right and the Preview eye icon beside it](images/housing-guide/01-page.jpg)
 
@@ -83,9 +84,23 @@ If a box is left empty, the site shows the last figures built in, so the page ne
 
 The whole banner links to the Housing page.
 
-## Behind the scenes
+## 5. Partners, Resources & News
 
-The Housing page also shows partners, resources, related news, counties served, and the "What it is" and "What it accomplishes" text. Those aren't edited here: they come from the program record under **Website → Programs** (the program whose URL is "housing", currently titled "Southern Tier's Capital Stack for Workforce Housing"). Edit them there as you would for any program. Don't change that program's URL field, because the Housing page and its short address depend on it.
+The Housing page also shows partners, resources, related news, counties served, and the "What it is" and "What it accomplishes" text. These are stored on the Housing **program record**, the same as on every program page, and this section lets you edit that record without leaving the Housing page.
+
+![Section 5: a note, then the Program record with its open, pencil and x icons](images/housing-guide/06-program-section.jpg)
+
+1. Click the **pencil** on **Program record**. The program opens in a panel on the right.
+2. Scroll to **News**, **Partners**, **Counties** or **Resources**. Use **Add Existing** to link one, or the trash icon to unlink it. Edit **What Is It** and **What It Accomplishes** here too.
+3. Click **Save** at the top of the panel, then **Save** the Housing page.
+
+![The program record open in the side panel, with its News, Events, Initiatives and Partners lists](images/housing-guide/07-program-panel.jpg)
+
+- The **open** icon (box with an arrow) opens the same record under **Website → Programs** instead.
+- Don't click the **x**: it unlinks the program, and the page won't save without one.
+- Don't change the program's **URL** field (it says "housing"). The Housing page and its short address depend on it.
+- Only **published** partners, resources and news show on the page.
+- **Explore Our Programs** at the bottom lists every other published program automatically; there's nothing to edit for it.
 
 ## The other Site Pages
 

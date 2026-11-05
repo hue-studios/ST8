@@ -579,16 +579,37 @@ function fieldDefinitions() {
       { max_length: 160 }
     ),
 
-    // Behind the scenes: the program record that supplies partners, resources and news.
+    // 5. Partners, Resources & News: the program record that supplies them, shown in place so
+    // staff can edit it from here. The data stays on the program, so the Programs listing and
+    // this page can't drift apart. Locked to its program: no picking another or creating one.
+    group(
+      'tab_program',
+      '5. Partners, Resources & News',
+      6,
+      'closed',
+      'groups'
+    ),
+    notice(
+      'program_notice',
+      'tab_program',
+      1,
+      'Partners, resources, related news, counties served and the "What it is" / "What it accomplishes" text come from the Housing **program record**. Click the pencil on the program below to edit them here, click **Save** at the top of that panel, then **Save** this page. They can also be edited under **Website → Programs**. Don’t change the program’s **URL** field: the Housing page and its short address depend on it.'
+    ),
     field('program', 'integer', {
       interface: 'select-dropdown-m2o',
       special: ['m2o'],
-      options: { template: '{{title}}' },
-      translations: label('Program'),
-      note: 'The program record this page shows partners, resources and news from. Set up by the developer.',
-      hidden: true,
-      group: null,
-      sort: 6,
+      required: true,
+      options: {
+        template: '{{title}}',
+        enableCreate: false,
+        enableSelect: false,
+        enableLink: true,
+      },
+      translations: label('Program record'),
+      note: 'Pencil: edit the program here. Arrow: open it in Website → Programs.',
+      hidden: false,
+      group: 'tab_program',
+      sort: 2,
       width: 'full',
     }),
   ]
