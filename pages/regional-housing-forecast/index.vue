@@ -39,7 +39,7 @@
               <dt>{{ stat.value }}</dt>
               <dd>
                 {{ stat.label }}
-                <span class="housing-forecast__stat-source"
+                <span v-if="stat.source" class="housing-forecast__stat-source"
                   >({{ stat.source }})</span
                 >
               </dd>
@@ -84,8 +84,7 @@ import {
   CS_ORIGIN,
   CS_CITATION,
   PROGRAM_SLUG,
-  HERO_STATS,
-  SUPPLY_NEED,
+  forecastFigures,
 } from '~/config/housingForecast'
 import { shareMeta, staticCard } from '~/config/share'
 import housingCountyMap from '~/components/housing/countyMap'
@@ -99,7 +98,7 @@ export default {
   async asyncData({ $axios }) {
     // Neither call is load-bearing for the charts, so a CMS hiccup costs us the cross-link or
     // the map's labels rather than the page.
-    const [program, counties] = await Promise.all([
+    const [program, counties, page] = await Promise.all([
       $axios
         .$get(
           '/items/programs?fields=id,title,url&filter[url][_eq]=' +
@@ -116,17 +115,26 @@ export default {
         // The region-wide row has no geoid and no shape on the map.
         .then((res) => res.data.filter((c) => c.geoid))
         .catch(() => []),
+      // Staff-edited headline figures; forecastFigures falls back to the config for anything
+      // missing, so a failed request is as good as an empty one.
+      $axios
+        .$get(
+          '/items/housing_page?fields=figures_as_of,headline_figures,' +
+            'need_total,need_replacement,need_shortage'
+        )
+        .then((res) => res.data || null)
+        .catch(() => null),
     ])
 
-    return { program, counties }
+    const { heroStats, supplyNeed } = forecastFigures(page)
+
+    return { program, counties, heroStats, supplyNeed }
   },
   data() {
     return {
       sections: SECTIONS,
-      supplyNeed: SUPPLY_NEED,
       csOrigin: CS_ORIGIN,
       citation: CS_CITATION,
-      heroStats: HERO_STATS,
     }
   },
   head() {
@@ -142,7 +150,9 @@ export default {
         path: '/regional-housing-forecast',
         image: staticCard('housing-forecast.png'),
         imageAlt:
-          'The eight counties of the Southern Tier 8 Region, and the 4,271 new homes the region needs by 2031',
+          'The eight counties of the Southern Tier 8 Region, and the ' +
+          this.supplyNeed.total +
+          ' new homes the region needs by 2031',
       }),
       link: [
         { rel: 'preconnect', href: CS_ORIGIN, crossorigin: 'true' },

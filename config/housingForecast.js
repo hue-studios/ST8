@@ -30,21 +30,22 @@ export const CS_CITATION =
   'CommunityScale Housing Forecast (2025). Housing needs analysis and population projection tool.'
 
 // The program this dashboard belongs to, so the program page can link across to it.
-export const PROGRAM_SLUG =
-  'southern-tier-s-capital-stack-for-workforce-housing'
+export const PROGRAM_SLUG = 'housing'
 
 // The four headline figures beside the map, mirroring the summary CommunityScale puts at the top
 // of its own dashboard.
 //
-// These are written down rather than fetched. CommunityScale renders them into its dashboard page
-// and offers no public endpoint for them — the per-card JSON its charts use is disallowed in their
-// robots.txt, and their MCP server needs an account — so taking them live would mean leaning on
-// something they have not opened up. Two of the four were checked against the card data and agree
-// exactly (population is the 2026 total in population_forecast; jobs is the 2023 regional total in
-// job_growth); the other two come from the dashboard itself.
+// Staff keep these in Directus under Housing Page → 3. Forecast Figures, so a new vintage needs no
+// deploy; the values below are only the fallback for a field left blank or a CMS that does not
+// answer (see forecastFigures). CommunityScale renders the figures into its dashboard page and
+// offers no public endpoint for them — the per-card JSON its charts use is disallowed in their
+// robots.txt, and their MCP server needs an account — so neither the site nor the CMS can take
+// them live. Two of the four were checked against the card data and agree exactly (population is
+// the 2026 total in population_forecast; jobs is the 2023 regional total in job_growth); the other
+// two come from the dashboard itself.
 //
-// Refresh them from https://southerntierny.communityscale.io/dashboard when CommunityScale posts a
-// new vintage, and move `asOf` with them.
+// When CommunityScale posts a new vintage, refresh them from
+// https://southerntierny.communityscale.io/dashboard in Directus, and move the as-of date with them.
 export const HERO_STATS_AS_OF = 'November 2026'
 
 export const HERO_STATS = [
@@ -229,14 +230,13 @@ export const SECTIONS = [
 
 // The figure the rest of the page builds towards. CommunityScale renders this one inline on its
 // dashboard rather than as a card — there is no /cards/ page for it to embed — so, like the hero
-// stats, it is written down here and refreshed by hand from
-// https://southerntierny.communityscale.io/dashboard. It is a regional total, so the county pages
-// leave it out.
+// stats, staff keep the three numbers in Directus (Housing Page → 3. Forecast Figures) and the
+// values here are the fallback. Heading, labels and details stay in code. It is a regional total,
+// so the county pages leave it out. `intro` is built from the total in forecastFigures, so it is
+// not repeated here.
 export const SUPPLY_NEED = {
   id: 'supply-needed',
   heading: 'How much new housing does the region need?',
-  intro:
-    'To keep pace with growth and clear the shortfall in what already exists, the Southern Tier 8 Region needs 4,271 new units over the next five years.',
   total: '4,271',
   totalLabel: 'Total five-year housing production need (2026–2031)',
   rows: [
@@ -251,6 +251,56 @@ export const SUPPLY_NEED = {
       detail: 'Production needed to bring vacancy rates back into balance.',
     },
   ],
+}
+
+const supplyNeedIntro = (total) =>
+  'To keep pace with growth and clear the shortfall in what already exists, the Southern Tier 8 Region needs ' +
+  total +
+  ' new units over the next five years.'
+
+// A Directus field that was never filled in comes back null, and one that was cleared can come
+// back as an empty or whitespace string; either way the config value should win.
+const text = (value, fallback) => {
+  const trimmed = typeof value === 'string' ? value.trim() : ''
+  return trimmed || fallback
+}
+
+// Merges the `housing_page` singleton over the values above, one field at a time, so a gap in the
+// CMS costs only that field and never leaves a blank box. `page` is the `data` object from
+// /items/housing_page, or null when the request failed. Pure, so both pages share one fallback.
+export const forecastFigures = (page) => {
+  const p = page || {}
+
+  const stats = (Array.isArray(p.headline_figures) ? p.headline_figures : [])
+    .map((s) => ({
+      value: text(s && s.value, ''),
+      label: text(s && s.label, ''),
+      // Optional: no source just means the page shows none.
+      source: text(s && s.source, ''),
+    }))
+    .filter((s) => s.value && s.label)
+
+  const total = text(p.need_total, SUPPLY_NEED.total)
+
+  return {
+    heroStats: stats.length ? stats : HERO_STATS,
+    asOf: text(p.figures_as_of, HERO_STATS_AS_OF),
+    supplyNeed: {
+      ...SUPPLY_NEED,
+      intro: supplyNeedIntro(total),
+      total,
+      rows: [
+        {
+          ...SUPPLY_NEED.rows[0],
+          value: text(p.need_replacement, SUPPLY_NEED.rows[0].value),
+        },
+        {
+          ...SUPPLY_NEED.rows[1],
+          value: text(p.need_shortage, SUPPLY_NEED.rows[1].value),
+        },
+      ],
+    },
+  }
 }
 
 export default SECTIONS
