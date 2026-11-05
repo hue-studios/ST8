@@ -700,7 +700,7 @@ function fieldDefinitions() {
       'program_notice',
       'tab_program',
       1,
-      'Partners, resources, related news, counties served and the "What it is" / "What it accomplishes" text come from the Housing **program record**. Click the pencil on the program below to edit them here, click **Save** at the top of that panel, then **Save** this page. They can also be edited under **Website → Programs**. Don’t change the program’s **URL** field: the Housing page and its short address depend on it.'
+      'Partners, resources, related news, counties served and the "What it is" / "What it accomplishes" text come from the Housing **program record**. Click the pencil on the program below to edit them here, click **Save** at the top of that panel, then **Save** this page. They can also be edited under **Content → Programs**. Don’t change the program’s **URL** field: the Housing page and its short address depend on it.'
     ),
     field('program', 'integer', {
       interface: 'select-dropdown-m2o',
@@ -713,7 +713,7 @@ function fieldDefinitions() {
         enableLink: true,
       },
       translations: label('Program record'),
-      note: 'Pencil: edit the program here. Arrow: open it in Website → Programs.',
+      note: 'Pencil: edit the program here. Arrow: open it in Content → Programs.',
       hidden: false,
       group: 'tab_program',
       sort: 2,

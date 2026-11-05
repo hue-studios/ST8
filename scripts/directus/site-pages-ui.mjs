@@ -128,7 +128,7 @@ const COLLECTIONS = [
       featured_resource: {
         sort: 4,
         translations: label('Featured resource'),
-        note: 'The resource in the "Featured Resource" box on the home page. Leave empty to hide the box. Add or edit resources under Website → Resources.',
+        note: 'The resource in the "Featured Resource" box on the home page. Leave empty to hide the box. Add or edit resources under Content → Resources.',
       },
     },
   },
@@ -366,7 +366,7 @@ const COLLECTIONS = [
       resources: {
         sort: 6,
         translations: label('Resources'),
-        note: 'Shown as cards at the bottom of the page, in this order. Pick existing resources; add new ones under Website → Resources.',
+        note: 'Shown as cards at the bottom of the page, in this order. Pick existing resources; add new ones under Content → Resources.',
       },
     },
   },
