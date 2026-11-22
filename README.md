@@ -1,22 +1,16 @@
 # southerntier8.org
 
-> Southern Tier 8 Regional Board website.
+Southern Tier 8 Regional Board website. Nuxt 4, Tailwind 4, shadcn-vue (wrapped), Directus.
 
-## Build Setup
-
-``` bash
-# install dependencies
-$ npm run install
-
-# serve with hot reload at localhost:3000
-$ npm run dev
-
-# build for production and launch server
-$ npm run build
-$ npm run start
-
-# generate static project
-$ npm run generate
+```bash
+pnpm install        # Node 22, pnpm 9
+pnpm dev            # http://localhost:3000
+pnpm build          # production build
+pnpm typecheck
+pnpm check:ui       # app/components/ui must equal the shadcn-vue CLI output
+pnpm generate:types # shared/directus/schema.ts from the live CMS (needs DIRECTUS_URL and DIRECTUS_TOKEN in .env)
 ```
 
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+The CMS is the staff-managed Directus at manage.southerntier8.org; the site reads only public data. The upgrade from
+Nuxt 2 is tracked in `docs/plans/search-services-podcast-updates.md`; see `docs/plans/upgrade-porting-notes.md` for
+how to port a page.

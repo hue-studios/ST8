@@ -1,0 +1,172 @@
+/* Tailwind 4 foundation for the Nuxt 4 port.
+
+   Layer order matters here. The site's ~8,100 lines of Sass are unlayered, and on the Nuxt 2 site they won ties with
+   Tailwind 3's utilities by source order and specificity. Tailwind 4 normally puts utilities in a cascade layer, which
+   every unlayered rule then beats outright (an `h3 { margin: 0 }` in the Sass would silently defeat `mb-4`). So theme and
+   preflight stay layered, utilities are imported unlayered, and main.css loads before main.scss: the same ties, the same
+   winners as before. When the Sass is retired this can go back to `@import 'tailwindcss'`. */
+@layer theme, base, vendor, components, utilities;
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/preflight.css' layer(base);
+@import 'tailwindcss/utilities.css';
+@import 'tw-animate-css';
+
+/* Swiper 12's stylesheet, in a layer below everything else: its `.swiper-slide { display: block }` and
+   `.swiper { padding: 0 }` would otherwise beat the flex and padding utilities the slides carry. */
+@import 'swiper/css' layer(vendor);
+@import 'swiper/css/navigation' layer(vendor);
+@import 'swiper/css/pagination' layer(vendor);
+
+/* Dark mode follows the `dark` class @nuxtjs/color-mode puts on <html>. It is held on `light` for now. */
+@custom-variant dark (&:is(.dark *));
+
+/* ── Brand theme, moved from tailwind.config.js ────────────────────────────────────────────────────────────────
+   The old config replaced Tailwind's palette rather than extending it, so `--color-*: initial` does the same. */
+@theme {
+  --color-*: initial;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+  --color-black: #000;
+  --color-white: #fff;
+  --color-gray-100: #f7fafc;
+  --color-gray-200: #edf2f7;
+  --color-gray-300: #e2e8f0;
+  --color-gray-400: #cbd5e0;
+  --color-gray-500: #a0aec0;
+  --color-gray-600: #718096;
+  --color-gray-700: #4a5568;
+  --color-gray-800: #2d3748;
+  --color-gray-900: #1a202c;
+  --color-blue: #00bfff;
+  --color-red: #e32020;
+  --color-pink: #fb00da;
+  --color-green: #00ff1b;
+  --color-yellow: #fff500;
+
+  /* The brand colours the Sass calls $navy and $green (assets/scss/_vars.scss). */
+  --color-navy: #193658;
+  --color-brand: #1accb8;
+
+  --breakpoint-xs: 450px;
+
+  --font-sans: 'Proxima Nova W01 Thin', sans-serif;
+  --font-body: 'Proxima Nova W01 Thin', sans-serif;
+
+  /* Tailwind 4 pairs each font size with a unitless line-height ratio, which nested smaller text inherits as a ratio;
+     Tailwind 3 gave a fixed rem, inherited as pixels. The Sass depends on the fixed values (the program card's tags
+     row grew 5px on phones without them), so these are the Tailwind 3 pairs. */
+  --text-xs--line-height: 1rem;
+  --text-sm--line-height: 1.25rem;
+  --text-base--line-height: 1.5rem;
+  --text-lg--line-height: 1.75rem;
+  --text-xl--line-height: 1.75rem;
+  --text-2xl--line-height: 2rem;
+  --text-3xl--line-height: 2.25rem;
+  --text-4xl--line-height: 2.5rem;
+  --text-5xl--line-height: 1;
+  --text-6xl--line-height: 1;
+  --text-7xl--line-height: 1;
+  --text-8xl--line-height: 1;
+  --text-9xl--line-height: 1;
+
+  /* Tailwind 4 changed these steps; the site's scale is the old one. */
+  --tracking-tightest: -0.075em;
+  --tracking-tighter: -0.05em;
+  --tracking-tight: -0.025em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.05em;
+  --tracking-wider: 0.1em;
+  --tracking-widest: 0.2em;
+}
+
+/* ── shadcn-vue tokens mapped to ST8 ─────────────────────────────────────────────────────────────────────────────
+   primary is the ST8 navy, ring and accents the brand green; border is the gray the old site's default border
+   (Tailwind 3's gray-200 from this palette) used. */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  --background: #fff;
+  --foreground: #193658;
+  --card: #fff;
+  --card-foreground: #193658;
+  --popover: #fff;
+  --popover-foreground: #193658;
+  --primary: #193658;
+  --primary-foreground: #fff;
+  --secondary: #f7fafc;
+  --secondary-foreground: #193658;
+  --muted: #f7fafc;
+  --muted-foreground: #4a5568;
+  --accent: #e8faf8;
+  --accent-foreground: #193658;
+  --destructive: #e32020;
+  --border: #edf2f7;
+  --input: #e2e8f0;
+  --ring: #1accb8;
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: #0f2038;
+  --foreground: #f7fafc;
+  --card: #152a47;
+  --card-foreground: #f7fafc;
+  --popover: #152a47;
+  --popover-foreground: #f7fafc;
+  --primary: #1accb8;
+  --primary-foreground: #0f2038;
+  --secondary: #1d3556;
+  --secondary-foreground: #f7fafc;
+  --muted: #1d3556;
+  --muted-foreground: #a0aec0;
+  --accent: #1d3556;
+  --accent-foreground: #f7fafc;
+  --destructive: #f26b6b;
+  --border: rgb(255 255 255 / 12%);
+  --input: rgb(255 255 255 / 16%);
+  --ring: #1accb8;
+}
+
+/* The site's own body colours (navy on white, Proxima Nova Light) are set in assets/scss/main.scss, which wins over
+   this, so shadcn's `bg-background text-foreground` on <body> is deliberately not applied here. */
+@layer base {
+  /* Tailwind 4 defaults to currentColor; Tailwind 3 here gave borders the palette's gray-200. */
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200);
+  }
+  * {
+    outline-color: color-mix(in oklab, var(--ring) 50%, transparent);
+  }
+  /* Tailwind 4 stopped giving buttons a pointer cursor. */
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
+  }
+}
