@@ -141,6 +141,12 @@ export default defineNuxtConfig({
     exclude: ['/regional-housing-forecast', '/regional-housing-forecast/**', '/search'],
   },
 
+  // Generated share cards. Card URLs are signed, so they cannot be pointed at other images: set NUXT_APP_SECRET
+  // (32+ characters, `npx nuxt-og-image generate-secret`) on Vercel, or cards answer 500.
+  ogImage: {
+    defaults: { width: 1200, height: 630 },
+  },
+
   robots: {
     disallow: ['/search', '/regional-housing-forecast'],
   },

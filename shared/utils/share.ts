@@ -18,6 +18,11 @@ export function shareCard(id: string) {
   return `${SITE_URL}/share-image/${id}.jpg`
 }
 
+// The Directus file id inside a shareCard() URL, or '' for any other image.
+export function shareCardId(url?: string) {
+  return url?.match(/\/share-image\/([0-9a-f-]{36})\.jpg$/i)?.[1] ?? ''
+}
+
 // A card that ships with the site, under public/images/social.
 export function staticCard(file: string) {
   return `${SITE_URL}/images/social/${file}`
