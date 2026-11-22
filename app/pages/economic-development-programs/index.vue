@@ -43,24 +43,8 @@ useShareMeta({
   imageAlt: 'Economic Development Programs - Southern Tier 8 Region',
 })
 
-// The line draws down the page as the visitor scrolls.
-let straightLine: SVGPathElement | null = null
-let straightLength = 0
-onMounted(() => {
-  straightLine = document.getElementById('straight-line') as unknown as SVGPathElement
-  straightLength = straightLine.getTotalLength()
-  straightLine.style.strokeDasharray = String(straightLength)
-  straightLine.style.strokeDashoffset = String(straightLength)
-})
-useEventListener('scroll', () => {
-  if (!straightLine) return
-  requestAnimationFrame(() => {
-    const container = document.getElementById('programs__program-cards')
-    if (!container || !straightLine) return
-    const scrollPercent = (window.scrollY / container.getBoundingClientRect().height) * 0.8
-    if (scrollPercent < 1) straightLine.style.strokeDashoffset = String(straightLength - straightLength * scrollPercent)
-  })
-})
+// The line drawings trace themselves as the visitor scrolls.
+useScrollLine({ container: 'programs__program-cards', paths: ['straight-line'], factor: 0.8 })
 </script>
 
 <template>

@@ -23,24 +23,8 @@ useShareMeta({
   path: '/how-to-apply/',
 })
 
-// The line draws as the visitor scrolls.
-let straightLine: SVGPathElement | null = null
-let straightLength = 0
-onMounted(() => {
-  straightLine = document.getElementById('straight-line') as unknown as SVGPathElement
-  straightLength = straightLine.getTotalLength()
-  straightLine.style.strokeDasharray = String(straightLength)
-  straightLine.style.strokeDashoffset = String(straightLength)
-})
-useEventListener('scroll', () => {
-  if (!straightLine) return
-  requestAnimationFrame(() => {
-    const info = document.getElementById('apply-info')
-    if (!info || !straightLine) return
-    const scrollPercent = (window.scrollY / info.getBoundingClientRect().height) * 0.5
-    if (scrollPercent < 1) straightLine.style.strokeDashoffset = String(straightLength - straightLength * scrollPercent)
-  })
-})
+// The line drawings trace themselves as the visitor scrolls.
+useScrollLine({ container: 'apply-info', paths: ['straight-line'], factor: 0.5 })
 </script>
 
 <template>

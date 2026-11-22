@@ -50,33 +50,8 @@ useShareMeta({
   path: `/economic-development-initiatives/${initiative.value.url}`,
 })
 
-// Both story lines draw as the visitor scrolls.
-let straightLine: SVGPathElement | null = null
-let longLine: SVGPathElement | null = null
-let straightLength = 0
-let longLength = 0
-onMounted(() => {
-  straightLine = document.getElementById('straight-line') as unknown as SVGPathElement
-  longLine = document.getElementById('initiative-line') as unknown as SVGPathElement
-  straightLength = straightLine.getTotalLength()
-  straightLine.style.strokeDasharray = String(straightLength)
-  straightLine.style.strokeDashoffset = String(straightLength)
-  longLength = longLine.getTotalLength()
-  longLine.style.strokeDasharray = String(longLength)
-  longLine.style.strokeDashoffset = String(longLength)
-})
-useEventListener('scroll', () => {
-  if (!straightLine || !longLine) return
-  requestAnimationFrame(() => {
-    const story = document.getElementById('initiative__story')
-    if (!story || !straightLine || !longLine) return
-    const scrollPercent = (window.scrollY / story.getBoundingClientRect().height) * 0.8
-    if (scrollPercent < 1) {
-      longLine.style.strokeDashoffset = String(longLength - longLength * scrollPercent)
-      straightLine.style.strokeDashoffset = String(straightLength - straightLength * scrollPercent)
-    }
-  })
-})
+// The line drawings trace themselves as the visitor scrolls.
+useScrollLine({ container: 'initiative__story', paths: ['straight-line', 'initiative-line'], factor: 0.8 })
 </script>
 
 <template>
