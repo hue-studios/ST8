@@ -134,6 +134,17 @@ export default defineNuxtConfig({
     directus: { baseURL: `${directusUrl}/assets/` },
   },
 
+  // Static routes come from app/pages; published news, events, initiatives and programs from a server route.
+  // The housing forecast pages are not linked from the site and stay out of the index.
+  sitemap: {
+    sources: ['/api/__sitemap__/urls'],
+    exclude: ['/regional-housing-forecast', '/regional-housing-forecast/**', '/search'],
+  },
+
+  robots: {
+    disallow: ['/search', '/regional-housing-forecast'],
+  },
+
   // Printed URLs (summit QR codes, slides, handouts) must never break, so redirects live in code, not the CMS.
   routeRules: redirects({
     '/programs': '/economic-development-programs',

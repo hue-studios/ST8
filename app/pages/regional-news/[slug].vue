@@ -52,6 +52,15 @@ useShareMeta({
   published: article.value.date_published || article.value.date_created || undefined,
   modified: article.value.date_updated || undefined,
 })
+useSchemaOrg([
+  defineArticle({
+    headline: article.value.title,
+    description: cardText(article.value.article, 160) || undefined,
+    image: imageId.value ? shareCard(imageId.value) : DEFAULT_CARD,
+    datePublished: article.value.date_published || article.value.date_created || undefined,
+    dateModified: article.value.date_updated || undefined,
+  }),
+])
 </script>
 
 <template>

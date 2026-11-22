@@ -42,7 +42,6 @@ const clean = (value: unknown) => (typeof value === 'string' ? value.trim() : ''
 const isHttp = (value: unknown) => /^https?:\/\//i.test(String(value))
 
 const directus = useDirectus()
-const asset = useAsset()
 
 const { data, error } = await useAsyncData('housing-program', async () => {
   // The page still works from the program record alone if the singleton can't be read.
@@ -136,7 +135,7 @@ useScrollLine({ paths: ['straight-line', 'program-line'] })
       <div id="program__intro-caption" class="flex items-center justify-center flex-col relative lg:py-8 max-w-4xl">
         <div class="w-5/6 lg:w-full flex flex-row items-end justify-center mb-6">
           <div class="w-1/2 flex items-center justify-center shadow-lg progam__image">
-            <img v-if="heroImage" :src="`${asset(heroImage)}?width=1000&quality=80`" :alt="title">
+            <NuxtImg v-if="heroImage" :src="heroImage" width="1000" quality="80" sizes="(min-width: 1024px) 40vw, 80vw" :alt="title" />
           </div>
           <div class="w-1/2 pl-4">
             <h1 class="uppercase green text-left program__page-title" :class="{ 'text-xs': tooLong }">
@@ -283,13 +282,14 @@ useScrollLine({ paths: ['straight-line', 'program-line'] })
         </p>
         <div id="program__partners" class="w-full flex flex-row justify-center items-center flex-wrap mt-6 px-10 max-w-5xl">
           <div v-for="(partner, index) in partners" :key="index" class="rounded-full flex items-center justify-center partners-badge">
-            <img
+            <NuxtImg
               v-if="partner.partners_id?.logo"
-              :src="asset(partner.partners_id.logo.id, 'thumbnail')"
+              :src="partner.partners_id.logo.id"
+              :modifiers="{ key: 'thumbnail' }"
               :alt="partner.partners_id.title"
               :width="partner.partners_id.logo.width"
               :height="partner.partners_id.logo.height"
-            >
+            />
           </div>
         </div>
       </template>

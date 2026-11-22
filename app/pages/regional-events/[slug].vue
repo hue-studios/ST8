@@ -5,7 +5,6 @@ import type { EventDetail } from '#shared/types/st8'
 const route = useRoute()
 const slug = computed(() => String(route.params.slug))
 const directus = useDirectus()
-const asset = useAsset()
 const { orgFileId } = useOrganization()
 
 const { data, error } = await useAsyncData(
@@ -50,6 +49,15 @@ useShareMeta({
   published: item.value.date_created || undefined,
   modified: item.value.date_updated || undefined,
 })
+useSchemaOrg([
+  defineEvent({
+    name: item.value.title,
+    description: cardText(item.value.description, 160) || undefined,
+    startDate: item.value.date,
+    image: imageId ? shareCard(imageId) : DEFAULT_CARD,
+    location: { '@type': 'Place', 'name': 'Southern Tier 8 Region, New York' },
+  }),
+])
 </script>
 
 <template>
@@ -59,7 +67,7 @@ useShareMeta({
       <div id="event__intro-caption" class="flex items-center justify-center flex-col relative lg:py-8">
         <div class="w-5/6 lg:w-full flex flex-row items-end justify-center mb-6">
           <div class="w-1/2 flex items-center justify-center shadow-lg event__image">
-            <img v-if="item.image" :src="asset(item.image.id, 'medium')" :alt="item.title">
+            <NuxtImg v-if="item.image" :src="item.image.id" :modifiers="{ key: 'medium' }" :alt="item.title" />
           </div>
           <div class="w-1/2 flex items-center justify-center flex-col">
             <h1 class="w-full uppercase green pl-4 text-left event__page-title" :class="{ 'text-xs': tooLong }">

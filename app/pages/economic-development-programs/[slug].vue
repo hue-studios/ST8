@@ -6,7 +6,6 @@ import { PROGRAM_CARD_FIELDS, PROGRAM_FIELDS } from '#shared/utils/programs'
 const route = useRoute()
 const slug = computed(() => String(route.params.slug))
 const directus = useDirectus()
-const asset = useAsset()
 
 // The program and the "Explore Our Programs" row load together on the server. The row used to load in the browser after
 // the page; that now needs no browser request to the CMS (which only allows requests from the live site's origin).
@@ -72,7 +71,7 @@ useScrollLine({ paths: ['straight-line', 'program-line'] })
       >
         <div class="w-5/6 lg:w-full flex flex-row items-end justify-center mb-6">
           <div class="w-1/2 flex items-center justify-center shadow-lg progam__image">
-            <img v-if="heroImage" :src="asset(heroImage, 'medium')" :alt="program.title">
+            <NuxtImg v-if="heroImage" :src="heroImage" :modifiers="{ key: 'medium' }" :alt="program.title" />
           </div>
           <h1 class="w-1/2 uppercase green pl-4 text-left program__page-title" :class="{ 'text-xs': tooLong }">
             <span class="navy">Program: </span>
@@ -185,13 +184,14 @@ useScrollLine({ paths: ['straight-line', 'program-line'] })
           :key="index"
           class="rounded-full flex items-center justify-center partners-badge"
         >
-          <img
+          <NuxtImg
             v-if="partner.partners_id?.logo"
-            :src="asset(partner.partners_id.logo.id, 'thumbnail')"
+            :src="partner.partners_id.logo.id"
+            :modifiers="{ key: 'thumbnail' }"
             :alt="partner.partners_id.title"
             :width="partner.partners_id.logo.width"
             :height="partner.partners_id.logo.height"
-          >
+          />
         </div>
       </div>
       <div

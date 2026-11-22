@@ -5,7 +5,6 @@
 defineProps<{
   banner: { image: string | null, title: string, text: string } | null
 }>()
-const asset = useAsset()
 </script>
 
 <template>
@@ -15,12 +14,17 @@ const asset = useAsset()
     to="/economic-development-programs/housing"
     class="w-full flex items-center relative"
   >
-    <img
+    <NuxtImg
       v-if="banner.image"
       class="home__housing-banner-image"
-      :src="`${asset(banner.image)}?width=1600&height=600&fit=cover&quality=80`"
+      :src="banner.image"
+      width="1600"
+      height="600"
+      fit="cover"
+      quality="80"
+      sizes="100vw"
       alt=""
-    >
+    />
     <div class="home__housing-banner-copy">
       <span class="uppercase green tracking-widest bold small-title block">Housing</span>
       <h2 class="uppercase thin-font white">{{ banner.title }}</h2>
