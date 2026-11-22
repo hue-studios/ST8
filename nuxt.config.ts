@@ -5,13 +5,13 @@ import tailwindcss from '@tailwindcss/vite'
 // Build-time default; override per environment with NUXT_PUBLIC_DIRECTUS_URL, read at runtime.
 const directusUrl = (process.env.DIRECTUS_URL || 'https://manage.southerntier8.org').replace(/\/$/, '')
 
-// Permanent (301) redirects, matched with and without a trailing slash.
+// Permanent (301) redirects. One rule each: the Vercel preset maps `/x` and `/x/` to the same function file and fails
+// the build on the duplicate. Nitro matches the trailing-slash form of a path against the same rule.
 function redirects(map: Record<string, string>) {
   const rules: Record<string, { redirect: { to: string, statusCode: 301 } }> = {}
   for (const [from, to] of Object.entries(map)) {
     const rule = { redirect: { to, statusCode: 301 as const } }
     rules[from] = rule
-    rules[`${from}/`] = rule
   }
   return rules
 }
