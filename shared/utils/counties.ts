@@ -80,4 +80,3 @@ export const COUNTY_SHAPES = [
   },
 ]
 
-export default COUNTY_SHAPES

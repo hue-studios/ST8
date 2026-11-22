@@ -25,4 +25,3 @@ export const NY_OUTLINE =
 export const NY_TRANSFORM =
   'translate(-1182.35, -904.83) scale(13.6659, 13.3576)'
 
-export default NY_OUTLINE

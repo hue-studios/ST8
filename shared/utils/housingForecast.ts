@@ -71,7 +71,15 @@ export const HERO_STATS = [
   },
 ]
 
-export const SECTIONS = [
+export interface ForecastSection {
+  id: string
+  heading: string
+  intro: string
+  card: { id: string, label: string, height?: number }
+  more?: Array<{ id: string, question: string, height?: number }>
+}
+
+export const SECTIONS: ForecastSection[] = [
   {
     id: 'affordability',
     heading: 'How affordable is the Southern Tier?',
@@ -253,14 +261,14 @@ export const SUPPLY_NEED = {
   ],
 }
 
-const supplyNeedIntro = (total) =>
+const supplyNeedIntro = (total: string) =>
   'To keep pace with growth and clear the shortfall in what already exists, the Southern Tier 8 Region needs ' +
   total +
   ' new units over the next five years.'
 
 // A Directus field that was never filled in comes back null, and one that was cleared can come
 // back as an empty or whitespace string; either way the config value should win.
-const text = (value, fallback) => {
+const text = (value: unknown, fallback: string): string => {
   const trimmed = typeof value === 'string' ? value.trim() : ''
   return trimmed || fallback
 }
@@ -268,11 +276,19 @@ const text = (value, fallback) => {
 // Merges the `housing_page` singleton over the values above, one field at a time, so a gap in the
 // CMS costs only that field and never leaves a blank box. `page` is the `data` object from
 // /items/housing_page, or null when the request failed. Pure, so both pages share one fallback.
-export const forecastFigures = (page) => {
-  const p = page || {}
+export interface HousingPageFigures {
+  figures_as_of?: string | null
+  headline_figures?: Array<{ value?: string, label?: string, source?: string }> | null
+  need_total?: string | null
+  need_replacement?: string | null
+  need_shortage?: string | null
+}
+
+export const forecastFigures = (page: HousingPageFigures | null | undefined) => {
+  const p: HousingPageFigures = page || {}
 
   const stats = (Array.isArray(p.headline_figures) ? p.headline_figures : [])
-    .map((s) => ({
+    .map(s => ({
       value: text(s && s.value, ''),
       label: text(s && s.label, ''),
       // Optional: no source just means the page shows none.
@@ -291,16 +307,15 @@ export const forecastFigures = (page) => {
       total,
       rows: [
         {
-          ...SUPPLY_NEED.rows[0],
-          value: text(p.need_replacement, SUPPLY_NEED.rows[0].value),
+          ...SUPPLY_NEED.rows[0]!,
+          value: text(p.need_replacement, SUPPLY_NEED.rows[0]!.value),
         },
         {
-          ...SUPPLY_NEED.rows[1],
-          value: text(p.need_shortage, SUPPLY_NEED.rows[1].value),
+          ...SUPPLY_NEED.rows[1]!,
+          value: text(p.need_shortage, SUPPLY_NEED.rows[1]!.value),
         },
       ],
     },
   }
 }
 
-export default SECTIONS
