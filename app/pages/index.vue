@@ -186,7 +186,7 @@ onMounted(() => {
   gsap.registerPlugin(ScrollTrigger)
   media = gsap.matchMedia()
   const drift = (overlayX: string, missionX: string) => {
-    const scrollTrigger = { trigger: '#home__mission', start: 'top bottom-=100px', end: '+=200%', scrub: true }
+    const scrollTrigger = { trigger: '#home__mission', start: 'top bottom-=100px', end: '+=200%', scrub: 0.6 }
     gsap.to('#cropped-overlay', { scrollTrigger, x: overlayX })
     gsap.to('#mission', { scrollTrigger, x: missionX })
   }
