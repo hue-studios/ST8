@@ -32,7 +32,7 @@ function smoothScroll(target: string) {
 }
 
 // The line drawings trace themselves as the visitor scrolls.
-useScrollLine({ container: 'initiatives__story', paths: ['straight-line', 'initiatives-line'], factor: 0.8 })
+useScrollLine({ paths: ['straight-line', 'initiatives-line'] })
 </script>
 
 <template>

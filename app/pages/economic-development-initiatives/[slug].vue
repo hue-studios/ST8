@@ -51,7 +51,7 @@ useShareMeta({
 })
 
 // The line drawings trace themselves as the visitor scrolls.
-useScrollLine({ container: 'initiative__story', paths: ['straight-line', 'initiative-line'], factor: 0.8 })
+useScrollLine({ paths: ['straight-line', 'initiative-line'] })
 </script>
 
 <template>

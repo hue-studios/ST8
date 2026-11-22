@@ -24,7 +24,7 @@ useShareMeta({
 })
 
 // The line drawings trace themselves as the visitor scrolls.
-useScrollLine({ container: 'apply-info', paths: ['straight-line'], factor: 0.7 })
+useScrollLine({ paths: ['straight-line'] })
 </script>
 
 <template>

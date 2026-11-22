@@ -59,7 +59,7 @@ useShareMeta({
   path: '/regional-organization/',
 })
 
-useScrollLine({ container: 'organization-info', paths: ['straight-line'], factor: 0.8 })
+useScrollLine({ paths: ['straight-line'] })
 </script>
 
 <template>

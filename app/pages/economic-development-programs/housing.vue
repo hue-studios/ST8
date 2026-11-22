@@ -127,7 +127,7 @@ useShareMeta(() => ({
 useHead({ link: [{ rel: 'canonical', href: SITE_URL + PAGE_PATH }] })
 
 // Both story lines draw as the visitor scrolls.
-useScrollLine({ container: 'program__story', paths: ['straight-line', 'program-line'], factor: 0.72 })
+useScrollLine({ paths: ['straight-line', 'program-line'] })
 </script>
 
 <template>
