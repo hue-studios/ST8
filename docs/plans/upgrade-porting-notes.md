@@ -55,6 +55,6 @@ base component: `pnpm exec shadcn-vue add <name>`, then wrap it the same way.
 - Routes not yet ported answer with a placeholder from `app/pages/[...slug].vue`; remove a prefix from its `PENDING`
   list when you add the page (a real page file wins automatically). `housing.vue` is a placeholder file because
   `economic-development-programs/[slug].vue` would otherwise treat `housing` as a program.
-- The resource request overlay (`legacy/components/layout/resourceInfo.vue`) is not in the layout yet; session 3 rebuilds
-  it with `St8Dialog` and `St8Field`.
-- `vee-validate` takes zod 4 schemas directly (Standard Schema); there is no `@vee-validate/zod`.
+- The resource request overlay is `components/layout/ResourceRequestDialog.vue`, mounted in `layouts/default.vue`; a gated
+  resource card opens it with `useResourceRequest().ask()`, and the form posts to `server/api/resource-requests.post.ts`.
+- `vee-validate` 4.15 cannot read a zod 4 schema directly (no Standard Schema support) and `@vee-validate/zod` targets zod 3: wrap the schema with `toZodSchema()` from `app/utils/zod-schema.ts` for `useForm({ validationSchema })`.

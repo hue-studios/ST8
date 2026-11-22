@@ -3,16 +3,9 @@
 // porting sessions delete a prefix from this list when they add the page (a real page file wins over this catch-all).
 // Anything not listed is a genuine 404.
 const PENDING = [
-  'economic-development-initiatives',
-  'economic-development-services',
-  'how-to-apply',
-  'regional-partnerships',
   'regional-profile',
-  'regional-events',
   'regional-housing-forecast',
-  'regional-news',
   'regional-organization',
-  'reporting',
 ]
 
 const route = useRoute()

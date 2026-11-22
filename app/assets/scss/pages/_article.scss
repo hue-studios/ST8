@@ -180,8 +180,10 @@
       .share-icon {
         fill: $navy;
         stroke: $navy;
+        // The icons are @nuxt/icon masks painted in currentColor, so they need an explicit height as well as a width.
+        color: $navy;
         width: 22px;
-        height: auto;
+        height: 22px;
       }
       .share-icon.linkedin {
         width: 35px;

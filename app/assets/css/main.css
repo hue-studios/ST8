@@ -17,6 +17,9 @@
 @import 'swiper/css/navigation' layer(vendor);
 @import 'swiper/css/pagination' layer(vendor);
 
+/* v-calendar's stylesheet, also below the site's Sass: the events page restyles .vc-* classes. */
+@import 'v-calendar/style.css' layer(vendor);
+
 /* Dark mode follows the `dark` class @nuxtjs/color-mode puts on <html>. It is held on `light` for now. */
 @custom-variant dark (&:is(.dark *));
 

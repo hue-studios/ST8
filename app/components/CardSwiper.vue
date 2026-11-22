@@ -3,12 +3,14 @@ import { Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 
 // A row of cards, ported from the Nuxt 2 pages' vue-awesome-swiper options. `resources` slides are auto-width with a
-// 15px gutter at each end (news and resource rows); `programs` slides are the default width.
+// 15px gutter at each end (news and resource rows); `programs` slides are the default width, `initiative` ones are the default width and centred.
 const props = withDefaults(defineProps<{
   items: T[]
-  preset?: 'resources' | 'programs'
+  preset?: 'resources' | 'programs' | 'initiative'
   slideClass?: string
-}>(), { preset: 'resources', slideClass: 'flex flex-col items-center justify-center px-3 sm:px-8 pt-4 pb-8' })
+  /** The dot row under the slides; the partners and how-to-apply rows have arrows only. */
+  pagination?: boolean
+}>(), { preset: 'resources', pagination: true, slideClass: 'flex flex-col items-center justify-center px-3 sm:px-8 pt-4 pb-8' })
 
 const resources = {
   slidesPerView: 'auto' as const,
@@ -23,14 +25,19 @@ const programs = {
   centerInsufficientSlides: true,
   spaceBetween: 30,
 }
-const options = computed(() => (props.preset === 'resources' ? resources : programs))
+// The initiative page's program row centres its one-per-view slide.
+const initiative = {
+  centeredSlides: true,
+  spaceBetween: 30,
+}
+const options = computed(() => ({ resources, programs, initiative })[props.preset])
 </script>
 
 <template>
   <Swiper
     v-bind="options"
     :modules="[Navigation, Pagination]"
-    :pagination="{ dynamicBullets: true }"
+    :pagination="props.pagination ? { dynamicBullets: true } : false"
     :navigation="{ hideOnClick: true }"
     class="swiper swiper-container w-full flex flex-row items-center justify-center pt-4 pb-4"
   >

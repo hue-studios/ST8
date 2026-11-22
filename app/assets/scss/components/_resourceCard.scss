@@ -54,7 +54,8 @@
   .resource-card__title.long {
     font-size: 12px;
     line-height: 16px;
-    @apply mb-2 pb-2;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
     @media (min-width: $breakpoint-small) {
     }
     @media (min-width: $breakpoint-medium) {
@@ -64,7 +65,8 @@
     }
   }
   .resource-card__description {
-    @apply flex-1 overflow-scroll;
+    flex: 1 1 0%;
+    overflow: scroll;
     p {
       font-size: 13px;
       @media (min-width: $breakpoint-small) {

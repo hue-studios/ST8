@@ -1,64 +1,41 @@
+<script setup lang="ts">
+import type { ReportItem } from '#shared/types/st8'
+
+const props = defineProps<{ item: ReportItem }>()
+const asset = useAsset()
+
+const date = computed(() => {
+  const value = props.item.date || props.item.date_updated || props.item.date_created
+  return value ? formatDate(value, 'EEEE MMMM do, yyyy') : ''
+})
+</script>
+
 <template>
   <div
     :id="'report-card-' + item.id"
     class="w-full flex items-center justify-start flex-row mb-6 shadow-lg relative report-card"
   >
-    <div
-      class="w-full flex flex-col items-start justify-center report-card__content"
-    >
+    <div class="w-full flex flex-col items-start justify-center report-card__content">
       <h2 class="uppercase tracking-wider w-full mb-1 report-card__title">
         {{ item.title }}
       </h2>
-
-      <h5
-        v-if="item.date"
-        class="w-full uppercase navy tracking-widest report-card__date"
-      >
-        {{ $moment(item.date).format('dddd MMMM Do, YYYY') }}
-      </h5>
-      <h5
-        v-else
-        class="w-full uppercase navy tracking-widest report-card__date"
-      >
-        {{
-          $moment(item.date_updated || item.date_created).format(
-            'dddd MMMM Do, YYYY'
-          )
-        }}
+      <h5 v-if="date" class="w-full uppercase navy tracking-widest report-card__date">
+        {{ date }}
       </h5>
     </div>
 
     <a
       v-if="item.file"
-      :href="imageLocation + item.file.id"
+      :href="asset(item.file.id)"
       target="_blank"
       rel="noreferrer"
       class="flex items-center justify-center flex-row uppercase report-card__link"
     >
-      <span class="inline-block parent"
-        >Download <span class="hidden sm:inline-block">Document</span></span
-      >
-      <icons-document-download class="inline-block" />
+      <span class="inline-block parent">Download <span class="hidden sm:inline-block">Document</span></span>
+      <Icon name="lucide:file-down" size="20" class="inline-block" />
     </a>
   </div>
 </template>
-<script>
-export default {
-  props: {
-    item: {
-      type: Object,
-      default: null,
-    },
-  },
-  data() {
-    return {
-      imageLocation: process.env.imageUrl,
-    }
-  },
-  created() {},
-  methods: {},
-}
-</script>
 
 <style lang="scss">
 @use '~/assets/scss/vars' as *;
@@ -69,8 +46,7 @@ export default {
   backdrop-filter: blur(2px);
   max-width: 680px;
   .report-card__content {
-    @apply p-4;
-
+    padding: 1rem;
     .report-card__title {
       font-size: 12px;
       line-height: 15px;
@@ -80,19 +56,9 @@ export default {
       font-weight: 400;
       color: $navy;
       letter-spacing: 0.2em;
-
       @media (min-width: $breakpoint-small) {
         font-size: 18px;
-
         line-height: 20px;
-      }
-      @media (min-width: $breakpoint-medium) {
-        font-size: 18px;
-
-        line-height: 20px;
-      }
-      @media (min-width: $breakpoint-large) {
-        // font-size: 18px;
       }
     }
     .report-card__date {
@@ -100,13 +66,9 @@ export default {
     }
   }
   .report-card__link {
-    // width: 40px;
-    // @media (min-width: $breakpoint-small) {
-    //   width: 50px;
-    // }
     font-size: 10px;
     letter-spacing: 0.2em;
-    @apply p-4;
+    padding: 1rem;
     .parent {
       width: 75px;
       @media (min-width: $breakpoint-small) {
@@ -116,7 +78,6 @@ export default {
     svg {
       height: 20px;
       width: auto;
-
       path {
         fill: $green;
       }

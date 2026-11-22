@@ -23,7 +23,7 @@ const menuOpen = ref(false)
       <NuxtLink to="/regional-news/">News</NuxtLink>
       <NuxtLink to="/economic-development-initiatives/">Initiatives</NuxtLink>
     </div>
-    <!-- The resource request overlay (layout-resource-info) returns with the form in the pages, batch A session. -->
+    <LayoutResourceRequestDialog />
   </div>
 </template>
 
