@@ -41,6 +41,8 @@ export function useScrollLine(options: { paths: string[], tip?: number }) {
   function drawnFraction({ el, reach }: Line) {
     const m = el.getScreenCTM()
     if (!m || !m.d) return 0 // Not rendered at this width (display: none).
+    // Some browsers still return a matrix for a hidden SVG; no client rects means it is not laid out at all.
+    if (el.ownerSVGElement && !el.ownerSVGElement.getClientRects().length) return 0
     // A fixed drawing never moves on screen, so it fills in step with the page's overall scroll instead.
     if (el.ownerSVGElement && getComputedStyle(el.ownerSVGElement).position === 'fixed') {
       const scrollable = document.documentElement.scrollHeight - window.innerHeight
