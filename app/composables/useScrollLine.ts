@@ -25,8 +25,8 @@ export function useScrollLine(options: { container: string, paths: string[], fac
       frame = 0
       const container = document.getElementById(options.container)
       if (!container) return
-      const scrollPercent = (window.scrollY / container.getBoundingClientRect().height) * options.factor
-      if (scrollPercent >= 1) return
+      // Clamped rather than skipped, so a fast scroll past the end still finishes the line.
+      const scrollPercent = Math.min(1, (window.scrollY / container.getBoundingClientRect().height) * options.factor)
       for (const { el, length } of lines) el.style.strokeDashoffset = String(length - length * scrollPercent)
     })
   }, { passive: true })
