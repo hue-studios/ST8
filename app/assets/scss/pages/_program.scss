@@ -184,7 +184,9 @@
     }
     #start-btn {
       position: absolute;
-      top: -70px;
+      // Below the large breakpoint the story sits directly under the counties / initiatives rows, so the dot starts
+      // lower (centered on the line's top) instead of overlapping them.
+      top: -30px;
       left: calc(50% - 20px);
       filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.25));
       @media (min-width: $breakpoint-small) {
@@ -217,9 +219,9 @@
     #straightLineSVG {
       position: absolute;
       z-index: -1;
-      top: -50px;
+      top: -10px;
       left: calc(50% - 1px);
-      height: calc(100% + 50px);
+      height: calc(100% + 10px);
       width: 3px;
       @media (min-width: $breakpoint-large) {
         display: none;
