@@ -20,7 +20,6 @@ export const PROGRAM_FIELDS = [
   'resources.resources_id.link',
   'resources.resources_id.file.id',
   'news.news_id.title',
-  'news.news_id.article',
   'news.news_id.link',
   'news.news_id.type',
   'news.news_id.tags',

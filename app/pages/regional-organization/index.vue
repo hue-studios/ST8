@@ -19,7 +19,7 @@ const { orgAsset } = useOrganization()
 
 const { data, error } = await useAsyncData('regional-organization', async () => {
   const [organization, people, counties] = await Promise.all([
-    directus.request(readSingleton('organization', { fields: ['*'] as never })),
+    directus.request(readSingleton('organization', { fields: ['mission_statement', 'who_we_are', 'our_role', 'our_history'] as never })),
     directus.request(readItems('people', {
       fields: ['id', 'name', 'title', 'phone', 'email', 'category', 'sort', 'image.id', 'county.title'] as never,
       filter: { status: { _eq: 'published' } },

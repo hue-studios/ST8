@@ -30,10 +30,11 @@ export function pruneUnresolvedLinks<T>(value: T): T {
 
 /**
  * The typed, public Directus client for the staff-managed CMS (manage.southerntier8.org). It carries no token: this
- * site reads only what the public role may read. Every response passes through pruneUnresolvedLinks.
+ * site reads only what the public role may read. `fetchImpl` replaces the global fetch (the cached
+ * server path and the same-origin proxy both use it). Every response passes through pruneUnresolvedLinks.
  */
-export function createCmsClient(url: string) {
-  return createDirectus<Schema>(url).with(
+export function createCmsClient(url: string, fetchImpl?: typeof fetch) {
+  return createDirectus<Schema>(url, fetchImpl ? { globals: { fetch: fetchImpl } } : undefined).with(
     rest({
       onResponse: (result: unknown) => pruneUnresolvedLinks(result),
     }),

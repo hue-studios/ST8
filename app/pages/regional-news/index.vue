@@ -13,7 +13,12 @@ const { data, error } = await useAsyncData('news-index', () =>
     filter: { status: { _eq: 'published' } },
     sort: ['-date_published', 'sort'],
     limit: -1,
-  })) as unknown as Promise<NewsCardItem[]>)
+  })).then(rows => (rows as unknown as NewsCardItem[]).map(item => ({
+    ...item,
+    // The card shows the first 120 characters of the article as plain text, so only that much goes into the page
+    // (the full articles were most of this page's payload). 200 leaves room for the card's own entity clean-up.
+    article: removeTags(item.article).slice(0, 200),
+  }))))
 if (error.value || !data.value) {
   throw createError({ statusCode: 503, statusMessage: 'News could not be loaded', fatal: true })
 }

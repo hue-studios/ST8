@@ -13,7 +13,7 @@ export default defineCachedEventHandler(async () => {
     + `?key=${encodeURIComponent(useRuntimeConfig().googleCalendarKey)}&timeMin=${timeMin}&timeMax=${timeMax}`
     + '&singleEvents=true&orderBy=startTime&maxResults=2500'
 
-  const res = await fetch(url, { headers: { referer: 'https://southerntier8.org/' } }).catch(() => null)
+  const res = await fetchWithTimeout(url, { headers: { referer: 'https://southerntier8.org/' } }).catch(() => null)
   if (!res || !res.ok) {
     // A calendar outage leaves the featured events and an empty calendar, never an error page.
     console.error('calendar: Google Calendar did not answer', res?.status)

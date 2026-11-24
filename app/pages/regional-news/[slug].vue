@@ -15,7 +15,7 @@ const { data, error } = await useAsyncData(
       filter: { url: { _eq: slug.value } },
       fields: [
         'id', 'status', 'article', 'cover_image.id', 'date_published', 'date_created', 'date_updated', 'link', 'tags',
-        'title', 'type', 'url', 'related_resources.resources_id.*', 'related_resources.resources_id.file.id',
+        'title', 'type', 'url', ...resourceFields('related_resources.resources_id'),
       ] as never,
       limit: 1,
     }))

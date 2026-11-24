@@ -14,7 +14,7 @@ const { data, error } = await useAsyncData('services-index', () =>
       'example_programs.programs_id.counties.counties_id.title',
       'example_programs.programs_id.initiatives.initiatives_id.title',
       'example_programs.programs_id.partners.partners_id.title',
-      'resources.resources_id.*', 'resources.resources_id.file.id',
+      ...resourceFields('resources.resources_id'), 'resources.resources_id.description',
       'news.id', 'news.news_id.id', 'news.news_id.title', 'news.news_id.url', 'news.news_id.date_published',
       'news.news_id.date_created', 'news.news_id.date_updated', 'news.news_id.cover_image.id',
     ] as never,

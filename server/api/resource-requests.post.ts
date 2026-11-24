@@ -11,7 +11,7 @@ export default defineEventHandler(async (event) => {
   }
   const { name, email, company, research, resource } = parsed.data
 
-  const res = await fetch(`${useRuntimeConfig().public.directusUrl}/items/requests`, {
+  const res = await fetchWithTimeout(`${useRuntimeConfig().public.directusUrl}/items/requests`, {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify({ name, email, company: company || null, research, resource, status: 'published' }),

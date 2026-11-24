@@ -24,8 +24,8 @@ function bannerFrom(page: Record<string, unknown> | null) {
 }
 
 // Directus returns a count as { id: "12" } with a field aggregate and as "12" with others; accept both.
-async function count(collection: 'news' | 'programs') {
-  const rows = await directus.request(readItems(collection, {
+async function countNews() {
+  const rows = await directus.request(readItems('news', {
     aggregate: { count: 'id' },
     filter: { status: { _eq: 'published' } },
   } as never)) as unknown as Array<{ count: string | number | Record<string, string | number> }>
@@ -34,39 +34,43 @@ async function count(collection: 'news' | 'programs') {
 }
 
 const { data, error } = await useAsyncData('home', async () => {
-  const [partners, news, programs, home, newsCount, programsCount, housingBanner] = await Promise.all([
+  const [partners, news, allPrograms, home, newsCount, housingBanner] = await Promise.all([
     directus.request(readItems('partners', { fields: ['title', 'category'] as never, limit: -1 })),
     directus.request(readItems('news', {
       fields: [
-        'title', 'article', 'url', 'cover_image.id', 'featured', 'date_published', 'date_created', 'date_updated',
+        'title', 'url', 'cover_image.id', 'featured', 'date_published', 'date_created', 'date_updated',
         'type', 'link', 'tags',
       ] as never,
       filter: { _and: [{ featured: { _eq: true } }, { status: { _eq: 'published' } }] },
       sort: ['-date_published'],
       limit: -1,
     })),
+    // One read of every published program: the featured ones fill the swiper and the length is the "View All N" count,
+    // which replaces a second request for the count (there are only a dozen programs).
     directus.request(readItems('programs', {
-      fields: PROGRAM_CARD_FIELDS as never,
-      filter: { _and: [{ featured: { _eq: true } }, { status: { _eq: 'published' } }] },
+      fields: [...PROGRAM_CARD_FIELDS, 'featured'] as never,
+      filter: { status: { _eq: 'published' } },
       limit: -1,
     })),
     directus.request(readSingleton('home', {
-      fields: ['introduction', 'featured_resource.*', 'featured_resource.programs.programs_id.*', 'featured_resource.file.id'] as never,
+      fields: ['introduction', ...resourceCardFields('featured_resource')] as never,
     })),
-    count('news'),
-    count('programs'),
+    countNews(),
     // The banner is an extra, so a CMS hiccup just leaves it off.
     directus.request(readSingleton('housing_page', {
       fields: ['banner_show', 'banner_image', 'banner_title', 'banner_text', 'title', 'page_image'] as never,
     })).then(row => bannerFrom(row as unknown as Record<string, unknown>)).catch(() => null),
   ])
+  const featuredPrograms = (allPrograms as unknown as Array<ProgramListItem & { featured?: boolean | null }>)
+    .filter(p => p.featured)
+    .map(({ featured: _featured, ...program }) => program)
   return {
     housingBanner,
     partners: partners as unknown as PartnerItem[],
     news: news as unknown as NewsCardItem[],
     newsCount,
-    programs: programs as unknown as ProgramListItem[],
-    programsCount,
+    programs: featuredPrograms as ProgramListItem[],
+    programsCount: (allPrograms as unknown[]).length,
     home: home as unknown as { introduction?: string | null, featured_resource?: ResourceCardItem | null },
   }
 })

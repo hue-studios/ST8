@@ -6,7 +6,7 @@ const directus = useDirectus()
 
 const { data, error } = await useAsyncData('resources-index', () =>
   directus.request(readItems('resources', {
-    fields: ['*', 'file.id', 'cover_image.id', 'programs.programs_id.id', 'programs.programs_id.title'] as never,
+    fields: [...RESOURCE_CARD_FIELDS, 'category'] as never,
     filter: { status: { _eq: 'published' } },
     sort: ['sort'],
     limit: -1,

@@ -20,7 +20,7 @@ export default defineEventHandler(async (event) => {
 
   const upstream = `${useRuntimeConfig().public.directusUrl}/assets/${id}?width=${OG_WIDTH}&height=${OG_HEIGHT}&fit=cover&format=jpg&quality=80`
 
-  const res = await fetch(upstream).catch(() => null)
+  const res = await fetchWithTimeout(upstream).catch(() => null)
   // A deleted or broken file should still leave the page with a card rather than a blank space.
   if (!res || !res.ok) {
     return sendRedirect(event, DEFAULT_CARD, 302)
