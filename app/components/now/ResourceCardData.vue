@@ -11,7 +11,8 @@ const isFile = computed(() => props.item.type === 'Internal File / PDF' && !!pro
 const isLink = computed(() => props.item.type === 'External Link')
 // A gated file opens the request form first; everything else is a plain link to the file or the resource.
 const gated = computed(() => isFile.value && !!props.item.require_info)
-const href = computed(() => (isFile.value ? fileUrl.value : isLink.value ? props.item.link || undefined : undefined))
+// A gated file gets no href, so the file's address is not in the page for crawlers or a middle-click to open.
+const href = computed(() => (gated.value ? undefined : isFile.value ? fileUrl.value : isLink.value ? props.item.link || undefined : undefined))
 
 function onClick(event: MouseEvent) {
   if (!gated.value) return

@@ -149,18 +149,25 @@ export default defineNuxtConfig({
     defaults: { width: 1200, height: 630 },
   },
 
+  // The housing forecast pages are not disallowed here: X and LinkedIn read robots.txt and draw no card for a blocked
+  // URL, and these pages have share cards of their own. They are kept out of search by a noindex in routeRules instead.
   robots: {
-    disallow: ['/search', '/regional-housing-forecast'],
+    disallow: ['/search'],
   },
 
-  // Printed URLs (summit QR codes, slides, handouts) must never break, so redirects live in code, not the CMS.
-  routeRules: redirects({
-    '/programs': '/economic-development-programs',
-    '/programs/housing': '/economic-development-programs/housing',
-    // The Housing program's slug before it moved to /housing.
-    '/economic-development-programs/southern-tier-s-capital-stack-for-workforce-housing':
-      '/economic-development-programs/housing',
-  }),
+  routeRules: {
+    // Printed URLs (summit QR codes, slides, handouts) must never break, so redirects live in code, not the CMS.
+    ...redirects({
+      '/programs': '/economic-development-programs',
+      '/programs/housing': '/economic-development-programs/housing',
+      // The Housing program's slug before it moved to /housing.
+      '/economic-development-programs/southern-tier-s-capital-stack-for-workforce-housing':
+        '/economic-development-programs/housing',
+    }),
+    // noindex (meta tag and X-Robots-Tag) without blocking crawlers, so the share cards still work.
+    '/regional-housing-forecast': { robots: false },
+    '/regional-housing-forecast/**': { robots: false },
+  },
 
   typescript: {
     strict: true,
