@@ -8,7 +8,7 @@ const { data, error } = await useAsyncData('how-to-apply', () =>
   directus.request(readSingleton('how_to_apply', {
     fields: [
       'introduction', 'steps', 'arc_info', 'resources.resources_id.id', 'resources.resources_id.title',
-      'resources.resources_id.type', 'resources.resources_id.link', 'resources.resources_id.file.id',
+      'resources.resources_id.type', 'resources.resources_id.link', 'resources.resources_id.require_info', 'resources.resources_id.file.id',
     ] as never,
   })) as unknown as Promise<HowToApply>)
 if (error.value || !data.value) {

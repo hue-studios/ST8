@@ -4,6 +4,14 @@ import type { ServiceItem } from '#shared/types/st8'
 
 const directus = useDirectus()
 const asset = useAsset()
+const { ask } = useResourceRequest()
+
+// A gated file opens the request form first and has no href (the same rule as the resource cards).
+function askForFile(event: MouseEvent, resource: { id: number, title: string, require_info?: boolean | null, file?: { id: string } | null }) {
+  if (!resource.require_info || !resource.file) return
+  event.preventDefault()
+  ask({ id: resource.id, title: resource.title, link: asset(resource.file.id) })
+}
 
 const { data, error } = await useAsyncData('services-index', () =>
   directus.request(readItems('services', {
@@ -181,9 +189,11 @@ const published = (news: { date_published?: string | null, date_updated?: string
             </p>
             <a
               v-if="resource.resources_id!.type === 'Internal File / PDF' && resource.resources_id!.file"
-              :href="asset(resource.resources_id!.file.id)"
+              :href="resource.resources_id!.require_info ? undefined : asset(resource.resources_id!.file.id)"
               class="w-full uppercase text-xs green bold tracking-widest text-right services-section__resource-card-link"
-              target="_blank"
+              :target="resource.resources_id!.require_info ? undefined : '_blank'"
+              :style="resource.resources_id!.require_info ? { cursor: 'pointer' } : undefined"
+              @click="askForFile($event, resource.resources_id!)"
             >
               View File
               <UniversalLinkIcon class="ml-2" />

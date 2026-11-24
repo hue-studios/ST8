@@ -3,7 +3,19 @@ import type { ResourceCardItem } from '#shared/types/st8'
 
 const props = defineProps<{ item: ResourceCardItem | null }>()
 const asset = useAsset()
+const { ask } = useResourceRequest()
 const tooLong = computed(() => (props.item?.title.length ?? 0) > 30)
+const isFile = computed(() => props.item?.type === 'Internal File / PDF' && !!props.item.file)
+// A gated file opens the request form first and has no href, so its address is not in the page for crawlers or a
+// middle-click to open (the same rule as NowResourceCardData).
+const gated = computed(() => isFile.value && !!props.item?.require_info)
+const fileHref = computed(() => (isFile.value && !gated.value ? asset(props.item!.file!.id) : undefined))
+
+function onFileClick(event: MouseEvent) {
+  if (!gated.value || !props.item) return
+  event.preventDefault()
+  ask({ id: props.item.id, title: props.item.title, link: asset(props.item.file!.id) })
+}
 </script>
 
 <template>
@@ -20,10 +32,12 @@ const tooLong = computed(() => (props.item?.title.length ?? 0) > 30)
     </h2>
 
     <a
-      v-if="item.type === 'Internal File / PDF' && item.file"
-      :href="asset(item.file.id)"
+      v-if="isFile"
+      :href="fileHref"
       class="w-full uppercase text-xs green bold tracking-widest px-4 md:px-6 resource-card__link"
-      target="_blank"
+      :target="fileHref ? '_blank' : undefined"
+      :style="gated ? { cursor: 'pointer' } : undefined"
+      @click="onFileClick"
     >
       View File
       <UniversalLinkIcon class="ml-2" />

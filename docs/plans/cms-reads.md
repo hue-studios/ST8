@@ -128,8 +128,8 @@ the webhook, so pair it with Runtime Cache/KV storage (above) before relying on 
 - **Detail pages** still read their related rows nested; trimming them further would change what they show.
 - **nuxt-og-image** fetches the cover image it renders from the CMS's `/assets`; that is the module's own fetch, not a
   data read, so it has no timeout from this change.
-- **Gated resources outside the Resources page:** `ResourceCardVertical` (news articles, programs, events, how to
-  apply, housing) still links a gated file's URL in its href. That is how it behaved before this work and "same output"
-  was the constraint, so I left it. Only `ResourceCardData` (home, Resources page) hides it. Worth a follow-up: the
-  vertical card needs the same `require_info` check, and the program/news field lists would need `require_info` added.
+- **Gated resources everywhere (done afterwards):** `ResourceCardVertical` and the Services page's resource cards now
+  follow `ResourceCardData`: a gated file has no href and opens the request form. This needed `require_info` and the
+  resource `id` on the program, housing and how-to-apply reads, so those cards' DOM ids now carry the real id instead of
+  `undefined`. The gated file's id is still inside the page's serialised data, as it was for the existing card.
 - **Purge webhook** described above, not built.
