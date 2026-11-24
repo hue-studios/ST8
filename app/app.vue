@@ -1,13 +1,14 @@
 <script setup lang="ts">
 const { organization } = useOrganization()
 
-// Site-wide identity, so every page names who published it.
+// Site-wide identity, so every page names who published it. The definition is one computed rather than a computed
+// `sameAs`: nuxt-schema-org 7's types reject a ref on a single field.
 useSchemaOrg([
-  defineOrganization({
+  defineOrganization(computed(() => ({
     name: 'Southern Tier 8',
     logo: '/images/st8-social.png',
-    sameAs: () => (organization.value.social_links || []).map(link => link.link),
-  }),
+    sameAs: (organization.value.social_links || []).map(link => link.link),
+  }))),
   defineWebSite({ name: 'Southern Tier 8' }),
 ])
 </script>
