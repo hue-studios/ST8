@@ -92,7 +92,9 @@ export default defineNuxtConfig({
         { rel: 'icon' as const, type: 'image/png', sizes: '32x32', href: '/icons/favicon-32x32.png' },
         { rel: 'icon' as const, type: 'image/png', sizes: '96x96', href: '/icons/favicon-96x96.png' },
         { rel: 'icon' as const, type: 'image/png', sizes: '16x16', href: '/icons/favicon-16x16.png' },
-        { rel: 'manifest', href: '/manifest.json' },
+        // use-credentials sends the visitor's cookies, so the manifest still loads where Vercel Deployment Protection
+        // guards the host (staging); on the public site it changes nothing.
+        { rel: 'manifest', href: '/manifest.json', crossorigin: 'use-credentials' as const },
       ],
     },
     // Pages cross-fade, as on the Nuxt 2 site (`.page-*` in assets/scss/_transitions.scss).
