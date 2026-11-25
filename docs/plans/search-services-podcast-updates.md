@@ -324,8 +324,8 @@ Done when: the header stays visible on every page type at desktop and mobile wid
 scroll down and expands on scroll up, the dropdown menus still open from the compact bar, the home
 hero still looks as it does now at the top of the page, and no content is hidden under the bar.
 
-**Check result, 2026-11-25 (master, southerntier8.org): FAILED, then FIXED the same day on local
-master (5d0fe2f), not yet deployed.**
+**Check result, 2026-11-25 (master, southerntier8.org): FAILED, then FIXED in 5d0fe2f; the re-check
+after deploy PASSES (see below).**
 - Passes on desktop: the bar compacts on scroll down, expands on scroll up, and the home hero is unchanged at the top.
 - Fixed on phone, home page: the frosted bar let body text read through behind the search icon. The
   bar is now solid white below the large breakpoint, and solid whenever compact at any width; the
@@ -336,8 +336,15 @@ master (5d0fe2f), not yet deployed.**
   1280px, stay inside it, and every link takes a click. Phones have no dropdowns (they use the
   mobile nav).
 
-Next session (Haiku 5.5): once master is deployed, re-check both phone pages and the compact-bar
-dropdowns on southerntier8.org, then mark Session 7 as passing.
+**Re-check after deploy, 2026-11-25 (Haiku 5.5, southerntier8.org, origin/master at 65127c4): PASSES.
+Session 7 is marked as passing.**
+- Phone, 375px, home and `/economic-development-services`: the bar is solid white at the top (70px),
+  compact (54px) and still solid after scrolling to 800px and 2000px, and back to full height at the
+  top. Checked from computed styles; the screenshot tool returned no image, so this is not a visual check.
+- Desktop, 1280px, compact bar on home: Active, Regional, Now and Organization each open on hover,
+  stay inside the bar, and every link inside them is reachable.
+
+Next session (Sonnet 5.5): Session 8, the podcast section, per the plan below.
 
 ### Session 8: Podcast section (Sonnet 5.5)
 
