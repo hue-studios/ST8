@@ -336,7 +336,15 @@
 
 // On the way down the bar stays but slims: shorter, a smaller logo, the New York graphic folded away. The nav and the
 // search button stay where they were. Only the height and the logo's size animate.
+//
+// Once compact the bar is solid: frosted, the page's text and dark sections read through it behind the logo and the
+// search icon, which on a phone is most of the bar. Below the large breakpoint it is solid at full height too, since
+// the phone bar is never shown over the home hero (it is hidden there until `.scrolled`).
 #page-header.compact {
+  background: $white;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: 0 1px 0 rgba($navy, 0.08);
   height: 54px;
   @media (min-width: $breakpoint-large) {
     height: 64px;
@@ -361,6 +369,13 @@
 }
 #page-header .logo svg {
   transition: width 0.4s $curve;
+}
+@media (max-width: $breakpoint-large - 1px) {
+  #page-header {
+    background: $white;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
 }
 // On the narrowest phones the centred logo would run into the search button; leave room for it on both sides.
 @media (max-width: $breakpoint-large - 1px) {
