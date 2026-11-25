@@ -370,6 +370,31 @@ are unpublished.
 "Rebuilding So-Tier" section and no audio or embed player. Git history has no podcast commit. The
 playback and unpublish checks could not run.
 
+**Status, 2026-11-25 (Sonnet 5.5): BUILT, live and PASSES. Session 8 is marked as passing.** The note above was
+written before 8c3ea1b landed. That commit is on `master` and in production:
+- The section, `PodcastEpisode.vue`, the shared `VideoEmbed.vue` (YouTube, Vimeo, Spotify, click to
+  load), guest links to `#person-<id>` on the Team and Board entries, the header's Podcast link, and
+  `PodcastEpisode` structured data are all in place.
+- Not built, by design: `podcast/[slug].vue`. No episode has a transcript, so there are no episode
+  pages and nothing to add to the sitemap. Build both when the first transcript arrives.
+- Passes on production: with both test episodes in draft, the Organization page has no podcast
+  section and the header has no Podcast link.
+- Passes on production, playback: Directus holds two test episodes, "TEST – uploaded file episode"
+  (an uploaded audio file) and "TEST – YouTube embed episode". Both were published briefly. On
+  southerntier8.org the section, both cards and the header's Podcast link appeared. The file played
+  in the native player (2.5 of 7.8 seconds, no error). The page had no iframe until play was pressed,
+  then loaded the youtube-nocookie player, which played. Both were then set back to draft at
+  22:00 UTC, and the section and the header link were gone from the live page by 22:10 UTC.
+- The site reads the CMS without a token, so drafts can't be shown even locally. Any future playback
+  check means publishing for a few minutes; allow about 10 minutes for the server cache to drop them
+  after unpublishing.
+- The two test rows stay in Directus as drafts for future checks. Delete them before launch if
+  staff would find them confusing.
+
+Next session (Haiku 5.5): re-check Session 9 against its "Done when" on southerntier8.org. Its "NOT
+BUILT" note below is out of date: the Housing Videos and Events section was merged to `master` in
+b4ac98b.
+
 ### Session 9: Housing videos and events (Sonnet 5.5)
 
 Files: `app/pages/economic-development-programs/housing.vue`, `_housing.scss`,
