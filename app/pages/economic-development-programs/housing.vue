@@ -3,10 +3,11 @@
 //
 // Its own copy, framework links and share card come from the `housing_page` singleton in Directus. Counties, "what it
 // is", partners, resources and news come from the program record that singleton points at, exactly as on any program
-// page. This file sits ahead of [slug].vue so /economic-development-programs/housing is not treated as a program slug;
+// page. Videos and Events joins the singleton's `videos` list with the published events linked to the program
+// (events.programs). This file sits ahead of [slug].vue so /economic-development-programs/housing is not treated as a program slug;
 // /programs/housing and the program's old slug redirect here from nuxt.config.ts.
 import { readItems, readSingleton } from '@directus/sdk'
-import type { ProgramDetail, ProgramListItem } from '#shared/types/st8'
+import type { EventListItem, ProgramDetail, ProgramListItem } from '#shared/types/st8'
 import { PROGRAM_CARD_FIELDS, PROGRAM_FIELDS } from '#shared/utils/programs'
 
 const PAGE_PATH = '/economic-development-programs/housing'
@@ -23,8 +24,10 @@ const PAGE_FIELDS = [
   'final_documents',
   'opportunities_intro',
   'opportunities',
+  'videos',
   'program',
 ]
+const EVENT_FIELDS = ['id', 'title', 'url', 'date', 'time', 'description', 'image.id']
 
 // Card icon for each link type; anything else gets the generic external-link icon. Literal names so the icon bundle
 // scan finds them.
@@ -38,6 +41,7 @@ const ICONS: Record<string, string> = {
 }
 
 interface Row { title?: string, url?: string, description?: string, button_text?: string, type?: string }
+interface VideoRow { title?: string, video_url?: string, description?: string }
 const clean = (value: unknown) => (typeof value === 'string' ? value.trim() : '')
 const isHttp = (value: unknown) => /^https?:\/\//i.test(String(value))
 
@@ -65,7 +69,20 @@ const { data, error } = await useAsyncData('housing-program', async () => {
       limit: -1,
     })) as unknown as ProgramListItem[]
     : []
-  return { page, program, others }
+  // Events attached to the program in Directus (an event's Programs list). A failed read only hides them.
+  const events = program
+    ? await directus.request(readItems('events', {
+      filter: { _and: [
+        { status: { _eq: 'published' } },
+        { date: { _nnull: true } },
+        { programs: { programs_id: { _eq: program.id } } },
+      ] } as never,
+      fields: EVENT_FIELDS as never,
+      sort: ['date'],
+      limit: -1,
+    })).catch(() => []) as unknown as EventListItem[]
+    : []
+  return { page, program, others, events }
 })
 if (error.value) {
   throw createError({ statusCode: 503, statusMessage: 'This program could not be loaded', fatal: true })
@@ -108,6 +125,16 @@ const plainLinks = (value: unknown) => rows(value).map(row => ({
 }))
 const finalDocuments = computed(() => plainLinks(page.value.final_documents))
 const opportunities = computed(() => plainLinks(page.value.opportunities))
+
+// Videos and Events. An event is upcoming through its own day (New York time); upcoming run soonest first, past ones
+// most recent first. A video row missing its title or link is skipped.
+const today = formatDate(nowInNewYork(), 'yyyy-MM-dd')
+const events = computed(() => data.value!.events ?? [])
+const upcomingEvents = computed(() => events.value.filter(e => e.date.slice(0, 10) >= today))
+const pastEvents = computed(() => events.value.filter(e => e.date.slice(0, 10) < today).reverse())
+const videos = computed(() => (Array.isArray(page.value.videos) ? page.value.videos as VideoRow[] : [])
+  .filter(row => row && clean(row.title) && isHttp(clean(row.video_url)))
+  .map(row => ({ title: clean(row.title), url: clean(row.video_url), description: clean(row.description) })))
 
 const heroImage = computed(() => (page.value.page_image as string) || program.value.images[0]?.directus_files_id.id || '')
 const tooLong = computed(() => title.value.length > 30)
@@ -266,6 +293,39 @@ useScrollLine({ paths: ['straight-line', 'program-line'] })
           </a>
         </li>
       </ul>
+    </section>
+
+    <section
+      v-if="upcomingEvents.length || pastEvents.length || videos.length"
+      id="housing__videos-events"
+      class="w-full flex flex-col items-center housing__section housing__media"
+    >
+      <h2 class="uppercase green relative program__title">Videos and Events</h2>
+      <template v-if="upcomingEvents.length">
+        <h3 class="uppercase navy bold housing__media-heading">Upcoming Events</h3>
+        <ul class="housing__events">
+          <li v-for="event in upcomingEvents" :key="event.id">
+            <EventsEventCard :event="event" />
+          </li>
+        </ul>
+      </template>
+      <template v-if="pastEvents.length || videos.length">
+        <h3 class="uppercase navy bold housing__media-heading">
+          {{ pastEvents.length ? 'Past Events and Recordings' : 'Recordings' }}
+        </h3>
+        <ul v-if="pastEvents.length" class="housing__events">
+          <li v-for="event in pastEvents" :key="event.id">
+            <EventsEventCard :event="event" />
+          </li>
+        </ul>
+        <ul v-if="videos.length" class="housing__videos">
+          <li v-for="(video, index) in videos" :key="index" class="housing__video">
+            <MediaVideoEmbed :url="video.url" :title="video.title" />
+            <h4 class="uppercase navy bold housing__video-title">{{ video.title }}</h4>
+            <p v-if="video.description" class="navy housing__video-description">{{ video.description }}</p>
+          </li>
+        </ul>
+      </template>
     </section>
 
     <section

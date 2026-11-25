@@ -80,34 +80,7 @@
         height: 200px;
       }
     }
-    .events__event {
-      width: 96%;
-      border: thin solid rgba($grey, 0.2);
-
-      .events__event-image {
-        width: 100px;
-        height: 100px;
-        background-color: $navy;
-      }
-
-      .events__event-description {
-        border-left: thin solid rgba($grey, 0.5);
-        padding: 20px;
-        font-size: 12px;
-        line-height: 1.2em;
-        width: calc(100% - 150px);
-        h3 {
-        }
-        h4 {
-          font-size: 10px;
-        }
-        p {
-        }
-      }
-      .events__event-link {
-        width: 50px;
-      }
-    }
+    // The cards themselves are styled in components/events/EventCard.vue.
   }
   #events__calendar {
     max-width: 700px;

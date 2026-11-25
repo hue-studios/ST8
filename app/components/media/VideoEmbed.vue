@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// A click-to-load YouTube or Spotify player. Until the visitor presses play the page shows a plain button, so no
+// A click-to-load YouTube, Vimeo or Spotify player. Until the visitor presses play the page shows a plain button, so no
 // third-party script, cookie or iframe loads with the page. Shared by the podcast (session 8) and Housing videos
 // (session 9). A link it does not recognise renders as a plain "open" link.
 const props = defineProps<{
@@ -27,6 +27,17 @@ const embed = computed(() => {
     if (!id || !/^[\w-]{6,}$/.test(id)) return null
     return { kind: 'youtube' as const, src: `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`, height: null }
   }
+  if (host === 'vimeo.com' || host === 'player.vimeo.com') {
+    // vimeo.com/123456, vimeo.com/123456/abcdef (unlisted, with its hash), player.vimeo.com/video/123456
+    const match = /^\/(?:video\/)?(\d+)(?:\/(\w+))?/.exec(link.pathname)
+    if (!match) return null
+    const hash = match[2] || link.searchParams.get('h')
+    return {
+      kind: 'vimeo' as const,
+      src: `https://player.vimeo.com/video/${match[1]}?autoplay=1&dnt=1${hash ? `&h=${hash}` : ''}`,
+      height: null,
+    }
+  }
   if (host === 'open.spotify.com') {
     const match = /^\/(?:embed\/)?(episode|show|track|playlist)\/(\w+)/.exec(link.pathname)
     if (!match) return null
@@ -39,6 +50,7 @@ const embed = computed(() => {
   return null
 })
 
+const PLAYERS = { youtube: 'YouTube', vimeo: 'Vimeo', spotify: 'Spotify' } as const
 const label = computed(() => (embed.value?.kind === 'spotify' ? 'Play on Spotify' : 'Play video'))
 </script>
 
@@ -60,7 +72,7 @@ const label = computed(() => (embed.value?.kind === 'spotify' ? 'Play on Spotify
         <Icon name="lucide:play" />
         <span>{{ label }}</span>
       </span>
-      <span class="video-embed__note">Loads a player from {{ embed.kind === 'spotify' ? 'Spotify' : 'YouTube' }}</span>
+      <span class="video-embed__note">Loads a player from {{ PLAYERS[embed.kind] }}</span>
     </button>
   </div>
   <a v-else :href="url" target="_blank" rel="noreferrer" class="video-embed__link">Open {{ title }}</a>
@@ -76,7 +88,8 @@ const label = computed(() => (embed.value?.kind === 'spotify' ? 'Play on Spotify
   border-radius: 4px;
   background: $navy;
 
-  &--youtube { aspect-ratio: 16 / 9; }
+  &--youtube,
+  &--vimeo { aspect-ratio: 16 / 9; }
   &--spotify { min-height: 152px; background: transparent; }
 
   .video-embed__frame {

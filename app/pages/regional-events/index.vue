@@ -6,7 +6,6 @@ import { Swiper, SwiperSlide } from 'swiper/vue'
 import type { CalendarEvent, EventListItem } from '#shared/types/st8'
 
 const directus = useDirectus()
-const asset = useAsset()
 
 // Featured events: everything from a year back, as before.
 const oneYearAgo = formatDate(subYears(nowInNewYork(), 1), 'yyyy-MM-dd')
@@ -114,31 +113,7 @@ useShareMeta({
             class="swiper w-full flex flex-row pt-4 pb-4"
           >
             <SwiperSlide v-for="item in featuredEvents" :key="item.id">
-              <div class="shadow-lg mx-4 events__event">
-                <div class="w-full flex items-center justify-center flex-row">
-                  <div
-                    class="bg-cover bg-no-repeat bg-center events__event-image"
-                    :style="item.image ? { backgroundImage: `url(${asset(item.image.id, 'small')})` } : undefined"
-                  />
-                  <div class="events__event-description">
-                    <h3 class="uppercase tracking-wider bold mb-2">{{ truncate(item.title, 100) }}</h3>
-                    <h4 class="uppercase tracking-wider bold">
-                      <span class="opacity-50">Date: </span>{{ formatDate(item.date, 'MMMM do yyyy') }}
-                    </h4>
-                    <h4 v-if="item.time" class="uppercase tracking-wider bold mb-2">
-                      <span class="opacity-50">Time: </span> {{ item.time }}
-                    </h4>
-                    <p class="w-full hidden md:inline-block">{{ truncate(item.description, 80) }}</p>
-                  </div>
-                  <NuxtLink
-                    :to="'/regional-events/' + item.url"
-                    class="flex items-center justify-center events__event-link"
-                    :aria-label="item.title"
-                  >
-                    <UniversalLinkIcon />
-                  </NuxtLink>
-                </div>
-              </div>
+              <EventsEventCard :event="item" class="mx-4" />
             </SwiperSlide>
           </Swiper>
         </div>
