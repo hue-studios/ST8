@@ -142,7 +142,7 @@ Proposed fixes, in priority order. Status is noted per item. Each item names the
 |---|---|---|---|---|
 | 1 | Live 500 on the workforce summit article | Live is the old site, so the fix is in the live app, not this branch. Check the record in the CMS (`news`, slug `workforce-housing-infrastructure-summit-november-18-2026`) for a field the old site cannot parse | Fix the record or the old site's handling of it. Staging already renders it, so the record itself is fine on the new app | Yes, if live keeps serving this URL at cutover |
 | 2 | **Done (on this branch, not deployed).** Staging share cards point at `https://southerntier8.org/_og/…` and 404 today | `shared/utils/share.ts:6` (`SITE_URL`) and `nuxt.config.ts` `site.url` | Build preview card URLs from the request's own origin, or accept that cards work only after cutover. Decide which before testing previews | Yes, for preview sign-off |
-| 3 | Staging detail pages emit two `og:image` tags (page card plus site default) | `nuxt.config.ts` `app.head.meta` (the default `og:image`) and `app/composables/useShareMeta.ts` (the page card, via `useSeoMeta`) | Drop the default `og:image` for pages that set their own card, or set the default only when a page sets none | Yes. Two images give crawlers a choice |
+| 3 | **Done (uncommitted).** Staging detail pages emit two `og:image` tags (page card plus site default) | `nuxt.config.ts` `app.head.meta` (the default `og:image`) and `app/composables/useShareMeta.ts` (the page card, via `useSeoMeta`) | Drop the default `og:image` for pages that set their own card, or set the default only when a page sets none | Yes. Two images give crawlers a choice |
 | 4 | Gated resource file ids appear in the hydration payload | `app/components/now/ResourceCardData.vue` and `ResourceCardVertical.vue` hide the href, but the payload still carries `file.id` | Strip `file` from gated rows in the server fetch, or fetch `file.id` only for non-gated rows, so the payload never holds a gated id | Decide before cutover. The leak is an id, not a link, so it is lower severity |
 | 5 | Staging emits canonical, robots and Twitter tags that live lacks | `nuxt.config.ts` and `useShareMeta.ts` | No change if intended. Confirm with the team | Confirm only |
 | 6 | Live sends Universal Analytics hits; staging sends GA4 | `nuxt.config.ts` `gtag.id` (`G-2L5KBV6N3L`) and the live app's analytics snippet (not in this repo) | Confirm which property the team reads. Keep GA4 on the new site and point reports at it | Yes, so traffic is not split across two properties at cutover |
@@ -161,3 +161,10 @@ Verified: `pnpm typecheck` passes. A build with `NUXT_PUBLIC_SITE_URL=http://loc
 **Side effect to check:** with the variable set, the preview's canonical link, sitemap and robots output also use the preview origin (they read `site.url`). Confirm that a preview should be allowed to publish those, since a preview that is indexable would compete with the live site.
 
 Not changed here: the duplicate `og:image` (item 3) and the gated file ids in the payload (item 4).
+
+### Duplicate og:image fix (status: done, uncommitted)
+
+- `nuxt.config.ts`: removed the static `og:image` from `app.head`.
+- `app/app.vue`: sets the site card through `useSeoMeta` as a fallback for pages without their own card (error pages, catch-all).
+
+Verified: `pnpm typecheck` passes. A local build with `NUXT_PUBLIC_SITE_URL` set shows exactly one `og:image` on home, the programs detail, the news article, resources, events, an initiative detail and a county page, each with the right card or site card. The 404 response has no `og:image` (the error page does not get the app-level fallback). Left as is, since error pages are not shared.

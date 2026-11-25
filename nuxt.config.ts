@@ -77,7 +77,6 @@ export default defineNuxtConfig({
         { property: 'og:type', content: 'website' },
         { property: 'og:url', content: 'https://southerntier8.org' },
         { property: 'fb:app_id', content: '503626331013525' },
-        { property: 'og:image', content: 'https://southerntier8.org/images/st8-social.png' },
         { name: 'twitter:site', content: '@SouthernTier8' },
         { name: 'twitter:card', content: 'summary_large_image' },
         { name: 'msapplication-TileColor', content: '#ffffff' },
