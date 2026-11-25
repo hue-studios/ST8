@@ -224,8 +224,7 @@
       width: auto;
       height: 36px;
       margin-right: 24px;
-      padding: 0 4px 0 24px;
-      border-left: thin solid rgba($navy, 0.15);
+      padding: 0 4px;
       border-radius: 0;
     }
   }
@@ -299,7 +298,7 @@
     }
     .page-header__search {
       margin-right: 16px;
-      padding: 0 4px 0 16px;
+      padding: 0 4px;
     }
   }
   @media (min-width: $breakpoint-large) and (max-width: 1199px) {
