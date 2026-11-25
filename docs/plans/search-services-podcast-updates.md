@@ -391,9 +391,8 @@ written before 8c3ea1b landed. That commit is on `master` and in production:
 - The two test rows stay in Directus as drafts for future checks. Delete them before launch if
   staff would find them confusing.
 
-Next session (Haiku 5.5): re-check Session 9 against its "Done when" on southerntier8.org. Its "NOT
-BUILT" note below is out of date: the Housing Videos and Events section was merged to `master` in
-b4ac98b.
+Next session (Haiku 5.5): re-check Session 9 against its "Done when" on southerntier8.org, since the
+Housing Videos and Events section was merged to `master` in b4ac98b after the earlier NOT BUILT result.
 
 ### Session 9: Housing videos and events (Sonnet 5.5)
 
@@ -408,9 +407,9 @@ Files: `app/pages/economic-development-programs/housing.vue`, `_housing.scss`,
 Done when: the summit appears with its video, and an event attached in Directus shows up without
 a deploy.
 
-**Check result, 2026-11-25 (master, southerntier8.org): NOT BUILT.** The Housing page has no
-"Videos and Events" section. The summit appears only as a related resource, not with its video.
-The event-attachment check could not run.
+**Check result, 2026-11-25 (master, southerntier8.org): NOT BUILT. Superseded by b4ac98b**, which
+merged the Videos and Events section to `master`. The result above was recorded before that merge
+and is kept for the record. The re-check against "Done when" is still pending.
 
 ### Session 10: Search index and search panel (Sonnet 5.5)
 
