@@ -328,6 +328,12 @@
   --st8-header: var(--st8-header-compact);
 }
 
+// A link to a section (#staff-section, #service-2, …), from search or anywhere else, lands it below the bar. The router
+// reads this when it scrolls to a hash.
+[id] {
+  scroll-margin-top: calc(var(--st8-header-full) + 10px);
+}
+
 // On the way down the bar stays but slims: shorter, a smaller logo, the New York graphic folded away. The nav and the
 // search button stay where they were. Only the height and the logo's size animate.
 #page-header.compact {

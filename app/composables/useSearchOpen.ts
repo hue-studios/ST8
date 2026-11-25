@@ -1,6 +1,6 @@
 /**
- * Whether the site search is open. The header's search button toggles it; the search panel in layouts/default.vue
- * reads it (an empty dialog until the real panel lands).
+ * Whether the site search panel (components/layout/SearchDialog.vue, mounted in layouts/default.vue) is open. The
+ * header's search button toggles it; the panel itself also opens on Cmd/Ctrl+K and `/`.
  */
 export function useSearchOpen() {
   const open = useState('st8-search-open', () => false)
