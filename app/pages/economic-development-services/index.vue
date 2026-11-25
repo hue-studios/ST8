@@ -10,7 +10,7 @@ const { ask } = useResourceRequest()
 function askForFile(event: MouseEvent, resource: { id: number, title: string, require_info?: boolean | null, file?: { id: string } | null }) {
   if (!resource.require_info || !resource.file) return
   event.preventDefault()
-  ask({ id: resource.id, title: resource.title, link: asset(resource.file.id) })
+  ask({ id: resource.id, title: resource.title })
 }
 
 const { data, error } = await useAsyncData('services-index', () =>

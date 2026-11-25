@@ -17,7 +17,7 @@ const href = computed(() => (gated.value ? undefined : isFile.value ? fileUrl.va
 function onClick(event: MouseEvent) {
   if (!gated.value) return
   event.preventDefault()
-  ask({ id: props.item.id, title: props.item.title, link: fileUrl.value })
+  ask({ id: props.item.id, title: props.item.title })
 }
 </script>
 

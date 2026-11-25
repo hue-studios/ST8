@@ -21,5 +21,14 @@ export default defineEventHandler(async (event) => {
     console.error('resource request: the CMS refused the post', res?.status, res ? await res.text().catch(() => '') : 'no response')
     throw createError({ statusCode: 502, statusMessage: 'We could not save your request. Please try again.' })
   }
-  return { ok: true }
+  // The address is sent only now, once the request is saved, and only for a gated file (see cms/[...path].get.ts).
+  return { ok: true, link: await gatedFileLink(parsed.data.resource) }
 })
+
+async function gatedFileLink(id: number): Promise<string | null> {
+  const res = await cmsRead(`/items/resources/${id}?fields=require_info,file.id`).catch(() => null)
+  if (!res || res.status !== 200) return null
+  const row = JSON.parse(res.body).data
+  if (!row?.require_info || !row.file?.id) return null
+  return `${useRuntimeConfig().public.directusUrl}/assets/${row.file.id}`
+}

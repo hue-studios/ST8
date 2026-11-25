@@ -17,14 +17,17 @@ const [company] = defineField('company')
 const [research] = defineField('research')
 
 const complete = ref(false)
+// The file's address, returned by the save. Empty until the request is saved.
+const fileLink = ref('')
 const firstName = computed(() => (name.value || '').trim().split(' ')[0])
 
 const submit = handleSubmit(async (values) => {
   try {
-    await $fetch('/api/resource-requests', {
+    const saved = await $fetch<{ ok: boolean, link: string | null }>('/api/resource-requests', {
       method: 'POST',
       body: { ...values, company: values.company || undefined, resource: target.value.id },
     })
+    fileLink.value = saved.link ?? ''
     complete.value = true
   }
   catch {
@@ -36,6 +39,7 @@ const submit = handleSubmit(async (values) => {
 watch(open, (isOpen) => {
   if (!isOpen) {
     complete.value = false
+    fileLink.value = ''
     resetForm()
   }
 })
@@ -80,7 +84,7 @@ const selectClass = 'border-input h-9 w-full rounded-md border bg-white px-3 tex
         We appreciate your interest in Southern Tier 8. Click the button below to view
         <span class="font-bold">{{ target.title }}</span>.
       </p>
-      <St8Button as="a" :href="target.link" target="_blank" rel="noreferrer" class="w-full">
+      <St8Button v-if="fileLink" as="a" :href="fileLink" target="_blank" rel="noreferrer" class="w-full">
         View resource
       </St8Button>
     </div>

@@ -6,12 +6,11 @@
 export interface ResourceRequestTarget {
   id: number
   title: string
-  link: string
 }
 
 export function useResourceRequest() {
   const open = useState('st8-resource-request-open', () => false)
-  const target = useState<ResourceRequestTarget>('st8-resource-request-target', () => ({ id: 0, title: '', link: '' }))
+  const target = useState<ResourceRequestTarget>('st8-resource-request-target', () => ({ id: 0, title: '' }))
 
   function ask(next: ResourceRequestTarget) {
     target.value = next

@@ -14,7 +14,7 @@ const fileHref = computed(() => (isFile.value && !gated.value ? asset(props.item
 function onFileClick(event: MouseEvent) {
   if (!gated.value || !props.item) return
   event.preventDefault()
-  ask({ id: props.item.id, title: props.item.title, link: asset(props.item.file!.id) })
+  ask({ id: props.item.id, title: props.item.title })
 }
 </script>
 
