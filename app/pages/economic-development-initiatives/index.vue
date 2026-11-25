@@ -26,11 +26,6 @@ useShareMeta({
 // An intro card shows its back (the goal and a link) while the pointer is over it.
 const shown = ref<number | null>(null)
 
-function smoothScroll(target: string) {
-  const element = document.querySelector<HTMLElement>(target)
-  if (element) window.scrollTo({ top: element.offsetTop, behavior: 'smooth' })
-}
-
 // The line drawings trace themselves as the visitor scrolls.
 useScrollLine({ paths: ['straight-line', 'initiatives-line'] })
 </script>
@@ -44,7 +39,7 @@ useScrollLine({ paths: ['straight-line', 'initiatives-line'] })
       <h2
         id="initiatives__page-title"
         class="w-full sm:w-5/6 md:w-full uppercase navy text-center tracking-widest relative thin-font mb-4 md:mb-0"
-        @click="smoothScroll('#initiatives__story')"
+        @click="scrollToSection('#initiatives__story')"
       >
         Initiatives
         <span class="tracking-wider">

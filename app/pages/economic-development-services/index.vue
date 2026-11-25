@@ -47,10 +47,6 @@ useShareMeta({
   path: '/economic-development-services/',
 })
 
-function smoothScroll(section: string) {
-  const element = document.querySelector<HTMLElement>(section)
-  if (element) window.scrollTo({ top: element.offsetTop, behavior: 'smooth' })
-}
 const published = (news: { date_published?: string | null, date_updated?: string | null, date_created?: string | null }) => {
   const value = news.date_published || news.date_updated || news.date_created
   return value ? formatDate(value, 'EEEE MMMM do, yyyy') : ''
@@ -67,7 +63,7 @@ const published = (news: { date_published?: string | null, date_updated?: string
           :key="service.id"
           :data-section="'#service-' + index"
           class="uppercase relative my-3 md:my-0 md:py-10 bold services-intro__link"
-          @click.prevent="smoothScroll('#service-' + index)"
+          @click.prevent="scrollToSection('#service-' + index)"
         >
           {{ service.title }}
           <UniversalPulseIcon icon-i-d="start-btn" class-name="inline-block button" />

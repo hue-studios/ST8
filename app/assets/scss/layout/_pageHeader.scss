@@ -288,18 +288,19 @@
     }
   }
 }
-// The bar's current height, for anything that sticks below it.
+// The bar's heights, for anything that sticks below it or scrolls to a spot under it. `--st8-header` is the current
+// one; utils/scroll-to-section.ts reads the full and compact values to land a section just below the bar.
 :root {
-  --st8-header: 70px;
+  --st8-header-full: 70px;
+  --st8-header-compact: 54px;
+  --st8-header: var(--st8-header-full);
   @media (min-width: $breakpoint-large) {
-    --st8-header: 100px;
+    --st8-header-full: 100px;
+    --st8-header-compact: 64px;
   }
 }
 :root.header-compact {
-  --st8-header: 54px;
-  @media (min-width: $breakpoint-large) {
-    --st8-header: 64px;
-  }
+  --st8-header: var(--st8-header-compact);
 }
 
 // On the way down the bar stays but slims: shorter, a smaller logo, the New York graphic folded away. The nav and the

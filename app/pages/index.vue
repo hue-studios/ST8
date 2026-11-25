@@ -154,10 +154,6 @@ function changePanelTwo() {
     hideMessage.value = false
   }
 }
-function smoothScroll(selector: string) {
-  const target = document.querySelector<HTMLElement>(selector)
-  if (target) window.scrollTo({ top: target.offsetTop, behavior: 'smooth' })
-}
 
 // The partner totals count up from 0 the first time each row is fully on screen.
 const counters = new Map<string, ReturnType<typeof setInterval>>()
@@ -296,7 +292,7 @@ onBeforeUnmount(() => {
           </div>
         </div>
       </Transition>
-      <div class="absolute home-intro__scroll-icon" data-section="#home__mission" @click.prevent="smoothScroll('#home__mission')">
+      <div class="absolute home-intro__scroll-icon" data-section="#home__mission" @click.prevent="scrollToSection('#home__mission')">
         <Icon name="lucide:chevron-down" size="1.5em" />
       </div>
     </div>
