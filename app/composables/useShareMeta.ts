@@ -23,9 +23,13 @@ export interface ShareMeta {
  */
 export function useShareMeta(meta: ShareMeta | (() => ShareMeta)) {
   const read = () => (typeof meta === 'function' ? meta() : meta)
+  // Card images are built on the live host (SITE_URL). On a preview, NUXT_PUBLIC_SITE_URL moves them to the preview's own
+  // origin so the card is served by the deployment that the page came from. og:url is not changed.
+  const origin = useRuntimeConfig().public.siteUrl as string
+  const onOrigin = (url: string) => (url.startsWith(SITE_URL) ? origin + url.slice(SITE_URL.length) : url)
   const resolved = () => {
     const m = read()
-    return { ...m, image: m.image || DEFAULT_CARD, imageAlt: m.imageAlt || m.title, type: m.type || 'website' }
+    return { ...m, image: onOrigin(m.image || DEFAULT_CARD), imageAlt: m.imageAlt || m.title, type: m.type || 'website' }
   }
 
   useHead(() => ({ title: resolved().title }))

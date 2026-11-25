@@ -5,6 +5,11 @@ import tailwindcss from '@tailwindcss/vite'
 // Build-time default; override per environment with NUXT_PUBLIC_DIRECTUS_URL, read at runtime.
 const directusUrl = (process.env.DIRECTUS_URL || 'https://manage.southerntier8.org').replace(/\/$/, '')
 
+// The host that share-card image URLs and generated cards are built on. Live keeps the default. A preview sets
+// NUXT_PUBLIC_SITE_URL to its own origin, so its cards are served by the preview instead of the live host. og:url
+// stays on the live host either way (see shared/utils/share.ts).
+const siteUrl = (process.env.NUXT_PUBLIC_SITE_URL || 'https://southerntier8.org').replace(/\/$/, '')
+
 // Permanent (301) redirects. One rule each: the Vercel preset maps `/x` and `/x/` to the same function file and fails
 // the build on the duplicate. Nitro matches the trailing-slash form of a path against the same rule.
 function redirects(map: Record<string, string>) {
@@ -51,7 +56,7 @@ export default defineNuxtConfig({
   },
 
   site: {
-    url: 'https://southerntier8.org',
+    url: siteUrl,
     name: 'Southern Tier 8',
     description:
       'Southern Tier 8 is a vibrant, multi-facet planning and development agency proudly serving eight counties in the Southern Tier region of Upstate New York.',
@@ -107,6 +112,7 @@ export default defineNuxtConfig({
     googleCalendarKey: 'AIzaSyAWRNx_1aSXBJxQcJPJg3QSpjx9R9jGRSk',
     public: {
       directusUrl,
+      siteUrl,
     },
   },
 
