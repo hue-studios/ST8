@@ -324,11 +324,20 @@ Done when: the header stays visible on every page type at desktop and mobile wid
 scroll down and expands on scroll up, the dropdown menus still open from the compact bar, the home
 hero still looks as it does now at the top of the page, and no content is hidden under the bar.
 
-**Check result, 2026-11-25 (master, southerntier8.org): FAILS in part.**
+**Check result, 2026-11-25 (master, southerntier8.org): FAILED, then FIXED the same day on local
+master (5d0fe2f), not yet deployed.**
 - Passes on desktop: the bar compacts on scroll down, expands on scroll up, and the home hero is unchanged at the top.
-- Fails on phone, home page: the bar has no solid background, so body text and the search icon overlap while scrolling down and back up.
-- Fails on phone, services page: text shows through the compact bar behind the logo.
-- Not checked: dropdown menus opening from the compact bar.
+- Fixed on phone, home page: the frosted bar let body text read through behind the search icon. The
+  bar is now solid white below the large breakpoint, and solid whenever compact at any width; the
+  full-height desktop bar stays frosted. Checked at 375px scrolling down and back up.
+- Fixed on phone, services page: the same translucency let text show behind the logo. Same fix,
+  checked at 375px with the bar compact.
+- Passes, dropdown menus: Active, Regional, Now and Organization each open from the compact bar at
+  1280px, stay inside it, and every link takes a click. Phones have no dropdowns (they use the
+  mobile nav).
+
+Next session (Haiku 5.5): once master is deployed, re-check both phone pages and the compact-bar
+dropdowns on southerntier8.org, then mark Session 7 as passing.
 
 ### Session 8: Podcast section (Sonnet 5.5)
 
@@ -413,13 +422,15 @@ Needs Beth's approval of the mapping from session 1.
 Done when: every existing service appears under exactly one core service, and each of the five
 buttons leads to at least one service and one program.
 
-**Check result, 2026-11-25 (master, southerntier8.org): FAILS on one button.** Every published
-service sits under exactly one core service. Four buttons lead to a service and programs; Build
-Capacity leads to programs only.
+**Check result, 2026-11-25 (master, southerntier8.org): FAILED, then FIXED the same day.** Build
+Capacity had no service, so its button led to programs only. Coordinating Review (draft) was moved
+under Build Capacity in Directus and published. The live services page now lists it there, so all
+five buttons lead to a service and programs. Every published service sits under exactly one core
+service.
 
-Known gap: Build Capacity has no service under it yet (see `docs/plans/core-services-mapping.md`).
-Its button leads to programs only, so the "at least one service" check fails for it until Beth
-decides whether to add a service or move Coordinating Review or Reducing Municipal Costs there.
+Interim choice, pending Beth: Coordinating Review was moved rather than a new service written. Beth
+may still want a dedicated Build Capacity service with its own wording; that would replace or sit
+beside it.
 
 ### Session 12: Ask ST8, the AI layer (Sonnet 5.5, then one Opus 5.5 review)
 
