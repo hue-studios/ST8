@@ -2,6 +2,22 @@
 // client-side navigation the browser calls it on this site's own origin, so it never talks to the CMS directly (the
 // CMS's CORS only allows the live origin, which broke previews and localhost). Answers come from the shared cache in
 // server/utils/directus.ts. Read-only, public collections only.
+//
+// Two things keep the route from being used to bust that cache: the query must be one of the shapes the site itself
+// sends (canonicalQuery refuses anything else and gives every accepted query one spelling), and a caller from outside
+// may make at most BROWSER_READS_PER_MINUTE reads a minute. The pages' own server-render reads are not counted.
+import type { H3Event } from 'h3'
+import { RENDER_READ_MARK } from '../../../shared/utils/cms'
+
+const BROWSER_READS_PER_MINUTE = 120
+
+// A read made in-process by this server's own page render (useDirectus passes the mark in the request context, which no
+// HTTP client can set). Those are bounded by the page routes themselves, and must never be refused to a crawler.
+function isRenderRead(event: H3Event): boolean {
+  const context = (event.node.req as { __unenv__?: Record<string, unknown> }).__unenv__
+  return context?.[RENDER_READ_MARK] === true
+}
+
 const COLLECTIONS = new Set([
   'counties', 'events', 'home', 'housing_page', 'how_to_apply', 'initiatives', 'news', 'organization', 'partners',
   'people', 'programs', 'reporting', 'resources', 'services',
@@ -29,9 +45,20 @@ function stripGatedFiles(body: string): string {
 export default defineEventHandler(async (event) => {
   const path = '/' + (getRouterParam(event, 'path') || '')
   const match = /^\/items\/([a-z_]+)$/.exec(path)
-  const query = new URL(event.path, 'http://localhost').search
-  if (!match || !COLLECTIONS.has(match[1]!) || query.length > 4000) {
+  const search = new URL(event.path, 'http://localhost').search
+  if (!match || !COLLECTIONS.has(match[1]!) || search.length > 4000) {
     throw createError({ statusCode: 404, statusMessage: 'Not found' })
+  }
+  const query = canonicalQuery(search)
+  if (query === null) {
+    throw createError({ statusCode: 400, statusMessage: 'Unsupported query' })
+  }
+
+  if (!isRenderRead(event)) {
+    const address = clientAddress(event)
+    if (address) {
+      enforceRateLimit(event, `cms:${address}`, BROWSER_READS_PER_MINUTE, 60_000, 'Too many requests')
+    }
   }
 
   let result

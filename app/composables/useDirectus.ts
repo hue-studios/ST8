@@ -19,7 +19,12 @@ export function useDirectus() {
   const viaSite: typeof fetch = (input, init) => {
     const url = new URL(typeof input === 'string' ? input : input instanceof URL ? input.href : input.url)
     const local = url.pathname + url.search
-    if (event) return (event as unknown as { fetch: typeof fetch }).fetch(local, init)
+    // In-process during a server render. The context mark tells the proxy this is the page's own read, which its
+    // per-visitor rate limit leaves alone (h3 hands init.context to the inner request as-is).
+    if (event) {
+      const context = { ...event.context, [RENDER_READ_MARK]: true }
+      return (event as unknown as { fetch: typeof fetch }).fetch(local, { ...init, context } as RequestInit)
+    }
     return fetch(local, { ...init, signal: init?.signal ?? AbortSignal.timeout(8000) })
   }
   return createCmsClient(`${origin}/api/cms`, viaSite)

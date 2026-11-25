@@ -2,14 +2,28 @@
 // accepts browser requests from the live site's origin, so the form cannot post to it directly from the preview or
 // from localhost; a Directus Flow on requests.create sends the confirmation email. The post carries no token: the
 // public role may create requests, nothing else.
+//
+// Each saved request makes the Flow send an email to the address typed in, so posts are limited: a few per visitor
+// address in ten minutes, and a few per email address an hour (so one inbox cannot be flooded from many addresses).
+// The limits are per server instance (see server/utils/rateLimit.ts).
 import { resourceRequestSchema } from '../../shared/utils/resource-request'
 
+const PER_ADDRESS = { limit: 5, windowMs: 10 * 60_000 }
+const PER_EMAIL = { limit: 3, windowMs: 60 * 60_000 }
+const TOO_MANY = 'Too many requests. Please wait a few minutes and try again.'
+
 export default defineEventHandler(async (event) => {
+  const address = clientAddress(event)
+  if (address) {
+    enforceRateLimit(event, `request-ip:${address}`, PER_ADDRESS.limit, PER_ADDRESS.windowMs, TOO_MANY)
+  }
+
   const parsed = resourceRequestSchema.safeParse(await readBody(event))
   if (!parsed.success) {
     throw createError({ statusCode: 422, statusMessage: 'Please check the form and try again.' })
   }
   const { name, email, company, research, resource } = parsed.data
+  enforceRateLimit(event, `request-email:${email.toLowerCase()}`, PER_EMAIL.limit, PER_EMAIL.windowMs, TOO_MANY)
 
   const res = await fetchWithTimeout(`${useRuntimeConfig().public.directusUrl}/items/requests`, {
     method: 'POST',

@@ -29,6 +29,13 @@ export function pruneUnresolvedLinks<T>(value: T): T {
 }
 
 /**
+ * Set in the request context of the reads a server render makes in-process to /api/cms (app/composables/useDirectus.ts),
+ * so the proxy can tell them from browser calls and leave them out of its rate limit. A context value, not a header:
+ * no HTTP client can send it.
+ */
+export const RENDER_READ_MARK = 'st8RenderRead'
+
+/**
  * The typed, public Directus client for the staff-managed CMS (manage.southerntier8.org). It carries no token: this
  * site reads only what the public role may read. `fetchImpl` replaces the global fetch (the cached
  * server path and the same-origin proxy both use it). Every response passes through pruneUnresolvedLinks.

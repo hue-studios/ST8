@@ -30,8 +30,12 @@ const submit = handleSubmit(async (values) => {
     fileLink.value = saved.link ?? ''
     complete.value = true
   }
-  catch {
-    toast.error('Sorry, we could not save your request. Please try again.')
+  catch (error) {
+    // The route limits how often one visitor or one email address may ask (429); say so rather than "try again".
+    const status = (error as { statusCode?: number })?.statusCode
+    toast.error(status === 429
+      ? 'You have sent several requests in a short time. Please wait a few minutes and try again.'
+      : 'Sorry, we could not save your request. Please try again.')
   }
 })
 
