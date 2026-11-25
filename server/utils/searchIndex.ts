@@ -75,7 +75,7 @@ async function read(collection: string, fields: string[], sort?: string[]): Prom
 }
 
 const READS = {
-  core_services: () => read('core_services', ['title', 'url', 'summary', 'need', 'search_phrases']),
+  core_services: () => read('core_services', ['title', 'url', 'summary', 'need', 'search_phrases'], ['sort']),
   services: () => read('services', [
     'title', 'url', 'need', 'search_phrases', 'purpose', 'how_we_help', 'who_it_is_for', 'core_service.title',
   ], ['sort']),
@@ -102,7 +102,7 @@ function entriesFrom(rows: Record<Collection, Row[]>): SearchEntry[] {
     entries.push({
       kind: 'core_service',
       title: c.title,
-      // Session 11 gives each core service its own section on the Services page.
+      // Each core service has its own section on the Services page, with its slug as the id.
       url: `/economic-development-services#${c.url}`,
       need: c.need ?? undefined,
       summary: blurb(c.summary),

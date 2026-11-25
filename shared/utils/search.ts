@@ -34,6 +34,12 @@ export interface SearchResponse {
   results: SearchResult[]
 }
 
+/** An example prompt for the empty search panel: a core service's "need" line. */
+export interface SearchPrompt {
+  title: string
+  need: string
+}
+
 export const SEARCH_KIND_LABEL: Record<SearchKind, string> = {
   core_service: 'Core service',
   service: 'Service',

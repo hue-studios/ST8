@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import type { SearchResponse, SearchResult } from '#shared/utils/search'
+import type { SearchPrompt, SearchResponse, SearchResult } from '#shared/utils/search'
 import { SEARCH_MIN_LENGTH } from '#shared/utils/search'
 
 /**
  * The site search panel. It opens from the header's search button, Cmd/Ctrl+K, and `/` when the visitor is not typing
  * in a field. Results come from /api/search as the visitor types; Enter (or "See all results") goes to /search, the
- * server-rendered list that can be linked to. Ported from Greater Opportunities' SiteSearch and SearchBar.
+ * server-rendered list that can be linked to. Before anything is typed it offers the five core services' "need" lines as
+ * example prompts. Ported from Greater Opportunities' SiteSearch and SearchBar.
  */
 const { open } = useSearchOpen()
 
@@ -48,10 +49,34 @@ watch(debounced, async (value) => {
 
 const panel = useTemplateRef<HTMLElement>('panel')
 
+const focusInput = () => panel.value?.querySelector<HTMLInputElement>('input')?.focus()
+
+// The example prompts load once, on the first open, from the server (the browser cannot call the CMS). If they fail the
+// panel simply shows the hint without them.
+const prompts = ref<SearchPrompt[]>([])
+let promptsAsked = false
+async function loadPrompts() {
+  if (promptsAsked) return
+  promptsAsked = true
+  try {
+    prompts.value = await $fetch<SearchPrompt[]>('/api/search/prompts')
+  }
+  catch {
+    promptsAsked = false
+  }
+}
+
+/** Choosing a prompt fills the field; the debounced watch above runs the search. */
+function choosePrompt(prompt: SearchPrompt) {
+  query.value = prompt.need
+  focusInput()
+}
+
 watch(open, async (isOpen) => {
   if (isOpen) {
+    loadPrompts()
     await nextTick()
-    panel.value?.querySelector<HTMLInputElement>('input')?.focus()
+    focusInput()
   }
   else {
     // A stale query would bring back the last visit's results on reopen.
@@ -148,10 +173,31 @@ const showResults = computed(() => !!searched.value && searched.value === query.
             </p>
           </div>
         </template>
-        <p v-else-if="!pending" class="px-3 py-2 text-sm text-navy/70">
-          Ask in your own words, such as “we need help applying for a grant”, or search for a program, a county or a
-          person’s name.
-        </p>
+        <div v-else-if="!pending" class="px-3 py-2">
+          <p class="text-sm text-navy/70">
+            Ask in your own words, or search for a program, a county or a person’s name.
+          </p>
+          <template v-if="prompts.length">
+            <p id="search-prompts-label" class="mt-4 mb-1 text-xs tracking-widest text-navy/60 uppercase">
+              Try one of these
+            </p>
+            <ul aria-labelledby="search-prompts-label" class="-mx-3">
+              <li v-for="prompt in prompts" :key="prompt.title">
+                <button
+                  type="button"
+                  class="flex w-full items-start gap-3 rounded-md px-3 py-2.5 text-left text-sm text-navy hover:bg-navy/5 focus-visible:bg-navy/5 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-brand"
+                  @click="choosePrompt(prompt)"
+                >
+                  <Icon name="lucide:message-circle" class="mt-0.5 size-4 shrink-0 text-navy/50" />
+                  <span class="min-w-0 flex-1">
+                    “{{ prompt.need }}”
+                    <span class="block text-xs text-navy/50">{{ prompt.title }}</span>
+                  </span>
+                </button>
+              </li>
+            </ul>
+          </template>
+        </div>
       </div>
 
       <p class="hidden items-center justify-end gap-3 text-xs text-navy/50 sm:flex">

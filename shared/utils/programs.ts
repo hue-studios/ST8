@@ -8,6 +8,8 @@ export const PROGRAM_FIELDS = [
   'what_it_accomplishes',
   'accomplishes_links',
   'url',
+  'core_services.core_services_id.title',
+  'core_services.core_services_id.url',
   'counties.counties_id.title',
   'initiatives.initiatives_id.title',
   'images.directus_files_id.id',

@@ -40,6 +40,7 @@ export interface NewsCardItem {
 }
 
 export interface ProgramDetail extends ProgramListItem {
+  core_services?: CoreServiceLink[]
   accomplishes_links?: Array<{ title: string, link: string, external: boolean }> | null
   what_it_accomplishes?: string | null
   partners: Array<{ partners_id: { title: string, logo?: { id: string, width: number, height: number } | null } | null }>
@@ -87,6 +88,8 @@ export interface ServiceItem {
   purpose?: string | null
   how_we_help?: string | null
   who_it_is_for?: string | null
+  /** The id of the core service it sits under (services.core_service). */
+  core_service?: number | null
   example_programs: Array<{
     programs_id: {
       id: number
@@ -100,6 +103,22 @@ export interface ServiceItem {
   }>
   resources: Array<{ resources_id: ResourceCardItem | null }>
   news: Array<{ id: number, news_id: NewsCardItem | null }>
+}
+
+/** One of the five core services (Plan, Develop, Connect, Build Capacity, Invest) that group services and programs. */
+export interface CoreServiceItem {
+  id: number
+  title: string
+  /** The slug, also the section id on the Services page (#plan, #develop, …). */
+  url: string
+  summary?: string | null
+  need?: string | null
+  programs: Array<{ programs_id: { id: number, title: string, url: string } | null }>
+}
+
+/** A program's link to a core service, as the program page reads it. */
+export interface CoreServiceLink {
+  core_services_id: { title: string, url: string } | null
 }
 
 export interface PartnerItem {

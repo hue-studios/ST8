@@ -44,6 +44,8 @@ const otherPrograms = computed(() => data.value!.others)
 const news = computed(() => program.value.news.filter(n => n.news_id))
 const resources = computed(() => program.value.resources.filter(r => r.resources_id))
 const partners = computed(() => program.value.partners.filter(p => p.partners_id))
+// The core services this program sits under, each linking to its section on the Services page.
+const coreServices = computed(() => (program.value.core_services ?? []).flatMap(c => (c.core_services_id ? [c.core_services_id] : [])))
 
 const tooLong = computed(() => program.value.title.length > 30)
 const tooLongContent = computed(() => (program.value.what_is_it?.length ?? 0) > 30)
@@ -77,6 +79,20 @@ useScrollLine({ paths: ['straight-line', 'program-line'] })
             <span class="navy">Program: </span>
             {{ program.title }}
           </h1>
+        </div>
+        <div
+          v-if="coreServices.length > 0"
+          class="w-5/6 lg:w-full flex flex-col items-center justify-center pt-6 mt-4 program__stats"
+        >
+          <div class="w-full flex flex-row flex-wrap items-center justify-start">
+            <h4 class="uppercase green mr-2 mb-1 bold">
+              Core service<span v-if="coreServices.length > 1">s</span>:
+            </h4>
+            <h5 v-for="(core, index) in coreServices" :key="core.url" class="uppercase mr-1 mb-1">
+              <NuxtLink :to="'/economic-development-services#' + core.url" class="hover:underline">{{ core.title }}</NuxtLink>
+              <span v-if="index + 1 < coreServices.length" class="green"> /</span>
+            </h5>
+          </div>
         </div>
         <div
           v-if="program.counties.length > 0"

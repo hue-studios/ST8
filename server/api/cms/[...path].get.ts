@@ -19,7 +19,7 @@ function isRenderRead(event: H3Event): boolean {
 }
 
 const COLLECTIONS = new Set([
-  'counties', 'events', 'home', 'housing_page', 'how_to_apply', 'initiatives', 'news', 'organization', 'partners',
+  'core_services', 'counties', 'events', 'home', 'housing_page', 'how_to_apply', 'initiatives', 'news', 'organization', 'partners',
   'people', 'programs', 'reporting', 'resources', 'services',
 ])
 
