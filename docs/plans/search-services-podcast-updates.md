@@ -324,6 +324,12 @@ Done when: the header stays visible on every page type at desktop and mobile wid
 scroll down and expands on scroll up, the dropdown menus still open from the compact bar, the home
 hero still looks as it does now at the top of the page, and no content is hidden under the bar.
 
+**Check result, 2026-11-25 (master, southerntier8.org): FAILS in part.**
+- Passes on desktop: the bar compacts on scroll down, expands on scroll up, and the home hero is unchanged at the top.
+- Fails on phone, home page: the bar has no solid background, so body text and the search icon overlap while scrolling down and back up.
+- Fails on phone, services page: text shows through the compact bar behind the logo.
+- Not checked: dropdown menus opening from the compact bar.
+
 ### Session 8: Podcast section (Sonnet 5.5)
 
 Files: `app/pages/regional-organization/index.vue`, `_organization.scss`, new
@@ -344,6 +350,10 @@ Files: `app/pages/regional-organization/index.vue`, `_organization.scss`, new
 Done when: a test episode of each kind (file, embed) plays, and the section disappears when both
 are unpublished.
 
+**Check result, 2026-11-25 (master, southerntier8.org): NOT BUILT.** The Organization page has no
+"Rebuilding So-Tier" section and no audio or embed player. Git history has no podcast commit. The
+playback and unpublish checks could not run.
+
 ### Session 9: Housing videos and events (Sonnet 5.5)
 
 Files: `app/pages/economic-development-programs/housing.vue`, `_housing.scss`,
@@ -356,6 +366,10 @@ Files: `app/pages/economic-development-programs/housing.vue`, `_housing.scss`,
 
 Done when: the summit appears with its video, and an event attached in Directus shows up without
 a deploy.
+
+**Check result, 2026-11-25 (master, southerntier8.org): NOT BUILT.** The Housing page has no
+"Videos and Events" section. The summit appears only as a related resource, not with its video.
+The event-attachment check could not run.
 
 ### Session 10: Search index and search panel (Sonnet 5.5)
 
@@ -377,6 +391,12 @@ Read and bring over, adjusting collections and wording: `shared/search.ts`,
 Done when: "broadband", "CEDS", a staff member's name, and a sentence such as "we need help
 applying for a grant" each return sensible results with the right core service near the top.
 
+**Check result, 2026-11-25 (master, southerntier8.org): PASSES for the queries run.** Queried the
+search endpoint directly: "broadband" returns the Invest core service first, then the Broadband
+program; "CEDS" returns the Plan core service first; "we need help applying for a grant" returns
+Build Capacity and Develop at the top. Not checked: a staff member's name, and the desktop panel's
+visual behaviour (the phone panel opens and works).
+
 ### Session 11: Five core services and example prompts (Sonnet 5.5)
 
 Needs Beth's approval of the mapping from session 1.
@@ -393,7 +413,18 @@ Needs Beth's approval of the mapping from session 1.
 Done when: every existing service appears under exactly one core service, and each of the five
 buttons leads to at least one service and one program.
 
+**Check result, 2026-11-25 (master, southerntier8.org): FAILS on one button.** Every published
+service sits under exactly one core service. Four buttons lead to a service and programs; Build
+Capacity leads to programs only.
+
+Known gap: Build Capacity has no service under it yet (see `docs/plans/core-services-mapping.md`).
+Its button leads to programs only, so the "at least one service" check fails for it until Beth
+decides whether to add a service or move Coordinating Review or Reducing Municipal Costs there.
+
 ### Session 12: Ask ST8, the AI layer (Sonnet 5.5, then one Opus 5.5 review)
+
+**Deferred.** Not started. Leave it until a month or two of search use shows whether visitors need
+a written answer on top of the results. Beth's choice between (a) and (b) is still open.
 
 Only if Beth chooses (b).
 
