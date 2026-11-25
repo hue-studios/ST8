@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { readItems, readSingleton } from '@directus/sdk'
+import type { PodcastEpisodeRow } from '~/components/organization/PodcastEpisode.vue'
 
 interface Person {
   id: number
@@ -18,8 +19,10 @@ const asset = useAsset()
 const { orgAsset } = useOrganization()
 
 const { data, error } = await useAsyncData('regional-organization', async () => {
-  const [organization, people, counties] = await Promise.all([
-    directus.request(readSingleton('organization', { fields: ['mission_statement', 'who_we_are', 'our_role', 'our_history'] as never })),
+  const [organization, people, counties, episodes] = await Promise.all([
+    directus.request(readSingleton('organization', {
+      fields: ['mission_statement', 'who_we_are', 'our_role', 'our_history', 'podcast_title', 'podcast_intro'] as never,
+    })),
     directus.request(readItems('people', {
       fields: ['id', 'name', 'title', 'phone', 'email', 'category', 'sort', 'image.id', 'county.title'] as never,
       filter: { status: { _eq: 'published' } },
@@ -32,11 +35,24 @@ const { data, error } = await useAsyncData('regional-organization', async () => 
       sort: ['sort'],
       limit: -1,
     })),
+    // A podcast read that fails (the collection is new) must not take the page down: the section just stays hidden.
+    directus.request(readItems('podcast_episodes' as never, {
+      fields: [
+        'id', 'title', 'url', 'episode_number', 'date_published', 'summary', 'duration', 'embed_url',
+        'audio_file.id', 'audio_file.type', 'cover_image.id',
+        'guests.people_id.id', 'guests.people_id.name', 'guests.people_id.category',
+      ] as never,
+      filter: { status: { _eq: 'published' } } as never,
+      sort: ['sort', '-date_published'] as never,
+      limit: -1,
+    })).catch(() => []),
   ])
   return {
     organization: organization as unknown as Record<string, string | null>,
     people: people as unknown as Person[],
     counties: counties as unknown as CountyRow[],
+    // An episode needs something to play.
+    episodes: (episodes as unknown as PodcastEpisodeRow[]).filter(e => e.audio_file || e.embed_url),
   }
 })
 if (error.value || !data.value) {
@@ -51,6 +67,37 @@ const regional = computed(() => data.value!.counties.find(c => c.title === 'Regi
 const boardFor = (county: string) => board.value.filter(p => p.county?.title === county)
 const BOARD_COUNTIES = ['Broome', 'Chenango', 'Cortland', 'Delaware', 'Otsego', 'Schoharie', 'Tioga', 'Tompkins']
 const text = (value?: string | null) => (value || '').trim()
+
+const episodes = computed(() => data.value!.episodes)
+const podcastTitle = computed(() => text(organization.value.podcast_title) || 'Rebuilding So-Tier')
+const episodeAnchor = (e: PodcastEpisodeRow) => `episode-${e.url || e.id}`
+
+const pageUrl = useRequestURL()
+if (episodes.value.length) {
+  const series = { '@type': 'PodcastSeries', 'name': podcastTitle.value, 'url': `${pageUrl.origin}/regional-organization/#podcast` }
+  useSchemaOrg(episodes.value.map(e => ({
+    '@type': 'PodcastEpisode',
+    'name': e.title,
+    'url': `${pageUrl.origin}/regional-organization/#${episodeAnchor(e)}`,
+    'description': text(e.summary) || undefined,
+    'datePublished': e.date_published || undefined,
+    'episodeNumber': e.episode_number || undefined,
+    'timeRequired': e.duration ? isoDuration(e.duration) : undefined,
+    'partOfSeries': series,
+    'actor': (e.guests || []).map(g => g.people_id).filter(Boolean).map(p => ({ '@type': 'Person', 'name': p!.name })),
+    'associatedMedia': e.audio_file
+      ? { '@type': 'MediaObject', 'contentUrl': asset(e.audio_file.id), 'encodingFormat': e.audio_file.type || 'audio/mpeg' }
+      : { '@type': 'MediaObject', 'embedUrl': e.embed_url },
+  })) as never)
+}
+
+/** '42:10' or '1:02:05' → 'PT42M10S' / 'PT1H2M5S'; anything else is left out. */
+function isoDuration(value: string) {
+  const parts = value.trim().split(':').map(Number)
+  if (parts.length < 2 || parts.length > 3 || parts.some(n => !Number.isFinite(n))) return undefined
+  const [h, m, s] = parts.length === 3 ? parts : [0, ...parts]
+  return `PT${h ? `${h}H` : ''}${m ? `${m}M` : ''}${s ? `${s}S` : ''}` || undefined
+}
 
 useShareMeta({
   title: 'Regional Economic Development Organization for the Southern Tier of New York',
@@ -110,10 +157,19 @@ useScrollLine({ paths: ['straight-line'] })
         </div>
       </div>
     </div>
+    <section v-if="episodes.length" id="podcast" class="w-full flex flex-col items-center py-20" aria-labelledby="podcast-title">
+      <h2 id="podcast-title" class="uppercase navy thin-font w-full text-center page-title tracking-widest">{{ podcastTitle }}</h2>
+      <p class="podcast__kicker uppercase green bold tracking-widest">The Southern Tier 8 podcast</p>
+      <p v-if="text(organization.podcast_intro)" class="podcast__intro whitespace-pre-line" v-text="text(organization.podcast_intro)" />
+      <div class="podcast__episodes w-full">
+        <OrganizationPodcastEpisode v-for="episode in episodes" :key="episode.id" :episode="episode" :anchor="episodeAnchor(episode)" />
+      </div>
+    </section>
     <div id="staff-section" class="w-full flex flex-col justify-center items-center py-20">
       <h2 class="uppercase navy thin-font w-full text-center page-title tracking-widest">Team</h2>
       <div
         v-for="person in staff"
+        :id="`person-${person.id}`"
         :key="person.id"
         class="flex flex-row justify-between items-center w-full md:w-5/6 people-card"
       >
@@ -144,7 +200,7 @@ useScrollLine({ paths: ['straight-line'] })
       <h2 class="uppercase w-full text-center page-title tracking-widest thin-font white mb-6">Board of Directors</h2>
       <div v-for="county in BOARD_COUNTIES" :key="county" class="text-center board-card">
         <h3 class="uppercase">{{ county }} County</h3>
-        <h5 v-for="person in boardFor(county)" :key="person.id" class="uppercase">
+        <h5 v-for="person in boardFor(county)" :id="`person-${person.id}`" :key="person.id" class="uppercase">
           {{ person.name }}<span v-if="person.title" class="title"> {{ person.title }}</span>
         </h5>
       </div>
