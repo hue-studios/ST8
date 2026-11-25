@@ -128,3 +128,25 @@
     }
   }
 }
+// Organization is the last item on the bar, so its links open to the left: mirrored, with each link drawing the line
+// to its right. Its fourth link gets the next step of the stagger.
+#page-nav #organizationNavContainer {
+  .page-nav__drop-links {
+    left: auto;
+    right: calc(50% + 30px);
+    flex-direction: row-reverse;
+    a:before {
+      right: auto;
+      left: 100%;
+      transform-origin: center right;
+    }
+  }
+  &.showDropNav .page-nav__drop-links {
+    a:nth-of-type(4) {
+      transition-delay: 0.35s;
+    }
+    a:nth-of-type(4):before {
+      transition-delay: 0.3s;
+    }
+  }
+}

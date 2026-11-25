@@ -38,6 +38,7 @@ useHead({ htmlAttrs: { class: computed(() => (compact.value ? 'header-compact' :
 
 // Which dropdown (active / regional / now) the pointer is over.
 const openDrop = ref<string | null>(null)
+const hasPodcast = useHasPodcast()
 
 const { open: searchOpen, toggle: toggleSearch } = useSearchOpen()
 </script>
@@ -90,10 +91,22 @@ const { open: searchOpen, toggle: toggleSearch } = useSearchOpen()
           <NuxtLink to="/regional-events" class="uppercase">Events</NuxtLink>
         </div>
       </div>
-      <div id="organizationNavContainer" class="relative page-nav__drop-container">
+      <div
+        id="organizationNavContainer"
+        class="relative page-nav__drop-container"
+        :class="{ showDropNav: openDrop === 'organization' }"
+        @mouseover="openDrop = 'organization'"
+        @mouseleave="openDrop = null"
+      >
         <NuxtLink to="/regional-organization/">
           <h3 class="uppercase">Organization</h3>
         </NuxtLink>
+        <div class="flex items-center justify-center flex-row page-nav__drop-links">
+          <NuxtLink v-if="hasPodcast" to="/regional-organization/#podcast" class="uppercase">Podcast</NuxtLink>
+          <NuxtLink to="/regional-organization/#staff-section" class="uppercase">Team</NuxtLink>
+          <NuxtLink to="/regional-organization/#board-section" class="uppercase">Board</NuxtLink>
+          <NuxtLink to="/regional-organization/#roi-section" class="uppercase">ROI</NuxtLink>
+        </div>
       </div>
     </div>
     <St8Button

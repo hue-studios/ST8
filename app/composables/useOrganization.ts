@@ -1,4 +1,4 @@
-import { readSingleton } from '@directus/sdk'
+import { readItems, readSingleton } from '@directus/sdk'
 
 export interface OrganizationData {
   mission_statement?: string | null
@@ -50,5 +50,24 @@ export async function loadOrganization() {
   }
   catch (error) {
     console.error('organization: could not load from the CMS', error)
+  }
+}
+
+/** Whether any "Rebuilding So-Tier" episode is published, so the header can offer the Podcast link. */
+export const useHasPodcast = () => useState<boolean>('st8-has-podcast', () => false)
+
+/** Called with loadOrganization. A failed read leaves the flag off, which only hides the header's Podcast link. */
+export async function loadHasPodcast() {
+  const hasPodcast = useHasPodcast()
+  try {
+    const rows = await useDirectus().request(readItems('podcast_episodes' as never, {
+      fields: ['id'] as never,
+      filter: { status: { _eq: 'published' } } as never,
+      limit: 1,
+    }))
+    hasPodcast.value = (rows as unknown[]).length > 0
+  }
+  catch {
+    hasPodcast.value = false
   }
 }

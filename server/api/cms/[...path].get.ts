@@ -20,7 +20,7 @@ function isRenderRead(event: H3Event): boolean {
 
 const COLLECTIONS = new Set([
   'core_services', 'counties', 'events', 'home', 'housing_page', 'how_to_apply', 'initiatives', 'news', 'organization', 'partners',
-  'people', 'programs', 'reporting', 'resources', 'services',
+  'people', 'podcast_episodes', 'programs', 'reporting', 'resources', 'services',
 ])
 
 // A gated resource's file id never reaches the page. The card and the form learn the file only after the request is saved

@@ -120,6 +120,11 @@ const readCached = defineCachedFunction(fetchUpstream, {
   staleMaxAge: STALE_MAX_AGE_S,
   swr: true,
   validate: entry => entry.value?.cacheable !== false,
+  // A list that empties (the last episode or news item unpublished) must not keep its old answer: the empty refresh
+  // fails `validate`, so Nitro would leave the stale entry in place and serve it for up to a day. This drops it, and
+  // the next read goes to the CMS. Empty answers are still never stored. `_removeStaleOnInvalid` is internal to Nitro
+  // (2.13, runtime/internal/cache.mjs); recheck it after a Nitro upgrade.
+  ...({ _removeStaleOnInvalid: (entry: { value?: { cacheable?: boolean } }) => entry.value?.cacheable === false } as object),
 })
 
 // The cache keys this instance has written, with when each was last used. The cache lives in the instance's memory, so
