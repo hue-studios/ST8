@@ -5,11 +5,12 @@ const props = defineProps<{ item: ResourceCardItem | null }>()
 const asset = useAsset()
 const { ask } = useResourceRequest()
 const tooLong = computed(() => (props.item?.title.length ?? 0) > 30)
-const isFile = computed(() => props.item?.type === 'Internal File / PDF' && !!props.item.file)
+// The type decides, not the file: a gated row arrives without its file (see cms/[...path].get.ts).
+const isFile = computed(() => props.item?.type === 'Internal File / PDF')
 // A gated file opens the request form first and has no href, so its address is not in the page for crawlers or a
 // middle-click to open (the same rule as NowResourceCardData).
 const gated = computed(() => isFile.value && !!props.item?.require_info)
-const fileHref = computed(() => (isFile.value && !gated.value ? asset(props.item!.file!.id) : undefined))
+const fileHref = computed(() => (isFile.value && !gated.value && props.item?.file ? asset(props.item.file.id) : undefined))
 
 function onFileClick(event: MouseEvent) {
   if (!gated.value || !props.item) return

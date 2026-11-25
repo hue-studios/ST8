@@ -7,7 +7,8 @@ const { ask } = useResourceRequest()
 
 const program = computed(() => props.item.programs?.[0]?.programs_id?.title ?? '')
 const fileUrl = computed(() => (props.item.file ? asset(props.item.file.id) : ''))
-const isFile = computed(() => props.item.type === 'Internal File / PDF' && !!props.item.file)
+// The type decides, not the file: a gated row arrives without its file (see cms/[...path].get.ts).
+const isFile = computed(() => props.item.type === 'Internal File / PDF')
 const isLink = computed(() => props.item.type === 'External Link')
 // A gated file opens the request form first; everything else is a plain link to the file or the resource.
 const gated = computed(() => isFile.value && !!props.item.require_info)

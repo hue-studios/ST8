@@ -8,7 +8,7 @@ const { ask } = useResourceRequest()
 
 // A gated file opens the request form first and has no href (the same rule as the resource cards).
 function askForFile(event: MouseEvent, resource: { id: number, title: string, require_info?: boolean | null, file?: { id: string } | null }) {
-  if (!resource.require_info || !resource.file) return
+  if (!resource.require_info) return
   event.preventDefault()
   ask({ id: resource.id, title: resource.title })
 }
