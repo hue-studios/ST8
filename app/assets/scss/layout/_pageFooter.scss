@@ -1,0 +1,119 @@
+@use '../vars' as *;
+
+#page-footer {
+  min-height: 500px;
+  box-shadow: 0px 2px 10px rgba($black, 0.1);
+  font-weight: 400;
+  background: $white;
+  @media (min-width: $breakpoint-small) {
+  }
+  @media (min-width: $breakpoint-large) {
+  }
+  .footer-col {
+    max-width: 350px;
+    h4 {
+      font-size: 12px;
+      letter-spacing: 0.3em;
+      border-bottom: thin solid rgba($darkGrey, 0.75);
+      color: rgba($darkGrey, 1);
+      padding-bottom: 5px;
+      margin-bottom: 20px;
+    }
+    a.footer-link {
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      padding-top: 8px;
+      padding-bottom: 8px;
+      margin-bottom: 4px;
+      color: $darkGrey;
+      font-family: $bold-font;
+    }
+    a.footer-link.router-link-exact-active {
+      color: $green;
+    }
+    .footer-col__contact-section {
+      margin-bottom: 20px;
+      p {
+        font-size: 12px;
+        letter-spacing: 0.1em;
+        padding-top: 2px;
+        padding-bottom: 2px;
+        margin-bottom: 4px;
+      }
+    }
+    .footer-col__contact-section.location {
+      h5 {
+        font-size: 12px;
+        letter-spacing: 0.1em;
+        padding-top: 2px;
+        padding-bottom: 0px;
+        margin-bottom: 0px;
+      }
+      p {
+        white-space: pre-line;
+        font-size: 12px;
+        letter-spacing: 0.1em;
+        padding-top: 2px;
+        padding-bottom: 2px;
+        margin-bottom: 4px;
+      }
+    }
+    .footer-col__contact-section.social {
+      a {
+        background: $navy;
+        color: $green !important;
+        cursor: pointer;
+        z-index: 5;
+        svg {
+          fill: $green !important;
+          path {
+            stroke: $green;
+          }
+        }
+        svg.instagram {
+          fill: rgba($grey, 0.01) !important;
+        }
+      }
+    }
+  }
+  h5#copyright {
+    font-size: 9px;
+
+    color: rgba($navy, 1);
+    margin-top: 50px;
+  }
+  h5#web-designer {
+    margin-top: 20px;
+    margin-bottom: 50px;
+    a {
+      font-size: 10px;
+      color: rgba($navy, 1);
+      svg {
+        width: 35px;
+        height: auto;
+        display: inline;
+        fill: rgba($navy, 1);
+        stroke: none;
+        margin-top: -11px;
+        margin-left: 3px;
+        path {
+          transition: all 0.3s linear;
+        }
+        path:nth-of-type(1) {
+          transition-delay: 0.1s;
+        }
+        path:nth-of-type(2) {
+          transition-delay: 0.2s;
+        }
+        path:nth-of-type(3) {
+          transition-delay: 0.3s;
+        }
+      }
+    }
+    a:hover {
+      svg path {
+        fill: #f90;
+      }
+    }
+  }
+}
