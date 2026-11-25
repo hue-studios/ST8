@@ -191,9 +191,10 @@
       width: auto;
     }
   }
+  // The nav never shrinks below its headings; when space runs short the New York graphic gives way instead (it
+  // has its own overflow), so nothing in the bar overlaps.
   #page-nav {
-    flex: 1 1 auto;
-    min-width: 0;
+    flex: 1 0 auto;
     padding-left: 20px;
   }
 
@@ -288,6 +289,31 @@
     }
   }
 }
+// Between the large and extra-large breakpoints the full row (logo, four headings, search with its label, the New
+// York graphic) is wider than the screen, so the headings tighten. Below 1200px the graphic goes and the search keeps
+// its label; from 1200px the graphic is back and the search shows only its icon.
+#page-header {
+  @media (min-width: $breakpoint-large) and (max-width: $breakpoint-xlarge - 1px) {
+    #page-nav .page-nav__drop-container {
+      padding: 0 18px;
+    }
+    .page-header__search {
+      margin-right: 16px;
+      padding: 0 4px 0 16px;
+    }
+  }
+  @media (min-width: $breakpoint-large) and (max-width: 1199px) {
+    .new-york-state {
+      display: none;
+    }
+  }
+  @media (min-width: 1200px) and (max-width: $breakpoint-xlarge - 1px) {
+    .page-header__search-label {
+      display: none;
+    }
+  }
+}
+
 // The bar's heights, for anything that sticks below it or scrolls to a spot under it. `--st8-header` is the current
 // one; utils/scroll-to-section.ts reads the full and compact values to land a section just below the bar.
 :root {
