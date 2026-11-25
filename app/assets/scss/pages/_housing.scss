@@ -195,4 +195,52 @@
       background: $green;
     }
   }
+
+  // Videos and Events: event cards (components/events/EventCard.vue) in one column, then the recordings two across.
+  .housing__media-heading {
+    width: 83.333%;
+    max-width: 960px;
+    margin: 8px 0 20px;
+    font-size: 14px;
+    letter-spacing: 0.2em;
+    text-align: center;
+  }
+
+  .housing__events {
+    width: 91.666%;
+    max-width: 720px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 40px;
+    .events__event {
+      width: 100%;
+    }
+  }
+
+  .housing__videos {
+    width: 83.333%;
+    max-width: 960px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+    margin-bottom: 24px;
+    @media (min-width: $breakpoint-medium) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .housing__video-title {
+    margin-top: 14px;
+    font-size: 14px;
+    line-height: 1.3em;
+    letter-spacing: 0.08em;
+  }
+
+  .housing__video-description {
+    margin-top: 6px;
+    font-size: 14px;
+    line-height: 1.5em;
+  }
 }

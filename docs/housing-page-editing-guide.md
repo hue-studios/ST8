@@ -26,6 +26,7 @@ How the page is laid out, top to bottom, and where each part is edited:
 | Program title, photo, counties and initiative served | 1. Page (counties and initiative: section 5) |
 | About the Program, What the Framework Delivers | 5. Partners, Resources & News (the program's What Is It and What It Accomplishes) |
 | Explore the Framework Tools | 2. Framework Tools |
+| Videos and Events | Videos: 6. Documents & Opportunities. Events: the event itself, under **Content → Events** |
 | Final Documents, Opportunities to be Involved | 6. Documents & Opportunities |
 | Partners, Related Resources, Related News | 5. Partners, Resources & News |
 
@@ -127,6 +128,27 @@ Two sections that fill in as the project goes on. Each has a short text and a li
 - **Opportunities to be Involved: text** and **links** work the same way. The section stays hidden until one of them has something in it, so it appears as soon as you add the first text or link (for example, the fund administrator procurement).
 - Links in both lists open in a new tab.
 
+## Videos and Events
+
+This section sits under Explore the Framework Tools. It shows **upcoming events** first, then **past events and recordings**: past events (most recent first), then the videos. It stays hidden until there is at least one event or video. Each event card links to that event's own page.
+
+### Add a video
+
+1. Open **Site Pages → Housing** and go to **6. Documents & Opportunities**.
+2. Under **Videos**, click **Add a video**.
+3. Fill in **Title** and **Video link (URL)**, the YouTube or Vimeo address copied from the browser (for example https://www.youtube.com/watch?v=… or https://vimeo.com/…). **Description** is optional, a line or two under the video.
+4. Click **Save**. Drag rows to change their order.
+
+The video doesn't load from YouTube or Vimeo until a visitor presses play. A link that isn't YouTube or Vimeo shows as a plain "Open" link instead of a player. A row missing its title or link is skipped.
+
+### Attach an event
+
+1. Open the event under **Content → Events** (create it there first if it's new).
+2. In its **Programs** list, click **Add Existing** and pick **Housing**.
+3. Make sure the event is **published** and has a **date**, then click **Save**.
+
+The event moves from Upcoming to Past by itself the day after its date. To take it off the Housing page, remove Housing from its Programs list. You can also see and link events from the program record (section 5), in its **Events** list.
+
 ## The other Site Pages
 
 **Home**, **Organization** and **How to Apply** sit beside Housing under **Site Pages**. Each field there has a note saying where it shows on the site, and the labels match the headings on the pages (for example, **Our Vision** and **Our Approach** on the Organization page). **How to Apply** is the page called **ARC Opportunities** on the site. The **Preview** button on each one opens that page.
@@ -140,6 +162,7 @@ Two sections that fill in as the project goes on. Each has a short text and a li
 - [ ] **Nominate a Partner and Pledge Support:** when the CommunityScale forms are live, add a card for each in **2. Framework Tools** (Type: Get involved), and add the sentence "Organizations that want to take part can nominate a partner or pledge support for the framework." to the intro.
 - [ ] **Opportunities to be Involved:** add text when you're ready; the section appears then.
 - [ ] **After the summit:** untick **Show on home page**.
+- [ ] **Summit recording:** add it under **Videos** (see Videos and Events). The summit event is already attached to Housing.
 
 ## When the page is shared on Facebook
 
