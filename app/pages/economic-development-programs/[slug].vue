@@ -189,8 +189,8 @@ useScrollLine({ paths: ['straight-line', 'program-line'] })
             :src="partner.partners_id.logo.id"
             :modifiers="{ key: 'thumbnail' }"
             :alt="partner.partners_id.title"
-            :width="partner.partners_id.logo.width"
-            :height="partner.partners_id.logo.height"
+            width="80"
+            height="80"
           />
         </div>
       </div>
