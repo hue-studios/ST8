@@ -422,6 +422,22 @@ async function planJunctionsAndM2O() {
   }
 }
 
+// A file field needs a many-to-one relation to directus_files, or the API returns the bare id and refuses to expand
+// `audio_file.id` / `cover_image.id` (the first run made the fields without one).
+async function planFileRelations() {
+  for (const c of COLLECTIONS) {
+    for (const def of c.fields.filter((x) => x.meta?.special?.includes('file'))) {
+      if (await find(`/relations/${c.name}/${def.field}`)) continue
+      change('+', `relate ${c.name}.${def.field} → directus_files`, () =>
+        api('POST', '/relations', {
+          collection: c.name, field: def.field, related_collection: 'directus_files',
+          schema: { on_delete: 'SET NULL' },
+        })
+      )
+    }
+  }
+}
+
 async function planAddedFields() {
   const cache = {}
   for (const [collection, def] of ADDED_FIELDS) {
@@ -603,6 +619,7 @@ async function main() {
       else planCollectionsFor(c)
     }
     await planJunctionsAndM2O()
+    await planFileRelations()
     await planAddedFields()
     await planPermissions()
     await planSeeds()
