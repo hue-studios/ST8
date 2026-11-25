@@ -106,9 +106,9 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
-    // Google Calendar's read-only key for the public ST8 calendar (the events page). The Nuxt 2 site sent it from the
-    // browser; the events server route sends it now. Override with NUXT_GOOGLE_CALENDAR_KEY.
-    googleCalendarKey: 'AIzaSyAWRNx_1aSXBJxQcJPJg3QSpjx9R9jGRSk',
+    // Google Calendar's read-only key for the public ST8 calendar (the events page), read from the environment and never
+    // written into the repo. The events route answers without it (see server/api/calendar.get.ts).
+    googleCalendarKey: process.env.NUXT_GOOGLE_CALENDAR_KEY || '',
     public: {
       directusUrl,
       siteUrl,
