@@ -24,6 +24,7 @@ const menuOpen = ref(false)
       <NuxtLink to="/economic-development-initiatives/">Initiatives</NuxtLink>
     </div>
     <LayoutResourceRequestDialog />
+    <LayoutSearchDialog />
   </div>
 </template>
 

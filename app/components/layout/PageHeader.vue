@@ -1,32 +1,49 @@
 <script setup lang="ts">
-// Ported as it is today, hide-on-scroll included: the bar slides away on scroll down and returns on scroll up, and
-// `.scrolled` (after 80px) hands the home page's hero treatment over to the normal bar.
-const showHeader = ref(true)
-const isScrolled = ref(false)
-let lastScrollPosition = 0
+// The bar stays put. Scrolling down compacts it (shorter, smaller logo, the New York graphic folded away) and scrolling
+// up, or getting back near the top, restores it. `.scrolled` (after 80px) still hands the home page's hero treatment
+// over to the normal bar.
+const SCROLLED_AT = 80
+// How far the page must travel in one direction before the bar changes, so a jittery trackpad doesn't flicker it.
+const TRAVEL = 12
+
+const { y } = useWindowScroll()
+// The server renders the top-of-page bar; reading the scroll only once mounted keeps hydration matching it.
+const mounted = useMounted()
+const top = computed(() => (mounted.value ? Math.max(y.value, 0) : 0))
+
+const isScrolled = computed(() => top.value > SCROLLED_AT)
+const compact = ref(false)
+// The furthest point reached in the current direction: the lowest while full, the highest while compact.
+let turn = 0
+
+watch(top, (current) => {
+  if (current <= SCROLLED_AT) {
+    compact.value = false
+    turn = current
+    return
+  }
+  const travelled = current - turn
+  if (compact.value ? travelled <= -TRAVEL : travelled >= TRAVEL) {
+    compact.value = !compact.value
+    turn = current
+  }
+  else if (compact.value ? current > turn : current < turn) {
+    turn = current
+  }
+})
+
+// Pages that pin things under the bar (sticky titles, a table of contents) read its current height from
+// `--st8-header`, which this class switches to the compact value.
+useHead({ htmlAttrs: { class: computed(() => (compact.value ? 'header-compact' : '')) } })
 
 // Which dropdown (active / regional / now) the pointer is over.
 const openDrop = ref<string | null>(null)
 
-onBeforeMount(() => {
-  lastScrollPosition = window.scrollY
-  isScrolled.value = window.scrollY > 80
-})
-
-useEventListener('scroll', () => {
-  const current = window.scrollY || document.documentElement.scrollTop
-  if (current < 0) return
-  // Set before the threshold below bails out, otherwise a slow scroll past the top never registers. On the home page
-  // this is what brings the bar out of its hero treatment.
-  isScrolled.value = current > 80
-  if (Math.abs(current - lastScrollPosition) < 20) return
-  showHeader.value = current < lastScrollPosition
-  lastScrollPosition = current
-}, { passive: true })
+const { open: searchOpen, toggle: toggleSearch } = useSearchOpen()
 </script>
 
 <template>
-  <div id="page-header" :class="{ hide: !showHeader, scrolled: isScrolled }">
+  <div id="page-header" :class="{ compact, scrolled: isScrolled }">
     <NuxtLink to="/">
       <LayoutLogo />
     </NuxtLink>
@@ -79,6 +96,17 @@ useEventListener('scroll', () => {
         </NuxtLink>
       </div>
     </div>
+    <St8Button
+      variant="ghost"
+      class="page-header__search"
+      aria-label="Search"
+      aria-haspopup="dialog"
+      :aria-expanded="searchOpen"
+      @click="toggleSearch"
+    >
+      <Icon name="lucide:search" class="page-header__search-icon" />
+      <span class="page-header__search-label">Search</span>
+    </St8Button>
     <LayoutNewYorkState />
   </div>
 </template>

@@ -191,9 +191,59 @@
       width: auto;
     }
   }
+  // The nav never shrinks below its headings; when space runs short the New York graphic gives way instead (it
+  // has its own overflow), so nothing in the bar overlaps.
   #page-nav {
-    width: calc(100% - 310px);
+    flex: 1 0 auto;
     padding-left: 20px;
+  }
+
+  // Search: an icon on its own at the right of the small-screen bar, icon and label after the nav on large screens.
+  .page-header__search {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    gap: 10px;
+    color: $navy;
+    background: none;
+    border-radius: 999px;
+    &:hover {
+      color: $green;
+      background: none;
+    }
+    @media (min-width: $breakpoint-large) {
+      position: relative;
+      top: auto;
+      right: auto;
+      transform: none;
+      flex: 0 0 auto;
+      width: auto;
+      height: 36px;
+      margin-right: 24px;
+      padding: 0 4px;
+      border-radius: 0;
+    }
+  }
+  .page-header__search-icon {
+    width: 18px;
+    height: 18px;
+    @media (min-width: $breakpoint-large) {
+      width: 15px;
+      height: 15px;
+    }
+  }
+  .page-header__search-label {
+    display: none;
+    @media (min-width: $breakpoint-large) {
+      display: inline;
+      letter-spacing: 0.3em;
+      font-size: 12px;
+      font-weight: 300;
+    }
   }
 }
 #page-header.home:not(.scrolled) {
@@ -238,12 +288,94 @@
     }
   }
 }
-// Out of the way on the way down, back on the way up — now on every width, where before the
-// large breakpoint cancelled it because the bar was not fixed up there.
-#page-header.hide {
-  transform: translate3d(0, -80px, 0);
+// Between the large and extra-large breakpoints the full row (logo, four headings, search with its label, the New
+// York graphic) is wider than the screen, so the headings tighten. Below 1200px the graphic goes and the search keeps
+// its label; from 1200px the graphic is back and the search shows only its icon.
+#page-header {
+  @media (min-width: $breakpoint-large) and (max-width: $breakpoint-xlarge - 1px) {
+    #page-nav .page-nav__drop-container {
+      padding: 0 18px;
+    }
+    .page-header__search {
+      margin-right: 16px;
+      padding: 0 4px;
+    }
+  }
+  @media (min-width: $breakpoint-large) and (max-width: 1199px) {
+    .new-york-state {
+      display: none;
+    }
+  }
+  @media (min-width: 1200px) and (max-width: $breakpoint-xlarge - 1px) {
+    .page-header__search-label {
+      display: none;
+    }
+  }
+}
+
+// The bar's heights, for anything that sticks below it or scrolls to a spot under it. `--st8-header` is the current
+// one; utils/scroll-to-section.ts reads the full and compact values to land a section just below the bar.
+:root {
+  --st8-header-full: 70px;
+  --st8-header-compact: 54px;
+  --st8-header: var(--st8-header-full);
   @media (min-width: $breakpoint-large) {
-    transform: translate3d(0, -110px, 0);
+    --st8-header-full: 100px;
+    --st8-header-compact: 64px;
+  }
+}
+:root.header-compact {
+  --st8-header: var(--st8-header-compact);
+}
+
+// On the way down the bar stays but slims: shorter, a smaller logo, the New York graphic folded away. The nav and the
+// search button stay where they were. Only the height and the logo's size animate.
+#page-header.compact {
+  height: 54px;
+  @media (min-width: $breakpoint-large) {
+    height: 64px;
+  }
+  .logo,
+  .logo svg {
+    width: 200px;
+  }
+  .new-york-state {
+    display: none;
+  }
+  // The dropdowns hang closer to their heading so they still fit inside the shorter bar.
+  #page-nav .page-nav__drop-container {
+    h3:after {
+      height: 12px;
+      bottom: -12px;
+    }
+    .page-nav__drop-links {
+      bottom: -18px;
+    }
+  }
+}
+#page-header .logo svg {
+  transition: width 0.4s $curve;
+}
+// On the narrowest phones the centred logo would run into the search button; leave room for it on both sides.
+@media (max-width: $breakpoint-large - 1px) {
+  #page-header .logo,
+  #page-header .logo svg {
+    max-width: calc(100vw - 112px);
+  }
+}
+
+// At the top of the home page the small-screen bar is invisible over the hero; keep it from catching taps there.
+#page-header.home:not(.scrolled) {
+  @media (max-width: $breakpoint-large - 1px) {
+    pointer-events: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #page-header,
+  #page-header .logo,
+  #page-header .logo svg {
+    transition: none;
   }
 }
 

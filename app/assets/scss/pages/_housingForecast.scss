@@ -130,8 +130,8 @@ $toc-rail-width: 2px;
 
     .housing-forecast__toc-inner {
       position: sticky;
-      // Clears the site header, which hides on scroll down and returns on scroll up.
-      top: 110px;
+      // Clears the site header, which slims on scroll down and returns to full height on scroll up.
+      top: calc(var(--st8-header) + 10px);
       max-height: calc(100vh - 140px);
       overflow-y: auto;
     }
@@ -284,7 +284,7 @@ $toc-rail-width: 2px;
   }
 
   .housing-forecast__section {
-    scroll-margin-top: 90px;
+    scroll-margin-top: calc(var(--st8-header) + 10px);
     padding-bottom: 40px;
 
     h2 {
@@ -304,7 +304,7 @@ $toc-rail-width: 2px;
   }
 
   #counties {
-    scroll-margin-top: 90px;
+    scroll-margin-top: calc(var(--st8-header) + 10px);
     // The section's box is also the crop, so this padding is what decides how much of New York
     // shows above and below the counties.
     padding: 56px 0 88px;
