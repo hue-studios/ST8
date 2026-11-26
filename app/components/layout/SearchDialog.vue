@@ -91,7 +91,7 @@ watch(() => route.fullPath, () => (open.value = false))
 // Closing the panel during a link's click cancels the router's navigation, so a site link is left to the route watch
 // above. Only a link that does not change the route (an outside page in a new tab, or the page already shown) closes it.
 const router = useRouter()
-function chose(result: SearchResult) {
+function chose(result: Pick<SearchResult, 'url' | 'external'>) {
   if (result.external || router.resolve(result.url).fullPath === route.fullPath) open.value = false
 }
 
@@ -151,6 +151,8 @@ const showResults = computed(() => !!searched.value && searched.value === query.
       </form>
 
       <div class="min-h-0 flex-1 overflow-y-auto" aria-live="polite">
+        <!-- Kept mounted while the visitor types: it waits for the query to settle before asking. -->
+        <SearchAnswer :query="showResults && !failed && results.length ? searched : ''" @choose="chose" />
         <template v-if="showResults">
           <p v-if="failed" class="px-3 py-6 text-center text-sm text-navy/70">
             Search is not available right now. Please try again in a moment.

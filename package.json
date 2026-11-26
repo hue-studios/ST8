@@ -18,6 +18,7 @@
     "generate:types": "node --env-file=.env scripts/generate-types.mjs"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^1.14.0",
     "@directus/sdk": "^27.0.0",
     "@lucide/vue": "^1.77.0",
     "@nuxt/icon": "^2.5.1",

@@ -17,6 +17,8 @@ import type { SearchKind, SearchResult } from '#shared/utils/search'
 export interface SearchEntry extends Omit<SearchResult, 'score'> {
   /** Everything searchable, already normalised, one bucket per weight. */
   haystacks: { text: string, weight: number }[]
+  /** Readable plain text about the row, for Ask ST8 (server/api/ask.post.ts). Never sent to the browser. */
+  context?: string
 }
 
 const INDEX_TTL = 5 * 60 * 1000
@@ -58,6 +60,9 @@ const blurb = (value: unknown, max = 160) => {
   const text = removeTags(String(value ?? '')).replace(/&[a-z#0-9]+;/gi, ' ').replace(/\s+/g, ' ').trim()
   return text ? (text.length <= max ? text : `${text.slice(0, max).replace(/\s+\S*$/, '')}…`) : undefined
 }
+
+/** Longer plain text for Ask ST8's records: tags and entities removed, whitespace collapsed, cut at a word. */
+const plain = (...values: unknown[]) => blurb(values.filter(Boolean).join(' '), 700)
 
 const phrases = (value: unknown) => (Array.isArray(value) ? value.join(' ') : '')
 
@@ -101,6 +106,7 @@ function entriesFrom(rows: Record<Collection, Row[]>): SearchEntry[] {
     if (!c.url || !c.title) continue
     entries.push({
       kind: 'core_service',
+      context: plain(c.summary),
       title: c.title,
       // Each core service has its own section on the Services page, with its slug as the id.
       url: `/economic-development-services#${c.url}`,
@@ -120,6 +126,7 @@ function entriesFrom(rows: Record<Collection, Row[]>): SearchEntry[] {
     if (!s.title) return
     entries.push({
       kind: 'service',
+      context: plain(s.purpose, s.how_we_help, s.who_it_is_for),
       title: s.title,
       url: `/economic-development-services#service-${index}`,
       need: s.need ?? undefined,
@@ -140,6 +147,7 @@ function entriesFrom(rows: Record<Collection, Row[]>): SearchEntry[] {
     const parents = ((p.core_services ?? []) as Row[]).map(l => l.core_services_id?.title).filter(Boolean).join(', ')
     entries.push({
       kind: 'program',
+      context: plain(p.what_is_it, p.what_it_accomplishes),
       title: p.title,
       url: `/economic-development-programs/${p.url}`,
       need: p.need ?? undefined,
@@ -159,6 +167,7 @@ function entriesFrom(rows: Record<Collection, Row[]>): SearchEntry[] {
     if (!i.url || !i.title) continue
     entries.push({
       kind: 'initiative',
+      context: plain(i.caption, i.goal, i.opportunity),
       title: i.title,
       url: `/economic-development-initiatives/${i.url}`,
       need: i.need ?? undefined,
@@ -180,6 +189,7 @@ function entriesFrom(rows: Record<Collection, Row[]>): SearchEntry[] {
     if (!url) continue
     entries.push({
       kind: 'news',
+      context: plain(n.date_published ? `Published ${formatDate(n.date_published, 'MMMM d, yyyy')}.` : '', n.article),
       title: n.title,
       url,
       external: external || undefined,
@@ -196,6 +206,7 @@ function entriesFrom(rows: Record<Collection, Row[]>): SearchEntry[] {
     if (!e.url || !e.title) continue
     entries.push({
       kind: 'event',
+      context: plain(e.date ? `Date: ${formatDate(e.date, 'MMMM d, yyyy')}.` : '', e.description),
       title: e.title,
       url: `/regional-events/${e.url}`,
       summary: [e.date ? formatDate(e.date, 'MMMM d, yyyy') : '', blurb(e.description, 120)]
@@ -217,6 +228,7 @@ function entriesFrom(rows: Record<Collection, Row[]>): SearchEntry[] {
       : r.link || '/regional-news/resources'
     entries.push({
       kind: 'resource',
+      context: plain(r.description),
       title: r.title,
       url,
       external: /^https?:/.test(url) || undefined,
@@ -235,6 +247,7 @@ function entriesFrom(rows: Record<Collection, Row[]>): SearchEntry[] {
     const board = p.category === 'Board'
     entries.push({
       kind: 'person',
+      context: plain(p.title),
       title: p.name,
       url: board ? '/regional-organization#board-section' : '/regional-organization#staff-section',
       summary: blurb(p.title),
@@ -251,6 +264,7 @@ function entriesFrom(rows: Record<Collection, Row[]>): SearchEntry[] {
     const categories = Array.isArray(p.category) ? p.category.join(', ') : ''
     entries.push({
       kind: 'partner',
+      context: categories || undefined,
       title: p.title,
       url: '/regional-partnerships',
       summary: categories || undefined,
@@ -266,6 +280,7 @@ function entriesFrom(rows: Record<Collection, Row[]>): SearchEntry[] {
     const guests = ((e.guests ?? []) as Row[]).map(g => g.people_id?.name).filter(Boolean).join(', ')
     entries.push({
       kind: 'podcast',
+      context: plain(e.summary),
       title: e.title,
       // The Organization page's podcast section (session 8).
       url: '/regional-organization#podcast',
@@ -346,7 +361,7 @@ export function rank(entries: SearchEntry[], query: string, limit: number): Sear
   const wholeWord = new Map(tokens.map(t => [t, new RegExp(`\\b${escape(t)}\\b`)]))
 
   const scored: SearchResult[] = []
-  for (const { haystacks, ...entry } of entries) {
+  for (const { haystacks, context: _context, ...entry } of entries) {
     let score = 0
     for (const { text, weight } of haystacks) {
       if (!text) continue

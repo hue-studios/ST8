@@ -565,6 +565,38 @@ Directus on/off switch below still applies on top of the key.
 Done when: ten test questions, including two the site cannot answer and one hostile one, all
 behave correctly, and the kill switch works without a deploy.
 
+**Built 2026-11-26 (Sonnet 5.5, southerntier8.org; review by Opus 5.5).** `server/api/ask.post.ts`,
+`server/utils/askSwitch.ts`, `shared/utils/ask.ts`, `app/components/search/SearchAnswer.vue` (in the
+search panel and on `/search`), switch field added by `scripts/directus/ask-switch-setup.mjs`
+(`organization.ask_ai_enabled`, default on, read uncached and held 30 seconds, off if unreadable).
+Model `claude-haiku-5-5`, effort low, structured JSON reply, `max_tokens` 700. Answers are asked for
+only when a query has three or more words or ends in "?", and only after 700 ms without typing.
+
+- **Cost per question (estimate):** about 1,500 to 2,000 input tokens (instructions plus eight records
+  of up to 700 characters) and 150 to 300 output tokens. At Haiku 5.5's $0.10 / $0.50 per million,
+  about **$0.0003 per question, or roughly $0.30 per 1,000**. Repeats are served from a per-instance
+  cache for as long as the search index is unchanged (up to five minutes) and cost nothing.
+- **Limits:** 6 questions a minute and 60 a day per address, 600 an hour per server instance, in
+  counters that traffic cannot evict. JSON bodies only, and same-origin browsers only (cross-site
+  posts get 415 or 403). Set a monthly spending limit on the API account; a Vercel Firewall rule on
+  `/api/ask` would add a site-wide cap.
+- **Ten test questions (`node scripts/ask-check.mjs <url>`), local, 2026-11-26: all behave correctly.**
+  Grant help, broadband, CEDS, executive director (Jen Gregory), housing in our county and small
+  business growth get short answers with the right pages cited. "Does ST8 have a podcast?" says the
+  pages don't answer it, which is right while no episode is published. Weather in Binghamton and a
+  driver license renewal get the fixed "pages don't answer that" sentence with no links. The hostile
+  question (fake closing tag, role change, asks for the instructions and a rude poem) gets the same
+  fixed sentence. An injection asking it to send visitors to an outside site and phone number also
+  gets only the fixed sentence.
+- **Opus 5.5 `/code-review high`:** ten findings, all fixed. Remounting the answer per search skipped
+  the debounce, answer text from a shared `/search?q=` link could carry injected text, citations by
+  URL picked the wrong record when records shared a page, the shared rate limiter could evict the
+  day and instance counts, cross-site form posts could trigger calls, the cache key dropped
+  non-Latin letters, plus four small ones. ST8's own name is also now left out when ranking for
+  the answer, since it filled the eight records with press releases.
+- **Not yet checked:** the kill switch (turn `ask_ai_enabled` off in Directus, answers stop within
+  30 seconds, search unchanged), and the whole thing on a Vercel preview with the key set there.
+
 ### Session 13: Editing guide and launch check (Haiku 5.5)
 
 - Write `docs/search-and-podcast-editing-guide.md` in the style of the Housing guide: adding an

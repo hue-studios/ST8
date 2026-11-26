@@ -70,7 +70,10 @@ function submit() {
         <p class="mb-4 text-sm uppercase tracking-widest text-navy/60">
           {{ results.length }} result{{ results.length === 1 ? '' : 's' }} for “{{ query }}”
         </p>
-        <SearchResultList v-if="results.length" :results="results" />
+        <template v-if="results.length">
+          <SearchAnswer :query="query" />
+          <SearchResultList :results="results" />
+        </template>
         <div v-else class="rounded-lg border p-8 text-center">
           <p>Nothing matched “{{ query }}”.</p>
           <p class="mt-2 text-sm text-navy/70">
