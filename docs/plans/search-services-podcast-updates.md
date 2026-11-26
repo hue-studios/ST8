@@ -480,6 +480,17 @@ visual behaviour (the phone panel opens and works).
   regionalboard.regfox.com/southerntiersummit, which is a registration form, not a recording. Session
   9 stays unmarked until Peter supplies the recording link and it plays on the page.
 
+**Re-run, 2026-11-26 (Haiku 5.5, southerntier8.org, curl):**
+- "Jen Gregory" returns her once: NOT YET, still FAILS. `/api/search?q=Jen%20Gregory` returns two
+  `person` results at `/regional-organization#staff-section` (the "Executive Director & (2025-?)…"
+  row and the "Director of Economic Development" row), both score 15.2. Clears only when the stale
+  Directus `people` row (id 41) is unpublished by staff.
+- Summit recording plays on `/economic-development-programs/housing`: NOT CHECKED. No recording link
+  has been supplied, so there was nothing to add to `housing_page.videos`. The server HTML fetched by
+  curl also contains no video, iframe or audio element and no "Past Events and Recordings" text, so
+  the Videos and Events section could not be confirmed from curl. The earlier 2026-11-26 browser
+  check saw that section, so this is unresolved rather than a regression. Session 9 stays unmarked.
+
 ### Session 11: Five core services and example prompts (Sonnet 5.5)
 
 Needs Beth's approval of the mapping from session 1.
