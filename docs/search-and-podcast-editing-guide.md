@@ -69,6 +69,20 @@ For the Housing page's **Videos and Events** section, the recordings are listed 
 
 - An event with no program attached appears only on the Events listing, not on a program page.
 
+## Turning Ask ST8 on and off
+
+Ask ST8 is the short AI-written answer that can appear above the search results. It is built from ST8's own pages only. It has its own switch, so you can stop it without a developer and without a deploy.
+
+1. In the left sidebar, click **Content**, then **Organization**.
+2. Scroll to the bottom. The last field is **Show AI answers above search results**, a switch.
+3. **On** (ticked): visitors who search with a full sentence can get an AI answer above the results.
+4. **Off** (unticked): answers stop. Search still works and shows the ordinary results.
+5. Click **Save**.
+
+- Turning it off takes effect within about a minute, with no deploy. Turning it back on works the same way.
+- The switch only has an effect if the site's AI key is set on the server. If the key is missing, the site shows ordinary search results whatever the switch says. Ask Peter to check the key.
+- Turning it off is the fast way to stop answers if they look wrong or the cost climbs. Tell Peter afterwards.
+
 ## Checking your change
 
 1. Click **Save** in Directus.
