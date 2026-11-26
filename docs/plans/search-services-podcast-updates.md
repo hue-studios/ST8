@@ -23,7 +23,10 @@ program two extra fields: `need`, a phrase in the visitor's voice, and `search_p
 people really type. Those are weighted above the title. Beth's keyword lists for the five core
 services are exactly this material.
 
-**Question to send Beth** (blocks only session 12):
+**Decided 2026-11-26: option (b),** built so the AI answer is on only when a model API key
+environment variable is set. Without the key the site behaves as (a). Session 12 builds it.
+
+**Question sent to Beth** (blocked only session 12):
 
 > When you say "AI search", which of these do you picture?
 > (a) A visitor types what they need in their own words and sees the matching services and
@@ -34,7 +37,9 @@ services are exactly this material.
 
 Other things to confirm with Beth, none of which block starting:
 
-1. **Podcast hosting.** Are the recordings audio or video, and are they already on a host
+1. **Podcast hosting.** (Peter, 2026-11-26: host the files in Directus or a bucket. Recommended:
+   staff upload in Directus, with Directus storage pointed at an S3-compatible bucket; the site
+   can publish its own RSS feed for podcast apps. Awaiting Peter's go-ahead.) Are the recordings audio or video, and are they already on a host
    (YouTube, Spotify, Buzzsprout)? If she wants the show listed in Apple Podcasts or Spotify, it
    needs a podcast host or an RSS feed; playing files on the website alone does not need one.
 2. **"Static like so-tier."** So-Tier is a separate project of ours. The header here is already
@@ -145,7 +150,7 @@ design or feature work, so each of Beth's items is written once, on the new stac
 | 9 | Housing videos and events | Sonnet 5.5 | 1, 6 | 7, 8 |
 | 10 | Search index and search panel | Sonnet 5.5 | 1, 7 | Nothing |
 | 11 | Five core services and example prompts | Sonnet 5.5 | 10 | Nothing |
-| 12 | Ask ST8 (AI), only if Beth picks (b) | Sonnet 5.5, then one Opus 5.5 review | 10, 11 | Nothing |
+| 12 | Ask ST8 (AI), option (b), on only when a model key is set | Sonnet 5.5, then one Opus 5.5 review | 10, 11 | Nothing |
 | 13 | Editing guide and launch check | Haiku 5.5 | All | Nothing |
 
 Model reasoning: the design decisions are made in this document and every session has a reference
@@ -425,7 +430,9 @@ and is kept for the record.
   Housing program (`programs: [60]`) with the token in `.env`. The live Housing page then listed it
   with no deploy. The link was removed afterwards (`programs: []`). The live page can keep showing
   it for a few minutes after unlinking, while the server cache drops it.
-- Next session (Haiku 5.5): once Peter has the summit recording link, add it to `housing_page.videos`
+- **Parked, 2026-11-26.** There is no recording link and won't be for some time. Session 13 and
+  later checks skip this item until Peter brings it back.
+- When it returns (Haiku 5.5): once Peter has the summit recording link, add it to `housing_page.videos`
   in Directus and confirm the video plays on the live Housing page. Then mark Session 9 as passing.
 
 ### Session 10: Search index and search panel (Sonnet 5.5)
@@ -523,12 +530,21 @@ from Directus, each linking to its section on the Services page. Checked on the 
 across at desktop, one column at phone width with no sideways scroll, and the Build Capacity tile
 lands on `#build-capacity`. If the core services cannot be read, the section is left off.
 
+**Later, wanted (Peter, 2026-11-26):** Build Capacity gets a service of its own with its own
+wording one day. Until then Coordinating Review stands in for it. Not scheduled.
+
+**Jen Gregory duplicate fixed, 2026-11-26.** The stale `people` row 41 ("Director of Economic
+Development", email field "2025 Unfunded Position") was set to draft with the token in `.env`, as
+Peter asked. Record 1 (Executive Director) stays. Live `/api/search?q=Jen Gregory` now returns her
+once, and `/regional-organization` shows one card.
+
 ### Session 12: Ask ST8, the AI layer (Sonnet 5.5, then one Opus 5.5 review)
 
-**Deferred.** Not started. Leave it until a month or two of search use shows whether visitors need
-a written answer on top of the results. Beth's choice between (a) and (b) is still open.
-
-Only if Beth chooses (b).
+**Decided 2026-11-26: build option (b), switched on by the key.** The route and the panel's
+answer block run only when the model API key environment variable (for example
+`ANTHROPIC_API_KEY`) is set on Vercel. With no key, `/api/ask` reports itself off and the panel
+shows ordinary results with no AI block, so the feature can ship before anyone pays for it. The
+Directus on/off switch below still applies on top of the key.
 
 - New server route `/api/ask`. It takes the question, takes the eight top-ranked records from
   session 10's `rank()`, and sends only those to Claude Haiku 5.5 with instructions to
