@@ -2,7 +2,7 @@
 import { readItems, readSingleton } from '@directus/sdk'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import type { NewsCardItem, PartnerItem, ProgramListItem, ResourceCardItem } from '#shared/types/st8'
+import type { CoreServiceItem, NewsCardItem, PartnerItem, ProgramListItem, ResourceCardItem } from '#shared/types/st8'
 import { PROGRAM_CARD_FIELDS } from '#shared/utils/programs'
 
 type Panel = 'home' | 'active' | 'regional' | 'now'
@@ -34,7 +34,7 @@ async function countNews() {
 }
 
 const { data, error } = await useAsyncData('home', async () => {
-  const [partners, news, allPrograms, home, newsCount, housingBanner] = await Promise.all([
+  const [partners, news, allPrograms, home, newsCount, housingBanner, coreServices] = await Promise.all([
     directus.request(readItems('partners', { fields: ['title', 'category'] as never, limit: -1 })),
     directus.request(readItems('news', {
       fields: [
@@ -60,11 +60,20 @@ const { data, error } = await useAsyncData('home', async () => {
     directus.request(readSingleton('housing_page', {
       fields: ['banner_show', 'banner_image', 'banner_title', 'banner_text', 'title', 'page_image'] as never,
     })).then(row => bannerFrom(row as unknown as Record<string, unknown>)).catch(() => null),
+    // The five core-service tiles, also an extra: a failed read leaves the section off. Not yet in the generated schema
+    // types, so the collection name is cast, as on the Services page.
+    directus.request(readItems('core_services' as never, {
+      fields: ['id', 'title', 'url', 'need'] as never,
+      filter: { status: { _eq: 'published' } } as never,
+      sort: ['sort'] as never,
+      limit: -1,
+    })).then(rows => rows as unknown as Array<Pick<CoreServiceItem, 'id' | 'title' | 'url' | 'need'>>).catch(() => []),
   ])
   const featuredPrograms = (allPrograms as unknown as Array<ProgramListItem & { featured?: boolean | null }>)
     .filter(p => p.featured)
     .map(({ featured: _featured, ...program }) => program)
   return {
+    coreServices,
     housingBanner,
     partners: partners as unknown as PartnerItem[],
     news: news as unknown as NewsCardItem[],
@@ -313,6 +322,7 @@ onBeforeUnmount(() => {
       </NuxtLink>
       <div id="cropped-overlay" class="absolute" />
     </div>
+    <HomeCoreServices :cores="data!.coreServices" />
     <div
       v-if="homeData.featured_resource"
       id="home__resource"

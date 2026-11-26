@@ -589,6 +589,37 @@
       }
     }
   }
+  // The five core services, one tile each: a column on phones, two then five across (as on the Services page).
+  #home__core-services {
+    .home__core-services {
+      max-width: 1200px;
+      grid-template-columns: 1fr;
+      @media (min-width: $breakpoint-small) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      @media (min-width: $breakpoint-large) {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+      }
+    }
+    .home__core-service {
+      background: $white;
+      border-top: 3px solid $green;
+      transition: transform 0.2s $curve;
+      &:hover,
+      &:focus-visible {
+        transform: translateY(-2px);
+      }
+      .home__core-service-title {
+        font-size: 14px;
+        letter-spacing: 0.2em;
+      }
+      .home__core-service-need {
+        font-size: 14px;
+        font-weight: 100;
+        line-height: 1.4;
+      }
+    }
+  }
   #home__programs {
     background: rgba($grey, 0.1);
     box-shadow: inset 0px -2px 30px rgba($black, 0.25);

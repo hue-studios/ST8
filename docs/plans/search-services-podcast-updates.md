@@ -515,8 +515,13 @@ service.
 
 **Mapping approved by Beth, 2026-11-26.** Coordinating Review stays under Build Capacity, as it is
 live. Re-checked the same day on southerntier8.org: the five sections and the five search prompts
-are live, and each core service has exactly one service under it. Still open: whether Beth wants
-the five-tile version on the home page.
+are live, and each core service has exactly one service under it.
+
+**Home page tiles added, 2026-11-26.** A "How We Help" section (`components/home/CoreServices.vue`)
+sits below the mission statement: five tiles with each core service's title and need line, read
+from Directus, each linking to its section on the Services page. Checked on the dev server: five
+across at desktop, one column at phone width with no sideways scroll, and the Build Capacity tile
+lands on `#build-capacity`. If the core services cannot be read, the section is left off.
 
 ### Session 12: Ask ST8, the AI layer (Sonnet 5.5, then one Opus 5.5 review)
 
