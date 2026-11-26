@@ -37,9 +37,11 @@ environment variable is set. Without the key the site behaves as (a). Session 12
 
 Other things to confirm with Beth, none of which block starting:
 
-1. **Podcast hosting.** (Peter, 2026-11-26: host the files in Directus or a bucket. Recommended:
-   staff upload in Directus, with Directus storage pointed at an S3-compatible bucket; the site
-   can publish its own RSS feed for podcast apps. Awaiting Peter's go-ahead.) Are the recordings audio or video, and are they already on a host
+1. **Podcast hosting.** (Peter, 2026-11-26: host the files in Directus or a bucket. Decided:
+   staff upload in Directus, and new uploads are stored in a private DigitalOcean Spaces bucket.
+   The server config and steps are in `admin-st8-12/RUNBOOK.md` section 9; it takes effect once
+   Peter creates the bucket and key and sets them on the droplet. Upload limit raised to 300 MB.
+   The site can publish its own RSS feed for podcast apps later, without a paid host.) Are the recordings audio or video, and are they already on a host
    (YouTube, Spotify, Buzzsprout)? If she wants the show listed in Apple Podcasts or Spotify, it
    needs a podcast host or an RSS feed; playing files on the website alone does not need one.
 2. **"Static like so-tier."** So-Tier is a separate project of ours. The header here is already
