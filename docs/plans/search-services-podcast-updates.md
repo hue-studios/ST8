@@ -468,6 +468,18 @@ visual behaviour (the phone panel opens and works).
   an empty field. Enter goes to `/search?q=…`, which is `noindex, follow`. Clicking a result opens
   its page and the panel closes.
 
+**Follow-up checks, 2026-11-26 (Haiku 5.5, southerntier8.org, Chrome):**
+- Jen Gregory's card on `/regional-organization` no longer links to `tel:null`: PASS. Her card holds
+  only a `mailto:` link, and no `tel:null` link exists anywhere on the page. 7ba3316 is live.
+- Search for "Jen Gregory" returns her once: NOT YET. `/api/search?q=Jen Gregory` still returns two
+  `person` results (the "Executive Director & (2025-?)…" and "Director of Economic Development"
+  rows), and the Team section shows two cards. Record 41 is still published. Staff need to unpublish
+  it, then this check reruns.
+- Summit recording plays on the Housing page: NOT CHECKED, no recording link yet. The Housing page
+  has no embedded video or audio. Its only summit link is a "Go to Resource" link to
+  regionalboard.regfox.com/southerntiersummit, which is a registration form, not a recording. Session
+  9 stays unmarked until Peter supplies the recording link and it plays on the page.
+
 ### Session 11: Five core services and example prompts (Sonnet 5.5)
 
 Needs Beth's approval of the mapping from session 1.
