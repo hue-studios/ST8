@@ -20,6 +20,9 @@ Build Capacity has no service under it. Its work (technical assistance, grant ad
 training) is currently only visible as programs. Beth may want a service for it, or to move
 Coordinating Review or Reducing Municipal Costs there.
 
+**Outcome, approved by Beth 2026-11-26:** Coordinating Review was moved to Build Capacity and
+published. Every other service stays as proposed above.
+
 ## Programs (may sit under more than one; first is the main one)
 
 | Program | Status | Proposed core service(s) |

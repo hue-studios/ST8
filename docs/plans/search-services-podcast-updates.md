@@ -513,9 +513,10 @@ under Build Capacity in Directus and published. The live services page now lists
 five buttons lead to a service and programs. Every published service sits under exactly one core
 service.
 
-Interim choice, pending Beth: Coordinating Review was moved rather than a new service written. Beth
-may still want a dedicated Build Capacity service with its own wording; that would replace or sit
-beside it.
+**Mapping approved by Beth, 2026-11-26.** Coordinating Review stays under Build Capacity, as it is
+live. Re-checked the same day on southerntier8.org: the five sections and the five search prompts
+are live, and each core service has exactly one service under it. Still open: whether Beth wants
+the five-tile version on the home page.
 
 ### Session 12: Ask ST8, the AI layer (Sonnet 5.5, then one Opus 5.5 review)
 
