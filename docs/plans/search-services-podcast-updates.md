@@ -409,7 +409,24 @@ a deploy.
 
 **Check result, 2026-11-25 (master, southerntier8.org): NOT BUILT. Superseded by b4ac98b**, which
 merged the Videos and Events section to `master`. The result above was recorded before that merge
-and is kept for the record. The re-check against "Done when" is still pending.
+and is kept for the record.
+
+**Re-check, 2026-11-26 (Haiku 5.5, southerntier8.org): PARTLY PASSES, NOT MARKED PASSING.**
+- Passes: the live `/economic-development-programs/housing` page has the "Videos and Events" section
+  with "Past Events and Recordings", and the summit card (Workforce Housing & Infrastructure
+  Developers Summit, November 18, 2025) links to `events/workforce-housing-infrastructure-developers-summit`.
+  The event is linked to the Housing program in Directus (public read of `events` id 23, program 60).
+- Fails: the summit has no video on the page. The public read of `housing_page` returns `videos: null`,
+  and the live HTML has no `housing__video` item. "The summit appears with its video" is not met yet.
+  No recording link exists yet (confirmed by Peter, 2026-11-26), so this item waits for the recording.
+  Once the link is available, add it to `housing_page.videos` in Directus and re-check the live page.
+- Passes: "an event attached in Directus shows up without a deploy". On 2026-11-26 Peter approved a
+  test. Event 34 (Regional Planning Committee Meeting & Board Meeting, 2026-08-27) was linked to the
+  Housing program (`programs: [60]`) with the token in `.env`. The live Housing page then listed it
+  with no deploy. The link was removed afterwards (`programs: []`). The live page can keep showing
+  it for a few minutes after unlinking, while the server cache drops it.
+- Next session (Haiku 5.5): once Peter has the summit recording link, add it to `housing_page.videos`
+  in Directus and confirm the video plays on the live Housing page. Then mark Session 9 as passing.
 
 ### Session 10: Search index and search panel (Sonnet 5.5)
 
