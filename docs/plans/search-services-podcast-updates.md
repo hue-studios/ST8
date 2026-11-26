@@ -454,6 +454,20 @@ program; "CEDS" returns the Plan core service first; "we need help applying for 
 Build Capacity and Develop at the top. Not checked: a staff member's name, and the desktop panel's
 visual behaviour (the phone panel opens and works).
 
+**Remaining checks, 2026-11-26 (Sonnet 5.5, southerntier8.org): PASS. Session 10 is fully checked.**
+- Staff name: "Jen Gregory" and "gregory" return her first, labelled Team, then Gregory Mezey
+  (Board). "who is the executive director" puts her in the top three. Content issue found, not a
+  search bug: Directus has two published `people` rows for her (ids 1 and 41, titles "Executive
+  Director & (2025-?) Director of Economic Development" and "Director of Economic Development"),
+  so search and the Organization page both list her twice. Staff should unpublish the stale one.
+  Her card on the Organization page also links `tel:null` because the phone field is empty.
+- Desktop panel at 1280px: the header's Search button, Cmd+K and `/` (from the page body) each
+  open it with the field focused. The five example prompts show before typing; choosing one fills
+  the field and runs the search. Typing shows ranked results ("broadband": Invest, then the
+  Broadband program). Esc closes it and returns focus to the Search button; reopening starts with
+  an empty field. Enter goes to `/search?q=…`, which is `noindex, follow`. Clicking a result opens
+  its page and the panel closes.
+
 ### Session 11: Five core services and example prompts (Sonnet 5.5)
 
 Needs Beth's approval of the mapping from session 1.
