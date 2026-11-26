@@ -187,8 +187,8 @@ useScrollLine({ paths: ['straight-line'] })
           <div class="flex flex-row justify-between items-center tracking-widest bold people-card__name">
             <h3 class="uppercase">{{ person.name }}</h3>
             <div class="flex flex-col justify-end items-end people-card__links">
-              <a :href="`tel:${person.phone}`" class="uppercase" target="_blank">{{ person.phone }}</a>
-              <a :href="`mailto:${person.email}`" class="uppercase" target="_blank">{{ person.email }}</a>
+              <a v-if="person.phone" :href="`tel:${person.phone}`" class="uppercase" target="_blank">{{ person.phone }}</a>
+              <a v-if="person.email" :href="`mailto:${person.email}`" class="uppercase" target="_blank">{{ person.email }}</a>
             </div>
           </div>
           <h5 v-if="person.title" class="uppercase bold people-card__title">{{ person.title }}</h5>
