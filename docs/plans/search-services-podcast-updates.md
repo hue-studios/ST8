@@ -594,8 +594,11 @@ only when a query has three or more words or ends in "?", and only after 700 ms 
   day and instance counts, cross-site form posts could trigger calls, the cache key dropped
   non-Latin letters, plus four small ones. ST8's own name is also now left out when ranking for
   the answer, since it filled the eight records with press releases.
-- **Not yet checked:** the kill switch (turn `ask_ai_enabled` off in Directus, answers stop within
-  30 seconds, search unchanged), and the whole thing on a Vercel preview with the key set there.
+- **Kill switch: PASS, 2026-11-26.** Peter turned `ask_ai_enabled` off in Directus (Content →
+  Organization, last field). Within 30 seconds `/api/ask` answered `{ enabled: false }` and search
+  still returned results, with no deploy. The switch is checked before the answer cache, so cached
+  answers stop too. It was left off.
+- **Not yet checked:** the whole thing on Vercel with `ANTHROPIC_API_KEY` set there.
 
 ### Session 13: Editing guide and launch check (Haiku 5.5)
 
