@@ -6,7 +6,15 @@
   left: 0px;
   z-index: 100;
   transform: translate3d(0, 0, 0);
-  transition: all 0.3s $curve;
+  // On a phone only the height and the shadow animate. The home page's phone bar is hidden (opacity 0) over the hero
+  // and appears once `.scrolled`; fading that in let the page show through behind the logo and search icon for the
+  // length of the fade, so the bar now arrives solid. Large screens keep the eased hero hand-over.
+  transition:
+    height 0.3s $curve,
+    box-shadow 0.3s $curve;
+  @media (min-width: $breakpoint-large) {
+    transition: all 0.3s $curve;
+  }
   display: flex;
   align-items: center;
   justify-content: center;

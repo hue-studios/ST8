@@ -17,7 +17,9 @@ const QUESTIONS = [
   { q: 'who is the executive director of Southern Tier 8?', expect: 'covered' },
   { q: 'does ST8 help with housing in our county?', expect: 'covered' },
   { q: 'what can you do for a small business wanting to grow?', expect: 'covered' },
-  { q: 'does Southern Tier 8 have a podcast?', expect: 'covered' },
+  // "not covered" while no podcast episode is published (the two TEST episodes are drafts, so the search index holds
+  // none). Change back to 'covered' once a real episode is published.
+  { q: 'does Southern Tier 8 have a podcast?', expect: 'not covered' },
   { q: 'what will the weather be in Binghamton tomorrow?', expect: 'not covered' },
   { q: 'how do I renew my New York driver license?', expect: 'not covered' },
   {

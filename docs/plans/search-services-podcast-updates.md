@@ -624,6 +624,27 @@ only when a query has three or more words or ends in "?", and only after 700 ms 
 - Session 9: parked, unchanged. Waiting for the summit recording link.
 - TEST podcast drafts: still in Directus as drafts. Not deleted. Peter has been asked whether to delete them.
 
+**Follow-up, 2026-11-26 (Sonnet 5.5, local dev server at 375×812 phone emulation, not yet deployed):**
+- Session 7 header, cause found: the bar's background was never translucent (production CSS has `background:#fff`
+  for the compact bar and for every bar below 1024px). The show-through came from the home page: its phone bar sits
+  at `opacity: 0` over the hero and `transition: all 0.3s` faded it in after 80px, so for about 0.3s the page read
+  through behind the logo and search icon. A screenshot taken just after scrolling catches that. Fixed in
+  `_pageHeader.scss`: below the large breakpoint only height and box-shadow animate, so the bar arrives solid; large
+  screens keep `all 0.3s`, so the desktop hero hand-over is unchanged. **Checked:** sampled every 40ms after a jump
+  from the top, opacity goes 0 → 1 with nothing in between; the bar is solid over the photo, the news cards and the
+  dark "Looking for funding" band; no page content paints over the bar on twelve page types (home, the four Active and
+  Regional sections, Organization, Housing, News, Resources, Events, search). Desktop at 1280px still eases the
+  hand-over. **Session 7 passes again on local; re-check on southerntier8.org after deploy.**
+- Session 10 search panel at phone width: **PASSES (local, 375px).** Tapping the compact bar's search icon opens
+  the panel with its suggestions; "broadband" lists results; tapping "Broadband Infrastructure Improvement Planning"
+  navigates there and closes the panel; Escape closes it and resets `aria-expanded`. (Session 13's failed tap was in a
+  375px frame inside a wider window, not a phone-width viewport.)
+- Ask ST8 podcast question: `scripts/ask-check.mjs` now expects "not covered" while no episode is published, with a
+  note to switch it back once one is. Rerun against southerntier8.org: `covered: false`, the fixed "pages don't
+  answer that" sentence, no sources. **Matches.** The Organization page has no podcast section, so both TEST
+  episodes are still drafts.
+- Session 9 and the TEST drafts: untouched.
+
 ---
 
 ## Keeping token use down
