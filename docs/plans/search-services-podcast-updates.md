@@ -607,6 +607,23 @@ only when a query has three or more words or ends in "?", and only after 700 ms 
 - Run through the "done when" lines of sessions 7 to 12 on the Vercel preview, at desktop and phone
   widths, and report anything that fails. It fixes nothing itself beyond typos.
 
+**Results, 2026-11-26 (Haiku 5.5, southerntier8.org, production, not the Vercel preview):**
+- Editing guide: written and committed in 8a5bfad, with the Ask ST8 on/off steps added.
+- Podcast answer after the index refresh: the search index no longer holds any podcast episode (both
+  TEST episodes are drafts, unpublished about 22:00 UTC on 2026-11-25, past the five-minute cache). `/api/ask`
+  for "Does Southern Tier 8 have a podcast?" returns `covered: false` with the fixed "pages don't answer
+  that" sentence and no sources. That is the correct answer while no episode is published. The
+  ten-question script still lists this question as "covered", so its `expect` value is out of date and
+  needs changing if the script is run again before an episode is published.
+- Session 7 header at phone width (375px, live site, Chrome): **NOT CONFIRMED, visual regression.** After
+  scrolling down, the compact bar is not solid: body text shows through behind the logo and search icon.
+  Session 7's fix (solid bar whenever compact) is not holding on this check. Checked with the site in a 375px
+  frame, since the browser window would not resize. Needs a fix and a re-check on a real phone-width view.
+- Session 10 search panel at phone width: **NOT CONFIRMED.** A click on the compact bar's search icon did
+  not open the panel in the 375px frame. Needs a re-check.
+- Session 9: parked, unchanged. Waiting for the summit recording link.
+- TEST podcast drafts: still in Directus as drafts. Not deleted. Peter has been asked whether to delete them.
+
 ---
 
 ## Keeping token use down
