@@ -645,8 +645,13 @@ only when a query has three or more words or ends in "?", and only after 700 ms 
   episodes are still drafts.
 - Session 9 and the TEST drafts: untouched.
 
-Next session (Haiku 5.5): once 273490b is pushed and deployed, re-check on southerntier8.org at a true 375px
-viewport that the home page's phone bar arrives solid after scrolling past the hero, then mark Session 7 as passing.
+**Re-check after deploy, 2026-11-27 (Haiku 5.5, southerntier8.org, origin/master at 273490b): PASSES.
+Session 7 stays marked as passing.**
+- Phone, 375px (innerWidth 375, home page): the bottom phone bar (NEWS / INITIATIVES / menu) is solid white at
+  opacity 1 at scroll 0, 400, 1200, 1627 and 3000px, so it is solid after scrolling past the hero. The top bar is
+  solid white at full height (70px) and compact (54px) at 3000px.
+- Checked from computed styles, not a screenshot: the browser pane's emulated frame kept changing size, so no
+  screenshot confirmed the look. A visual check is still worth one look on a real phone.
 
 ---
 
