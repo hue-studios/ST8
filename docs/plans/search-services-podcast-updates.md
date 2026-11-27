@@ -653,6 +653,8 @@ Session 7 stays marked as passing.**
 - Checked from computed styles, not a screenshot: the browser pane's emulated frame kept changing size, so no
   screenshot confirmed the look. A visual check is still worth one look on a real phone.
 
+Next session (Haiku 5.5): take one screenshot of the home page's phone bar at 375px after scrolling past the hero to confirm the look that the computed-style check could not show.
+
 ---
 
 ## Keeping token use down
