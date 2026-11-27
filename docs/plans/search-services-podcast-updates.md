@@ -1,6 +1,10 @@
 # Site updates: podcast, housing media, static header, Nuxt 4 upgrade, search and core services
 
-Status: plan only. No code or Directus changes have been made.
+Status: in progress. Code and Directus changes are built and live on southerntier8.org for most sessions.
+Open items as of 2026-11-27: Session 9 is parked until Peter supplies the summit recording link; Session 10
+needs staff to unpublish a duplicate `people` record (id 41) before the "Jen Gregory" check passes; Session 12
+has not been checked on Vercel with `ANTHROPIC_API_KEY` set; the two TEST podcast drafts await Peter's decision.
+Each session's own status line gives the detail.
 Written 2026-11-22 from Beth's four-item feedback list, plus the decision to move the site to
 Nuxt 4 and the current house stack before the search work.
 
@@ -463,7 +467,7 @@ program; "CEDS" returns the Plan core service first; "we need help applying for 
 Build Capacity and Develop at the top. Not checked: a staff member's name, and the desktop panel's
 visual behaviour (the phone panel opens and works).
 
-**Remaining checks, 2026-11-26 (Sonnet 5.5, southerntier8.org): PASS. Session 10 is fully checked.**
+**Remaining checks, 2026-11-26 (Sonnet 5.5, southerntier8.org): PASS for everything except the duplicate staff record. Session 10 is not fully checked until "Jen Gregory" returns once (see the follow-up checks below).**
 - Staff name: "Jen Gregory" and "gregory" return her first, labelled Team, then Gregory Mezey
   (Board). "who is the executive director" puts her in the top three. Content issue found, not a
   search bug: Directus has two published `people` rows for her (ids 1 and 41, titles "Executive
